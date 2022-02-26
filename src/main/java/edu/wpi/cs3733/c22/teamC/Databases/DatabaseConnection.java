@@ -7,8 +7,6 @@ package edu.wpi.cs3733.c22.teamC.Databases;
 
 import static edu.wpi.cs3733.c22.teamC.Capp.dbCreation;
 
-import edu.wpi.cs3733.c22.teamC.Databases.MongoDB.MongoEquipment;
-import edu.wpi.cs3733.c22.teamC.Databases.MongoDB.MongoLocation;
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,25 +17,26 @@ import java.sql.Statement;
 
 public class DatabaseConnection {
   private Connection connection;
-  private MongoEquipment mongoEquipment;
-  private MongoLocation mongoLocation;
+  // private MongoEquipment mongoEquipment;
+  // private MongoLocation mongoLocation;
 
   public boolean isClientDatabase() {
     return isClientDatabase;
   }
 
+  /*
   public boolean isMongulDB() {
     return isMongulDB;
   }
 
   public void setMongulDB(boolean b) {
     isMongulDB = b;
-  }
+  }*/
 
   /** databaseType is false if embedded, true if client */
   private boolean isClientDatabase = false;
 
-  private boolean isMongulDB = false;
+  // private boolean isMongulDB = false;
 
   private static DatabaseConnection dbcInstance = new DatabaseConnection();
 
@@ -51,8 +50,9 @@ public class DatabaseConnection {
   private String db_url = "jdbc:derby:CDB;create=true";
   private String db_s_c_url = "jdbc:derby://localhost:1527/CDB;create=true";
 
-  private final String mongulConnection =
-      "mongodb+srv://admin:dDbno11RbFVsXVv3@serverlessinstance0.zitm8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+  // private final String mongulConnection =
+  //
+  // "mongodb+srv://admin:dDbno11RbFVsXVv3@serverlessinstance0.zitm8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
   /**
    * This url should be tested because I am unsure of the port type. I know that the current
@@ -60,7 +60,7 @@ public class DatabaseConnection {
    * a way where we declare the embedded db and then switch over tto the new client server db?
    */
   public DatabaseConnection() {
-    this.isMongulDB = false;
+    // this.isMongulDB = false;
     startDbConnection();
   }
 
@@ -69,7 +69,7 @@ public class DatabaseConnection {
       Class.forName(driver);
       connection = DriverManager.getConnection(db_url);
       isClientDatabase = false;
-      isMongulDB = false;
+      // isMongulDB = false;
       if (connection != null) {
         System.out.println("Connected to the Embedded DB");
       }
@@ -79,10 +79,10 @@ public class DatabaseConnection {
     }
   }
 
-  public void startMongo() {
+  /*public void startMongo() {
     mongoEquipment = new MongoEquipment();
     mongoLocation = new MongoLocation();
-  }
+  }*/
 
   /**
    * This will connect to the database once signed in and treat the database as a client server db.
@@ -92,7 +92,7 @@ public class DatabaseConnection {
       Class.forName(driverCS);
       connection = DriverManager.getConnection(db_s_c_url);
       isClientDatabase = true;
-      isMongulDB = false;
+      // isMongulDB = false;
       if (connection != null) {
         dbCreation();
         System.out.println("Connected to the Client DB");
@@ -135,11 +135,11 @@ public class DatabaseConnection {
     statement.executeUpdate(query);
   }
 
-  public MongoEquipment getMongoEquipment() {
+  /*public MongoEquipment getMongoEquipment() {
     return mongoEquipment;
   }
 
   public MongoLocation getMongoLocation() {
     return mongoLocation;
-  }
+  }*/
 }

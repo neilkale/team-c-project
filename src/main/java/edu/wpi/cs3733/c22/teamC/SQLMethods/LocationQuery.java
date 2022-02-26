@@ -13,9 +13,9 @@ public class LocationQuery extends Query<Location> {
   private MongoLocation mongoLocation;
 
   public LocationQuery() {
-    dbConnection.getMongoLocation();
+
     try {
-      mongoLocation = new MongoLocation();
+      // mongoLocation = new MongoLocation();
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("[LocationQuery]: Something went wrong with connecting to the mongoDB");
@@ -82,33 +82,29 @@ public class LocationQuery extends Query<Location> {
     Location queryResult = null;
     ArrayList<Location> allNodes = new ArrayList<Location>();
 
-    if (!dbConnection.isMongulDB()) {
-      try {
-        String query = "SELECT * FROM " + getQueryInput();
-        ResultSet rs = dbConnection.executeQuery(query);
+    try {
+      String query = "SELECT * FROM " + getQueryInput();
+      ResultSet rs = dbConnection.executeQuery(query);
 
-        while (rs.next()) {
-          String nodeID = rs.getString("nodeID");
-          String xcoord = rs.getString("xcoord");
-          String ycoord = rs.getString("ycoord");
-          String floor = rs.getString("floor");
-          String building = rs.getString("building");
-          String nodeType = rs.getString("nodeType");
-          String longName = rs.getString("longName");
-          String shortName = rs.getString("shortName");
+      while (rs.next()) {
+        String nodeID = rs.getString("nodeID");
+        String xcoord = rs.getString("xcoord");
+        String ycoord = rs.getString("ycoord");
+        String floor = rs.getString("floor");
+        String building = rs.getString("building");
+        String nodeType = rs.getString("nodeType");
+        String longName = rs.getString("longName");
+        String shortName = rs.getString("shortName");
 
-          queryResult =
-              new Location(nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName);
-          allNodes.add(queryResult);
-        }
-
-      } catch (SQLException e) {
-        e.printStackTrace();
+        queryResult =
+            new Location(nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName);
+        allNodes.add(queryResult);
       }
-    } else {
 
-      allNodes = dbInterfaceToLocation(mongoLocation.getAllNodeData());
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
+
     return allNodes;
   }
 
@@ -148,7 +144,7 @@ public class LocationQuery extends Query<Location> {
     } catch (SQLException e) {
       System.out.println(e);
     }
-    mongoLocation.addItem(location);
+    // mongoLocation.addItem(location);
   }
 
   @Override
@@ -157,7 +153,7 @@ public class LocationQuery extends Query<Location> {
     String query =
         "DELETE FROM " + getQueryInput() + " WHERE nodeID = '" + location.get_nodeID() + "'";
     dbConnection.execute(query);
-    mongoLocation.removeItem(location);
+    // mongoLocation.removeItem(location);
   }
 
   @Override
@@ -187,7 +183,7 @@ public class LocationQuery extends Query<Location> {
             + location.get_nodeID()
             + "'";
     dbConnection.execute(query);
-    mongoLocation.changeItem(location);
+    // mongoLocation.changeItem(location);
   }
 
   @Override

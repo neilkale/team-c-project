@@ -20,7 +20,7 @@ public class MongoEquipment implements MongoInterface {
   private MongoCollection<Document> equipmentCollection;
 
   public MongoEquipment() {
-    ConnectionString connectionString =
+    /*ConnectionString connectionString =
         new ConnectionString(
             "mongodb+srv://admin:dDbno11RbFVsXVv3@serverlessinstance0.zitm8.mongodb.net/teamC_DB?retryWrites=true&w=majority");
     MongoClientSettings settings =
@@ -48,7 +48,7 @@ public class MongoEquipment implements MongoInterface {
       if (!a) {
         equipmentCollection.insertOne(equipment.get(i));
       }
-    }
+    }*/
   }
 
   @Override

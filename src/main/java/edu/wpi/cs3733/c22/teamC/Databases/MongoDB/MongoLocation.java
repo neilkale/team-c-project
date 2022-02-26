@@ -19,7 +19,7 @@ public class MongoLocation implements MongoInterface {
   private MongoCollection<Document> LocationCollection;
 
   public MongoLocation() {
-    ConnectionString connectionString =
+    /*ConnectionString connectionString =
         new ConnectionString(
             "mongodb+srv://admin:dDbno11RbFVsXVv3@serverlessinstance0.zitm8.mongodb.net/teamC_DB?retryWrites=true&w=majority");
     MongoClientSettings settings =
@@ -48,7 +48,7 @@ public class MongoLocation implements MongoInterface {
       if (!a) {
         LocationCollection.insertOne(equipment.get(i));
       }
-    }
+    }*/
   }
 
   @Override

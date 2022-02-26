@@ -2,7 +2,6 @@ package edu.wpi.cs3733.c22.teamC.SQLMethods.requests;
 
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
-import edu.wpi.cs3733.c22.teamC.Databases.MongoDB.MongoEquipment;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.MedicalEquipment;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
 import java.sql.ResultSet;
@@ -11,11 +10,11 @@ import java.util.ArrayList;
 
 public class MedicalEquipmentQuery extends Query<MedicalEquipment> {
   private DatabaseConnection dbConnection = super.dbConnection;
-  private MongoEquipment mongoEquipment;
+  // private MongoEquipment mongoEquipment;
 
   public MedicalEquipmentQuery() {
     try {
-      mongoEquipment = new MongoEquipment();
+      // mongoEquipment = new MongoEquipment();
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println(
@@ -48,30 +47,27 @@ public class MedicalEquipmentQuery extends Query<MedicalEquipment> {
     MedicalEquipment queryResult = null;
     ArrayList<MedicalEquipment> allNodes = new ArrayList<MedicalEquipment>();
 
-    if (!dbConnection.isMongulDB()) {
-      try {
-        String query = "SELECT * FROM EquipmentC";
-        ResultSet rs = dbConnection.executeQuery(query);
+    try {
+      String query = "SELECT * FROM EquipmentC";
+      ResultSet rs = dbConnection.executeQuery(query);
 
-        while (rs.next()) {
-          String equipmentID = rs.getString("equipmentID");
-          String locationID = rs.getString("locationID");
-          String status = rs.getString("status");
-          String equipmentType = rs.getString("equipmentType");
-          String name = rs.getString("name");
-          String lastKnownTime = rs.getString("lastKnownTime");
+      while (rs.next()) {
+        String equipmentID = rs.getString("equipmentID");
+        String locationID = rs.getString("locationID");
+        String status = rs.getString("status");
+        String equipmentType = rs.getString("equipmentType");
+        String name = rs.getString("name");
+        String lastKnownTime = rs.getString("lastKnownTime");
 
-          queryResult =
-              new MedicalEquipment(
-                  equipmentID, locationID, lastKnownTime, status, equipmentType, name);
-          allNodes.add(queryResult);
-        }
-      } catch (SQLException e) {
-        e.printStackTrace();
+        queryResult =
+            new MedicalEquipment(
+                equipmentID, locationID, lastKnownTime, status, equipmentType, name);
+        allNodes.add(queryResult);
       }
-    } else {
-      allNodes = dbInterfaceToEquipment(mongoEquipment.getAllNodeData());
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
+
     return allNodes;
   }
 
@@ -85,7 +81,7 @@ public class MedicalEquipmentQuery extends Query<MedicalEquipment> {
 
   @Override
   public void addNode(MedicalEquipment object) {
-    mongoEquipment.addItem(object);
+    // mongoEquipment.addItem(object);
     try {
       String query =
           "INSERT INTO EquipmentC VALUES "

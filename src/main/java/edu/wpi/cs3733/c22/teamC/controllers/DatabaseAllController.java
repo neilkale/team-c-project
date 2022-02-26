@@ -136,19 +136,19 @@ public class DatabaseAllController extends AbstractController {
   @FXML
   private void toMongo() {
     //    Capp.dbSave();
-    if (dbConnection.isMongulDB()) {
-      // This creates the switch in db
-      dbConnection.startDbConnection();
-      // This creates the new tables for the db
-      Capp test = new Capp();
-      test.dbCreation();
 
-      btnToMongo.setText("Switch to Embedded Database");
-    } else if (!dbConnection.isMongulDB()) {
+    // This creates the switch in db
+    dbConnection.startDbConnection();
+    // This creates the new tables for the db
+    Capp test = new Capp();
+    test.dbCreation();
+
+    btnToMongo.setText("Switch to Embedded Database");
+    /*} else if (!dbConnection.isMongulDB()) {
       // dbConnection.start();
       dbConnection.setMongulDB(true);
       btnToMongo.setText("Switch to NoSQL");
-    }
+    }*/
     //  Capp.dbCreation();
   }
 

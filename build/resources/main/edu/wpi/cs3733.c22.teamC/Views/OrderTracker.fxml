@@ -22,6 +22,7 @@
                <rowConstraints>
                   <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="55.0" />
                   <RowConstraints maxHeight="-Infinity" minHeight="10.0" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" />
                   <RowConstraints />
                </rowConstraints>
                <columnConstraints>
@@ -63,16 +64,19 @@
                         </JFXButton>
                      </children>
                   </HBox>
-                  <JFXComboBox fx:id="statusComboBox" labelFloat="true" prefHeight="25.0" prefWidth="176.0" promptText="Search by status" style="-fx-background-color: #FFFFFF;" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                     <GridPane.margin>
-                        <Insets right="185.0" />
-                     </GridPane.margin>
-                  </JFXComboBox>
-                  <JFXComboBox fx:id="employeeComboBox" labelFloat="true" prefHeight="25.0" prefWidth="176.0" promptText="Search by employee" style="-fx-background-color: #FFFFFF;" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER">
-                     <GridPane.margin>
-                        <Insets right="5.0" />
-                     </GridPane.margin>
-                  </JFXComboBox>
+                  <HBox fx:id="orderTrackerTable" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.rowIndex="2">
+                     <children>
+                        <JFXComboBox fx:id="idComboBox" labelFloat="true" prefHeight="25.0" prefWidth="150.0" promptText="Search by ticket ID" style="-fx-background-color: #FFFFFF;">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </JFXComboBox>
+                        <JFXComboBox fx:id="statusComboBox" labelFloat="true" prefHeight="25.0" prefWidth="150.0" promptText="Search by status" style="-fx-background-color: #FFFFFF;" />
+                        <JFXComboBox fx:id="locComboBox" labelFloat="true" prefHeight="25.0" prefWidth="150.0" promptText="Search by location" style="-fx-background-color: #FFFFFF;" />
+                        <JFXComboBox fx:id="typeComboBox" labelFloat="true" prefHeight="25.0" prefWidth="150.0" promptText="Search by request type" style="-fx-background-color: #FFFFFF;" />
+                        <JFXComboBox fx:id="employeeComboBox" labelFloat="true" prefHeight="25.0" prefWidth="150.0" promptText="Search by employee" style="-fx-background-color: #FFFFFF;" />
+                     </children>
+                  </HBox>
                </children>
             </GridPane>
          </top>

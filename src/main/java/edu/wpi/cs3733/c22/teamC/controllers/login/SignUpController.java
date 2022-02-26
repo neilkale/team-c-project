@@ -136,7 +136,7 @@ public class SignUpController extends AbstractController {
     psswd = password.getText();
     psswd2 = password2.getText();
     EmployeeQuery e = new EmployeeQuery();
-    Employee employee = new Employee(user, psswd, null, null, null, null, null);
+    Employee employee = new Employee(user, psswd, null, null, null, null, null, null);
     if (psswd.equals(psswd2)) {
       e.addNode(employee);
     } else {

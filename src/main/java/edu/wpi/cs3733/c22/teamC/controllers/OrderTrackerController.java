@@ -81,8 +81,7 @@ public class OrderTrackerController extends AbstractController {
     // if no filters entered in comboboxes, show all orders; bring back prompt text
     int count = 0;
     for (JFXComboBox comboBox : comboBoxes) {
-      if (comboBox.getEditor().getText().isEmpty())
-        count++;
+      if (comboBox.getEditor().getText().isEmpty()) count++;
       if (count == comboBoxes.size()) {
         addRequestsToListView(ServiceRequest.getAllServiceRequests());
         count = 0;

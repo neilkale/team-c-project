@@ -11,7 +11,7 @@ public class DatabaseCreation {
     try {
       // Creates the table with parameters
       String query =
-          "CREATE TABLE TowerLocations( "
+          "CREATE TABLE TowerLocationsC( "
               + "nodeID VARCHAR(255), "
               + "xcoord VARCHAR(255), "
               + "ycoord VARCHAR(255), "

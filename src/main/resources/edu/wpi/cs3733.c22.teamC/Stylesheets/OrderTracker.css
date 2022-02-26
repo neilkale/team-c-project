@@ -5,3 +5,11 @@
 #orderTrackerTable {
 -fx-background-color: #1F58AF !important;
 }
+
+.combo-box .input-focused-line{
+    -fx-background-color: #FFF !important;
+}
+
+.combo-box .input-focused-line{
+    -fx-prompt-text-fill: #FFF !important;
+}

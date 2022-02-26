@@ -25,6 +25,6 @@
 -fx-background-color: #1F58AF !important;
 }
 
-/*.combo-box {
--fx-focus-prompt-text-fill: #1F58AF !important;
-}*/
+.combo-box .input-focused-line{
+ -fx-prompt-text-fill: #1F58AF !important;
+}

@@ -39,9 +39,17 @@ public class OrderTrackerController extends AbstractController {
   @FXML private JFXComboBox locComboBox;
   @FXML private JFXComboBox typeComboBox;
 
+  private static final int numOfComboBoxes = 5;
   private HashMap<String, ServiceRequest> requestHashMap = new HashMap<String, ServiceRequest>();
   private ArrayList<JFXComboBox> comboBoxes = new ArrayList<JFXComboBox>();
-  private SRCriteria[] filterArray = new SRCriteria[5];
+  private String[] promptTextArray = {
+    "Search by ticket ID",
+    "Search by status",
+    "Search by location",
+    "Search by request type",
+    "Search by employee"
+  };
+  private SRCriteria[] filterArray = new SRCriteria[numOfComboBoxes];
 
   // to clear/remove orders, must clear hashmap, orderControllerHashMap, and listView.items()
 
@@ -50,7 +58,7 @@ public class OrderTrackerController extends AbstractController {
     // make sure to add new comboboxes meant for filtering to this arraylist
     comboBoxes.addAll(
         FXCollections.observableArrayList(
-            employeeComboBox, statusComboBox, idComboBox, locComboBox, typeComboBox));
+            idComboBox, statusComboBox, locComboBox, typeComboBox, employeeComboBox));
 
     // populate combobox dropdowns
     statusComboBox.getItems().addAll("Blank", "Done", "Cancelled", "Waiting for");
@@ -63,21 +71,25 @@ public class OrderTrackerController extends AbstractController {
               locComboBox.getItems().add(node.get_shortName());
             });
 
+    // adding autocomplete listeners for comboboxes
     ControllerUtil.addAutoCompleteListener(statusComboBox);
     ControllerUtil.addAutoCompleteListener(employeeComboBox); // have to add after fill combobox
     ControllerUtil.addAutoCompleteListener(idComboBox);
     ControllerUtil.addAutoCompleteListener(locComboBox); // have to add after fill combobox
     ControllerUtil.addAutoCompleteListener(typeComboBox);
 
+    // if no filters entered in comboboxes, show all orders; bring back prompt text
     int count = 0;
     for (JFXComboBox comboBox : comboBoxes) {
-      if (comboBox.getEditor().getText().isEmpty()) count++;
+      if (comboBox.getEditor().getText().isEmpty())
+        count++;
       if (count == comboBoxes.size()) {
         addRequestsToListView(ServiceRequest.getAllServiceRequests());
         count = 0;
       }
     }
 
+    // add listener for each searchbox filter
     addComboBoxFilterListener(employeeComboBox, "assignment");
     addComboBoxFilterListener(statusComboBox, "status");
     addComboBoxFilterListener(idComboBox, "id");

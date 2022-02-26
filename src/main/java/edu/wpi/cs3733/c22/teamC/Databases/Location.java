@@ -133,10 +133,14 @@ public class Location implements DatabaseInterface {
     this._shortName = null;
   }
 
-  public static String[] getarguments() {
+  public String[] getarguments() {
     return new String[] {
       "nodeID", "xcoord", "ycoord", "floor", "building", "nodeType", "longName", "shortName"
     };
+  }
+
+  public String getName() {
+    return "Location";
   }
 
   @Override

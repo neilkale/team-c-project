@@ -32,7 +32,7 @@ public abstract class Query<T> {
       case "EMPLOYEEC":
         return new EmployeeQuery().queryFactory(inputs);
 
-      case "TOWERLOCATIONS":
+      case "TOWERLOCATIONSC":
         return new LocationQuery().queryFactory(inputs);
 
       case "EQUIPMENTREQUESTC":

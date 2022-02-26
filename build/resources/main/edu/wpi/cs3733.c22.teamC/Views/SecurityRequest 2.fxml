@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFF;" stylesheets="@../Stylesheets/ServiceRequestConstants.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.requests.SecurityRequestController">
+    <children>
+        <BorderPane layoutX="142.0" layoutY="142.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <Pane maxWidth="1.7976931348623157E308" prefHeight="55.0" style="-fx-background-color: #001a3cff;" BorderPane.alignment="CENTER">
+                    <children>
+                        <Label contentDisplay="CENTER" layoutX="199.0" layoutY="5.0" text="SECURITY ORDER">
+                            <font>
+                                <Font name="System Bold" size="30.0" />
+                            </font>
+                            <textFill>
+                                <LinearGradient endX="1.0" endY="1.0">
+                                    <stops>
+                                        <Stop>
+                                            <color>
+                                                <Color red="1.0" green="1.0" blue="1.0" />
+                                            </color>
+                                        </Stop>
+                                        <Stop offset="1.0">
+                                            <color>
+                                                <Color red="1.0" green="1.0" blue="1.0" />
+                                            </color>
+                                        </Stop>
+                                    </stops>
+                                </LinearGradient>
+                            </textFill>
+                        </Label>
+                        <JFXButton fx:id="backButton" alignment="CENTER" onAction="#backButtonPressed" prefHeight="55.0" prefWidth="55.0" ripplerFill="BLACK" text="&lt;" textAlignment="CENTER" textFill="WHITE">
+                            <font>
+                                <Font name="Consolas Bold" size="30.0" />
+                            </font>
+                        </JFXButton>
+                    </children>
+                </Pane>
+            </top>
+            <bottom>
+                <GridPane BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <JFXButton fx:id="clearButton" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.0E7" onAction="#clearButtonPressed" prefHeight="45.0" prefWidth="1000000.0" style="-fx-background-color: #c6c6c6c6;" text="CLEAR" textFill="#009f9f" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
+                            <font>
+                                <Font name="System Bold" size="22.0" />
+                            </font>
+                            <GridPane.margin>
+                                <Insets bottom="10.0" left="10.0" right="5.0" top="10.0" />
+                            </GridPane.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="confirmButton" alignment="CENTER" maxWidth="1.0E7" onAction="#confirmButtonPressed" prefHeight="47.0" prefWidth="329.0" style="-fx-background-color: #083d81ff;" text="CONFIRM" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
+                            <font>
+                                <Font name="System Bold" size="22.0" />
+                            </font>
+                            <GridPane.margin>
+                                <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
+                            </GridPane.margin>
+                        </JFXButton>
+                    </children>
+                </GridPane>
+            </bottom>
+            <center>
+                <GridPane BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <JFXComboBox fx:id="securityComboBox" focusColor="#083d81ff" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="150.0" promptText="SECURITY" style="-fx-background-color: #c1dcffff;" unFocusColor="#99d9d9" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
+                            <GridPane.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </GridPane.margin>
+                        </JFXComboBox>
+                        <JFXComboBox fx:id="locationComboBox" focusColor="#083d81ff" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="150.0" promptText="LOCATION" style="-fx-background-color: #c1dcffff;" unFocusColor="#689ee6ff" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                            <GridPane.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </GridPane.margin>
+                        </JFXComboBox>
+                    </children>
+                </GridPane>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>

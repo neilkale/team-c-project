@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="borderPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFF;" stylesheets="@../Stylesheets/ServiceRequest.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.ServiceRequestController">
+   <top>
+      <GridPane style="-fx-background-color: #009f9f;" BorderPane.alignment="CENTER">
+         <rowConstraints>
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="55.0" />
+         </rowConstraints>
+         <columnConstraints>
+            <ColumnConstraints maxWidth="1.7976931348623157E308" />
+            <ColumnConstraints />
+         </columnConstraints>
+         <children>
+            <Label fx:id="Banner" alignment="CENTER" prefHeight="55.0" prefWidth="6000.0" style="-fx-background-color: #001a3cff;" stylesheets="@../Stylesheets/ServiceRequestConstants.css" text="Service Request Systems" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="backButton" onAction="#backButtonPressed" prefHeight="55.0" prefWidth="55.0" ripplerFill="BLACK" text="&lt;" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="LEFT">
+               <font>
+                  <Font name="Consolas Bold" size="30.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </GridPane>
+   </top>
+   <center>
+      <VBox alignment="TOP_CENTER" prefHeight="22.0" prefWidth="235.0" style="-fx-background-color: #f5f5f5;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="TOP_CENTER" prefHeight="7.0" prefWidth="800.0" spacing="100.0">
+               <children>
+                  <TextField fx:id="searchBox" alignment="CENTER" maxWidth="300.0" onKeyTyped="#searchBoxEntered" prefHeight="26.0" prefWidth="237.0" promptText=" Search For Pages" style="-fx-background-color: #FFF; -fx-text-fill: #000000;">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="200.0" top="10.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <JFXCheckBox fx:id="showNamesCheckBox" alignment="CENTER" contentDisplay="CENTER" styleClass="JFXCheckBox" text="Show Names" textAlignment="CENTER">
+                     <HBox.margin>
+                        <Insets bottom="10.0" top="15.0" />
+                     </HBox.margin>
+                  </JFXCheckBox>
+               </children>
+            </HBox>
+            <ScrollPane fx:id="scrollPane" prefHeight="517.0" prefWidth="800.0" style="-fx-background-color: #f5f5f5;">
+               <content>
+                  <FlowPane fx:id="flowPane" columnHalignment="CENTER" hgap="10.0" prefHeight="494.0" prefWidth="763.0" prefWrapLength="220.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="VBox">
+                           <children>
+                              <JFXButton fx:id="launServButton" alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#laundryServButtonPressed" prefHeight="100.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #002d59;" styleClass="JFXButton" text="Laundry Services" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView blendMode="ADD" fitHeight="148.0" fitWidth="62.0" opacity="0.6" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/LaundryBlueIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <Label styleClass="Label" text="Jack" />
+                           </children>
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="VBox">
+                           <children>
+                              <JFXButton fx:id="langInterpButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#langInterpButtonPressed" prefHeight="100.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #002d59;" styleClass="JFXButton" text="Language Interpreter" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="156.0" fitWidth="59.0" opacity="0.6" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/OtherBlueIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <Label styleClass="Label" text="Jared" />
+                           </children>
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="VBox">
+                           <children>
+                              <JFXButton fx:id="itButton" alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#itButtonPressed" prefHeight="100.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #002d59;" styleClass="JFXButton" text="IT Help" textAlignment="CENTER" textFill="#002d59" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="84.0" fitWidth="84.0" opacity="0.6" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/TechBlueIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <Label styleClass="Label" text="Neil" />
+                           </children>
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="VBox">
+                           <children>
+                              <JFXButton fx:id="saniServButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#saniServButtonPressed" prefHeight="100.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #002d59;" styleClass="JFXButton" text="Sanitation Services" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView blendMode="ADD" fitHeight="52.0" fitWidth="46.0" opacity="0.6" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/TrashBlueIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <Label styleClass="Label" text="Matt" />
+                           </children>
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="VBox">
+                           <children>
+                              <JFXButton fx:id="equipDelivButton" alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#equipDelivReqButtonPressed" prefHeight="100.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #002d59;" styleClass="JFXButton" text="Equipment Delivery " textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView blendMode="ADD" fitHeight="71.0" fitWidth="79.0" opacity="0.6" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/PumpBlueIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <Label styleClass="Label" text="Ian" />
+                           </children>
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="VBox">
+                           <children>
+                              <JFXButton fx:id="maintReqButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#maintenanceButtonPressed" prefHeight="181.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #002d59;" styleClass="JFXButton" text="Maintenance" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="164.0" fitWidth="48.0" opacity="0.6" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/LightbulbBlueIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <Label styleClass="Label" text="Aidan" />
+                           </children>
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="VBox">
+                           <children>
+                              <JFXButton fx:id="medDelivButton" alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#medDelivButtonPressed" prefHeight="100.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #002d59;" styleClass="JFXButton" text="Medicine Delivery " textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView blendMode="ADD" fitHeight="115.0" fitWidth="81.0" opacity="0.6" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/Meds1BlueIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <Label styleClass="Label" text="Ian" />
+                           </children>
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="VBox">
+                           <children>
+                              <JFXButton fx:id="transportButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#transportButtonPressed" prefHeight="100.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #002d59;" styleClass="JFXButton" text="Internal Transport" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView blendMode="ADD" fitHeight="47.0" fitWidth="81.0" opacity="0.6" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/TransportBlueIcon.png" />
+                                       </image>
+                                       <viewport>
+                                          <Rectangle2D />
+                                       </viewport>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <Label styleClass="Label" text="Abby" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="VBox">
+                           <children>
+                              <JFXButton fx:id="giftButton" alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#giftButtonPressed" prefHeight="100.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #002d59;" styleClass="JFXButton" text="Gift" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="67.0" fitWidth="62.0" opacity="0.6" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/OtherBlueIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <Label styleClass="Label" text="Coco" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="VBox">
+                           <children>
+                              <JFXButton fx:id="religiousButton" alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#religiousButtonPressed" prefHeight="100.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #002d59;" styleClass="JFXButton" text="Religious" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="68.0" fitWidth="63.0" opacity="0.6" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/OtherBlueIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <Label styleClass="Label" text="Lauren" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="VBox">
+                           <children>
+                              <JFXButton fx:id="securityButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#securityButtonPressed" prefHeight="100.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #002d59;" styleClass="JFXButton" text="Security" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="159.0" fitWidth="65.0" opacity="0.6" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/OtherBlueIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <Label styleClass="Label" text="Dee" />
+                           </children>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </FlowPane>
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

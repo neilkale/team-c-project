@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDrawersStack?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../Stylesheets/DefaultPage.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.DefaultController">
+   <children>
+      <BorderPane fx:id="borderPane" layoutX="91.0" layoutY="26.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <left>
+            <GridPane BorderPane.alignment="CENTER">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <HBox alignment="CENTER" prefWidth="66.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <children>
+                        <VBox fx:id="Banner" alignment="TOP_CENTER" prefHeight="600.0" prefWidth="112.0" stylesheets="@../Stylesheets/ServiceRequestConstants.css">
+                           <children>
+                              <JFXButton fx:id="navButton" text="Requests" textFill="WHITE" />
+                              <JFXButton fx:id="navButton111" onAction="#orderTrackerButtonPressed" text="Track Orders" textFill="WHITE" />
+                              <JFXButton fx:id="navButton1" onAction="#mapEditorButtonPressed" text="Map Editor" textFill="WHITE" />
+                              <JFXButton fx:id="sideViewButton" layoutX="23.0" layoutY="60.0" onAction="#sideViewButtonPressed" text="Side View" textFill="WHITE" />
+                              <JFXButton fx:id="databasesButton" onAction="#databasesButtonPressed" text="Databases" textFill="WHITE" />
+                              <JFXButton fx:id="exitButton" text="Exit" textFill="WHITE" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </VBox>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <GridPane.margin>
+                        <Insets top="10.0" />
+                     </GridPane.margin>
+                  </HBox>
+               </children>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </GridPane>
+         </left>
+         <center>
+            <Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+      <JFXDrawersStack fx:id="drawerStack" layoutX="100.0" prefHeight="600.0" prefWidth="235.0" />
+   </children>
+</AnchorPane>

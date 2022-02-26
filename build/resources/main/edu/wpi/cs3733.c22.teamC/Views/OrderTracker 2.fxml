@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../Stylesheets/OrderTracker.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.OrderTrackerController">
+   <children>
+      <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <GridPane style="-fx-background-color: #001a3cff;" BorderPane.alignment="CENTER">
+               <rowConstraints>
+                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="55.0" />
+               </rowConstraints>
+               <columnConstraints>
+                  <ColumnConstraints maxWidth="1.7976931348623157E308" />
+                  <ColumnConstraints />
+               </columnConstraints>
+               <children>
+                  <Label alignment="CENTER" prefHeight="55.0" prefWidth="6000.0" text="ORDER TRACKER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="backButton" onAction="#backButtonPressed" prefHeight="55.0" prefWidth="55.0" ripplerFill="BLACK" text="&lt;" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="LEFT">
+                     <font>
+                        <Font name="Consolas Bold" size="30.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </GridPane>
+         </top>
+         <center>
+            <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f5f5f5;" BorderPane.alignment="CENTER">
+               <content>
+                  <ListView fx:id="listView" prefHeight="545.0" prefWidth="807.0" />
+               </content>
+            </ScrollPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,9 @@
+#xRayButton,#bedButton,#pumpButton,#reclinerButton {
+    -fx-background-color: #c6e1ff !important;
+    -fx-border-color: #c6e1ff !important;
+}
+
+#xRayButton:focused,#bedButton:focused,#pumpButton:focused,#reclinerButton:focused {
+    -fx-background-color: #c6e1ff !important;
+    -fx-border-color: #c6e1ff !important;
+}

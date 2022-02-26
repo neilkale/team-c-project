@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.DatabaseAllController">
+   <children>
+      <BorderPane prefHeight="400.0" prefWidth="663.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <bottom>
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+              </rowConstraints>
+               <children>
+                  <JFXButton fx:id="readButton" maxWidth="1.7976931348623157E308" onAction="#readButtonPressed" prefHeight="45.0" prefWidth="261.0" style="-fx-background-color: #001a3cff;" text="READFROMCSV" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+                     </GridPane.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="writeButton" maxWidth="1.7976931348623157E308" onAction="#writeButtonPressed" prefHeight="45.0" prefWidth="261.0" style="-fx-background-color: #c6c6c6c6;" text="WRITETOCSV" textFill="#001a3c" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+                     </GridPane.margin>
+                  </JFXButton>
+               </children>
+            </GridPane>
+         </bottom>
+         <center>
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="204.0" minHeight="36.0" vgrow="NEVER" />
+                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" vgrow="ALWAYS" />
+              </rowConstraints>
+               <children>
+                  <TableView fx:id="tableView" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS" />
+                  <JFXComboBox fx:id="comboBox" maxWidth="1.7976931348623157E308" onAction="#comboChanged" prefHeight="25.0" prefWidth="200.0" promptText="Locations" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                     <GridPane.margin>
+                        <Insets left="250.0" right="250.0" />
+                     </GridPane.margin></JFXComboBox>
+               </children>
+            </GridPane>
+         </center>
+         <top>
+            <GridPane fx:id="Banner" prefHeight="62.0" prefWidth="800.0" style="-fx-background-color: #001a3cff;" stylesheets="@../Stylesheets/ServiceRequestConstants.css" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="0.0" prefWidth="84.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="518.0" minWidth="10.0" prefWidth="377.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="84.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.0" minWidth="10.0" prefWidth="101.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="151.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <JFXButton fx:id="backButton" alignment="CENTER" onAction="#backButtonPressed" prefHeight="55.0" prefWidth="119.0" text="&lt;" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas Bold" size="30.0" />
+                     </font>
+                  </JFXButton>
+                  <Label alignment="CENTER" prefHeight="62.0" prefWidth="441.0" stylesheets="@../Stylesheets/ServiceRequestConstants.css" text="DATABASES" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="refreshButton" alignment="CENTER" buttonType="RAISED" onAction="#refreshPressed" prefHeight="48.0" prefWidth="87.0" text="refresh" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
+                     <font>
+                        <Font name="Consolas Bold" size="9.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="switchDBButton" alignment="CENTER" buttonType="RAISED" onAction="#switchDBButtonPressed" prefHeight="48.0" prefWidth="175.0" text="No One Will Ever See This" textAlignment="CENTER" textFill="WHITE" wrapText="true" GridPane.columnIndex="3">
+                     <font>
+                        <Font name="Consolas Bold" size="9.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnToMongo" onAction="#toMongo" prefHeight="60.0" prefWidth="152.0" text="Switch to NoSQL" textFill="WHITE" wrapText="true" GridPane.columnIndex="4" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </GridPane>
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>

@@ -1,11 +1,12 @@
 package edu.wpi.cs3733.c22.teamC;
 
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoDatabase;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import org.bson.Document;
 
 /** @author Aidan Burns 2/21/2022 File is a playground for creating MongoDB */
@@ -15,15 +16,25 @@ public class AidansMessAround {
         "nodeID", "xcoord", "ycoord", "floor", "building", "nodeType", "longName", "shortName"
       };
 
+  static MongoClient mongoClient;
+  static MongoDatabase teamC_db;
+  static Map<String, List<String>> map;
+
   public static void main(String[] args) {
-    /*try {
+    String uri =
+        "mongodb+srv://admin:dDbno11RbFVsXVv3@serverlessinstance0.zitm8.mongodb.net/teamC_DB?retryWrites=true&w=majority";
+
+    mongoClient = MongoClients.create(uri);
+    teamC_db = mongoClient.getDatabase("teamC_DB");
+    map = new HashMap<>();
+    /*
+    try {
       System.out.println(locFields[-1]);
       // Replace the uri string with your MongoDB deployment's connection string
       // changed uri to include the name of the database we are using instead of myFirstDatabase
-      String uri =
-          "mongodb+srv://admin:dDbno11RbFVsXVv3@serverlessinstance0.zitm8.mongodb.net/teamC_DB?retryWrites=true&w=majority";
 
-      try (MongoClient mongoClient = MongoClients.create(uri)) {
+
+      try {
         MongoDatabase teamC_db = mongoClient.getDatabase("teamC_DB");
         try {
         } catch (MongoException me) {
@@ -106,9 +117,18 @@ public class AidansMessAround {
     } catch (Exception e) {
       e.printStackTrace();
       System.err.println(e.getCause());
-    }*/
+    }
+
+     */
+
     for (String s : readQueries()) {
-      System.out.println(getAction(s) + s.substring(s.indexOf(' ')));
+      if (s.length() != 0) {
+        System.out.println(getAction(s) + s.substring(s.indexOf(' ')));
+      }
+    }
+
+    if (mongoClient != null) {
+      mongoClient.close();
     }
   }
 
@@ -119,25 +139,39 @@ public class AidansMessAround {
       case "INSERT":
         toReturn = insert(query);
         break;
-      case "SELECT":
-        toReturn = select(query);
-        break;
-      case "DELETE":
-        toReturn = delete(query);
-        break;
-      case "TRUNCATE":
-        toReturn = truncate(query);
-        break;
-      case "CREATE":
-        toReturn = createTable(query);
-        break;
+        /*case "SELECT":
+          toReturn = select(query);
+          break;
+        case "DELETE":
+          toReturn = delete(query);
+          break;
+        case "TRUNCATE":
+          toReturn = truncate(query);
+          break;
+        case "CREATE":
+          toReturn = createTable(query);
+          break;*/
     }
     return toReturn;
   }
 
   private static String insert(String query) {
-    String actQuery = query.substring(0, query.indexOf(' '));
-    actQuery = actQuery.substring(0, actQuery.indexOf(' '));
+    String actQuery = query.substring(query.indexOf(' ') + 1);
+    actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
+    String table = actQuery.substring(0, actQuery.indexOf(' ') - 1);
+    teamC_db.getCollection(table);
+    List<String> fields = map.get(table);
+    actQuery = actQuery.substring(actQuery.indexOf('(') + 1, actQuery.indexOf(')'));
+    String toIterate = actQuery;
+    List<String> values = new ArrayList<>();
+    while (toIterate.contains(",")) {
+      values.add(actQuery.substring(0, actQuery.indexOf(',')));
+    }
+    Document doc = new Document();
+    for (int i = 0; i < fields.size(); i++) {
+      doc.append(fields.get(i), values.get(i));
+    }
+    teamC_db.getCollection(table).insertOne(doc);
     return "INSERT";
   }
 
@@ -152,12 +186,26 @@ public class AidansMessAround {
   }
 
   private static String truncate(String query) {
+    String actQuery = query.substring(query.indexOf(' '));
+    actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
+    teamC_db.getCollection(actQuery).deleteMany(new Document());
     return "TRUNCATE";
   }
 
   private static String createTable(String query) {
-    String actQuery = query.substring(query.indexOf(' '));
-    actQuery = actQuery.substring(actQuery.indexOf(' '));
+    String actQuery = query.substring(query.indexOf(' ') + 1);
+    actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
+    String table = actQuery.substring(0, actQuery.indexOf(' ') - 1);
+    actQuery = actQuery.substring(actQuery.indexOf('(') + 1, actQuery.lastIndexOf(')'));
+    String toIterate = actQuery;
+    List<String> values = new ArrayList<>();
+    while (toIterate.contains(",")) {
+      values.add(toIterate.substring(0, toIterate.indexOf('V') - 1));
+      toIterate = toIterate.substring(toIterate.indexOf(',') + 1);
+    }
+    values.add(toIterate.substring(1, toIterate.indexOf('V') - 1));
+    map.put(table, values);
+
     return "CREATE";
   }
 

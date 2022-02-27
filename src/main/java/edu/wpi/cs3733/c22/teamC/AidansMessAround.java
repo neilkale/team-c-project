@@ -139,18 +139,20 @@ public class AidansMessAround {
       case "INSERT":
         toReturn = insert(query);
         break;
+      case "CREATE":
+        toReturn = createTable(query);
+        break;
         /*case "SELECT":
-          toReturn = select(query);
-          break;
+            toReturn = select(query);
+            break;
         case "DELETE":
-          toReturn = delete(query);
-          break;
+            toReturn = delete(query);
+            break;
         case "TRUNCATE":
-          toReturn = truncate(query);
-          break;
-        case "CREATE":
-          toReturn = createTable(query);
-          break;*/
+            toReturn = truncate(query);
+            break;*/
+      default:
+        break;
     }
     return toReturn;
   }
@@ -159,13 +161,13 @@ public class AidansMessAround {
     String actQuery = query.substring(query.indexOf(' ') + 1);
     actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
     String table = actQuery.substring(0, actQuery.indexOf(' ') - 1);
-    teamC_db.getCollection(table);
-    List<String> fields = map.get(table);
     actQuery = actQuery.substring(actQuery.indexOf('(') + 1, actQuery.indexOf(')'));
     String toIterate = actQuery;
     List<String> values = new ArrayList<>();
-    while (toIterate.contains(",")) {
+    List<String> fields = map.get(table);
+    while (actQuery.contains(",")) {
       values.add(actQuery.substring(0, actQuery.indexOf(',')));
+      actQuery = actQuery.substring(actQuery.indexOf(',') + 1);
     }
     Document doc = new Document();
     for (int i = 0; i < fields.size(); i++) {
@@ -176,6 +178,8 @@ public class AidansMessAround {
   }
 
   private static String select(String query) {
+    String table = query.substring(query.lastIndexOf(' ') + 1);
+
     return "SELECT";
   }
 
@@ -195,7 +199,7 @@ public class AidansMessAround {
   private static String createTable(String query) {
     String actQuery = query.substring(query.indexOf(' ') + 1);
     actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
-    String table = actQuery.substring(0, actQuery.indexOf(' ') - 1);
+    String table = actQuery.substring(0, actQuery.indexOf(' '));
     actQuery = actQuery.substring(actQuery.indexOf('(') + 1, actQuery.lastIndexOf(')'));
     String toIterate = actQuery;
     List<String> values = new ArrayList<>();

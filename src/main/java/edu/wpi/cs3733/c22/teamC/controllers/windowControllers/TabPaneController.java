@@ -89,10 +89,9 @@ public class TabPaneController extends AbstractController {
         .hoverProperty()
         .addListener(
             (observable, oldValue, newValue) -> {
-              if (newValue && tabPane.getTabs().indexOf(tab) == tabPane.getTabs().size() - 1){
+              if (newValue && tabPane.getTabs().indexOf(tab) == tabPane.getTabs().size() - 1) {}
 
-              }
-                //tabPane.getTabs().add(tabPane.getTabs().size() - 1, newTabButton());
+              // tabPane.getTabs().add(tabPane.getTabs().size() - 1, newTabButton());
             });
 
     return tab;

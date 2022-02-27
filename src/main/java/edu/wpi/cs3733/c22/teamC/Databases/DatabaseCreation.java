@@ -11,7 +11,7 @@ public class DatabaseCreation {
     try {
       // Creates the table with parameters
       String query =
-          "CREATE TABLE TowerLocationsC( "
+          "CREATE TABLE TOWERLOCATIONSC( "
               + "nodeID VARCHAR(255), "
               + "xcoord VARCHAR(255), "
               + "ycoord VARCHAR(255), "
@@ -33,9 +33,9 @@ public class DatabaseCreation {
   public static void makeEquipmentRequestTable() throws SQLException {
     DatabaseConnection dbConnection = DatabaseConnection.getInstance();
     try {
-      // Creates the table with parameters
+      // Creates the table with parameters EquipmentRequestC
       String query =
-          "CREATE TABLE EquipmentRequestC( "
+          "CREATE TABLE EQUIPMENTREQUESTC( "
               + "ticketID VARCHAR(255), "
               + "locationID VARCHAR(255), "
               + "status VARCHAR(255), "
@@ -57,9 +57,9 @@ public class DatabaseCreation {
   public static void makeSecurityRequestTable() throws SQLException {
     DatabaseConnection dbConnection = DatabaseConnection.getInstance();
     try {
-      // Creates the table with parameters
+      // Creates the table with parametersSecurityRequestC
       String query =
-          "CREATE TABLE SecurityRequestC( "
+          "CREATE TABLE SECURITYREQUESTC( "
               + "ticketID VARCHAR (255), "
               + "locationID VARCHAR(255), "
               + "status VARCHAR(255), "
@@ -82,9 +82,9 @@ public class DatabaseCreation {
   public static void makeMaintenanceRequestTable() throws SQLException {
     DatabaseConnection dbConnection = DatabaseConnection.getInstance();
     try {
-      // Creates the table with parameters
+      // Creates the table with parametersMaintenanceRequestC
       String query =
-          "CREATE TABLE MaintenanceRequestC( "
+          "CREATE TABLE MAINTENANCEREQUESTC( "
               + "ticketID VARCHAR(255), "
               + "locationID VARCHAR(255), "
               + "status VARCHAR(255), "
@@ -106,7 +106,7 @@ public class DatabaseCreation {
     try {
       // Creates the table with parameters
       String query =
-          "CREATE TABLE Maps( "
+          "CREATE TABLE MAPSC( "
               + "buildingName VARCHAR(255), "
               + "floorName VARCHAR(255), "
               + "imagePath VARCHAR(255), "
@@ -126,7 +126,7 @@ public class DatabaseCreation {
     try {
       // Creates the table with parameters
       String query =
-          "CREATE TABLE SanitationRequestC( "
+          "CREATE TABLE SANITATIONREQUESTC( "
               + " ticketID VARCHAR(255), "
               + " locationID VARCHAR(255), "
               + " status VARCHAR(255), "
@@ -146,9 +146,9 @@ public class DatabaseCreation {
   public static void makeITTable() throws SQLException {
     DatabaseConnection dbConnection = DatabaseConnection.getInstance();
     try {
-      // Creates the table with parameters
+      // Creates the table with parametersITRequestC
       String query =
-          "CREATE TABLE ITRequestC( "
+          "CREATE TABLE ITREQUESTC( "
               + "ticketID VARCHAR(255), "
               + "locationID VARCHAR(255), "
               + "status VARCHAR(255), "
@@ -170,7 +170,7 @@ public class DatabaseCreation {
     try {
       // Creates the table with parameters
       String query =
-          "CREATE TABLE EmployeeC( "
+          "CREATE TABLE EMPLOYEEC( "
               + "username VARCHAR(255), "
               + "password VARCHAR(255), "
               + "firstName VARCHAR(255), "
@@ -192,9 +192,9 @@ public class DatabaseCreation {
   public static void makeReligionTable() throws SQLException {
     DatabaseConnection dbConnection = DatabaseConnection.getInstance();
     try {
-      // Creates the table with parameters
+      // Creates the table with parametersReligiousRequestC
       String query =
-          "CREATE TABLE ReligiousRequestC("
+          "CREATE TABLE RELIGIOUSREQUESTC("
               + " ticketID VARCHAR(255), "
               + " locationID VARCHAR(255), "
               + " status VARCHAR(255), "
@@ -214,9 +214,9 @@ public class DatabaseCreation {
   public static void makeLanguageTable() throws SQLException {
     DatabaseConnection dbConnection = DatabaseConnection.getInstance();
     try {
-      // Creates the table with parameters
+      // Creates the table with parametersLanguageRequestC
       String query =
-          "CREATE TABLE LanguageRequestC("
+          "CREATE TABLE LANGUAGEREQUESTC("
               + " ticketID VARCHAR(255), "
               + " locationID VARCHAR(255), "
               + " status VARCHAR(255), "
@@ -236,9 +236,9 @@ public class DatabaseCreation {
   public static void makeGiftTable() throws SQLException {
     DatabaseConnection dbConnection = DatabaseConnection.getInstance();
     try {
-      // Creates the table with parameters
+      // Creates the table with parametersGiftRequestC
       String query =
-          "CREATE TABLE GiftRequestC( "
+          "CREATE TABLE GIFTREQUESTC( "
               + " ticketID VARCHAR(255), "
               + " locationID VARCHAR(255), "
               + " status VARCHAR(255), "
@@ -259,9 +259,9 @@ public class DatabaseCreation {
   public static void makeLaundryRequestTable() throws SQLException {
     DatabaseConnection dbConnection = DatabaseConnection.getInstance();
     try {
-      // Creates the table with parameters
+      // Creates the table with parametersLaundryRequestC
       String query =
-          "CREATE TABLE LaundryRequestC( "
+          "CREATE TABLE LAUNDRYREQUESTC( "
               + " ticketID VARCHAR(255), "
               + " locationID VARCHAR(255), "
               + " status VARCHAR(255), "
@@ -281,9 +281,9 @@ public class DatabaseCreation {
   public static void makeInternalTransportTable() throws SQLException {
     DatabaseConnection dbConnection = DatabaseConnection.getInstance();
     try {
-      // Creates the table with parameters
+      // Creates the table with parametersInternalTransportRequestC
       String query =
-          "CREATE TABLE InternalTransportRequestC( "
+          "CREATE TABLE INTERNALTRANSPORTREQUESTC( "
               + "ticketID VARCHAR(255), "
               + "locationID VARCHAR(255), "
               + "status VARCHAR(255), "
@@ -304,9 +304,9 @@ public class DatabaseCreation {
   public static void makeMedicineTable() throws SQLException {
     DatabaseConnection dbConnection = DatabaseConnection.getInstance();
     try {
-      // Creates the table with parameters
+      // Creates the table with parametersMedicineRequestC
       String query =
-          "CREATE TABLE MedicineRequestC( "
+          "CREATE TABLE MEDICINEREQUESTC( "
               + "ticketID VARCHAR(255), "
               + "locationID VARCHAR(255), "
               + "status VARCHAR(255), "
@@ -328,13 +328,13 @@ public class DatabaseCreation {
   public static void makeEquipmentTable() throws SQLException {
     DatabaseConnection dbConnection = DatabaseConnection.getInstance();
     try {
-      // Creates the table with parameters
+      // Creates the table with parametersEquipmentC
       /*
       ID varchar
 
        */
       String query =
-          "CREATE TABLE EquipmentC( "
+          "CREATE TABLE EQUIPMENTC( "
               + "equipmentID VARCHAR(255), "
               + "locationID VARCHAR(255), "
               + "lastKnownTime VARCHAR(255), "

@@ -39,7 +39,7 @@ public class GiftRequestQuery extends Query<GiftRequest> {
     GiftRequest queryResult = null;
     ArrayList<GiftRequest> allNodes = new ArrayList<GiftRequest>();
     try {
-      String query = "SELECT * FROM GiftRequestC";
+      String query = "SELECT * FROM " + getQueryInput();
       ResultSet rs = dbConnection.executeQuery(query);
       while (rs.next()) {
         String ticketID = rs.getString("ticketID");
@@ -63,7 +63,9 @@ public class GiftRequestQuery extends Query<GiftRequest> {
   public void addNode(GiftRequest giftRequest) {
     try {
       String query =
-          "INSERT INTO GiftRequestC VALUES "
+          "INSERT INTO "
+              + getQueryInput()
+              + " VALUES "
               + "('"
               + giftRequest.get_ticketID()
               + "', '"
@@ -85,14 +87,17 @@ public class GiftRequestQuery extends Query<GiftRequest> {
 
   @Override
   public void removeNode(GiftRequest object) throws SQLException {
-    String query = "DELETE FROM GiftRequestC WHERE " + "ticketID = '" + object.get_ticketID() + "'";
+    String query =
+        "DELETE FROM " + getQueryInput() + " WHERE " + "ticketID = '" + object.get_ticketID() + "'";
     dbConnection.execute(query);
   }
 
   @Override
   public void editNode(GiftRequest object) throws SQLException {
     String query =
-        "UPDATE GiftRequestC SET "
+        "UPDATE "
+            + getQueryInput()
+            + " SET "
             + "locationID = '"
             + object.get_locationID()
             + "', status = '"
@@ -111,7 +116,7 @@ public class GiftRequestQuery extends Query<GiftRequest> {
 
   @Override
   public Integer getNumRows() throws SQLException {
-    String sql = "SELECT * FROM GiftRequestC";
+    String sql = "SELECT * FROM " + getQueryInput();
     ResultSet rs = dbConnection.executeQuery(sql);
     Integer rowCount = 0;
     while (rs.next()) {
@@ -122,6 +127,6 @@ public class GiftRequestQuery extends Query<GiftRequest> {
 
   @Override
   public String getQueryInput() {
-    return "GiftRequestC";
+    return "GIFTREQUESTC";
   }
 }

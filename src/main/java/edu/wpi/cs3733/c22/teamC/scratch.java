@@ -93,8 +93,7 @@ public class scratch {
   }
 
   private static String delete(String query) {
-    String actQuery = query.substring(query.indexOf(' '));
-    actQuery = actQuery.substring(actQuery.indexOf(' '));
+
     return "DELETE";
   }
 
@@ -126,22 +125,26 @@ public class scratch {
 
   private static String update(String query) {
     String actQuery = query.substring(query.indexOf(' ') + 1);
-    String table = actQuery.substring(0,actQuery.indexOf(' '));
+    String table = actQuery.substring(0, actQuery.indexOf(' '));
     String toIterate = actQuery;
     List<String> values = new ArrayList<>();
     String from = actQuery.substring(actQuery.indexOf("WHERE"));
     from = from.substring(from.indexOf('\''));
     values.add(from);
     while (toIterate.contains(",")) {
-      String value = toIterate.substring(toIterate.indexOf('\''),toIterate.indexOf(','));
+      String value = toIterate.substring(toIterate.indexOf('\''), toIterate.indexOf(','));
       values.add(value);
-      toIterate = toIterate.substring(toIterate.indexOf(',')+1);
+      toIterate = toIterate.substring(toIterate.indexOf(',') + 1);
     }
-    String value = toIterate.substring(toIterate.indexOf('\''),toIterate.indexOf(" WHERE"));
-    values.add(value);
-
-
-    teamC_db.getCollection(t)
+    String lastValue = toIterate.substring(toIterate.indexOf('\''), toIterate.indexOf(" WHERE"));
+    values.add(lastValue);
+    List<String> fields = map.get(table);
+    Document document = new Document();
+    for (int i = 0; i < fields.size(); i++) {
+      document.append(fields.get(i), values.get(i));
+    }
+    Document filterDoc = new Document(fields.get(0), values.get(0));
+    teamC_db.getCollection(table).updateOne(filterDoc, document);
     return "UPDATE";
   }
 

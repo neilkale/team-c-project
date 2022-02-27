@@ -1,1 +1,2 @@
 Connected to the Embedded DB
+OINSERT INTO LAUNDRYREQUESTC VALUES ('123', '567', 'active', 'laundry', 'Jack')

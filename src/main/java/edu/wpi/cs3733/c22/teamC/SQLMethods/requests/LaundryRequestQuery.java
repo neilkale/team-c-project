@@ -19,11 +19,11 @@ public class LaundryRequestQuery extends Query<LaundryRequest> {
     return each.get_ticketID();
   }
 
-  public LaundryRequest queryFactory(String[] inputs) {
+  public static LaundryRequest queryFactory(String[] inputs) {
     if (inputs.length != 5) {
       System.out.println(
           "[QueryFactory of QueryType]: "
-              + getQueryInput()
+              + staticGetQueryInput()
               + "has failed | Input arguments does not match the allotted arguments for the creation of the object - NULL has been returned");
       return null;
     }
@@ -109,6 +109,10 @@ public class LaundryRequestQuery extends Query<LaundryRequest> {
 
   @Override
   public String getQueryInput() {
+    return staticGetQueryInput();
+  }
+
+  public static String staticGetQueryInput() {
     return "LAUNDRYREQUESTC";
   }
 

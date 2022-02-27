@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.SQLMethods;
 
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.*;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.SecurityRequestQuery;
 import java.io.*;
@@ -13,14 +14,14 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 import javax.swing.filechooser.FileSystemView;
 
-public abstract class Query<T> {
+public abstract class Query<DatabaseInterface> {
   public static final boolean VERBOSE = false;
 
   // protected String queryInput; // The string of the table the query would access
 
   protected DatabaseConnection dbConnection = DatabaseConnection.getInstance();
 
-  public abstract T queryFactory(String[] inputs);
+  public DatabaseInterface queryFactory(String[] args);
 
   public static Object factoryGeneric(
       String table,
@@ -79,7 +80,7 @@ public abstract class Query<T> {
     return null;
   }
 
-  public abstract void addNode(T object) throws SQLException;
+  public abstract void addNode(DatabaseInterface object) throws SQLException;
 
   public boolean addNodeGeneric(String[] fields) throws SQLException {
     try {
@@ -109,11 +110,11 @@ public abstract class Query<T> {
     return true;
   }
 
-  public abstract void removeNode(T object) throws SQLException;
+  public abstract void removeNode(DatabaseInterface object) throws SQLException;
 
-  public abstract void editNode(T object) throws SQLException;
+  public abstract void editNode(DatabaseInterface object) throws SQLException;
 
-  public void modifyFromList(ArrayList<String> modificationTypes, ArrayList<T> nodes)
+  public void modifyFromList(ArrayList<String> modificationTypes, ArrayList<DatabaseInterface> nodes)
       throws Exception {
     if (modificationTypes.size() != nodes.size()) {
       System.out.println(
@@ -124,7 +125,7 @@ public abstract class Query<T> {
     try {
       for (int i = 0; i < modificationTypes.size(); i++) {
         String modType = modificationTypes.get(i);
-        T node = nodes.get(i);
+        DatabaseInterface node = nodes.get(i);
         if (modType.toUpperCase().equals("REMOVE")) {
           removeNode(node);
         }
@@ -176,13 +177,13 @@ public abstract class Query<T> {
   //    return false;
   //  }
 
-  public boolean compareAndChange(ArrayList<T> list, String UID) throws Exception {
+  public boolean compareAndChange(ArrayList<DatabaseInterface> list, String UID) throws Exception {
     try {
-      ArrayList<T> listDataBaseNow = getAllNodeData();
-      for (T mod : list) {
+      ArrayList<DatabaseInterface> listDataBaseNow = getAllNodeData();
+      for (DatabaseInterface mod : list) {
         String modUID = getUID(mod);
         if (!listDataBaseNow.contains(mod)) {
-          for (T now : listDataBaseNow) {
+          for (DatabaseInterface now : listDataBaseNow) {
             if (modUID.equals(getUID(now))) {
               DatabaseConnection.getConnection()
                   .createStatement()
@@ -199,10 +200,10 @@ public abstract class Query<T> {
           addNode(mod);
         }
       }
-      for (T now : listDataBaseNow) {
+      for (DatabaseInterface now : listDataBaseNow) {
         boolean found = false;
         String nowUID = getUID(now);
-        for (T mod : list) {
+        for (DatabaseInterface mod : list) {
           if (nowUID.equals(getUID(mod))) {
             //            System.out.println("REMOVING UID:" + nowUID);
             found = true;
@@ -259,11 +260,11 @@ public abstract class Query<T> {
   //    return false;
   //  }
 
-  public abstract String getUID(T each) throws SQLException;
+  public abstract String getUID(DatabaseInterface each) throws SQLException;
 
-  public ArrayList<T> getAllNodeData() {
-    T queryResult = null;
-    ArrayList<T> allNodes = new ArrayList<>();
+  public ArrayList<DatabaseInterface> getAllNodeData() {
+    DatabaseInterface queryResult = null;
+    ArrayList<DatabaseInterface> allNodes = new ArrayList<>();
 
     try {
       String query = "SELECT * FROM " + getQueryInput();
@@ -284,8 +285,8 @@ public abstract class Query<T> {
     return allNodes;
   }
 
-  public abstract String
-      getQueryInput(); // Returns the table name so that I can query it (For example in locations
+  public abstract String getQueryInput(); // Returns the table name so that I can query it (For example in locations
+
   // this would be "TowerLocationsC")
 
   public void readCsv(String fileName) {

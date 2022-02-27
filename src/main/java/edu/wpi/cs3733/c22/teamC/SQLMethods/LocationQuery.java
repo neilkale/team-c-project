@@ -64,11 +64,11 @@ public class LocationQuery extends Query<Location> {
     return toReturn;
   }
 
-  public Location queryFactory(String[] inputs) {
+  public static Location queryFactory(String[] inputs) {
     if (inputs.length != 8) {
       System.out.println(
           "[QueryFactory of QueryType]: "
-              + getQueryInput()
+              + staticGetQueryInput()
               + "has failed | Input arguments does not match the allotted arguments for the creation of the object - NULL has been returned");
       return null;
     }
@@ -188,6 +188,10 @@ public class LocationQuery extends Query<Location> {
 
   @Override
   public String getQueryInput() {
+    return staticGetQueryInput();
+  }
+
+  public static String staticGetQueryInput() {
     return "TOWERLOCATIONSC";
   }
 

@@ -11,12 +11,11 @@ public class MapQuery extends Query<Map> {
 
   public MapQuery() {}
 
-  @Override
-  public Map queryFactory(String[] inputs) {
+  public static Map queryFactory(String[] inputs) {
     if (inputs.length != 4) {
       System.out.println(
           "[QueryFactory of QueryType]: "
-              + getQueryInput()
+              + staticGetQueryInput()
               + "has failed | Input arguments does not match the allotted arguments for the creation of the object - NULL has been returned");
       return null;
     }
@@ -61,9 +60,12 @@ public class MapQuery extends Query<Map> {
   public String getUID(Map each) throws SQLException {
     return each.get_imagePath();
   }
-
   @Override
   public String getQueryInput() {
+    return staticGetQueryInput();
+  }
+
+  public static String staticGetQueryInput() {
     return "MAPSC";
   }
 

@@ -6,6 +6,7 @@ import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.*;
 import org.bson.Document;
 
@@ -183,17 +184,15 @@ public class scratch {
   private List<DatabaseInterface> docToList(String table) {
     MongoCollection<Document> collection = teamC_db.getCollection(table);
     List<Location> items = new ArrayList<>();
-    String className = tableToClassName(table);
-    List<String> fields = map.get(table);
-    try {
-      Class databaseInstance = Class.forName(className);
-      Constructor constructor = databaseInstance.getConstructor();
-      constructor.setAccessible(true);
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
-    } catch (NoSuchMethodException e) {
-      e.printStackTrace();
+    Class databaseClass;
+    try{
+      databaseClass = tableToClassName(table);
+      Method queryFactory = databaseClass.g
+    } catch (ClassNotFoundException e){
+      return null;
     }
+    List<String> fields = map.get(table);
+
     for (Document d : collection.find()) {
 
 
@@ -202,7 +201,7 @@ public class scratch {
     return null;
   }
 
-  private String tableToClassName(String tableName) {
+  private Class tableToClassName(String tableName) throws ClassNotFoundException {
     String toReturn = "";
     switch (tableName) {
       case "TOWERLOCATIONSC":
@@ -251,7 +250,7 @@ public class scratch {
         toReturn = "MedicalEquipment";
         break;
     }
-    return toReturn;
+    return Class.forName(toReturn+"Query");
   }
 
   private static List<String> readQueries() {

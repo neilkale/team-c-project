@@ -19,12 +19,11 @@ public class ReligiousRequestQuery extends Query<ReligiousRequest> {
     return each.get_ticketID();
   }
 
-  @Override
-  public ReligiousRequest queryFactory(String[] inputs) {
+  public static ReligiousRequest queryFactory(String[] inputs) {
     if (inputs.length != 6) {
       System.out.println(
           "[QueryFactory of QueryType]: "
-              + getQueryInput()
+              + staticGetQueryInput()
               + "has failed | Input arguments does not match the allotted arguments for the creation of the object - NULL has been returned");
       return null;
     }
@@ -116,6 +115,10 @@ public class ReligiousRequestQuery extends Query<ReligiousRequest> {
 
   @Override
   public String getQueryInput() {
+    return staticGetQueryInput();
+  }
+
+  public static String staticGetQueryInput() {
     return "ReligiousRequestC";
   }
 

@@ -107,6 +107,11 @@ public class MedicalEquipment implements DatabaseInterface {
   }
 
   @Override
+  public String getName() {
+    return "EQUIPMENTC";
+  }
+
+  @Override
   public String[] getValues() {
     return new String[] {
       get_equipmentID(),

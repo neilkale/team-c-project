@@ -1,14 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.wpi.cs3733.c22.teamC.controllers.windowControllers.DashboardController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../Stylesheets/Dashboard.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.windowControllers.DashboardController">
+   <children>
+      <HBox fx:id="hBox" alignment="CENTER_RIGHT" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane fx:id="anchorPaneUser" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="522.0" HBox.hgrow="ALWAYS">
+               <effect>
+                  <DropShadow blurType="ONE_PASS_BOX">
+                     <color>
+                        <Color red="0.3019607961177826" green="0.3019607961177826" blue="0.3019607961177826" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </AnchorPane>
+            <AnchorPane fx:id="anchorPaneVBox" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <VBox fx:id="vBoxRight" alignment="TOP_CENTER" prefHeight="577.0" prefWidth="270.0">
+                     <children>
+                        <Label fx:id="Banner" alignment="CENTER" prefHeight="30.0" prefWidth="6000.0" stylesheets="@../Stylesheets/ServiceRequestConstants.css" text="Notifications" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="notificationLabel" alignment="CENTER" prefHeight="141.0" prefWidth="270.0" stylesheets="@../Stylesheets/ServiceRequestConstants.css" text="You have (0) pending requests" textAlignment="CENTER" textFill="#4d4d4d">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <ProgressIndicator fx:id="progressCircle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="269.0" progress="0.0">
+                           <VBox.margin>
+                              <Insets top="100.0" />
+                           </VBox.margin>
+                        </ProgressIndicator>
+                     </children>
+                  </VBox>
+               </children>
+               <effect>
+                  <DropShadow blurType="ONE_PASS_BOX">
+                     <color>
+                        <Color red="0.3019607961177826" green="0.3019607961177826" blue="0.3019607961177826" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
+               </HBox.margin>
+            </AnchorPane>
+         </children>
+      </HBox>
+   </children>
 </AnchorPane>

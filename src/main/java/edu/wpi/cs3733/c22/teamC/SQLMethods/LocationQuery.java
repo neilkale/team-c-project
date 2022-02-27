@@ -188,7 +188,7 @@ public class LocationQuery extends Query<Location> {
 
   @Override
   public String getQueryInput() {
-    return "TOWERLOCATIONS";
+    return "TOWERLOCATIONSC";
   }
 
   @Override

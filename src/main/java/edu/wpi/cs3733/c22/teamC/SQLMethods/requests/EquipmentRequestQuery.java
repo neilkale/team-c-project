@@ -38,7 +38,7 @@ public class EquipmentRequestQuery extends Query<EquipmentRequest> {
     ArrayList<EquipmentRequest> allNodes = new ArrayList<EquipmentRequest>();
 
     try {
-      String sql = "SELECT * FROM EquipmentRequestC";
+      String sql = "SELECT * FROM " + getQueryInput();
       ResultSet rs = dbConnection.executeQuery(sql);
 
       while (rs.next()) {
@@ -72,7 +72,9 @@ public class EquipmentRequestQuery extends Query<EquipmentRequest> {
   public void addNode(EquipmentRequest object) {
     try {
       String query =
-          "INSERT INTO EquipmentRequestC "
+          "INSERT INTO "
+              + getQueryInput()
+              + " "
               + "VALUES "
               + "('"
               + object.get_ticketID()
@@ -83,13 +85,13 @@ public class EquipmentRequestQuery extends Query<EquipmentRequest> {
               + "','"
               + object.get_serviceType()
               + "','"
+              + object.get_assignment()
+              + "','"
               + object.get_urgency()
               + "','"
               + object.get_equipmentID()
               + "','"
               + object.get_pickupLocationID()
-              + "','"
-              + object.get_assignment()
               + "')";
       dbConnection.execute(query);
     } catch (SQLException e) {
@@ -100,14 +102,16 @@ public class EquipmentRequestQuery extends Query<EquipmentRequest> {
   @Override
   public void removeNode(EquipmentRequest object) throws SQLException {
     String query =
-        "DELETE FROM EquipmentRequestC WHERE " + "ticketID = '" + object.get_ticketID() + "'";
+        "DELETE FROM " + getQueryInput() + " WHERE " + "ticketID = '" + object.get_ticketID() + "'";
     dbConnection.execute(query);
   }
 
   @Override
   public void editNode(EquipmentRequest object) throws SQLException {
     String query =
-        "UPDATE EquipmentRequestC SET "
+        "UPDATE "
+            + getQueryInput()
+            + " SET "
             + "locationID = '"
             + object.get_locationID()
             + "', status = '"
@@ -130,12 +134,12 @@ public class EquipmentRequestQuery extends Query<EquipmentRequest> {
 
   @Override
   public String getQueryInput() {
-    return "EquipmentRequestC";
+    return "EQUIPMENTREQUESTC";
   }
 
   @Override
   public Integer getNumRows() throws SQLException {
-    String sql = "SELECT * FROM EquipmentRequestC";
+    String sql = "SELECT * FROM " + getQueryInput();
     ResultSet rs = dbConnection.executeQuery(sql);
     int rowCount = 0;
     while (rs.next()) {

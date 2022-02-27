@@ -1,0 +1,11 @@
+#anchorPane #hBox{
+    -fx-background-color: #E8E8E8;
+}
+
+#anchorPaneVBox {
+    -fx-background-color: #FFF;
+}
+
+#anchorPaneUser {
+    -fx-background-color: #FFF;
+}

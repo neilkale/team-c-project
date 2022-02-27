@@ -34,7 +34,7 @@ public class MaintenanceRequestQuery extends Query<MaintenanceRequest> {
     MaintenanceRequest queryResult = null;
     ArrayList<MaintenanceRequest> allNodes = new ArrayList<MaintenanceRequest>();
     try {
-      String query = "SELECT * FROM MaintenanceRequestC";
+      String query = "SELECT * FROM " + getQueryInput();
       ResultSet rs = dbConnection.executeQuery(query);
       while (rs.next()) {
         String ticketID = rs.getString("ticketID");
@@ -64,7 +64,9 @@ public class MaintenanceRequestQuery extends Query<MaintenanceRequest> {
   public void addNode(MaintenanceRequest maintenanceRequest) {
     try {
       String query =
-          "INSERT INTO MaintenanceRequestC VALUES "
+          "INSERT INTO "
+              + getQueryInput()
+              + " VALUES "
               + "('"
               + maintenanceRequest.get_ticketID()
               + "', '"
@@ -87,14 +89,16 @@ public class MaintenanceRequestQuery extends Query<MaintenanceRequest> {
   @Override
   public void removeNode(MaintenanceRequest object) throws SQLException {
     String query =
-        "DELETE FROM MaintenanceRequestC WHERE " + "ticketID = '" + object.get_ticketID() + "'";
+        "DELETE FROM " + getQueryInput() + " WHERE " + "ticketID = '" + object.get_ticketID() + "'";
     dbConnection.execute(query);
   }
 
   @Override
   public void editNode(MaintenanceRequest object) throws SQLException {
     String query =
-        "UPDATE MaintenanceRequestC SET "
+        "UPDATE "
+            + getQueryInput()
+            + " SET "
             + "locationID = '"
             + object.get_locationID()
             + "', status = '"
@@ -113,7 +117,7 @@ public class MaintenanceRequestQuery extends Query<MaintenanceRequest> {
 
   @Override
   public Integer getNumRows() throws SQLException {
-    String sql = "SELECT * FROM MaintenanceRequestC";
+    String sql = "SELECT * FROM " + getQueryInput();
     ResultSet rs = dbConnection.executeQuery(sql);
     Integer rowCount = 0;
     while (rs.next()) {
@@ -124,6 +128,6 @@ public class MaintenanceRequestQuery extends Query<MaintenanceRequest> {
 
   @Override
   public String getQueryInput() {
-    return "MaintenanceRequestC";
+    return "MAINTENANCEREQUESTC";
   }
 }

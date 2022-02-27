@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 
 // this singleton mediator will be used for all incoming and outgoing controller communication
 // now controllers don't call each other directly, leading to low coupling and centralized
@@ -110,7 +111,11 @@ public class ControllerMediator {
 
   // sets the name of the currently selected tab
   public void setTabName(String tabName) {
-    this.tabPaneController.getTabPane().getSelectionModel().getSelectedItem().setText(tabName);
+    this.tabPaneController
+        .getTabPane()
+        .getSelectionModel()
+        .getSelectedItem()
+        .setGraphic(new Label(tabName));
   }
 
   public void anchorPushNotification(String title, String message) {

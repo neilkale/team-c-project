@@ -48,7 +48,7 @@ public class MedicalEquipmentQuery extends Query<MedicalEquipment> {
     ArrayList<MedicalEquipment> allNodes = new ArrayList<MedicalEquipment>();
 
     try {
-      String query = "SELECT * FROM EquipmentC";
+      String query = "SELECT * FROM " + getQueryInput();
       ResultSet rs = dbConnection.executeQuery(query);
 
       while (rs.next()) {
@@ -84,7 +84,9 @@ public class MedicalEquipmentQuery extends Query<MedicalEquipment> {
     // mongoEquipment.addItem(object);
     try {
       String query =
-          "INSERT INTO EquipmentC VALUES "
+          "INSERT INTO "
+              + getQueryInput()
+              + " VALUES "
               + "('"
               + object.get_equipmentID()
               + "', '"
@@ -112,12 +114,12 @@ public class MedicalEquipmentQuery extends Query<MedicalEquipment> {
 
   @Override
   public String getQueryInput() {
-    return "EquipmentC";
+    return "EQUIPMENTC";
   }
 
   @Override
   public Integer getNumRows() throws SQLException {
-    String sql = "SELECT * FROM EquipmentC";
+    String sql = "SELECT * FROM " + getQueryInput();
     ResultSet rs = dbConnection.executeQuery(sql);
     Integer rowCount = 0;
     while (rs.next()) {

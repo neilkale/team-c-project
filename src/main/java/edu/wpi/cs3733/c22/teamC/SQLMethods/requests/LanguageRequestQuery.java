@@ -33,7 +33,7 @@ public class LanguageRequestQuery extends Query<LanguageRequest> {
     LanguageRequest queryResult = null;
     ArrayList<LanguageRequest> allNodes = new ArrayList<LanguageRequest>();
     try {
-      String query = "SELECT * FROM LanguageRequestC";
+      String query = "SELECT * FROM " + getQueryInput();
       ResultSet rs = dbConnection.executeQuery(query);
       while (rs.next()) {
         String ticketID = rs.getString("ticketID");
@@ -57,7 +57,9 @@ public class LanguageRequestQuery extends Query<LanguageRequest> {
   public void addNode(LanguageRequest object) {
     try {
       String query =
-          "INSERT INTO LanguageRequestC VALUES "
+          "INSERT INTO "
+              + getQueryInput()
+              + " VALUES "
               + "('"
               + object.get_ticketID()
               + "', '"
@@ -80,7 +82,7 @@ public class LanguageRequestQuery extends Query<LanguageRequest> {
   @Override
   public void removeNode(LanguageRequest object) throws SQLException {
     String query =
-        "DELETE FROM LanguageRequestC WHERE " + "ticketID = '" + object.get_ticketID() + "'";
+        "DELETE FROM " + getQueryInput() + " WHERE " + "ticketID = '" + object.get_ticketID() + "'";
     dbConnection.execute(query);
   }
 
@@ -88,7 +90,9 @@ public class LanguageRequestQuery extends Query<LanguageRequest> {
   public void editNode(LanguageRequest object) throws SQLException {
 
     String query =
-        "UPDATE LanguageRequestC SET "
+        "UPDATE "
+            + getQueryInput()
+            + " SET "
             + "locationID = '"
             + object.get_locationID()
             + "', status = '"
@@ -112,12 +116,12 @@ public class LanguageRequestQuery extends Query<LanguageRequest> {
 
   @Override
   public String getQueryInput() {
-    return "LanguageRequestC";
+    return "LANGUAGEREQUESTC";
   }
 
   @Override
   public Integer getNumRows() throws SQLException {
-    String sql = "SELECT * FROM LanguageRequestC";
+    String sql = "SELECT * FROM " + getQueryInput();
     ResultSet rs = dbConnection.executeQuery(sql);
     Integer rowCount = 0;
     while (rs.next()) {

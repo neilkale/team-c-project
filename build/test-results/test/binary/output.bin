@@ -1,34 +1,1 @@
 Connected to the Embedded DB
-Connected to the Embedded DB
-EMPLOYEEC FOUND
-EQUIPMENTC FOUND
-EQUIPMENTREQUESTC FOUND
-GIFTREQUESTC FOUND
- INTERNALTRANSPORTREQUESTC FOUND
-ITREQUESTC FOUND
-LANGUAGEREQUESTC FOUND
-LAUNDRYREQUESTC FOUND
-MAINTENANCEREQUESTC FOUND
-MAPS FOUND
-MAPSC FOUND
-MEDICINEREQUESTC FOUND
-RELIGIOUSREQUESTC FOUND
-SANITATIONREQUESTC FOUND
-SECURITYREQUESTC FOUND
-TOWERLOCATIONSC FOUND
-Jsrc/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/TowerLocationsC.csv
-Dsrc/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/EmployeeC.csv
-Jsrc/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/LaundryRequestC.csv
-Lsrc/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/ReligiousRequestC.csv
-Esrc/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/EquipmentC.csv
-Lsrc/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/EquipmentRequestC.csv
-Nsrc/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/MaintenanceRequestC.csv
-Msrc/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/SanitationRequestC.csv
-Esrc/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/ITRequestC.csv
-Gsrc/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/GiftRequestC.csv
-Tsrc/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/InternalTransportRequestC.csv
-Ksrc/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/LanguageRequestC.csv
-Ksrc/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/SecurityRequestC.csv
-Ksrc/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/MedicineRequestC.csv
->src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/Map.csv
-Connected to the Client DB

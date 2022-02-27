@@ -9,6 +9,7 @@ import java.util.*;
 import org.junit.jupiter.api.Test;
 
 public class QueryTest {
+
   /**
    * Equipment Test 1 Tests creating a request, query, and then adding that to the request list, and
    * then accessing that added node in the list of existing requests to see if it was saved.

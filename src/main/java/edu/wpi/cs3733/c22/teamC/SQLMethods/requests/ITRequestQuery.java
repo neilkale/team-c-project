@@ -36,7 +36,7 @@ public class ITRequestQuery extends Query<ITRequest> {
     ArrayList<ITRequest> allNodes = new ArrayList<>();
 
     try {
-      String query = "SELECT * FROM ITRequestC";
+      String query = "SELECT * FROM " + getQueryInput();
       ResultSet rs = dbConnection.executeQuery(query);
 
       while (rs.next()) {
@@ -61,7 +61,9 @@ public class ITRequestQuery extends Query<ITRequest> {
   public void addNode(ITRequest object) {
     try {
       String query =
-          "INSERT INTO ITRequestC VALUES "
+          "INSERT INTO "
+              + getQueryInput()
+              + " VALUES "
               + "('"
               + object.get_ticketID()
               + "', '"
@@ -83,14 +85,17 @@ public class ITRequestQuery extends Query<ITRequest> {
 
   @Override
   public void removeNode(ITRequest object) throws SQLException {
-    String query = "DELETE FROM ITRequestC WHERE " + "ticketID = '" + object.get_ticketID() + "'";
+    String query =
+        "DELETE FROM " + getQueryInput() + " WHERE " + "ticketID = '" + object.get_ticketID() + "'";
     dbConnection.execute(query);
   }
 
   @Override
   public void editNode(ITRequest object) throws SQLException {
     String query =
-        "UPDATE ITRequestC SET "
+        "UPDATE "
+            + getQueryInput()
+            + " SET "
             + "locationID = '"
             + object.get_locationID()
             + "', status = '"
@@ -109,12 +114,12 @@ public class ITRequestQuery extends Query<ITRequest> {
 
   @Override
   public String getQueryInput() {
-    return "ITRequestC";
+    return "ITREQUESTC";
   }
 
   @Override
   public Integer getNumRows() throws SQLException {
-    String sql = "SELECT * FROM ITRequestC";
+    String sql = "SELECT * FROM " + getQueryInput();
     ResultSet rs = dbConnection.executeQuery(sql);
     Integer rowCount = 0;
     while (rs.next()) {

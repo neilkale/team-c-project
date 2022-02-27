@@ -174,6 +174,7 @@ public class AidansMessAround {
       doc.append(fields.get(i), values.get(i));
     }
     teamC_db.getCollection(table).insertOne(doc);
+
     return "INSERT";
   }
 

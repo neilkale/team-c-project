@@ -108,7 +108,7 @@ public class MedicalEquipment implements DatabaseInterface {
 
   @Override
   public String getName() {
-    return "MedicalEquipment";
+    return "EQUIPMENTC";
   }
 
   @Override

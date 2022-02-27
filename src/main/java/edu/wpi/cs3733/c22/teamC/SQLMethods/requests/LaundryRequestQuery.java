@@ -83,7 +83,8 @@ public class LaundryRequestQuery extends Query<LaundryRequest> {
 
   @Override
   public void removeNode(LaundryRequest object) throws SQLException {
-    String query = "DELETE FROM LaundryRequestC WHERE ticketID = '" + object.get_ticketID() + "'";
+    String query =
+        "DELETE FROM " + getQueryInput() + " WHERE ticketID = '" + object.get_ticketID() + "'";
     dbConnection.execute(query);
   }
 
@@ -108,7 +109,7 @@ public class LaundryRequestQuery extends Query<LaundryRequest> {
 
   @Override
   public String getQueryInput() {
-    return "LaundryRequestC";
+    return "LAUNDRYREQUESTC";
   }
 
   @Override

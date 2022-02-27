@@ -83,13 +83,13 @@ public class EquipmentRequestQuery extends Query<EquipmentRequest> {
               + "','"
               + object.get_serviceType()
               + "','"
+              + object.get_assignment()
+              + "','"
               + object.get_urgency()
               + "','"
               + object.get_equipmentID()
               + "','"
               + object.get_pickupLocationID()
-              + "','"
-              + object.get_assignment()
               + "')";
       dbConnection.execute(query);
     } catch (SQLException e) {

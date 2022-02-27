@@ -1,12 +1,22 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.EquipmentRequestQuery;
 
-public class EquipmentRequest extends ServiceRequest {
+import java.util.List;
+
+public class EquipmentRequest extends ServiceRequest implements DatabaseInterface {
 
   private String _urgency;
   private String _equipmentID;
   private String _pickupLocationID;
+
+  public EquipmentRequest(List<String> args){
+    super(args.get(0), args.get(1), args.get(2), args.get(4), args.get(5));
+    this._urgency = args.get(6);
+    this._equipmentID = args.get(7);
+    this._pickupLocationID = args.get(8);
+  }
 
   public EquipmentRequest(
       String ticketID,
@@ -90,5 +100,24 @@ public class EquipmentRequest extends ServiceRequest {
         + _equipmentID
         + "\nPickup Location ID: "
         + _pickupLocationID;
+  }
+
+  @Override
+  public String[] getValues() {
+    return new String[] {
+      "ID",
+      "Location",
+      "Status",
+      "Service Type",
+      "Assignment",
+      "Urgency",
+      "Equipment ID",
+      "Pickup Location ID"
+    };
+  }
+
+  @Override
+  public String getName() {
+    return null;
   }
 }

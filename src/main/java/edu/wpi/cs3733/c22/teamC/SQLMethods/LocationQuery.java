@@ -104,7 +104,7 @@ public class LocationQuery extends Query<Location> {
     } catch (SQLException e) {
       e.printStackTrace();
     }
-
+    System.out.println();
     return allNodes;
   }
 

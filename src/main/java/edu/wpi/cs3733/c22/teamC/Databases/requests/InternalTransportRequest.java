@@ -1,8 +1,9 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.InternalTransportRequestQuery;
 
-public class InternalTransportRequest extends ServiceRequest {
+public class InternalTransportRequest extends ServiceRequest implements DatabaseInterface {
   private String _dropOff;
   private String _urgency;
 
@@ -73,5 +74,17 @@ public class InternalTransportRequest extends ServiceRequest {
         + _dropOff
         + "\nUrgency: "
         + _urgency;
+  }
+
+  @Override
+  public String[] getValues() {
+    return new String[] {
+      "ID", "Pick-up Location", "Status", "Service Type", "Assignment", "Drop off", "Urgency"
+    };
+  }
+
+  @Override
+  public String getName() {
+    return null;
   }
 }

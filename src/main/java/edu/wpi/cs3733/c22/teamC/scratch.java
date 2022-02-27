@@ -1,11 +1,11 @@
 package edu.wpi.cs3733.c22.teamC;
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.*;
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
+import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.lang.reflect.Constructor;
 import java.util.*;
 import org.bson.Document;
 
@@ -91,9 +91,11 @@ public class scratch {
   }
 
   private static String select(String query) {
-    if (query.contains("*")){
-
-
+    if (query.contains("*")) {
+      String table = query.substring(query.lastIndexOf(' ' + 1));
+      FindIterable<Document> a = teamC_db.getCollection(table).find();
+      List<String> b = new ArrayList<>();
+      for (Document d : a) {}
 
     } else {
 
@@ -176,6 +178,80 @@ public class scratch {
     teamC_db.getCollection(table).deleteOne(filterDoc);
     teamC_db.getCollection(table).insertOne(document);
     return "UPDATE";
+  }
+
+  private List<DatabaseInterface> docToList(String table) {
+    MongoCollection<Document> collection = teamC_db.getCollection(table);
+    List<Location> items = new ArrayList<>();
+    String className = tableToClassName(table);
+    List<String> fields = map.get(table);
+    try {
+      Class databaseInstance = Class.forName(className);
+      Constructor constructor = databaseInstance.getConstructor();
+      constructor.setAccessible(true);
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    } catch (NoSuchMethodException e) {
+      e.printStackTrace();
+    }
+    for (Document d : collection.find()) {
+
+
+    }
+
+    return null;
+  }
+
+  private String tableToClassName(String tableName) {
+    String toReturn = "";
+    switch (tableName) {
+      case "TOWERLOCATIONSC":
+        toReturn = "Location";
+        break;
+      case "SECURITYREQUESTC":
+        toReturn = "SecurityRequest";
+        break;
+      case "LANGUAGEREQUESTC":
+        toReturn = "LanguageRequest";
+        break;
+      case "RELIGIOUSREQUESTC":
+        toReturn = "ReligiousRequest";
+        break;
+      case "LAUNDRYREQUESTC":
+        toReturn = "LaundryRequest";
+        break;
+      case "MEDICINEREQUESTC":
+        toReturn = "MedicineRequest";
+        break;
+      case "INTERNALTRANSPORTREQUESTC":
+        toReturn = "InternalTransportRequest";
+        break;
+      case "GIFTREQUESTC":
+        toReturn = "GiftRequest";
+        break;
+      case "EMPLOYEEC":
+        toReturn = "Employee";
+        break;
+      case "MAPSC":
+        toReturn = "Map";
+        break;
+      case "ITREQUESTC":
+        toReturn = "ITRequest";
+        break;
+      case "SANITATIONREQUESTC":
+        toReturn = "SanitationRequest";
+        break;
+      case "MAINTENANCEREQUESTC":
+        toReturn = "MaintenanceRequest";
+        break;
+      case "EQUIPMENTREQUESTC":
+        toReturn = "EquipmentRequest";
+        break;
+      case "EQUIPMENTC":
+        toReturn = "MedicalEquipment";
+        break;
+    }
+    return toReturn;
   }
 
   private static List<String> readQueries() {

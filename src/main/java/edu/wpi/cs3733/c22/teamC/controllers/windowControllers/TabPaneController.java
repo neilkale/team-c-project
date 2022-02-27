@@ -5,6 +5,8 @@ import static javafx.scene.control.TabPane.TabDragPolicy.REORDER;
 
 import edu.wpi.cs3733.c22.teamC.controllers.AbstractController;
 import java.io.IOException;
+import java.util.ArrayList;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -38,6 +40,20 @@ public class TabPaneController extends AbstractController {
                 tabPane.setTabDragPolicy(REORDER);
               }
             });
+
+    // prevents other tabs from being able to be placed to the right of addTab
+    tabPane
+        .getTabs()
+        .addListener(
+            (ListChangeListener<? super Tab>)
+                observable -> {
+                  if (!tabPane.getTabs().get(tabPane.getTabs().size() - 1).equals(addTab)) {
+                    ArrayList<Tab> currTabList = new ArrayList<Tab>(tabPane.getTabs());
+                    currTabList.remove(newTabButton());
+                    currTabList.add(newTabButton());
+                    tabPane.getTabs().setAll(currTabList);
+                  }
+                });
   }
 
   private Tab newTabButton() {

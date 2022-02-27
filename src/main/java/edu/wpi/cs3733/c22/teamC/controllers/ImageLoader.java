@@ -98,8 +98,12 @@ public class ImageLoader {
     imageFileNames.put("Security", "Icons/SecurityIcon.png");
     images.put("Security", null);
 
-    imageFileNames.put("DefaultProfile", "Icons/DefaultUserIcon.png");
+    // Profile Pics
+    imageFileNames.put("DefaultProfile", "ProfilePics/DefaultUserIcon.png");
     images.put("DefaultProfile", null);
+
+    imageFileNames.put("Kevin", "ProfilePics/kevin.png");
+    images.put("Kevin", null);
   }
 
   public static Image loadImage(String name) {

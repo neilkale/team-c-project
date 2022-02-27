@@ -1,11 +1,13 @@
 package edu.wpi.cs3733.c22.teamC.controllers;
 
 import com.jfoenix.controls.*;
+import edu.wpi.cs3733.c22.teamC.Databases.LoggedInUser;
 import edu.wpi.cs3733.c22.teamC.controllers.windowControllers.SlideNavMenuController;
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -17,6 +19,7 @@ public class DefaultController extends AbstractController {
   @FXML private JFXDrawersStack drawerStack;
   @FXML private JFXButton navButton;
   @FXML private JFXButton exitButton;
+  @FXML private ImageView profilePic;
 
   private JFXDrawer navDrawer = new JFXDrawer();
   private JFXDrawer exitDrawer = new JFXDrawer();
@@ -29,6 +32,8 @@ public class DefaultController extends AbstractController {
 
   @FXML
   public void initialize() throws IOException {
+    profilePic.setImage(LoggedInUser.getProfilePic());
+
     FXMLLoader slideNavLoader = getLoader("SlideNavMenu.fxml");
     slideNavMenu = slideNavLoader.load();
     slideNavMenuController = slideNavLoader.getController();

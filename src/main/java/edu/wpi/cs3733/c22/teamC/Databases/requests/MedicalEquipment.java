@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
+import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.MedicalEquipmentQuery;
 import java.util.Objects;
 
 /** this class is for the medical equipment data */
@@ -109,6 +110,10 @@ public class MedicalEquipment implements DatabaseInterface {
   @Override
   public String getName() {
     return "EQUIPMENTC";
+  }
+
+  public MedicalEquipmentQuery getQueryInstance() {
+    return new MedicalEquipmentQuery();
   }
 
   @Override

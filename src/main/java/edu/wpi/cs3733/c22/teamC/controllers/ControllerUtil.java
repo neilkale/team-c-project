@@ -43,7 +43,6 @@ public final class ControllerUtil {
     editor.addEventHandler(
         KeyEvent.ANY,
         event -> {
-          comboBox.setPromptText(null);
           if (!event.getCode().isNavigationKey()) { // allow arrow navigation between characters
             // The filter method uses the Predicate to filter the Suggestions defined above
             // I choose to use the contains method while ignoring cases

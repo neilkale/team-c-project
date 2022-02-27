@@ -6,10 +6,12 @@
 -fx-background-color: #1F58AF !important;
 }
 
-.combo-box .input-focused-line{
+.combo-box .input-line {
     -fx-background-color: #FFF !important;
+    -fx-prompt-text-fill: #1D1D1D;
 }
 
 .combo-box .input-focused-line{
-    -fx-prompt-text-fill: #FFF !important;
+    -fx-background-color: #FFF !important;
+    -fx-prompt-text-fill: #1D1D1D !important;
 }

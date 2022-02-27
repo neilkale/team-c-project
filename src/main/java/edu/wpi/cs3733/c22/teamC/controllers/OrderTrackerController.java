@@ -42,13 +42,6 @@ public class OrderTrackerController extends AbstractController {
   private static final int numOfComboBoxes = 5;
   private HashMap<String, ServiceRequest> requestHashMap = new HashMap<String, ServiceRequest>();
   private ArrayList<JFXComboBox> comboBoxes = new ArrayList<JFXComboBox>();
-  private String[] promptTextArray = {
-    "Search by ticket ID",
-    "Search by status",
-    "Search by location",
-    "Search by request type",
-    "Search by employee"
-  };
   private SRCriteria[] filterArray = new SRCriteria[numOfComboBoxes];
 
   // to clear/remove orders, must clear hashmap, orderControllerHashMap, and listView.items()
@@ -78,9 +71,19 @@ public class OrderTrackerController extends AbstractController {
     ControllerUtil.addAutoCompleteListener(locComboBox); // have to add after fill combobox
     ControllerUtil.addAutoCompleteListener(typeComboBox);
 
-    // if no filters entered in comboboxes, show all orders; bring back prompt text
+    // if no filters entered in comboboxes, show all orders; set float label color as well
     int count = 0;
     for (JFXComboBox comboBox : comboBoxes) {
+      // set prompt text label color to #FFF if floating, else #4d4d4d
+      comboBox
+          .focusedProperty()
+          .addListener(
+              (observable, oldValue, newValue) -> {
+                if (oldValue && !comboBox.getEditor().getText().isBlank())
+                  comboBox.setStyle("-fx-background-color: #FFF; -fx-prompt-text-fill: #FFF;");
+                else
+                  comboBox.setStyle("-fx-background-color: #FFF; -fx-prompt-text-fill: #4d4d4d;");
+              });
       if (comboBox.getEditor().getText().isEmpty()) count++;
       if (count == comboBoxes.size()) {
         addRequestsToListView(ServiceRequest.getAllServiceRequests());

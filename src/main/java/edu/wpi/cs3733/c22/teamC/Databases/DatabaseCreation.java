@@ -177,7 +177,8 @@ public class DatabaseCreation {
               + "lastName VARCHAR(255), "
               + "serviceType VARCHAR(255), "
               + "access VARCHAR(255),"
-              + "id VARCHAR(255)"
+              + "id VARCHAR(255),"
+              + "profilePicture VARCHAR(255)"
               + ")";
       dbConnection.execute(query);
     } catch (SQLException e) {

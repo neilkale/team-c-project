@@ -9,6 +9,7 @@ public class Employee {
   private String serviceType;
   private String access;
   private String id;
+  private String profilePicture;
 
   public String get_username() {
     return username;
@@ -73,7 +74,8 @@ public class Employee {
       String lastName,
       String serviceType,
       String access,
-      String id) {
+      String id,
+      String picture) {
     this.username = username;
     this.password = password;
     this.firstName = firstName;
@@ -81,5 +83,14 @@ public class Employee {
     this.serviceType = serviceType;
     this.access = access;
     this.id = id;
+    this.profilePicture = picture;
+  }
+
+  public String get_profilePicture() {
+    return profilePicture;
+  }
+
+  public void set_profilePicture(String profilePicture) {
+    this.profilePicture = profilePicture;
   }
 }

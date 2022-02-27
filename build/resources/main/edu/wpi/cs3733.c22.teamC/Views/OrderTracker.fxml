@@ -30,7 +30,7 @@
                   <ColumnConstraints />
                </columnConstraints>
                <children>
-                  <Label fx:id="Banner" alignment="CENTER" prefHeight="55.0" prefWidth="6000.0" stylesheets="@../Stylesheets/ServiceRequestConstants.css" text="ORDER TRACKER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Label fx:id="Banner2" alignment="CENTER" prefHeight="55.0" prefWidth="6000.0" stylesheets="@../Stylesheets/ServiceRequestConstants.css" text="ORDER TRACKER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font name="System Bold" size="30.0" />
                      </font>
@@ -40,7 +40,7 @@
                         <Font name="Consolas Bold" size="30.0" />
                      </font>
                   </JFXButton>
-                  <HBox fx:id="Banner" prefHeight="10.0" prefWidth="800.0" stylesheets="@../Stylesheets/ServiceRequestConstants.css" GridPane.rowIndex="1">
+                  <HBox fx:id="Banner2" prefHeight="10.0" prefWidth="800.0" stylesheets="@../Stylesheets/ServiceRequestConstants.css" GridPane.rowIndex="1">
                      <children>
                         <JFXButton fx:id="refreshButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" onAction="#refreshButtonPressed" text="Clear" textFill="WHITE">
                            <font>

@@ -1,7 +1,17 @@
-#Banner{
--fx-background-color: #001a3cff !important;
+#Banner2 {
+-fx-background-color: #1F58AF !important;
 }
 
 #orderTrackerTable {
--fx-background-color: #c6e1ff !important;
+-fx-background-color: #1F58AF !important;
+}
+
+.combo-box .input-line {
+    -fx-background-color: #FFF !important;
+    -fx-prompt-text-fill: #1D1D1D;
+}
+
+.combo-box .input-focused-line{
+    -fx-background-color: #FFF !important;
+    -fx-prompt-text-fill: #1D1D1D !important;
 }

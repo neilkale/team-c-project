@@ -37,13 +37,22 @@
                               <JFXButton fx:id="navButton1" onAction="#mapEditorButtonPressed" text="Map Editor" textFill="WHITE" />
                               <JFXButton fx:id="sideViewButton" layoutX="23.0" layoutY="60.0" onAction="#sideViewButtonPressed" text="Side View" textFill="WHITE" />
                               <JFXButton fx:id="databasesButton" onAction="#databasesButtonPressed" text="Databases" textFill="WHITE" />
-                              <JFXButton fx:id="exitButton" text="Exit" textFill="WHITE" />
+                              <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <JFXButton fx:id="dashboardButton" onAction="#dashboardButtonPressed" text="Dashboard" textFill="WHITE" VBox.vgrow="NEVER" />
+                                    <JFXButton fx:id="exitButton" text="Exit" textFill="WHITE" VBox.vgrow="NEVER">
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" />
+                                       </VBox.margin>
+                                    </JFXButton>
+                                 </children>
+                              </VBox>
                            </children>
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
                            <HBox.margin>
-                              <Insets top="5.0" />
+                              <Insets />
                            </HBox.margin>
                         </VBox>
                      </children>

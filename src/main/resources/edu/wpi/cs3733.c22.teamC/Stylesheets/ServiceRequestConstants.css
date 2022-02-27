@@ -23,8 +23,6 @@
 
 .combo-box .input-focused-line{
 -fx-background-color: #1F58AF !important;
-}
-
-.combo-box .input-focused-line{
  -fx-prompt-text-fill: #1F58AF !important;
 }
+

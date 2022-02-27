@@ -64,7 +64,9 @@ public class SanitationRequestQuery extends Query<SanitationRequest> {
   public void addNode(SanitationRequest object) {
     try {
       String query =
-          "INSERT INTO SanitationRequestC VALUES "
+          "INSERT INTO "
+              + getQueryInput()
+              + " VALUES "
               + "('"
               + object.get_ticketID()
               + "', '"
@@ -87,14 +89,16 @@ public class SanitationRequestQuery extends Query<SanitationRequest> {
   @Override
   public void removeNode(SanitationRequest object) throws SQLException {
     String query =
-        "DELETE FROM SanitationRequestC WHERE " + "ticketID = '" + object.get_ticketID() + "'";
+        "DELETE FROM " + getQueryInput() + " WHERE " + "ticketID = '" + object.get_ticketID() + "'";
     dbConnection.execute(query);
   }
 
   @Override
   public void editNode(SanitationRequest object) throws SQLException {
     String query =
-        "UPDATE SanitationRequestC SET "
+        "UPDATE "
+            + getQueryInput()
+            + " SET "
             + "locationID = '"
             + object.get_locationID()
             + "', status = '"
@@ -113,7 +117,7 @@ public class SanitationRequestQuery extends Query<SanitationRequest> {
 
   @Override
   public String getQueryInput() {
-    return "SanitationRequestC";
+    return "SANITATIONREQUESTC";
   }
 
   @Override

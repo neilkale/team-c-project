@@ -66,7 +66,9 @@ public class InternalTransportRequestQuery extends Query<InternalTransportReques
   public void addNode(InternalTransportRequest object) {
     try {
       String query =
-          "INSERT INTO InternalTransportRequestC VALUES "
+          "INSERT INTO "
+              + getQueryInput()
+              + " VALUES "
               + "('"
               + object.get_ticketID()
               + "', '"
@@ -91,14 +93,16 @@ public class InternalTransportRequestQuery extends Query<InternalTransportReques
   @Override
   public void removeNode(InternalTransportRequest object) throws SQLException {
     String query =
-        "DELETE FROM InternalTransportRequestC WHERE ticketID = '" + object.get_ticketID() + "'";
+        "DELETE FROM " + getQueryInput() + " WHERE ticketID = '" + object.get_ticketID() + "'";
     dbConnection.execute(query);
   }
 
   @Override
   public void editNode(InternalTransportRequest object) throws SQLException {
     String query =
-        "UPDATE InternalTransportRequestC SET "
+        "UPDATE "
+            + getQueryInput()
+            + " SET "
             + "locationID = '"
             + object.get_locationID()
             + "', status = '"
@@ -119,12 +123,12 @@ public class InternalTransportRequestQuery extends Query<InternalTransportReques
 
   @Override
   public String getQueryInput() {
-    return "InternalTransportRequestC";
+    return "INTERNALTRANSPORTREQUESTC";
   }
 
   @Override
   public Integer getNumRows() throws SQLException {
-    String sql = "SELECT * FROM InternalTransportRequestC";
+    String sql = "SELECT * FROM " + getQueryInput();
     ResultSet rs = dbConnection.executeQuery(sql);
     Integer rowCount = 0;
     while (rs.next()) {

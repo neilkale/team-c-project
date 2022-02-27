@@ -38,7 +38,7 @@ public class ReligiousRequestQuery extends Query<ReligiousRequest> {
     ReligiousRequest queryResult = null;
     ArrayList<ReligiousRequest> allNodes = new ArrayList<ReligiousRequest>();
     try {
-      String query = "SELECT * FROM ReligiousRequestC";
+      String query = "SELECT * FROM " + getQueryInput();
       ResultSet rs = dbConnection.executeQuery(query);
       while (rs.next()) {
         String ticketID = rs.getString("ticketID");
@@ -62,7 +62,9 @@ public class ReligiousRequestQuery extends Query<ReligiousRequest> {
   public void addNode(ReligiousRequest object) {
     try {
       String query =
-          "INSERT INTO ReligiousRequestC VALUES "
+          "INSERT INTO "
+              + getQueryInput()
+              + " VALUES "
               + "('"
               + object.get_ticketID()
               + "', '"
@@ -85,7 +87,7 @@ public class ReligiousRequestQuery extends Query<ReligiousRequest> {
   @Override
   public void removeNode(ReligiousRequest object) throws SQLException {
     String query =
-        "DELETE FROM ReligiousRequestC WHERE " + "ticketID = '" + object.get_ticketID() + "'";
+        "DELETE FROM " + getQueryInput() + " WHERE " + "ticketID = '" + object.get_ticketID() + "'";
     dbConnection.execute(query);
   }
 
@@ -93,7 +95,9 @@ public class ReligiousRequestQuery extends Query<ReligiousRequest> {
   public void editNode(ReligiousRequest object) throws SQLException {
 
     String query =
-        "UPDATE ReligiousRequestC SET "
+        "UPDATE "
+            + getQueryInput()
+            + " SET "
             + "locationID = '"
             + object.get_locationID()
             + "', status = '"
@@ -117,7 +121,7 @@ public class ReligiousRequestQuery extends Query<ReligiousRequest> {
 
   @Override
   public Integer getNumRows() throws SQLException {
-    String sql = "SELECT * FROM ReligiousRequestC";
+    String sql = "SELECT * FROM " + getQueryInput();
     ResultSet rs = dbConnection.executeQuery(sql);
     Integer rowCount = 0;
     while (rs.next()) {

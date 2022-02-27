@@ -33,7 +33,9 @@ public class MapQuery extends Query<Map> {
   public void addNode(Map object) {
     try {
       String query =
-          "INSERT INTO Maps VALUES "
+          "INSERT INTO "
+              + getQueryInput()
+              + " VALUES "
               + "('"
               + object.get_buildingName()
               + "', '"
@@ -62,12 +64,12 @@ public class MapQuery extends Query<Map> {
 
   @Override
   public String getQueryInput() {
-    return "Maps";
+    return "MAPSC";
   }
 
   @Override
   public Integer getNumRows() throws SQLException {
-    String sql = "SELECT * FROM Maps";
+    String sql = "SELECT * FROM " + getQueryInput();
     ResultSet rs = dbConnection.executeQuery(sql);
     Integer rowCount = 0;
     while (rs.next()) {

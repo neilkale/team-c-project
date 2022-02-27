@@ -136,6 +136,11 @@ public class DefaultController extends AbstractController {
     setCenter("DatabasesAll.fxml");
   }
 
+  @FXML
+  private void dashboardButtonPressed() throws IOException {
+    setCenter("Dashboard.fxml");
+  }
+
   // reformats camel cased strings, such as fxml file names; OOOH LOOK, REGEX!!! PURDY.
   private String splitCamelCase(String s) {
     return s.replaceAll(

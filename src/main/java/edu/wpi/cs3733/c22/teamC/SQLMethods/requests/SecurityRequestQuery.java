@@ -33,7 +33,7 @@ public class SecurityRequestQuery extends Query<SecurityRequest> {
     ArrayList<SecurityRequest> allNodes = new ArrayList<>();
 
     try {
-      String query = "SELECT * FROM SecurityRequestC";
+      String query = "SELECT * FROM " + getQueryInput();
       ResultSet rs = dbConnection.executeQuery(query);
 
       while (rs.next()) {
@@ -68,7 +68,9 @@ public class SecurityRequestQuery extends Query<SecurityRequest> {
   public void addNode(SecurityRequest object) throws SQLException {
     try {
       String query =
-          "INSERT INTO SecurityRequestC VALUES "
+          "INSERT INTO "
+              + getQueryInput()
+              + " VALUES "
               + "('"
               + object.get_ticketID()
               + "', '"
@@ -106,7 +108,9 @@ public class SecurityRequestQuery extends Query<SecurityRequest> {
   @Override
   public void editNode(SecurityRequest object) throws SQLException {
     String query =
-        "UPDATE SecurityRequestC SET "
+        "UPDATE "
+            + getQueryInput()
+            + " SET "
             + "locationID = '"
             + object.get_locationID()
             + "', status = '"
@@ -134,6 +138,6 @@ public class SecurityRequestQuery extends Query<SecurityRequest> {
 
   @Override
   public String getQueryInput() {
-    return "SecurityRequestC";
+    return "SECURITYREQUESTC";
   }
 }

@@ -72,7 +72,9 @@ public class MedicineRequestQuery extends Query<MedicineRequest> {
   public void addNode(MedicineRequest object) {
     try {
       String query =
-          "INSERT INTO MedicineRequestC VALUES "
+          "INSERT INTO "
+              + getQueryInput()
+              + " VALUES "
               + "('"
               + object.get_ticketID()
               + "', '"
@@ -98,14 +100,17 @@ public class MedicineRequestQuery extends Query<MedicineRequest> {
 
   @Override
   public void removeNode(MedicineRequest object) throws SQLException {
-    String query = "DELETE FROM MedicineRequestC WHERE ticketID = '" + object.get_ticketID() + "'";
+    String query =
+        "DELETE FROM " + getQueryInput() + " WHERE ticketID = '" + object.get_ticketID() + "'";
     dbConnection.execute(query);
   }
 
   @Override
   public void editNode(MedicineRequest object) throws SQLException {
     String query =
-        "UPDATE MedicineRequestC SET "
+        "UPDATE "
+            + getQueryInput()
+            + " SET "
             + "locationID = '"
             + object.get_locationID()
             + "', status = '"
@@ -128,12 +133,12 @@ public class MedicineRequestQuery extends Query<MedicineRequest> {
 
   @Override
   public String getQueryInput() {
-    return "MedicineRequestC";
+    return "MEDICINEREQUESTC";
   }
 
   @Override
   public Integer getNumRows() throws SQLException {
-    String sql = "SELECT * FROM MedicineRequestC";
+    String sql = "SELECT * FROM " + getQueryInput();
     ResultSet rs = dbConnection.executeQuery(sql);
     Integer rowCount = 0;
     while (rs.next()) {

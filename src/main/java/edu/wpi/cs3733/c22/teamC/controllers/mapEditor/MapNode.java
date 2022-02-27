@@ -215,11 +215,19 @@ public class MapNode extends ImageView {
   }
 
   MedicalEquipment getEquipment() {
-    return equipment.get(equipmentIndex % equipment.size());
+    try {
+      return equipment.get(equipmentIndex % equipment.size());
+    } catch (Exception e) {
+      return null;
+    }
   }
 
   ServiceRequest getServiceReq() {
-    return requests.get(serviceIndex % equipment.size());
+    try {
+      return requests.get(serviceIndex % equipment.size());
+    } catch (Exception e) {
+      return null;
+    }
   }
 
   void removeEquipment() {

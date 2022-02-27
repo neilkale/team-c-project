@@ -270,9 +270,9 @@ public abstract class ServiceRequest {
     ArrayList<ServiceRequest> total = getAllServiceRequests();
     int completed = 0;
     for (ServiceRequest each : total) {
-      if (each.get_status().equals("DONE")
-          || each.get_status().equals("COMPLETED")
-          || each.get_status().equals("FINISHED")) {
+      if (each.get_status().equalsIgnoreCase("done")
+          || each.get_status().equalsIgnoreCase("complete")
+          || each.get_status().equalsIgnoreCase("finished")) {
         completed++;
       }
     }

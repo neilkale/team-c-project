@@ -1,19 +1,40 @@
 package edu.wpi.cs3733.c22.teamC;
+
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoDatabase;
+import edu.wpi.cs3733.c22.teamC.Databases.Location;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.*;
+import org.bson.Document;
+
 /** @author Aidan Burns 2/21/2022 File is a playground for creating MongoDB */
 public class AidansMessAround {
-  /* private static String[] locFields =
-  new String[] {
-    "nodeID", "xcoord", "ycoord", "floor", "building", "nodeType", "longName", "shortName"
-  };*/
+  private static String[] locFields =
+      new String[] {
+        "nodeID", "xcoord", "ycoord", "floor", "building", "nodeType", "longName", "shortName"
+      };
+
+  static MongoClient mongoClient;
+  static MongoDatabase teamC_db;
+  static Map<String, List<String>> map;
 
   public static void main(String[] args) {
-    /*try {
+    String uri =
+        "mongodb+srv://admin:dDbno11RbFVsXVv3@serverlessinstance0.zitm8.mongodb.net/teamC_DB?retryWrites=true&w=majority";
+
+    mongoClient = MongoClients.create(uri);
+    teamC_db = mongoClient.getDatabase("teamC_DB");
+    map = new HashMap<>();
+    /*
+    try {
+      System.out.println(locFields[-1]);
       // Replace the uri string with your MongoDB deployment's connection string
       // changed uri to include the name of the database we are using instead of myFirstDatabase
-      String uri =
-          "mongodb+srv://admin:dDbno11RbFVsXVv3@serverlessinstance0.zitm8.mongodb.net/teamC_DB?retryWrites=true&w=majority";
 
-      try (MongoClient mongoClient = MongoClients.create(uri)) {
+
+      try {
         MongoDatabase teamC_db = mongoClient.getDatabase("teamC_DB");
         try {
         } catch (MongoException me) {
@@ -97,47 +118,112 @@ public class AidansMessAround {
       e.printStackTrace();
       System.err.println(e.getCause());
     }
-    */
-    /*
-    download mongodb, download mongodbimport, go into program files -> mongodDB -> server -> 4.4 -> bin,
-    drop mongoimport.exe in there, as well as csv files
 
-    CMD: mongoimport -d databaseName -c collectionName --type csv --file something.csv --headerline
-    __ document(s) imported successfully
      */
-    /*
 
-    */
-    /*
-    going to use documentName.put("collectionName", "updatedName"); to update stuff
-    BasicDBObject to update things
-    https://kb.objectrocket.com/mongo-db/how-to-update-a-document-in-mongodb-using-java-384
-     */
-    /*
-     */
+    for (String s : readQueries()) {
+      if (s.length() != 0) {
+        System.out.println(getAction(s) + s.substring(s.indexOf(' ')));
+      }
+    }
+
+    if (mongoClient != null) {
+      mongoClient.close();
+    }
   }
 
-  /*private static List<Location> getAllItemsFromMongo(String collectionName) {
-   */
-  /*MongoCollection<Document> collection = database.getCollection(collectionName);*/
-  /*
-  List<Location> locations = new ArrayList<>();
-  */
-  /* for(Document d : collection.find()){
-    Location location = new Location((String)d.get(locFields[0]),(String)d.get(locFields[1]),(String)d.get(locFields[2]),(String)d.get(locFields[3]),(String)d.get(locFields[4]),(String)d.get(locFields[5]),(String)d.get(locFields[6]),(String)d.get(locFields[7]));
-    locations.add(location);
-  }*/
-  /*
+  private static String getAction(String query) {
+    String toReturn = "";
+    String firstWord = query.substring(0, query.indexOf(' '));
+    switch (firstWord) {
+      case "INSERT":
+        toReturn = insert(query);
+        break;
+      case "CREATE":
+        toReturn = createTable(query);
+        break;
+        /*case "SELECT":
+            toReturn = select(query);
+            break;
+        case "DELETE":
+            toReturn = delete(query);
+            break;
+        case "TRUNCATE":
+            toReturn = truncate(query);
+            break;*/
+      default:
+        break;
+    }
+    return toReturn;
+  }
+
+  private static String insert(String query) {
+    String actQuery = query.substring(query.indexOf(' ') + 1);
+    actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
+    String table = actQuery.substring(0, actQuery.indexOf(' ') - 1);
+    actQuery = actQuery.substring(actQuery.indexOf('(') + 1, actQuery.indexOf(')'));
+    String toIterate = actQuery;
+    List<String> values = new ArrayList<>();
+    List<String> fields = map.get(table);
+    while (actQuery.contains(",")) {
+      values.add(actQuery.substring(0, actQuery.indexOf(',')));
+      actQuery = actQuery.substring(actQuery.indexOf(',') + 1);
+    }
+    Document doc = new Document();
+    for (int i = 0; i < fields.size(); i++) {
+      doc.append(fields.get(i), values.get(i));
+    }
+    teamC_db.getCollection(table).insertOne(doc);
+
+    return "INSERT";
+  }
+
+  private static String select(String query) {
+    String table = query.substring(query.lastIndexOf(' ') + 1);
+
+    return "SELECT";
+  }
+
+  private static String delete(String query) {
+    String actQuery = query.substring(query.indexOf(' '));
+    actQuery = actQuery.substring(actQuery.indexOf(' '));
+    return "DELETE";
+  }
+
+  private static String truncate(String query) {
+    String actQuery = query.substring(query.indexOf(' '));
+    actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
+    teamC_db.getCollection(actQuery).deleteMany(new Document());
+    return "TRUNCATE";
+  }
+
+  private static String createTable(String query) {
+    String actQuery = query.substring(query.indexOf(' ') + 1);
+    actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
+    String table = actQuery.substring(0, actQuery.indexOf(' '));
+    actQuery = actQuery.substring(actQuery.indexOf('(') + 1, actQuery.lastIndexOf(')'));
+    String toIterate = actQuery;
+    List<String> values = new ArrayList<>();
+    while (toIterate.contains(",")) {
+      values.add(toIterate.substring(0, toIterate.indexOf('V') - 1));
+      toIterate = toIterate.substring(toIterate.indexOf(',') + 1);
+    }
+    values.add(toIterate.substring(1, toIterate.indexOf('V') - 1));
+    map.put(table, values);
+
+    return "CREATE";
+  }
+
+  private static List<Location> getAllItemsFromMongo(String collectionName) {
+    // MongoCollection<Document> collection = .getCollection(collectionName);
+    List<Location> locations = new ArrayList<>();
+    /*for(Document d : collection.find()){
+      Location location = new Location((String)d.get(locFields[0]),(String)d.get(locFields[1]),(String)d.get(locFields[2]),(String)d.get(locFields[3]),(String)d.get(locFields[4]),(String)d.get(locFields[5]),(String)d.get(locFields[6]),(String)d.get(locFields[7]));
+      locations.add(location);
+    }*/
     return locations;
   }
 
-  */
-  /**
-   * Compares Location docs
-   *
-   * @return true if same
-   */
-  /*
   private static boolean compareLocationDocs(Document loc1, Document loc2) {
     boolean toReturn = false;
     for (String f : locFields) {
@@ -164,9 +250,6 @@ public class AidansMessAround {
     return toReturn;
   }
 
-  */
-  /** @return */
-  /*
   private static List<Document> createLocationFilter() {
     List<List<String>> csvList =
         readCSV("src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/TowerLocationsC.csv");
@@ -179,9 +262,6 @@ public class AidansMessAround {
     return toReturn;
   }
 
-  */
-  /** @return A list of documents, used to insert into MongoDB */
-  /*
   private static List<Document> createEquipmentDoc() {
     List<List<String>> csvList =
         readCSV("src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/EquipmentC.csv");
@@ -200,9 +280,6 @@ public class AidansMessAround {
     return toReturn;
   }
 
-  */
-  /** @return a list of filter documets */
-  /*
   private static List<Document> createEquipmentFilter() {
     List<List<String>> csvList =
         readCSV("src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/EquipmentC.csv");
@@ -215,14 +292,6 @@ public class AidansMessAround {
     return toReturn;
   }
 
-  */
-  /**
-   * Reads a csv that you tell it to
-   *
-   * @param filename the name
-   * @return a List of lines that are represented by Strings
-   */
-  /*
   private static List<List<String>> readCSV(String filename) {
     List<List<String>> toReturn = new ArrayList<>();
 
@@ -236,5 +305,19 @@ public class AidansMessAround {
       e.printStackTrace();
     }
     return toReturn;
-  }*/
+  }
+
+  private static List<String> readQueries() {
+    List<String> toReturn = new ArrayList<>();
+
+    try (BufferedReader br = new BufferedReader(new FileReader("sampleQueries.txt"))) {
+      String line;
+      while ((line = br.readLine()) != null) {
+        toReturn.add(line);
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return toReturn;
+  }
 }

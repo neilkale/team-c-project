@@ -21,10 +21,11 @@
 hs_err_pid*
 
 
-build/*
+
 **/.gradle/
 **/.idea/
 **/CDB/
 *.DS_Store
 *.log
 
+/build/

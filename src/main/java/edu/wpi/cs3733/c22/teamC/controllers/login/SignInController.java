@@ -2,6 +2,7 @@ package edu.wpi.cs3733.c22.teamC.controllers.login;
 
 import com.jfoenix.controls.JFXPasswordField;
 import edu.wpi.cs3733.c22.teamC.Databases.Employee;
+import edu.wpi.cs3733.c22.teamC.Databases.LoggedInUser;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.EmployeeQuery;
 import edu.wpi.cs3733.c22.teamC.controllers.AbstractController;
 import edu.wpi.cs3733.c22.teamC.controllers.ControllerMediator;
@@ -45,6 +46,7 @@ public class SignInController extends AbstractController {
   private void loginButtonPressed() {
     // TODO: keep this button unclickable if username/psswd text fields are empty
     if (checkCredentials(username.getText(), psswd.getText())) {
+      LoggedInUser.signInEmployee(username.getText());
       FXMLLoader loader = null;
       try {
         loader = getLoader("TabPane.fxml");

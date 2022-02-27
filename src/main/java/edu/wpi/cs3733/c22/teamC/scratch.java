@@ -2,6 +2,7 @@ package edu.wpi.cs3733.c22.teamC;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -33,6 +34,8 @@ public class scratch {
       mongoClient.close();
     }
   }
+  // ticketID
+  // ticketID
 
   private static String getAction(String query) {
     String toReturn = "";
@@ -68,16 +71,17 @@ public class scratch {
     actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
     String table = actQuery.substring(0, actQuery.indexOf(' '));
     actQuery = actQuery.substring(actQuery.indexOf('(') + 1, actQuery.indexOf(')'));
-    String toIterate = actQuery;
     List<String> values = new ArrayList<>();
 
     List<String> fields = map.get(table);
     while (actQuery.contains(",")) {
-      values.add(actQuery.substring(0, actQuery.indexOf(',')));
-      actQuery = actQuery.substring(actQuery.indexOf(',') + 1);
+      values.add(actQuery.substring(actQuery.indexOf('\'') + 1, actQuery.indexOf(',') - 1));
+      actQuery = actQuery.substring(actQuery.indexOf(','));
+      if (actQuery.charAt(0) == ',') {
+        actQuery = actQuery.substring(1);
+      }
     }
-    values.add(actQuery.substring(1, actQuery.length() - 1));
-
+    values.add(actQuery.substring(2, actQuery.length() - 1));
     Document doc = new Document();
     for (int i = 0; i < fields.size(); i++) {
       doc.append(fields.get(i), values.get(i));
@@ -87,13 +91,28 @@ public class scratch {
   }
 
   private static String select(String query) {
-    String table = query.substring(query.lastIndexOf(' ') + 1);
+    if (query.contains("*")){
+
+
+
+    } else {
+
+    }
 
     return "SELECT";
   }
 
   private static String delete(String query) {
-
+    if (query.contains("WHERE")) {
+      String actQuery = query.substring(query.indexOf(' ') + 1);
+      actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
+      String table = actQuery.substring(0, actQuery.indexOf(' '));
+      String keyVal = actQuery.substring(actQuery.indexOf('\'') + 1, actQuery.length() - 1);
+      MongoCollection collection = teamC_db.getCollection(table);
+      teamC_db.getCollection(table).deleteOne(new Document(map.get(table).get(0), keyVal));
+    } else {
+      teamC_db.getCollection(query.substring(query.lastIndexOf(' '))).drop();
+    }
     return "DELETE";
   }
 
@@ -109,16 +128,23 @@ public class scratch {
     String actQuery = query.substring(query.indexOf(' ') + 1);
     actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
     String table = actQuery.substring(0, actQuery.indexOf('('));
-    actQuery = actQuery.substring(actQuery.indexOf('(') + 1, actQuery.lastIndexOf(')'));
+    actQuery = actQuery.substring(actQuery.indexOf('('), actQuery.lastIndexOf(')'));
     String toIterate = actQuery;
-    List<String> values = new ArrayList<>();
+    List<String> fields = new ArrayList<>();
     while (toIterate.contains(",")) {
-      values.add(toIterate.substring(0, toIterate.indexOf('V') - 1));
+      while (toIterate.charAt(0) != ' ') {
+        toIterate = toIterate.substring(1);
+      }
+      fields.add(toIterate.substring(1, toIterate.indexOf('V') - 1));
       toIterate = toIterate.substring(toIterate.indexOf(',') + 1);
     }
-    values.add(toIterate.substring(1, toIterate.indexOf('V') - 1));
-    map.put(table, values);
-    teamC_db.getCollection(table);
+    fields.add(toIterate.substring(1, toIterate.indexOf('V') - 1));
+    map.put(table, fields);
+    try {
+      teamC_db.createCollection(table);
+    } catch (Exception e) {
+      teamC_db.getCollection(table);
+    }
 
     return "CREATE";
   }
@@ -144,7 +170,11 @@ public class scratch {
       document.append(fields.get(i), values.get(i));
     }
     Document filterDoc = new Document(fields.get(0), values.get(0));
-    teamC_db.getCollection(table).updateOne(filterDoc, document);
+    System.out.println(table);
+    System.out.println(fields.get(0));
+    System.out.println(values.get(0));
+    teamC_db.getCollection(table).deleteOne(filterDoc);
+    teamC_db.getCollection(table).insertOne(document);
     return "UPDATE";
   }
 

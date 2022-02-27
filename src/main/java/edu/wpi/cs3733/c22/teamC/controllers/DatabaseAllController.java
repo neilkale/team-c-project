@@ -78,7 +78,8 @@ public class DatabaseAllController extends AbstractController {
     if (f.length > 0) {
       // System.out.println(fd.getFiles()[0].getAbsolutePath());
     }
-    readCSV(fd.getFiles()[0].getAbsolutePath());
+    if (fd.getFiles().length != 0) readCSV(fd.getFiles()[0].getAbsolutePath());
+    else System.out.println("File not selected");
   }
 
   public boolean readCSV(String fileIn) {

@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.c22.teamC.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import edu.wpi.cs3733.c22.teamB.ServiceRequestAPI.BServiceRequestAPI;
+import edu.wpi.cs3733.c22.teamD.Main;
 import javafx.fxml.FXML;
 
 public class APIController extends AbstractController {
@@ -13,7 +15,7 @@ public class APIController extends AbstractController {
 
   @FXML
   private void startTeamBAPI() {
-    ComputerSR computerAPI = new ComputerSR();
+    BServiceRequestAPI computerAPI = BServiceRequestAPI.getInstance();
     try {
       computerAPI.run(0, 0, 1900, 1000, null, null, null);
     } catch (Exception e) {
@@ -24,8 +26,7 @@ public class APIController extends AbstractController {
 
   @FXML
   private void startTeamDAPI() {
-    InternalTransportationRequest securityAPI = new InternalTransportationRequest();
-
+    Main securityAPI = new Main();
     try {
       securityAPI.run(0, 0, 1900, 1000, null, null, null);
 

@@ -109,7 +109,7 @@ public class MedicalEquipment implements DatabaseInterface {
 
   @Override
   public String getName() {
-    return "EQUIPMENTC";
+    return this.getClass().getName();
   }
 
   public MedicalEquipmentQuery getQueryInstance() {

@@ -1,9 +1,10 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.LanguageRequestQuery;
 
 /** this class is for the language service request data */
-public class LanguageRequest extends ServiceRequest {
+public class LanguageRequest extends ServiceRequest implements DatabaseInterface {
 
   private String _language;
 
@@ -61,5 +62,15 @@ public class LanguageRequest extends ServiceRequest {
         + get_assignment()
         + "\nLanguage: "
         + _language;
+  }
+
+  @Override
+  public String[] getValues() {
+    return new String[] {"ID", "Location", "Status", "Service Type", "Assignment", "Language"};
+  }
+
+  @Override
+  public String getName() {
+    return this.getClass().getName();
   }
 }

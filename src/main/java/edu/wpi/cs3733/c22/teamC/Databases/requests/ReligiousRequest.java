@@ -1,8 +1,9 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.ReligiousRequestQuery;
 
-public class ReligiousRequest extends ServiceRequest {
+public class ReligiousRequest extends ServiceRequest implements DatabaseInterface {
 
   private String _religion;
 
@@ -60,5 +61,17 @@ public class ReligiousRequest extends ServiceRequest {
         + get_assignment()
         + "\nReligion: "
         + _religion;
+  }
+
+  @Override
+  public String[] getValues() {
+    return new String[] {
+      "ticketID", "locationID", "status", "serviceType", "assignment", "religion",
+    };
+  }
+
+  @Override
+  public String getName() {
+    return this.getClass().getName();
   }
 }

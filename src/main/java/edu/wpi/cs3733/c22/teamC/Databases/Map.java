@@ -1,6 +1,6 @@
 package edu.wpi.cs3733.c22.teamC.Databases;
 
-public class Map {
+public class Map implements DatabaseInterface {
   private String buildingName;
   private String floorName;
   private String imagePath;
@@ -43,5 +43,15 @@ public class Map {
     this.floorName = floorName;
     this.imagePath = imagePath;
     this.floorNumber = floorNumber;
+  }
+
+  @Override
+  public String[] getValues() {
+    return new String[0];
+  }
+
+  @Override
+  public String getName() {
+    return null;
   }
 }

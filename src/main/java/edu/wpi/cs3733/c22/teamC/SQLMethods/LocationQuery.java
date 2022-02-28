@@ -65,10 +65,14 @@ public class LocationQuery extends Query<Location> {
   }
 
   public Location queryFactory(String[] inputs) {
+    return staticQueryFactory(inputs);
+  }
+
+  public static Location staticQueryFactory(String[] inputs) {
     if (inputs.length != 8) {
       System.out.println(
           "[QueryFactory of QueryType]: "
-              + getQueryInput()
+              + staticGetQueryInput()
               + "has failed | Input arguments does not match the allotted arguments for the creation of the object - NULL has been returned");
       return null;
     }
@@ -104,7 +108,7 @@ public class LocationQuery extends Query<Location> {
     } catch (SQLException e) {
       e.printStackTrace();
     }
-
+    System.out.println();
     return allNodes;
   }
 
@@ -188,6 +192,10 @@ public class LocationQuery extends Query<Location> {
 
   @Override
   public String getQueryInput() {
+    return staticGetQueryInput();
+  }
+
+  public static String staticGetQueryInput() {
     return "TOWERLOCATIONSC";
   }
 

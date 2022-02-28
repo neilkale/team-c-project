@@ -21,10 +21,14 @@ public class SanitationRequestQuery extends Query<SanitationRequest> {
   }
 
   public SanitationRequest queryFactory(String[] inputs) {
+    return staticQueryFactory(inputs);
+  }
+
+  public static SanitationRequest staticQueryFactory(String[] inputs) {
     if (inputs.length != 6) {
       System.out.println(
           "[QueryFactory of QueryType]: "
-              + getQueryInput()
+              + staticGetQueryInput()
               + "has failed | Input arguments does not match the allotted arguments for the creation of the object - NULL has been returned");
       return null;
     }
@@ -115,9 +119,13 @@ public class SanitationRequestQuery extends Query<SanitationRequest> {
     dbConnection.execute(query);
   }
 
+  public static String staticGetQueryInput() {
+    return "SANITATIONREQUESTC";
+  }
+
   @Override
   public String getQueryInput() {
-    return "SANITATIONREQUESTC";
+    return staticGetQueryInput();
   }
 
   @Override

@@ -36,12 +36,12 @@ public class MapEditorController extends AbstractController { // todo implement 
 
   @FXML JFXComboBox floorComboBox;
   @FXML JFXComboBox typeComboBox;
-  @FXML JFXTextArea shortNameField;
-  @FXML JFXTextArea longNameField;
+  @FXML JFXTextField shortNameField;
+  @FXML JFXTextField longNameField;
 
   @FXML JFXComboBox equipmentTypeComboBox;
   @FXML JFXComboBox equipmentStatusComboBox;
-  @FXML JFXTextArea nameField;
+  @FXML JFXTextField nameField;
 
   @FXML JFXTreeTableView locationsTable;
 
@@ -89,8 +89,6 @@ public class MapEditorController extends AbstractController { // todo implement 
   @FXML
   private void initialize() {
     list.load();
-
-    updateOnClickMenuTabs();
 
     // load the first map
     mapView.setImage(ImageLoader.loadImage("L2"));
@@ -174,6 +172,8 @@ public class MapEditorController extends AbstractController { // todo implement 
     // Reset selections
     movingPoint = false;
     movingLocation = false;
+
+    updateOnClickMenuTabs();
   }
 
   // Makes the feature tree
@@ -324,6 +324,7 @@ public class MapEditorController extends AbstractController { // todo implement 
 
   @FXML
   void onScroll(ScrollEvent evt) {
+    hideOnClickMenu();
     // Zoom in and out
     if (evt.getDeltaY() < 0) {
       zoomOutButtonPressed();
@@ -519,33 +520,36 @@ public class MapEditorController extends AbstractController { // todo implement 
   // Moves the mobile button pane to the selected x and y coords
   private void placeOnClickMenu(double xCoord, double yCoord) {
     int index = MapState.getIndexSelected();
-    if (list.nodes.get(MapState.getIndexSelected()).isNewPoint()) {
-      startButton.setDisable(true);
-      endButton.setDisable(true);
-    } else {
-      startButton.setDisable(false);
-      endButton.setDisable(false);
-    }
     if (index == -1) {
       hideOnClickMenu();
-    } else {
+    }
+    // If a point is selected
+    else {
+      if (list.nodes.get(MapState.getIndexSelected()).isNewPoint()) {
+        startButton.setDisable(true);
+        endButton.setDisable(true);
+      } else {
+        startButton.setDisable(false);
+        endButton.setDisable(false);
+      }
       MapNode node = list.nodes.get(index);
       tabPane.setVisible(true);
       tabPane.setLayoutX(xCoord);
       tabPane.setLayoutY(yCoord);
+      updateOnClickMenuTabs();
       updateFields();
       if (node.isNewPoint()) {
         addButton.setDisable(false);
       } else {
         addButton.setDisable(true);
       }
-      if (tabPane.getTabs().contains(equipmentTab) && node.hasEquipment())
-        tabPane.getSelectionModel().select(tabPane.getTabs().indexOf(equipmentTab));
-      else if (tabPane.getTabs().contains(servicesTab) && node.hasServiceReq())
-        tabPane.getSelectionModel().select(tabPane.getTabs().indexOf(servicesTab));
-      else tabPane.getSelectionModel().select(0);
+      if (list.nodes.get(index).hasEquipment() && tabPane.getTabs().contains(equipmentTab))
+        tabPane.getSelectionModel().select(equipmentTab);
+      else if (list.nodes.get(index).hasServiceReq() && tabPane.getTabs().contains(servicesTab))
+        tabPane.getSelectionModel().select(servicesTab);
+      else if (tabPane.getTabs().contains(locationTab))
+        tabPane.getSelectionModel().select(locationTab);
     }
-    updateOnClickMenuTabs();
   }
 
   // hides the mobile button pane
@@ -554,8 +558,17 @@ public class MapEditorController extends AbstractController { // todo implement 
   }
 
   // Resizes and adjusts the tabpane according to the current filters
+  @FXML
   private void updateOnClickMenuTabs() {
-    int paneWidth = 20;
+    if (MapState.getIndexSelected() == -1) {
+      hideOnClickMenu();
+      return;
+    }
+
+    Tab previouslyOpenTab = tabPane.getSelectionModel().getSelectedItem();
+
+    int paneWidth = 30;
+
     tabPane.getTabs().clear();
     if (MapState.isLocationsShown()) {
       tabPane.getTabs().add(locationTab);
@@ -570,7 +583,13 @@ public class MapEditorController extends AbstractController { // todo implement 
       paneWidth += 55;
     }
     if (paneWidth < 130) paneWidth = 130;
+
     tabPane.setPrefWidth(paneWidth);
+
+    if (tabPane.getTabs().contains(previouslyOpenTab))
+      tabPane.getSelectionModel().select(previouslyOpenTab);
+    else tabPane.getSelectionModel().select(0);
+
     if (locationTab.isSelected()) tabPane.setPrefHeight(273);
     if (equipmentTab.isSelected()) tabPane.setPrefHeight(243);
     if (servicesTab.isSelected()) tabPane.setPrefHeight(213);
@@ -583,34 +602,19 @@ public class MapEditorController extends AbstractController { // todo implement 
   private void updateFields() {
     MapNode node = list.nodes.get(MapState.getIndexSelected());
 
-    if (node.getLocation().get_longName().equals("")) {
-      longNameField.setText("Long Name");
-    } else {
-      longNameField.setText(node.getLocation().get_longName());
-    }
-
-    if (node.getLocation().get_longName().equals("")) {
-      shortNameField.setText("Short Name");
-    } else {
-      shortNameField.setText(node.getLocation().get_shortName());
-    }
-
+    longNameField.setText(node.getLocation().get_longName());
+    shortNameField.setText(node.getLocation().get_shortName());
     typeComboBox.valueProperty().set(node.getLocation().get_nodeType());
     floorComboBox.valueProperty().set(node.getLocation().get_floor());
 
     if (node.hasEquipment()) {
       equipmentStatusComboBox.valueProperty().set(node.getEquipment().get_status());
       equipmentTypeComboBox.valueProperty().set(node.getEquipment().get_equipmentType());
-
-      if (node.getEquipment().get_name().equals("")) {
-        nameField.setText("Name");
-      } else {
-        nameField.setText(node.getEquipment().get_name());
-      }
+      nameField.setText(node.getEquipment().get_name());
     } else {
       equipmentStatusComboBox.valueProperty().set(null);
       equipmentTypeComboBox.valueProperty().set(null);
-      nameField.setText("Name");
+      nameField.setText("");
     }
 
     if (node.hasServiceReq()) {
@@ -622,8 +626,6 @@ public class MapEditorController extends AbstractController { // todo implement 
       requestTicketLabel.setText("");
       requestStatusLabel.setText("");
     }
-
-    node.update();
     refresh();
   }
 
@@ -637,7 +639,6 @@ public class MapEditorController extends AbstractController { // todo implement 
       serviceReqsCheckbox.setSelected(true);
     }
     MapState.setServicesShown(serviceReqsCheckbox.isSelected());
-    updateOnClickMenuTabs();
     refresh();
   }
 
@@ -651,7 +652,6 @@ public class MapEditorController extends AbstractController { // todo implement 
       equipmentCheckBox.setSelected(true);
     }
     MapState.setEquipmentShown(equipmentCheckBox.isSelected());
-    updateOnClickMenuTabs();
     refresh();
   }
 
@@ -665,7 +665,6 @@ public class MapEditorController extends AbstractController { // todo implement 
       locationsCheckBox.setSelected(true);
     }
     MapState.setLocationsShown(locationsCheckBox.isSelected());
-    updateOnClickMenuTabs();
     refresh();
   }
 

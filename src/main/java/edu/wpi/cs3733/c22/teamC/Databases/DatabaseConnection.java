@@ -120,14 +120,12 @@ public class DatabaseConnection {
 
   /** Standardizes executeQuery to method, so we don't have 100 query names */
   public ResultSet executeQuery(String query) throws SQLException {
-    System.out.println(query);
     Statement statement = connection.createStatement();
     ResultSet rs = statement.executeQuery(query);
     return rs;
   }
 
   public void execute(String query) throws SQLException {
-    System.out.println(query);
     Statement statement = connection.createStatement();
     statement.execute(query);
   }
@@ -137,7 +135,7 @@ public class DatabaseConnection {
     statement.executeUpdate(query);
   }
 
-  public void close(){
+  public void close() {
     try {
       connection.close();
     } catch (SQLException e) {

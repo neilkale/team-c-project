@@ -2,6 +2,7 @@ package edu.wpi.cs3733.c22.teamC.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.*;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.filters.ServiceRequestFilters.*;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.EmployeeQuery;
@@ -78,7 +79,7 @@ public class OrderTrackerController extends AbstractController {
         .getAllNodeData()
         .forEach(
             node -> {
-              locComboBox.getItems().add(node.get_shortName());
+              locComboBox.getItems().add(node.get_longName());
             });
 
     // adding autocomplete listeners for comboboxes
@@ -172,14 +173,29 @@ public class OrderTrackerController extends AbstractController {
                     Label idLabel = new Label(fieldName + ": " + fieldValuesArrayList.get(0));
                     controllerMediator.addNodeToOrder(orderKey, idLabel);
                   }
+
                   // for all other fields and values of request
                   else {
                     // add fieldName to a label
                     Label fieldNameLabel = new Label(fieldName);
+
                     // add fieldValue to a textField
-                    TextField valueTextField =
-                        new TextField(
-                            fieldValuesArrayList.get(fieldNamesArrayList.indexOf(fieldName)));
+                    TextField valueTextField;
+                    // if field name is location id, lets take its fieldValue and convert the NODEID
+                    // -> longName
+                    if (fieldName.equalsIgnoreCase("location id")) {
+                      LocationQuery locationQuery = new LocationQuery();
+                      Location location =
+                          locationQuery.findNodeByID(
+                              fieldValuesArrayList.get(fieldNamesArrayList.indexOf(fieldName)));
+                      valueTextField = new TextField(location.get_longName());
+                    }
+                    // else just use the corresponding raw fieldValue with same index as fieldName
+                    else {
+                      valueTextField =
+                          new TextField(
+                              fieldValuesArrayList.get(fieldNamesArrayList.indexOf(fieldName)));
+                    }
                     valueTextField.setEditable(false); // set to not editable
 
                     VBox vBox = new VBox();

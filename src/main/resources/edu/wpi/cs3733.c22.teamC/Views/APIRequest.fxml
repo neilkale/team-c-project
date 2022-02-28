@@ -17,7 +17,7 @@
    <children>
       <BorderPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <GridPane style="-fx-background-color: #009f9f;" BorderPane.alignment="CENTER">
+            <GridPane style="-fx-background-color: #002d59;" BorderPane.alignment="CENTER">
               <rowConstraints>
                 <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="55.0" />
               </rowConstraints>
@@ -40,7 +40,8 @@
             </GridPane>
          </top>
          <center>
-             <JFXButton fx:id="TeamBAPI" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#startTeamBAPI" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #c6c6c6c6;" text="CLEAR" textFill="#009f9f" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
+             <JFXButton fx:id="TeamBAPI" alignment="CENTER_LEFT" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#startTeamBAPI" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #c6c6c6c6;" text="Team C API" textFill="#002d59"
+                        GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
                  <font>
                      <Font name="System Bold" size="16.0" />
                  </font>
@@ -48,7 +49,7 @@
                      <Insets bottom="10.0" top="10.0" />
                  </GridPane.margin>
              </JFXButton>
-             <JFXButton fx:id="TeamDAPI" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#startTeamDAPI" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #009f9f;" text="SUBMIT" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
+             <JFXButton fx:id="TeamDAPI" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#startTeamDAPI" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #002d59;" text="Team D API" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
                  <font>
                      <Font name="System Bold" size="16.0" />
                  </font>

@@ -3,6 +3,7 @@ package edu.wpi.cs3733.c22.teamC.controllers;
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.c22.teamB.ServiceRequestAPI.BServiceRequestAPI;
 import edu.wpi.cs3733.c22.teamD.Main;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 
 public class APIController extends AbstractController {

@@ -17,8 +17,7 @@ import java.sql.Statement;
 
 public class DatabaseConnection {
   private Connection connection;
-  // private MongoEquipment mongoEquipment;
-  // private MongoLocation mongoLocation;
+  private MongoDatabase mongoDatabase;
 
   public boolean isClientDatabase() {
     return isClientDatabase;
@@ -60,6 +59,11 @@ public class DatabaseConnection {
    * a way where we declare the embedded db and then switch over tto the new client server db?
    */
   public DatabaseConnection() {
+    try {
+      mongoDatabase = new MongoDatabase();
+    } catch (Exception e) {
+      System.out.println("oops no mongo!");
+    }
     // this.isMongulDB = false;
     startDbConnection();
   }
@@ -120,14 +124,12 @@ public class DatabaseConnection {
 
   /** Standardizes executeQuery to method, so we don't have 100 query names */
   public ResultSet executeQuery(String query) throws SQLException {
-    System.out.println(query);
     Statement statement = connection.createStatement();
     ResultSet rs = statement.executeQuery(query);
     return rs;
   }
 
   public void execute(String query) throws SQLException {
-    System.out.println(query);
     Statement statement = connection.createStatement();
     statement.execute(query);
   }
@@ -135,6 +137,17 @@ public class DatabaseConnection {
   public void executeUpdate(String query) throws SQLException {
     Statement statement = connection.createStatement();
     statement.executeUpdate(query);
+  }
+
+  public void close() {
+    try {
+      connection.close();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    if (mongoDatabase != null) {
+      mongoDatabase.closeMongo();
+    }
   }
 
   /*public MongoEquipment getMongoEquipment() {

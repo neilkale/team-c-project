@@ -353,11 +353,10 @@ public class DatabaseCreation {
   }
 
   public static void readDatabasesFromCsv() {
-    LocationQuery locationQuery = new LocationQuery();
-    locationQuery.readCSV(
-        "src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/TowerLocationsC.csv");
+    Query e = new LocationQuery();
+    e.readCSV("src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/TowerLocationsC.csv");
 
-    Query e = new EmployeeQuery();
+    e = new EmployeeQuery();
     e.readCSV("src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/EmployeeC.csv");
 
     e = new LaundryRequestQuery();
@@ -366,47 +365,38 @@ public class DatabaseCreation {
     e = new ReligiousRequestQuery();
     e.readCSV("src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/ReligiousRequestC.csv");
 
-    MedicalEquipmentQuery medicalEquipmentQuery = new MedicalEquipmentQuery();
-    medicalEquipmentQuery.readCSV(
-        "src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/EquipmentC.csv");
+    e = new MedicalEquipmentQuery();
+    e.readCSV("src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/EquipmentC.csv");
 
-    EquipmentRequestQuery equipmentRequestQuery = new EquipmentRequestQuery();
-    equipmentRequestQuery.readCSV(
-        "src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/EquipmentRequestC.csv");
+    e = new EquipmentRequestQuery();
+    e.readCSV("src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/EquipmentRequestC.csv");
 
-    MaintenanceRequestQuery maintenanceRequestQuery = new MaintenanceRequestQuery();
-    maintenanceRequestQuery.readCSV(
-        "src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/MaintenanceRequestC.csv");
+    e = new MaintenanceRequestQuery();
+    e.readCSV("src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/MaintenanceRequestC.csv");
 
-    SanitationRequestQuery sanitationRequestQuery = new SanitationRequestQuery();
-    sanitationRequestQuery.readCSV(
-        "src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/SanitationRequestC.csv");
+    e = new SanitationRequestQuery();
+    e.readCSV("src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/SanitationRequestC.csv");
 
-    ITRequestQuery itRequestQuery = new ITRequestQuery();
-    itRequestQuery.readCSV("src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/ITRequestC.csv");
+    e = new ITRequestQuery();
+    e.readCSV("src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/ITRequestC.csv");
 
-    GiftRequestQuery giftRequestQuery = new GiftRequestQuery();
-    giftRequestQuery.readCSV(
-        "src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/GiftRequestC.csv");
+    e = new GiftRequestQuery();
+    e.readCSV("src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/GiftRequestC.csv");
 
-    InternalTransportRequestQuery internalTransportRequestQuery =
-        new InternalTransportRequestQuery();
-    internalTransportRequestQuery.readCSV(
+    e = new InternalTransportRequestQuery();
+    e.readCSV(
         "src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/InternalTransportRequestC.csv");
 
-    LanguageRequestQuery languageRequestQuery = new LanguageRequestQuery();
-    languageRequestQuery.readCSV(
-        "src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/LanguageRequestC.csv");
+    e = new LanguageRequestQuery();
+    e.readCSV("src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/LanguageRequestC.csv");
 
-    SecurityRequestQuery securityRequestQuery = new SecurityRequestQuery();
-    securityRequestQuery.readCSV(
-        "src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/SecurityRequestC.csv");
+    e = new SecurityRequestQuery();
+    e.readCSV("src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/SecurityRequestC.csv");
 
-    MedicineRequestQuery medicineRequestQuery = new MedicineRequestQuery();
-    medicineRequestQuery.readCSV(
-        "src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/MedicineRequestC.csv");
+    e = new MedicineRequestQuery();
+    e.readCSV("src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/MedicineRequestC.csv");
 
-    MapQuery map = new MapQuery();
-    map.readCSV("src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/Map.csv");
+    e = new MapQuery();
+    e.readCSV("src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/Map.csv");
   }
 }

@@ -56,6 +56,23 @@ public class OrderTrackerController extends AbstractController {
     // populate combobox dropdowns
     statusComboBox.getItems().addAll("Blank", "Done", "Cancelled", "Waiting for");
     employeeComboBox.getItems().addAll((new EmployeeQuery()).getFullNameAll());
+    typeComboBox
+        .getItems()
+        .addAll(
+            "Equipment Request",
+            "Gift Request",
+            "Internal Transport Request",
+            "IT Request",
+            "Language Request",
+            "Laundry Request",
+            "Maintenance Request",
+            "Medicine Request",
+            "Religious Request",
+            "Sanitation Request",
+            "Security Request");
+    idComboBox
+        .getItems()
+        .addAll(FXCollections.observableArrayList(ServiceRequest.getAvailableTicketIDs()));
     LocationQuery locationQuery = new LocationQuery();
     locationQuery
         .getAllNodeData()

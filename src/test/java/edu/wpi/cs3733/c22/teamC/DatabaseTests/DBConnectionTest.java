@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 public class DBConnectionTest {
 
   /**
-   * Basic test for connecting to the embedded db. Currently having
-   * no problems with connecting to it.
+   * Basic test for connecting to the embedded db. Currently having no problems with connecting to
+   * it.
    */
   @Test
   public void testEmbeddedDBConnection() {
@@ -31,15 +31,12 @@ public class DBConnectionTest {
     assertEquals(true, tf);
   }
 
-  /**
-   * Basic test for connecting to the noSQL db. Currently having speed
-   *
-   */
-//  @Test
-//  public void testNoSQLDBConnection() {
-//    DatabaseConnection dbconnection = new DatabaseConnection();
-//    dbconnection.mongoDB();
-//    boolean tf = dbconnection.isClientDatabase();
-//    assertEquals(false, tf);
-//  }
+  /** Basic test for connecting to the noSQL db. Currently having speed */
+  //  @Test
+  //  public void testNoSQLDBConnection() {
+  //    DatabaseConnection dbconnection = new DatabaseConnection();
+  //    dbconnection.mongoDB();
+  //    boolean tf = dbconnection.isClientDatabase();
+  //    assertEquals(false, tf);
+  //  }
 }

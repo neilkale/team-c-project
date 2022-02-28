@@ -63,6 +63,12 @@
                            </font>
                         </JFXButton>
                      </children>
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                     <GridPane.margin>
+                        <Insets top="-10.0" />
+                     </GridPane.margin>
                   </HBox>
                   <HBox fx:id="orderTrackerTable" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.rowIndex="2">
                      <children>
@@ -80,8 +86,11 @@
                         <Insets />
                      </opaqueInsets>
                      <padding>
-                        <Insets bottom="5.0" />
+                        <Insets bottom="5.0" top="5.0" />
                      </padding>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
                   </HBox>
                </children>
             </GridPane>

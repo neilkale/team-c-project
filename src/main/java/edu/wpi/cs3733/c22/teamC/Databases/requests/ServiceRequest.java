@@ -279,6 +279,17 @@ public abstract class ServiceRequest {
     return new int[] {total.size(), completed};
   }
 
+  // return all of the current ticketIDs being used for submitted requests
+  public static ArrayList<String> getAvailableTicketIDs() {
+    ArrayList<ServiceRequest> total = getAllServiceRequests();
+    ArrayList<String> ids = new ArrayList<String>();
+    total.forEach(
+        serviceRequest -> {
+          ids.add(serviceRequest.get_ticketID());
+        });
+    return ids;
+  }
+
   public abstract Query getQueryInstance();
   // THIS METHOD FOR EACH SERVICE REQUEST MUST BE FORMATTED THE SAME
   // -> TITLE OF REQUEST FIRST; EACH FIELD HAS TITLE FOLLOWED BY COLON; SPACE AFTER FOLLOWED BY

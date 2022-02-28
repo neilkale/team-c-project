@@ -115,6 +115,10 @@ public class OrderTrackerController extends AbstractController {
             });
   }
 
+  public JFXComboBox getEmployeeComboBox() {
+    return employeeComboBox;
+  }
+
   private void addRequestsToListView(List<ServiceRequest> requestsList) {
     // clear current request hashMap, orderController, and listView to allow for new categories of
     // requests

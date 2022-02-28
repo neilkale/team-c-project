@@ -274,6 +274,12 @@ public class OrderTrackerController extends AbstractController {
               ControllerUtil.popUpMessage("Error Saving", "Not all fields have been filled");
               return;
             }
+            // else if the field is the location fieldValue, convert it back to NodeID for database
+            // storage
+            else if (orderFieldsList.indexOf(field)
+                == controllerMediator.getLocationFieldIndex(orderKey))
+              orderFieldsList.set(
+                  orderFieldsList.indexOf(field), LocationQuery.longToNodeID(field));
           });
 
       // retrieve the corresponding request instance that matches the request of this order pane

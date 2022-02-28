@@ -315,7 +315,7 @@ public class DatabaseCreation {
               + "assignment VARCHAR(255), "
               + "medicineType VARCHAR(255), "
               + "quantity VARCHAR(255), "
-              + "urgency VARCHAR(255)) ";
+              + "urgency VARCHAR(255))";
       dbConnection.execute(query);
     } catch (SQLException e) {
       // if "ServiceRequestC already exists," does nothing\

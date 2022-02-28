@@ -59,7 +59,11 @@ public class DatabaseConnection {
    * a way where we declare the embedded db and then switch over tto the new client server db?
    */
   public DatabaseConnection() {
-    mongoDatabase = new MongoDatabase();
+    try {
+      mongoDatabase = new MongoDatabase();
+    } catch (Exception e) {
+      System.out.println("oops no mongo!");
+    }
     // this.isMongulDB = false;
     startDbConnection();
   }
@@ -141,7 +145,9 @@ public class DatabaseConnection {
     } catch (SQLException e) {
       e.printStackTrace();
     }
-    mongoDatabase.closeMongo();
+    if (mongoDatabase != null) {
+      mongoDatabase.closeMongo();
+    }
   }
 
   /*public MongoEquipment getMongoEquipment() {

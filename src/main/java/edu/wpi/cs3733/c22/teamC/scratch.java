@@ -2,6 +2,7 @@ package edu.wpi.cs3733.c22.teamC;
 
 import com.mongodb.client.*;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
+import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.lang.reflect.InvocationTargetException;
@@ -34,8 +35,6 @@ public class scratch {
       mongoClient.close();
     }
   }
-  // ticketID
-  // ticketID
 
   private static String getAction(String query) {
     String toReturn = "";
@@ -91,14 +90,10 @@ public class scratch {
   }
 
   private static String select(String query) {
-    if (query.contains("*")) {
-      String table = query.substring(query.lastIndexOf(' ' + 1));
-      List<DatabaseInterface> listOfDatabase = selectAllObjectFromTable(table);
-      for (DatabaseInterface d : listOfDatabase) {
-        System.out.println(d);
-      }
+    if (query.contains("*") && !query.contains("WHERE")) {
+      List<DatabaseInterface> listOfDatabase = selectAllObjectFromQuery(query);
     } else {
-
+      List<String> lstOfDatabase = selectColumnFromQuery(query);
     }
 
     return "SELECT";
@@ -137,7 +132,7 @@ public class scratch {
       while (toIterate.charAt(0) != ' ') {
         toIterate = toIterate.substring(1);
       }
-      fields.add(toIterate.substring(1, toIterate.indexOf('V') - 1));
+      fields.add(toIterate.substring(1, toIterate.indexOf("VAR") - 1));
       toIterate = toIterate.substring(toIterate.indexOf(',') + 1);
     }
     fields.add(toIterate.substring(1, toIterate.indexOf('V') - 1));
@@ -145,7 +140,6 @@ public class scratch {
     try {
       teamC_db.createCollection(table);
     } catch (Exception e) {
-      teamC_db.getCollection(table);
     }
 
     return "CREATE";
@@ -172,73 +166,119 @@ public class scratch {
       document.append(fields.get(i), values.get(i));
     }
     Document filterDoc = new Document(fields.get(0), values.get(0));
-    System.out.println(table);
-    System.out.println(fields.get(0));
-    System.out.println(values.get(0));
     teamC_db.getCollection(table).deleteOne(filterDoc);
     teamC_db.getCollection(table).insertOne(document);
     return "UPDATE";
   }
 
-  private static List<DatabaseInterface> selectAllObjectFromTable(String table) {
+  private static List<DatabaseInterface> selectAllObjectFromQuery(String query) {
+    String table;
+    if (query.contains("WHERE")) {
+      String actQuery = query.substring(query.indexOf(' ') + 1);
+      actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
+      table = actQuery.substring(0, actQuery.indexOf(' '));
+    } else {
+      table = query.substring(query.lastIndexOf(' ') + 1);
+    }
+
     MongoCollection<Document> collection = teamC_db.getCollection(table);
     List<DatabaseInterface> toReturn = new ArrayList<>();
     List<String> fields = map.get(table);
-    Class queryClass;
+    Class<? extends Query> queryClass;
     Method queryFactory;
-    Class databaseClass;
-    try {
-      String className = tableToClassName(table);
-      databaseClass = Class.forName(className.substring(0, className.lastIndexOf('Q')));
-      queryClass = Class.forName(className);
-      queryFactory = queryClass.getMethod("staticQueryFactory", String[].class);
 
-      for (Document d : collection.find()) {
-        String[] args = new String[d.size()];
+    try {
+      String className = tableToQueryClass(table);
+      queryClass = (Class<? extends Query>) Class.forName(className);
+
+      queryFactory = queryClass.getMethod("staticQueryFactory", String[].class);
+      FindIterable<Document> toIterate;
+
+      if (query.contains("WHERE")) {
+        Document filter =
+            new Document(
+                fields.get(0), query.substring(query.indexOf('\'') + 1, query.length() - 1));
+        toIterate = collection.find(filter);
+      } else {
+        toIterate = collection.find();
+      }
+
+      for (Document d : toIterate) {
+
+        String[] args = new String[d.size() - 1];
         for (int i = 0; i < fields.size(); i++) {
           args[i] = (String) d.get(fields.get(i));
         }
-        toReturn.add((DatabaseInterface) (queryFactory.invoke(args)));
+
+        toReturn.add((DatabaseInterface) (queryFactory.invoke(null, new Object[] {args})));
       }
     } catch (ClassNotFoundException e) {
-      return new ArrayList<>();
+      System.out.println("ClassNotFound");
+      e.printStackTrace();
+    } catch (IllegalArgumentException e) {
+      System.out.println("IllegalArgumentException");
+      e.printStackTrace();
     } catch (NoSuchMethodException e) {
+      System.out.println("NoSuchMethod");
       e.printStackTrace();
     } catch (InvocationTargetException e) {
+      System.out.println("InvocationTarget");
       e.printStackTrace();
     } catch (IllegalAccessException e) {
+      System.out.println("IllegalAccess");
       e.printStackTrace();
     }
 
     return toReturn;
   }
 
-  private static String tableToClassName(String tableName) {
+  private static List<String> selectColumnFromQuery(String query) {
+    String specificField = query.substring(query.indexOf(' ') + 1, query.indexOf("FROM") - 1);
+    String actQuery = query.substring(query.indexOf(' ') + 1);
+    actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
+    String table = actQuery.substring(0, actQuery.indexOf(' '));
+
+    MongoCollection<Document> collection = teamC_db.getCollection(table);
+    List<String> toReturn = new ArrayList<>();
+
+    FindIterable<Document> toIterate;
+    toIterate = collection.find();
+
+    for (Document d : toIterate) {
+      toReturn.add((String) d.get(specificField));
+    }
+
+    return toReturn;
+  }
+
+  private static String tableToQueryClass(String tableName) {
+    String toCheck = tableName.toUpperCase(Locale.ROOT);
     String toReturn = "";
-    switch (tableName) {
+    switch (toCheck) {
       case "TOWERLOCATIONSC":
         toReturn = "Location";
         break;
       case "SECURITYREQUESTC":
-        toReturn = "SecurityRequest";
+        toReturn = "requests.SecurityRequest";
         break;
       case "LANGUAGEREQUESTC":
-        toReturn = "LanguageRequest";
+        toReturn = "requests.LanguageRequest";
         break;
+        // edu.wpi.cs3733.c22.teamC.SQLMethods.requests.ReligiousRequestQuery
       case "RELIGIOUSREQUESTC":
-        toReturn = "ReligiousRequest";
+        toReturn = "requests.ReligiousRequest";
         break;
       case "LAUNDRYREQUESTC":
-        toReturn = "LaundryRequest";
+        toReturn = "requests.LaundryRequest";
         break;
       case "MEDICINEREQUESTC":
-        toReturn = "MedicineRequest";
+        toReturn = "requests.MedicineRequest";
         break;
       case "INTERNALTRANSPORTREQUESTC":
-        toReturn = "InternalTransportRequest";
+        toReturn = "requests.InternalTransportRequest";
         break;
       case "GIFTREQUESTC":
-        toReturn = "GiftRequest";
+        toReturn = "requests.GiftRequest";
         break;
       case "EMPLOYEEC":
         toReturn = "Employee";
@@ -247,22 +287,22 @@ public class scratch {
         toReturn = "Map";
         break;
       case "ITREQUESTC":
-        toReturn = "ITRequest";
+        toReturn = "requests.ITRequest";
         break;
       case "SANITATIONREQUESTC":
-        toReturn = "SanitationRequest";
+        toReturn = "requests.SanitationRequest";
         break;
       case "MAINTENANCEREQUESTC":
-        toReturn = "MaintenanceRequest";
+        toReturn = "requests.MaintenanceRequest";
         break;
       case "EQUIPMENTREQUESTC":
-        toReturn = "EquipmentRequest";
+        toReturn = "requests.EquipmentRequest";
         break;
       case "EQUIPMENTC":
-        toReturn = "MedicalEquipment";
+        toReturn = "requests.MedicalEquipment";
         break;
     }
-    return toReturn + "Query";
+    return "edu.wpi.cs3733.c22.teamC.SQLMethods." + toReturn + "Query";
   }
 
   private static List<String> readQueries() {

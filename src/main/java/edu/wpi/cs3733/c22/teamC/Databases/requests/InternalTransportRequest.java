@@ -85,6 +85,6 @@ public class InternalTransportRequest extends ServiceRequest implements Database
 
   @Override
   public String getName() {
-    return null;
+    return this.getClass().getName();
   }
 }

@@ -1,6 +1,6 @@
 package edu.wpi.cs3733.c22.teamC.Databases;
 
-public class Employee {
+public class Employee implements DatabaseInterface {
 
   private String username;
   private String password;
@@ -81,5 +81,17 @@ public class Employee {
     this.serviceType = serviceType;
     this.access = access;
     this.id = id;
+  }
+
+  @Override
+  public String[] getValues() {
+    return new String[] {
+      "username", "password", "firstName", "lastName", "serviceType", "access", "id"
+    };
+  }
+
+  @Override
+  public String getName() {
+    return null;
   }
 }

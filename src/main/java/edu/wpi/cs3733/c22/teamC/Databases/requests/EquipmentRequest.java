@@ -2,7 +2,6 @@ package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.EquipmentRequestQuery;
-
 import java.util.List;
 
 public class EquipmentRequest extends ServiceRequest implements DatabaseInterface {
@@ -11,7 +10,7 @@ public class EquipmentRequest extends ServiceRequest implements DatabaseInterfac
   private String _equipmentID;
   private String _pickupLocationID;
 
-  public EquipmentRequest(List<String> args){
+  public EquipmentRequest(List<String> args) {
     super(args.get(0), args.get(1), args.get(2), args.get(4), args.get(5));
     this._urgency = args.get(6);
     this._equipmentID = args.get(7);
@@ -118,6 +117,6 @@ public class EquipmentRequest extends ServiceRequest implements DatabaseInterfac
 
   @Override
   public String getName() {
-    return null;
+    return this.getClass().getName();
   }
 }

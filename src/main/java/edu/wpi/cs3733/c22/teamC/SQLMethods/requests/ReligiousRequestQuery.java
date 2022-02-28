@@ -123,7 +123,7 @@ public class ReligiousRequestQuery extends Query<ReligiousRequest> {
   }
 
   public static String staticGetQueryInput() {
-    return "ReligiousRequestC";
+    return "RELIGIOUSREQUESTC";
   }
 
   @Override

@@ -70,6 +70,6 @@ public class GiftRequest extends ServiceRequest implements DatabaseInterface {
 
   @Override
   public String getName() {
-    return null;
+    return this.getClass().getName();
   }
 }

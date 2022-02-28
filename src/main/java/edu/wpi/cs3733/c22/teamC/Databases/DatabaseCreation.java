@@ -311,7 +311,7 @@ public class DatabaseCreation {
               + "locationID VARCHAR(255), "
               + "status VARCHAR(255), "
               + "serviceType VARCHAR(255), "
-              + "assignment VARCHAR(255),"
+              + "assignment VARCHAR(255), "
               + "medicineType VARCHAR(255), "
               + "quantity VARCHAR(255), "
               + "urgency VARCHAR(255)) ";

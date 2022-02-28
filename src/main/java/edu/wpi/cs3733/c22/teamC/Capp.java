@@ -5,7 +5,6 @@ import edu.wpi.cs3733.c22.teamC.SQLMethods.*;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.*;
 import edu.wpi.cs3733.c22.teamC.controllers.ImageLoader;
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +26,7 @@ public class Capp extends Application {
   public void start(Stage primaryStage) throws SQLException {
     try {
       dbCreation();
+      DatabaseConnection.setTableNames();
       ImageLoader imageLoader = new ImageLoader();
       FXMLLoader loader = new FXMLLoader();
       Parent root =
@@ -46,14 +46,6 @@ public class Capp extends Application {
 
   public static void dbCreation() {
     try {
-      DatabaseConnection dbc = DatabaseConnection.getInstance();
-      ResultSet resultSet =
-          dbc.getConnection().getMetaData().getTables(null, null, null, new String[] {"TABLE"});
-      int i = 0;
-      while (resultSet.next()) {
-        System.out.println(resultSet.getString("TABLE_NAME") + " FOUND");
-        i++;
-      }
       // Creates the tables in the db
       DatabaseCreation.makeLocationTable();
       DatabaseCreation.makeEquipmentTable();

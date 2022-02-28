@@ -2,6 +2,7 @@ package edu.wpi.cs3733.c22.teamC;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import java.io.BufferedReader;
@@ -215,12 +216,21 @@ public class AidansMessAround {
   }
 
   private static List<Location> getAllItemsFromMongo(String collectionName) {
-    // MongoCollection<Document> collection = .getCollection(collectionName);
+    MongoCollection<Document> collection = teamC_db.getCollection(collectionName);
     List<Location> locations = new ArrayList<>();
-    /*for(Document d : collection.find()){
-      Location location = new Location((String)d.get(locFields[0]),(String)d.get(locFields[1]),(String)d.get(locFields[2]),(String)d.get(locFields[3]),(String)d.get(locFields[4]),(String)d.get(locFields[5]),(String)d.get(locFields[6]),(String)d.get(locFields[7]));
+    for (Document d : collection.find()) {
+      Location location =
+          new Location(
+              (String) d.get(locFields[0]),
+              (String) d.get(locFields[1]),
+              (String) d.get(locFields[2]),
+              (String) d.get(locFields[3]),
+              (String) d.get(locFields[4]),
+              (String) d.get(locFields[5]),
+              (String) d.get(locFields[6]),
+              (String) d.get(locFields[7]));
       locations.add(location);
-    }*/
+    }
     return locations;
   }
 

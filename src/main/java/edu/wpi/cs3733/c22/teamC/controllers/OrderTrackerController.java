@@ -2,6 +2,7 @@ package edu.wpi.cs3733.c22.teamC.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.*;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.filters.ServiceRequestFilters.*;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.EmployeeQuery;
@@ -56,12 +57,29 @@ public class OrderTrackerController extends AbstractController {
     // populate combobox dropdowns
     statusComboBox.getItems().addAll("Blank", "Done", "Cancelled", "Waiting for");
     employeeComboBox.getItems().addAll((new EmployeeQuery()).getFullNameAll());
+    typeComboBox
+        .getItems()
+        .addAll(
+            "Equipment Request",
+            "Gift Request",
+            "Internal Transport Request",
+            "IT Request",
+            "Language Request",
+            "Laundry Request",
+            "Maintenance Request",
+            "Medicine Request",
+            "Religious Request",
+            "Sanitation Request",
+            "Security Request");
+    idComboBox
+        .getItems()
+        .addAll(FXCollections.observableArrayList(ServiceRequest.getAvailableTicketIDs()));
     LocationQuery locationQuery = new LocationQuery();
     locationQuery
         .getAllNodeData()
         .forEach(
             node -> {
-              locComboBox.getItems().add(node.get_shortName());
+              locComboBox.getItems().add(node.get_longName());
             });
 
     // adding autocomplete listeners for comboboxes
@@ -115,6 +133,10 @@ public class OrderTrackerController extends AbstractController {
             });
   }
 
+  public JFXComboBox getEmployeeComboBox() {
+    return employeeComboBox;
+  }
+
   private void addRequestsToListView(List<ServiceRequest> requestsList) {
     // clear current request hashMap, orderController, and listView to allow for new categories of
     // requests
@@ -151,14 +173,29 @@ public class OrderTrackerController extends AbstractController {
                     Label idLabel = new Label(fieldName + ": " + fieldValuesArrayList.get(0));
                     controllerMediator.addNodeToOrder(orderKey, idLabel);
                   }
+
                   // for all other fields and values of request
                   else {
                     // add fieldName to a label
                     Label fieldNameLabel = new Label(fieldName);
+
                     // add fieldValue to a textField
-                    TextField valueTextField =
-                        new TextField(
-                            fieldValuesArrayList.get(fieldNamesArrayList.indexOf(fieldName)));
+                    TextField valueTextField;
+                    // if field name is location id, lets take its fieldValue and convert the NODEID
+                    // -> longName
+                    if (fieldName.equalsIgnoreCase("location id")) {
+                      LocationQuery locationQuery = new LocationQuery();
+                      Location location =
+                          locationQuery.findNodeByID(
+                              fieldValuesArrayList.get(fieldNamesArrayList.indexOf(fieldName)));
+                      valueTextField = new TextField(location.get_longName());
+                    }
+                    // else just use the corresponding raw fieldValue with same index as fieldName
+                    else {
+                      valueTextField =
+                          new TextField(
+                              fieldValuesArrayList.get(fieldNamesArrayList.indexOf(fieldName)));
+                    }
                     valueTextField.setEditable(false); // set to not editable
 
                     VBox vBox = new VBox();
@@ -237,6 +274,12 @@ public class OrderTrackerController extends AbstractController {
               ControllerUtil.popUpMessage("Error Saving", "Not all fields have been filled");
               return;
             }
+            // else if the field is the location fieldValue, convert it back to NodeID for database
+            // storage
+            else if (orderFieldsList.indexOf(field)
+                == controllerMediator.getLocationFieldIndex(orderKey))
+              orderFieldsList.set(
+                  orderFieldsList.indexOf(field), LocationQuery.longToNodeID(field));
           });
 
       // retrieve the corresponding request instance that matches the request of this order pane
@@ -281,7 +324,9 @@ public class OrderTrackerController extends AbstractController {
                   srCriteria = new SRCriteriaID(comboBox.getEditor().getText());
                   break;
                 case "location":
-                  srCriteria = new SRCriteriaLocation(comboBox.getEditor().getText());
+                  srCriteria =
+                      new SRCriteriaLocation(
+                          LocationQuery.longToNodeID(comboBox.getEditor().getText()));
                   break;
                 case "type":
                   srCriteria = new SRCriteriaType(comboBox.getEditor().getText());

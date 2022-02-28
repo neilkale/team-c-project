@@ -20,10 +20,14 @@ public class LaundryRequestQuery extends Query<LaundryRequest> {
   }
 
   public LaundryRequest queryFactory(String[] inputs) {
+    return staticQueryFactory(inputs);
+  }
+
+  public static LaundryRequest staticQueryFactory(String[] inputs) {
     if (inputs.length != 5) {
       System.out.println(
           "[QueryFactory of QueryType]: "
-              + getQueryInput()
+              + staticGetQueryInput()
               + "has failed | Input arguments does not match the allotted arguments for the creation of the object - NULL has been returned");
       return null;
     }
@@ -109,6 +113,10 @@ public class LaundryRequestQuery extends Query<LaundryRequest> {
 
   @Override
   public String getQueryInput() {
+    return staticGetQueryInput();
+  }
+
+  public static String staticGetQueryInput() {
     return "LAUNDRYREQUESTC";
   }
 

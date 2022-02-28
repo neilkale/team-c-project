@@ -90,7 +90,7 @@ public class DatabaseConnection {
   public void startServerClientDbConnection() {
     try {
       Class.forName(driverCS);
-      connection = DriverManager.getConnection(db_s_c_url);
+      connection = DriverManager.getConnection(db_s_c_url, "admin", "admin");
       isClientDatabase = true;
       // isMongulDB = false;
       if (connection != null) {
@@ -120,12 +120,14 @@ public class DatabaseConnection {
 
   /** Standardizes executeQuery to method, so we don't have 100 query names */
   public ResultSet executeQuery(String query) throws SQLException {
+    System.out.println(query);
     Statement statement = connection.createStatement();
     ResultSet rs = statement.executeQuery(query);
     return rs;
   }
 
   public void execute(String query) throws SQLException {
+    System.out.println(query);
     Statement statement = connection.createStatement();
     statement.execute(query);
   }

@@ -3,6 +3,7 @@ package edu.wpi.cs3733.c22.teamC.controllers.login;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
 import edu.wpi.cs3733.c22.teamC.Databases.Employee;
+import edu.wpi.cs3733.c22.teamC.Databases.LoggedInUser;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.EmployeeQuery;
 import edu.wpi.cs3733.c22.teamC.controllers.AbstractController;
 import java.io.IOException;
@@ -28,6 +29,7 @@ public class CardSwipeController extends AbstractController {
   private boolean checkCredentials(String id) {
     EmployeeQuery employeeQuery = new EmployeeQuery();
     Employee e = employeeQuery.findNodeByID(id);
+    LoggedInUser.signInEmployee(e.get_id());
     if (e != null) { // username exists
       if (e.get_id().equals(id)) { // password is correct
         //        if (e.get_access().equals("admin")) {

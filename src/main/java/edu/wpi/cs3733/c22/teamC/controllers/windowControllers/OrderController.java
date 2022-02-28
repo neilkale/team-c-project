@@ -84,4 +84,26 @@ public class OrderController {
             });
     return fieldValuesList;
   }
+
+  // search through field name labels of an order and find the index of location name; this index
+  // also indicates
+  // where the fieldValue for location longName is stored
+  public int getLocationFieldIndex() {
+    for (int i = 0; i < flowPane.getChildren().size(); i++) {
+      // iterate through flowpane children, which we know are all VBoxes
+      Node flowPaneChild = flowPane.getChildren().get(i);
+      if (flowPaneChild instanceof VBox) {
+        VBox vBox = (VBox) flowPaneChild;
+        // iterate through VBox children to find label with location field name
+        for (int j = 0; j < vBox.getChildren().size(); j++) {
+          Node vBoxChild = vBox.getChildren().get(j);
+          if (vBoxChild instanceof Label) {
+            Label label = (Label) vBoxChild;
+            if (label.getText().equalsIgnoreCase("location id")) return i;
+          }
+        }
+      }
+    }
+    return 0;
+  }
 }

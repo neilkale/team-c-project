@@ -1,9 +1,10 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.MedicineRequestQuery;
 
 /** this class is for the medicine service request data */
-public class MedicineRequest extends ServiceRequest {
+public class MedicineRequest extends ServiceRequest implements DatabaseInterface {
 
   private String _medicineType;
   private String _quantity;
@@ -89,5 +90,24 @@ public class MedicineRequest extends ServiceRequest {
         + _quantity
         + "\nUrgency: "
         + _urgency;
+  }
+
+  @Override
+  public String[] getValues() {
+    return new String[] {
+      "ID",
+      "Location",
+      "Status",
+      "Service Type",
+      "Assignment",
+      "Medicine Type",
+      "Quantity",
+      "Urgency"
+    };
+  }
+
+  @Override
+  public String getName() {
+    return this.getClass().getName();
   }
 }

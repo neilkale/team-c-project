@@ -97,7 +97,14 @@ public class Employee implements DatabaseInterface {
   @Override
   public String[] getValues() {
     return new String[] {
-      "username", "password", "firstName", "lastName", "serviceType", "access", "id"
+      "username",
+      "password",
+      "firstName",
+      "lastName",
+      "serviceType",
+      "access",
+      "id",
+      "profilePicture"
     };
   }
 

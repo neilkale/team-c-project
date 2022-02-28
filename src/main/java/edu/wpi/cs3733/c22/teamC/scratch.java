@@ -105,10 +105,11 @@ public class scratch {
       actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
       String table = actQuery.substring(0, actQuery.indexOf(' '));
       String keyVal = actQuery.substring(actQuery.indexOf('\'') + 1, actQuery.length() - 1);
-      MongoCollection collection = teamC_db.getCollection(table);
       teamC_db.getCollection(table).deleteOne(new Document(map.get(table).get(0), keyVal));
     } else {
-      teamC_db.getCollection(query.substring(query.lastIndexOf(' '))).drop();
+      System.out.println("DELETE\n\n\n\n\n");
+      System.out.println(query.substring(query.lastIndexOf(' ') + 1));
+      teamC_db.getCollection(query.substring(query.lastIndexOf(' ') + 1)).drop();
     }
     return "DELETE";
   }

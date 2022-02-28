@@ -40,7 +40,7 @@
             </GridPane>
          </top>
          <center>
-             <JFXButton fx:id="TeamBAPI" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#clearButtonPressed" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #c6c6c6c6;" text="CLEAR" textFill="#009f9f" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
+             <JFXButton fx:id="TeamBAPI" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#startTeamBAPI" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #c6c6c6c6;" text="CLEAR" textFill="#009f9f" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
                  <font>
                      <Font name="System Bold" size="16.0" />
                  </font>
@@ -48,7 +48,7 @@
                      <Insets bottom="10.0" top="10.0" />
                  </GridPane.margin>
              </JFXButton>
-             <JFXButton fx:id="TeamDAPI" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#submitButtonPressed" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #009f9f;" text="SUBMIT" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
+             <JFXButton fx:id="TeamDAPI" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#startTeamDAPI" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #009f9f;" text="SUBMIT" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
                  <font>
                      <Font name="System Bold" size="16.0" />
                  </font>

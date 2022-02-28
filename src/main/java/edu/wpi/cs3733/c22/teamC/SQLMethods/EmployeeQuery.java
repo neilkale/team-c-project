@@ -18,8 +18,6 @@ public class EmployeeQuery extends Query<Employee> {
 
   public static Employee staticQueryFactory(String[] inputs) {
     if (inputs.length != 8) {
-      return staticQueryFactory(inputs);
-    }
       System.out.println(
           "[QueryFactory of QueryType]: "
               + staticGetQueryInput()

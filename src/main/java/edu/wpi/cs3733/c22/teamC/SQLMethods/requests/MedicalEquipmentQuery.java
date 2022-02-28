@@ -10,11 +10,9 @@ import java.util.ArrayList;
 
 public class MedicalEquipmentQuery extends Query<MedicalEquipment> {
   private DatabaseConnection dbConnection = super.dbConnection;
-  // private MongoEquipment mongoEquipment;
 
   public MedicalEquipmentQuery() {
     try {
-      // mongoEquipment = new MongoEquipment();
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println(

@@ -3,14 +3,12 @@ package edu.wpi.cs3733.c22.teamC.SQLMethods;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
-import edu.wpi.cs3733.c22.teamC.Databases.MongoDB.MongoLocation;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class LocationQuery extends Query<Location> {
   private DatabaseConnection dbConnection = super.dbConnection;
-  private MongoLocation mongoLocation;
 
   public LocationQuery() {
 

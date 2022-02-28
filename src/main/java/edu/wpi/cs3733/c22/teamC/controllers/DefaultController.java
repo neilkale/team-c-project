@@ -7,10 +7,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 public class DefaultController extends AbstractController {
   @FXML private AnchorPane anchorPane;
@@ -19,7 +21,8 @@ public class DefaultController extends AbstractController {
   @FXML private JFXDrawersStack drawerStack;
   @FXML private JFXButton navButton;
   @FXML private JFXButton exitButton;
-  @FXML private ImageView profilePic;
+  @FXML private Circle profileCircle;
+  @FXML private Label nameLabel;
 
   private JFXDrawer navDrawer = new JFXDrawer();
   private JFXDrawer exitDrawer = new JFXDrawer();
@@ -32,7 +35,11 @@ public class DefaultController extends AbstractController {
 
   @FXML
   public void initialize() throws IOException {
-    profilePic.setImage(LoggedInUser.getProfilePic());
+    profileCircle.setFill(new ImagePattern(LoggedInUser.getProfilePic()));
+    nameLabel.setText(
+        LoggedInUser.getCurrentUser().get_firstName()
+            + " "
+            + LoggedInUser.getCurrentUser().get_lastName());
 
     FXMLLoader slideNavLoader = getLoader("SlideNavMenu.fxml");
     slideNavMenu = slideNavLoader.load();

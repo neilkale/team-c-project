@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawersStack?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -18,9 +14,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../Stylesheets/DefaultPage.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.DefaultController">
+<AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../Stylesheets/DefaultPage.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.DefaultController">
    <children>
       <BorderPane fx:id="borderPane" layoutX="91.0" layoutY="26.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -32,104 +29,117 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <VBox fx:id="Banner" alignment="TOP_CENTER" prefHeight="605.0" prefWidth="100.0" stylesheets="@../Stylesheets/ServiceRequestConstants.css">
+                  <VBox fx:id="Banner" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="150.0" stylesheets="@../Stylesheets/ServiceRequestConstants.css" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                      <children>
-                        <JFXButton fx:id="navButton" alignment="TOP_LEFT" prefHeight="50.0" prefWidth="500.0" text="Requests" textFill="WHITE">
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@Icons/RequestServiceIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
-                        <JFXButton fx:id="navButton111" alignment="TOP_LEFT" onAction="#orderTrackerButtonPressed" prefHeight="50.0" prefWidth="500.0" text="Track Orders" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@Icons/OrderTracker.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
-                        <JFXButton fx:id="navButton1" alignment="TOP_LEFT" onAction="#mapEditorButtonPressed" prefHeight="50.0" prefWidth="500.0" text="Map Editor" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@Icons/MapEditorIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
-                        <JFXButton fx:id="sideViewButton" alignment="TOP_LEFT" layoutX="23.0" layoutY="60.0" onAction="#sideViewButtonPressed" prefHeight="50.0" prefWidth="500.0" text="Side View" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@Icons/SideViewIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
-                        <JFXButton fx:id="databasesButton" alignment="TOP_LEFT" onAction="#databasesButtonPressed" prefHeight="50.0" prefWidth="500.0" text="Databases" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@Icons/DatabasesIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
-                        <JFXButton fx:id="dashboardButton" alignment="TOP_LEFT" onAction="#dashboardButtonPressed" prefHeight="50.0" prefWidth="500.0" text="Dashboard" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@Icons/DashboardIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
-                        <JFXButton fx:id="exitButton" alignment="TOP_LEFT" prefHeight="50.0" prefWidth="500.0" text="Exit" textFill="WHITE" VBox.vgrow="NEVER">
-                           <VBox.margin>
-                              <Insets bottom="20.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@Icons/LogOut.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
+                        <VBox prefWidth="100.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <JFXButton fx:id="navButton" alignment="TOP_LEFT" prefHeight="50.0" prefWidth="500.0" text="Requests" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/RequestServiceIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="navButton111" alignment="TOP_LEFT" onAction="#orderTrackerButtonPressed" prefHeight="50.0" prefWidth="500.0" text="Track Orders" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/OrderTracker.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="navButton1" alignment="TOP_LEFT" onAction="#mapEditorButtonPressed" prefHeight="50.0" prefWidth="500.0" text="Map Editor" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/MapEditorIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="sideViewButton" alignment="TOP_LEFT" onAction="#sideViewButtonPressed" prefHeight="50.0" prefWidth="500.0" text="Side View" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/SideViewIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="databasesButton" alignment="TOP_LEFT" onAction="#databasesButtonPressed" prefHeight="50.0" prefWidth="500.0" text="Databases" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/DatabasesIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="dashboardButton" alignment="TOP_LEFT" onAction="#dashboardButtonPressed" prefHeight="50.0" prefWidth="500.0" text="Dashboard" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/DashboardIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="exitButton" alignment="TOP_LEFT" prefHeight="50.0" prefWidth="500.0" text="Exit" textFill="WHITE" VBox.vgrow="NEVER">
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/LogOut.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="138.0" prefWidth="150.0" VBox.vgrow="NEVER">
+                           <children>
+                              <Circle fx:id="profileCircle" fill="#1f58af" radius="55.0" stroke="#1f58af" strokeType="INSIDE" />
+                              <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="First Last" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
                      </children>
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </VBox>
-                  <ImageView fx:id="profilePic" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.valignment="BOTTOM" />
                </children>
                <effect>
                   <DropShadow />

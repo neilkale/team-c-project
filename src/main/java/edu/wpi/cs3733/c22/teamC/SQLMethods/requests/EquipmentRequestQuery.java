@@ -18,8 +18,11 @@ public class EquipmentRequestQuery extends Query<EquipmentRequest> {
     return each.get_ticketID();
   }
 
+  public EquipmentRequest queryFactory(String[] inputs) {
+    return staticQueryFactory(inputs);
+  }
 
-  public static EquipmentRequest queryFactory(String[] inputs) {
+  public static EquipmentRequest staticQueryFactory(String[] inputs) {
     if (inputs.length != 8) {
       System.out.println(
           "[QueryFactory of QueryType]: "

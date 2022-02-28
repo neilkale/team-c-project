@@ -11,7 +11,11 @@ public class MapQuery extends Query<Map> {
 
   public MapQuery() {}
 
-  public static Map queryFactory(String[] inputs) {
+  public Map queryFactory(String[] inputs) {
+    return staticQueryFactory(inputs);
+  }
+
+  public static Map staticQueryFactory(String[] inputs) {
     if (inputs.length != 4) {
       System.out.println(
           "[QueryFactory of QueryType]: "
@@ -60,6 +64,7 @@ public class MapQuery extends Query<Map> {
   public String getUID(Map each) throws SQLException {
     return each.get_imagePath();
   }
+
   @Override
   public String getQueryInput() {
     return staticGetQueryInput();

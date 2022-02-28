@@ -17,7 +17,11 @@ public class ITRequestQuery extends Query<ITRequest> {
     return each.get_ticketID();
   }
 
-  public static ITRequest queryFactory(String[] inputs) {
+  public ITRequest queryFactory(String[] inputs) {
+    return staticQueryFactory(inputs);
+  }
+
+  public static ITRequest staticQueryFactory(String[] inputs) {
     if (inputs.length != 6) {
       System.out.println(
           "[QueryFactory of QueryType]: "

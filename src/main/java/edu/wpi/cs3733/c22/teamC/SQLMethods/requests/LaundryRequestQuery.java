@@ -19,7 +19,11 @@ public class LaundryRequestQuery extends Query<LaundryRequest> {
     return each.get_ticketID();
   }
 
-  public static LaundryRequest queryFactory(String[] inputs) {
+  public LaundryRequest queryFactory(String[] inputs) {
+    return staticQueryFactory(inputs);
+  }
+
+  public static LaundryRequest staticQueryFactory(String[] inputs) {
     if (inputs.length != 5) {
       System.out.println(
           "[QueryFactory of QueryType]: "

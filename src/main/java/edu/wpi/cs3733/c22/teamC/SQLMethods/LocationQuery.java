@@ -64,7 +64,11 @@ public class LocationQuery extends Query<Location> {
     return toReturn;
   }
 
-  public static Location queryFactory(String[] inputs) {
+  public Location queryFactory(String[] inputs) {
+    return staticQueryFactory(inputs);
+  }
+
+  public static Location staticQueryFactory(String[] inputs) {
     if (inputs.length != 8) {
       System.out.println(
           "[QueryFactory of QueryType]: "

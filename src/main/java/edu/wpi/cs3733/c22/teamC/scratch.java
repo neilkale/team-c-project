@@ -2,10 +2,9 @@ package edu.wpi.cs3733.c22.teamC;
 
 import com.mongodb.client.*;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
-import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 import org.bson.Document;
@@ -94,10 +93,10 @@ public class scratch {
   private static String select(String query) {
     if (query.contains("*")) {
       String table = query.substring(query.lastIndexOf(' ' + 1));
-      FindIterable<Document> a = teamC_db.getCollection(table).find();
-      List<String> b = new ArrayList<>();
-      for (Document d : a) {}
-
+      List<DatabaseInterface> listOfDatabase = selectAllObjectFromTable(table);
+      for (DatabaseInterface d : listOfDatabase) {
+        System.out.println(d);
+      }
     } else {
 
     }
@@ -181,27 +180,40 @@ public class scratch {
     return "UPDATE";
   }
 
-  private List<DatabaseInterface> docToList(String table) {
+  private static List<DatabaseInterface> selectAllObjectFromTable(String table) {
     MongoCollection<Document> collection = teamC_db.getCollection(table);
-    List<Location> items = new ArrayList<>();
-    Class databaseClass;
-    try{
-      databaseClass = tableToClassName(table);
-      Method queryFactory = databaseClass.g
-    } catch (ClassNotFoundException e){
-      return null;
-    }
+    List<DatabaseInterface> toReturn = new ArrayList<>();
     List<String> fields = map.get(table);
+    Class queryClass;
+    Method queryFactory;
+    Class databaseClass;
+    try {
+      String className = tableToClassName(table);
+      databaseClass = Class.forName(className.substring(0, className.lastIndexOf('Q')));
+      queryClass = Class.forName(className);
+      queryFactory = queryClass.getMethod("staticQueryFactory", String[].class);
 
-    for (Document d : collection.find()) {
-
-
+      for (Document d : collection.find()) {
+        String[] args = new String[d.size()];
+        for (int i = 0; i < fields.size(); i++) {
+          args[i] = (String) d.get(fields.get(i));
+        }
+        toReturn.add((DatabaseInterface) (queryFactory.invoke(args)));
+      }
+    } catch (ClassNotFoundException e) {
+      return new ArrayList<>();
+    } catch (NoSuchMethodException e) {
+      e.printStackTrace();
+    } catch (InvocationTargetException e) {
+      e.printStackTrace();
+    } catch (IllegalAccessException e) {
+      e.printStackTrace();
     }
 
-    return null;
+    return toReturn;
   }
 
-  private Class tableToClassName(String tableName) throws ClassNotFoundException {
+  private static String tableToClassName(String tableName) {
     String toReturn = "";
     switch (tableName) {
       case "TOWERLOCATIONSC":
@@ -250,7 +262,7 @@ public class scratch {
         toReturn = "MedicalEquipment";
         break;
     }
-    return Class.forName(toReturn+"Query");
+    return toReturn + "Query";
   }
 
   private static List<String> readQueries() {

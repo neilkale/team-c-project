@@ -14,7 +14,11 @@ public class LanguageRequestQuery extends Query<LanguageRequest> {
 
   public LanguageRequestQuery() {}
 
-  public static LanguageRequest queryFactory(String[] inputs) {
+  public LanguageRequest queryFactory(String[] inputs) {
+    return staticQueryFactory(inputs);
+  }
+
+  public static LanguageRequest staticQueryFactory(String[] inputs) {
     if (inputs.length != 6) {
       System.out.println(
           "[QueryFactory of QueryType]: "

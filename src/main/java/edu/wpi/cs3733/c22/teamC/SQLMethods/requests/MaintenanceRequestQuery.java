@@ -15,7 +15,11 @@ public class MaintenanceRequestQuery extends Query<MaintenanceRequest> {
 
   public MaintenanceRequestQuery() {}
 
-  public static MaintenanceRequest queryFactory(String... inputs) {
+  public MaintenanceRequest queryFactory(String[] inputs) {
+    return staticQueryFactory(inputs);
+  }
+
+  public static MaintenanceRequest staticQueryFactory(String... inputs) {
     if (inputs.length != 6) {
       System.out.println(
           "[QueryFactory of QueryType]: "

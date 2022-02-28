@@ -27,7 +27,11 @@ public class MedicalEquipmentQuery extends Query<MedicalEquipment> {
     return each.get_equipmentID();
   }
 
-  public static MedicalEquipment queryFactory(String[] inputs) {
+  public MedicalEquipment queryFactory(String[] inputs) {
+    return staticQueryFactory(inputs);
+  }
+
+  public static MedicalEquipment staticQueryFactory(String[] inputs) {
     if (inputs.length != 6) {
       System.out.println(
           "[QueryFactory of QueryType]: "

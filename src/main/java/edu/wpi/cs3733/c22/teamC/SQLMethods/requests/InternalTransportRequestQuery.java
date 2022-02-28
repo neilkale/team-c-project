@@ -19,7 +19,11 @@ public class InternalTransportRequestQuery extends Query<InternalTransportReques
     return each.get_ticketID();
   }
 
-  public static InternalTransportRequest queryFactory(String[] inputs) {
+  public InternalTransportRequest queryFactory(String[] inputs) {
+    return staticQueryFactory(inputs);
+  }
+
+  public static InternalTransportRequest staticQueryFactory(String[] inputs) {
     if (inputs.length != 7) {
       System.out.println(
           "[QueryFactory of QueryType]: "

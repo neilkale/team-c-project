@@ -11,8 +11,11 @@ public class EmployeeQuery extends Query<Employee> {
 
   public EmployeeQuery() {}
 
+  public Employee queryFactory(String[] inputs) {
+    return staticQueryFactory(inputs);
+  }
 
-  public static Employee queryFactory(String[] inputs) {
+  public static Employee staticQueryFactory(String[] inputs) {
     if (inputs.length != 7) {
       System.out.println(
           "[QueryFactory of QueryType]: "

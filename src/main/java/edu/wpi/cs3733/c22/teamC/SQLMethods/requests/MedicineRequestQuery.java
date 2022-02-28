@@ -12,7 +12,11 @@ public class MedicineRequestQuery extends Query<MedicineRequest> {
 
   public MedicineRequestQuery() {}
 
-  public static MedicineRequest queryFactory(String[] inputs) {
+  public MedicineRequest queryFactory(String[] inputs) {
+    return staticQueryFactory(inputs);
+  }
+
+  public static MedicineRequest staticQueryFactory(String[] inputs) {
     if (inputs.length != 8) {
       System.out.println(
           "[QueryFactory of QueryType]: "

@@ -12,8 +12,11 @@ public class SecurityRequestQuery extends Query<SecurityRequest> {
 
   public SecurityRequestQuery() {}
 
+  public SecurityRequest queryFactory(String[] inputs) {
+    return staticQueryFactory(inputs);
+  }
 
-  public static SecurityRequest queryFactory(String[] inputs) {
+  public static SecurityRequest staticQueryFactory(String[] inputs) {
     if (inputs.length != 8) {
       System.out.println(
           "[QueryFactory of QueryType]: "
@@ -135,6 +138,7 @@ public class SecurityRequestQuery extends Query<SecurityRequest> {
   public String getUID(SecurityRequest each) throws SQLException {
     return each.get_ticketID();
   }
+
   @Override
   public String getQueryInput() {
     return staticGetQueryInput();

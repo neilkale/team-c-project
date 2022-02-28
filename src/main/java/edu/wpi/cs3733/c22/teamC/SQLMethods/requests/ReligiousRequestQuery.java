@@ -19,7 +19,11 @@ public class ReligiousRequestQuery extends Query<ReligiousRequest> {
     return each.get_ticketID();
   }
 
-  public static ReligiousRequest queryFactory(String[] inputs) {
+  public ReligiousRequest queryFactory(String[] inputs) {
+    return staticQueryFactory(inputs);
+  }
+
+  public static ReligiousRequest staticQueryFactory(String[] inputs) {
     if (inputs.length != 6) {
       System.out.println(
           "[QueryFactory of QueryType]: "

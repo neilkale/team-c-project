@@ -20,8 +20,11 @@ public class GiftRequestQuery extends Query<GiftRequest> {
     return each.get_ticketID();
   }
 
+  public GiftRequest queryFactory(String[] inputs) {
+    return staticQueryFactory(inputs);
+  }
 
-  public static GiftRequest queryFactory(String[] inputs) {
+  public static GiftRequest staticQueryFactory(String[] inputs) {
     if (inputs.length != 6) {
       System.out.println(
           "[QueryFactory of QueryType]: "

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
@@ -37,11 +38,26 @@
                               <Font name="System Bold" size="25.0" />
                            </font>
                         </Label>
-                        <Label fx:id="notificationLabel" alignment="CENTER" prefHeight="141.0" prefWidth="270.0" stylesheets="@../Stylesheets/ServiceRequestConstants.css" text="You have (0) pending requests" textAlignment="CENTER" textFill="#4d4d4d">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Label>
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label fx:id="notificationLabel" alignment="CENTER" prefHeight="134.0" prefWidth="270.0" stylesheets="@../Stylesheets/ServiceRequestConstants.css" text="You have (0) pending requests" textAlignment="CENTER" textFill="#4d4d4d" VBox.vgrow="NEVER">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="50.0" />
+                                 </padding>
+                              </Label>
+                              <JFXButton fx:id="trackOrdersButton" onAction="#trackOrdersButtonPressed" text="Track your Assigned Orders" textFill="WHITE">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </VBox>
                         <StackPane alignment="BOTTOM_CENTER" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <children>
                               <ProgressIndicator fx:id="progressCircle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="269.0" progress="0.0" StackPane.alignment="CENTER" />
@@ -55,7 +71,7 @@
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                                  <StackPane.margin>
-                                    <Insets top="65.0" />
+                                    <Insets top="35.0" />
                                  </StackPane.margin>
                               </Label>
                               <Label fx:id="qtyLabel" text="Number" textFill="#1f58af" StackPane.alignment="CENTER">

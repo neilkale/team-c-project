@@ -1,14 +1,18 @@
 package edu.wpi.cs3733.c22.teamC.controllers;
 
 import com.jfoenix.controls.*;
+import edu.wpi.cs3733.c22.teamC.Databases.LoggedInUser;
 import edu.wpi.cs3733.c22.teamC.controllers.windowControllers.SlideNavMenuController;
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 public class DefaultController extends AbstractController {
   @FXML private AnchorPane anchorPane;
@@ -17,6 +21,8 @@ public class DefaultController extends AbstractController {
   @FXML private JFXDrawersStack drawerStack;
   @FXML private JFXButton navButton;
   @FXML private JFXButton exitButton;
+  @FXML private Circle profileCircle;
+  @FXML private Label nameLabel;
 
   private JFXDrawer navDrawer = new JFXDrawer();
   private JFXDrawer exitDrawer = new JFXDrawer();
@@ -29,6 +35,12 @@ public class DefaultController extends AbstractController {
 
   @FXML
   public void initialize() throws IOException {
+    profileCircle.setFill(new ImagePattern(LoggedInUser.getProfilePic()));
+    nameLabel.setText(
+        LoggedInUser.getCurrentUser().get_firstName()
+            + " "
+            + LoggedInUser.getCurrentUser().get_lastName());
+
     FXMLLoader slideNavLoader = getLoader("SlideNavMenu.fxml");
     slideNavMenu = slideNavLoader.load();
     slideNavMenuController = slideNavLoader.getController();
@@ -88,16 +100,24 @@ public class DefaultController extends AbstractController {
   // overloaded constructor
   // doesn't implement renaming of tab
   @FXML
-  public void setCenter(Pane pane) {
-    pane.prefWidthProperty().bind(borderPane.widthProperty());
-    pane.prefHeightProperty().bind(borderPane.heightProperty());
+  public void setCenter(Pane pane, String fxmlFileName) throws IOException {
+    Pane root = pane;
 
-    borderPane.setCenter(pane);
+    root.prefWidthProperty().bind(borderPane.widthProperty());
+    root.prefHeightProperty().bind(borderPane.heightProperty());
 
-    AnchorPane.setTopAnchor(pane, 0.0);
-    AnchorPane.setBottomAnchor(pane, 0.0);
-    AnchorPane.setLeftAnchor(pane, 0.0);
-    AnchorPane.setRightAnchor(pane, 0.0);
+    borderPane.setCenter(root);
+
+    AnchorPane.setTopAnchor(root, 0.0);
+    AnchorPane.setBottomAnchor(root, 0.0);
+    AnchorPane.setLeftAnchor(root, 0.0);
+    AnchorPane.setRightAnchor(root, 0.0);
+
+    String tabName = splitCamelCase(fxmlFileName.replace(".fxml", ""));
+    controllerMediator.setTabName(tabName); // set tab text to tabName
+
+    if (prevPageList.isEmpty() || prevPageList.get(prevPageList.size() - 1) != fxmlFileName)
+      prevPageList.add(fxmlFileName); // add this page to tracking list of previous pages
   }
 
   @FXML
@@ -105,8 +125,7 @@ public class DefaultController extends AbstractController {
     prevPageList.remove(prevPageList.size() - 1); // remove the current page from the tracking list
 
     if (prevPageList.isEmpty()) { // base case
-      setCenter(pane);
-      controllerMediator.setTabName("Default Page");
+      setCenter(pane, "DefaultPage.fxml");
     } else { // we get last page of list and go to that
       String prevPage = prevPageList.get(prevPageList.size() - 1);
       setCenter(prevPage);

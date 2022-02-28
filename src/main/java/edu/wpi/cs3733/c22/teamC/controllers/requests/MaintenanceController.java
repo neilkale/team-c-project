@@ -73,6 +73,7 @@ public class MaintenanceController extends AbstractController {
       for (Location l : locations) {
         if (l.get_longName().equals(chosenLocation)) {
           locationID = l.get_nodeID();
+          break;
         }
       }
 

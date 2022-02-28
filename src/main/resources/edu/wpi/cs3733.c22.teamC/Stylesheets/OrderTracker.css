@@ -7,11 +7,11 @@
 }
 
 .combo-box .input-line {
-    -fx-background-color: #FFF !important;
+    -fx-background-color: #1F58AF !important;
     -fx-prompt-text-fill: #1D1D1D;
 }
 
 .combo-box .input-focused-line{
-    -fx-background-color: #FFF !important;
+    -fx-background-color: #1F58AF !important;
     -fx-prompt-text-fill: #1D1D1D !important;
 }

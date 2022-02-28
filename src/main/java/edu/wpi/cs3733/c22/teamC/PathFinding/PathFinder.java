@@ -42,6 +42,7 @@ public class PathFinder {
           new Node(
               Integer.parseInt(loc.get_xcoord()),
               Integer.parseInt(loc.get_ycoord()),
+              loc.get_zcoord(),
               loc.get_nodeID());
       nodeMap.put(loc.get_nodeID(), node);
     }

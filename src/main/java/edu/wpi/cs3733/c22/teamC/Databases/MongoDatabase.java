@@ -19,17 +19,19 @@ public class MongoDatabase {
     static MongoClient mongoClient;
     static com.mongodb.client.MongoDatabase teamC_db;
     static Map<String, ArrayList<String>> map;
+    static String uri =
+            "mongodb+srv://admin:dDbno11RbFVsXVv3@serverlessinstance0.zitm8.mongodb.net/teamC_DB?retryWrites=true&w=majority";
 
-    public static void main(String[] args) {
-
-        String uri =
-                "mongodb+srv://admin:dDbno11RbFVsXVv3@serverlessinstance0.zitm8.mongodb.net/teamC_DB?retryWrites=true&w=majority";
-
+    public MongoDatabase(){
         mongoClient = MongoClients.create(uri);
         teamC_db = mongoClient.getDatabase("teamC_DB");
         map = new HashMap<>();
+    }
+
+    public void closeMongo(){
         mongoClient.close();
     }
+
 
     private static String getAction(String query) {
         String toReturn = "";

@@ -9,3 +9,18 @@
 #anchorPaneUser {
     -fx-background-color: #FFF;
 }
+
+#progressCircle {
+    -fx-progress-color: #1F58AF !important;
+}
+
+#progressCircle .percentage {
+    -fx-fill: null;
+}
+
+#progressCircle .tick {
+    -fx-background-color: #1F58AF !important;
+}
+
+
+

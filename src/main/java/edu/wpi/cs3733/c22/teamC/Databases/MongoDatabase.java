@@ -1,39 +1,31 @@
-package edu.wpi.cs3733.c22.teamC;
-
-import com.mongodb.client.*;
-import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
+package edu.wpi.cs3733.c22.teamC.Databases;
+/** @author Aidan Burns 2/28/2022 This project does MongoDatabase on the IntelliJ IDEA */
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.Map;
 import org.bson.Document;
 
-public class scratch {
+public class MongoDatabase {
   static MongoClient mongoClient;
-  static MongoDatabase teamC_db;
-  static Map<String, List<String>> map;
+  static com.mongodb.client.MongoDatabase teamC_db;
+  static Map<String, ArrayList<String>> map;
+  static String uri =
+      "mongodb+srv://admin:dDbno11RbFVsXVv3@serverlessinstance0.zitm8.mongodb.net/teamC_DB?retryWrites=true&w=majority";
 
-  public static void main(String[] args) {
-
-    String uri =
-        "mongodb+srv://admin:dDbno11RbFVsXVv3@serverlessinstance0.zitm8.mongodb.net/teamC_DB?retryWrites=true&w=majority";
-
+  public MongoDatabase() {
     mongoClient = MongoClients.create(uri);
     teamC_db = mongoClient.getDatabase("teamC_DB");
     map = new HashMap<>();
+  }
 
-    try {
-      for (String s : readQueries()) {
-        if (s.length() != 0) {
-          System.out.println(getAction(s) + s.substring(s.indexOf(' ')));
-        }
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-      mongoClient.close();
-    }
+  public void closeMongo() {
+    mongoClient.close();
   }
 
   private static String getAction(String query) {
@@ -70,9 +62,9 @@ public class scratch {
     actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
     String table = actQuery.substring(0, actQuery.indexOf(' '));
     actQuery = actQuery.substring(actQuery.indexOf('(') + 1, actQuery.indexOf(')'));
-    List<String> values = new ArrayList<>();
+    ArrayList<String> values = new ArrayList<>();
 
-    List<String> fields = map.get(table);
+    ArrayList<String> fields = map.get(table);
     while (actQuery.contains(",")) {
       values.add(actQuery.substring(actQuery.indexOf('\'') + 1, actQuery.indexOf(',') - 1));
       actQuery = actQuery.substring(actQuery.indexOf(','));
@@ -91,11 +83,10 @@ public class scratch {
 
   private static String select(String query) {
     if (query.contains("*") && !query.contains("WHERE")) {
-      List<DatabaseInterface> listOfDatabase = selectAllObjectFromQuery(query);
+      ArrayList<DatabaseInterface> listOfDatabase = selectAllObjectFromQuery(query);
     } else {
-      List<String> lstOfDatabase = selectColumnFromQuery(query);
+      ArrayList<String> lstOfDatabase = selectColumnFromQuery(query);
     }
-
     return "SELECT";
   }
 
@@ -128,7 +119,7 @@ public class scratch {
     String table = actQuery.substring(0, actQuery.indexOf('('));
     actQuery = actQuery.substring(actQuery.indexOf('('), actQuery.lastIndexOf(')'));
     String toIterate = actQuery;
-    List<String> fields = new ArrayList<>();
+    ArrayList<String> fields = new ArrayList<>();
     while (toIterate.contains(",")) {
       while (toIterate.charAt(0) != ' ') {
         toIterate = toIterate.substring(1);
@@ -150,7 +141,7 @@ public class scratch {
     String actQuery = query.substring(query.indexOf(' ') + 1);
     String table = actQuery.substring(0, actQuery.indexOf(' '));
     String toIterate = actQuery;
-    List<String> values = new ArrayList<>();
+    ArrayList<String> values = new ArrayList<>();
     String from = actQuery.substring(actQuery.indexOf("WHERE"));
     from = from.substring(from.indexOf('\''));
     values.add(from);
@@ -161,7 +152,7 @@ public class scratch {
     }
     String lastValue = toIterate.substring(toIterate.indexOf('\''), toIterate.indexOf(" WHERE"));
     values.add(lastValue);
-    List<String> fields = map.get(table);
+    ArrayList<String> fields = map.get(table);
     Document document = new Document();
     for (int i = 0; i < fields.size(); i++) {
       document.append(fields.get(i), values.get(i));
@@ -172,7 +163,7 @@ public class scratch {
     return "UPDATE";
   }
 
-  private static List<DatabaseInterface> selectAllObjectFromQuery(String query) {
+  private static ArrayList<DatabaseInterface> selectAllObjectFromQuery(String query) {
     String table;
     if (query.contains("WHERE")) {
       String actQuery = query.substring(query.indexOf(' ') + 1);
@@ -183,8 +174,8 @@ public class scratch {
     }
 
     MongoCollection<Document> collection = teamC_db.getCollection(table);
-    List<DatabaseInterface> toReturn = new ArrayList<>();
-    List<String> fields = map.get(table);
+    ArrayList<DatabaseInterface> toReturn = new ArrayList<>();
+    ArrayList<String> fields = map.get(table);
     Class<? extends Query> queryClass;
     Method queryFactory;
 
@@ -233,14 +224,14 @@ public class scratch {
     return toReturn;
   }
 
-  private static List<String> selectColumnFromQuery(String query) {
+  private static ArrayList<String> selectColumnFromQuery(String query) {
     String specificField = query.substring(query.indexOf(' ') + 1, query.indexOf("FROM") - 1);
     String actQuery = query.substring(query.indexOf(' ') + 1);
     actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
     String table = actQuery.substring(0, actQuery.indexOf(' '));
 
     MongoCollection<Document> collection = teamC_db.getCollection(table);
-    List<String> toReturn = new ArrayList<>();
+    ArrayList<String> toReturn = new ArrayList<>();
 
     FindIterable<Document> toIterate;
     toIterate = collection.find();
@@ -304,19 +295,5 @@ public class scratch {
         break;
     }
     return "edu.wpi.cs3733.c22.teamC.SQLMethods." + toReturn + "Query";
-  }
-
-  private static List<String> readQueries() {
-    List<String> toReturn = new ArrayList<>();
-
-    try (BufferedReader br = new BufferedReader(new FileReader("sampleQueries.txt"))) {
-      String line;
-      while ((line = br.readLine()) != null) {
-        toReturn.add(line);
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return toReturn;
   }
 }

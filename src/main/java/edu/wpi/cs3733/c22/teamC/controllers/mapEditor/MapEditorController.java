@@ -147,8 +147,17 @@ public class MapEditorController extends AbstractController { // todo implement 
     iconPane.getChildren().clear();
 
     // display node icons
+
     for (MapNode n : list.nodes) {
       n.update();
+      n.setOnMouseEntered(
+          (MouseEvent evt) -> {
+            if (!n.isSelected()) n.setOpacity(.8);
+          });
+      n.setOnMouseExited(
+          (MouseEvent evt) -> {
+            if (!n.isSelected()) n.setOpacity(.6);
+          });
       iconPane.getChildren().add(n);
     }
 

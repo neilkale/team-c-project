@@ -271,4 +271,8 @@ public class MapNode extends ImageView {
   public void setStopPoint(boolean stopPoint) {
     this.stopPoint = stopPoint;
   }
+
+  public boolean isSelected() {
+    return selected;
+  }
 }

@@ -52,7 +52,6 @@ public class LaundryRequestQuery extends Query<LaundryRequest> {
               + "', '"
               + object.get_assignment()
               + "')";
-      System.out.println(query);
       dbConnection.execute(query);
     } catch (SQLException e) {
       System.out.println(e);

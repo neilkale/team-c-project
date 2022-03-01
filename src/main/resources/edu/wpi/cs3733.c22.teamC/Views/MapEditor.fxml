@@ -20,7 +20,7 @@
                      <children>
                         <ImageView fx:id="mapView" fitHeight="425.0" fitWidth="638.0" pickOnBounds="true" preserveRatio="true" />
                         <Pane fx:id="iconPane" maxWidth="-Infinity" prefHeight="425.0" prefWidth="638.0" />
-                        <TabPane fx:id="tabPane" onMouseClicked="#updateOnClickMenuTabs" prefHeight="273.0" prefWidth="150.0" tabClosingPolicy="UNAVAILABLE">
+                        <TabPane fx:id="tabPane" onMouseClicked="#updateOnClickMenuTabs" prefHeight="273.0" prefWidth="150.0" tabClosingPolicy="UNAVAILABLE" visible="false">
                           <tabs>
                             <Tab fx:id="locationTab" text="Location">
                               <content>
@@ -314,7 +314,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </JFXButton>
-                        <JFXCheckBox fx:id="disableStairsCheckBox" checkedColor="#001a3c" mnemonicParsing="false" onMouseReleased="#toggleDisableStairs" text="DISABLE STAIRS" textFill="WHITE" unCheckedColor="WHITE">
+                        <JFXCheckBox fx:id="disableStairsCheckBox" checkedColor="#001a3c" mnemonicParsing="false" onMouseClicked="#toggleDisableStairs" text="DISABLE STAIRS" textFill="WHITE" unCheckedColor="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>

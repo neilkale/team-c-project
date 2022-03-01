@@ -4,6 +4,7 @@ import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import java.util.List;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.StrokeLineCap;
 
 public class MapNavLine {
   public Pane getNavLine(List<Location> locations) {
@@ -22,7 +23,12 @@ public class MapNavLine {
           double startY = Double.parseDouble(l.get_ycoord()) * MapState.getZoomFactor();
           double endX = Double.parseDouble(lPrevious.get_xcoord()) * MapState.getZoomFactor();
           double endY = Double.parseDouble(lPrevious.get_ycoord()) * MapState.getZoomFactor();
-          returnPane.getChildren().add(new Line(startX, startY, endX, endY));
+
+          Line line = new Line(startX, startY, endX, endY);
+          line.setStyle("-fx-stroke: #083d81");
+          line.setStrokeLineCap(StrokeLineCap.ROUND);
+          line.setStrokeWidth(5);
+          returnPane.getChildren().add(line);
         }
       }
       lPrevious = l;

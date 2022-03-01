@@ -167,11 +167,21 @@ public class SignUpController extends AbstractController {
 
   @FXML
   private void createButtonPressed() {
-    createEmployee();
-    try {
-      setNewScene("SignInPage.fxml", createButton);
-    } catch (IOException e) {
-      e.printStackTrace();
+    psswd = password.getText();
+    psswd2 = password2.getText();
+    //    System.out.println(
+    //        "matches: " + psswd.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,}$"));
+    //    System.out.println("Equals:" + psswd.equals(psswd2));
+    if (psswd.equals(psswd2)
+        && psswd.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,}$")) {
+      createEmployee();
+      try {
+        setNewScene("SignInPage.fxml", createButton);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    } else {
+      System.out.println("POPUP NEEDS TO BE CREATED - PASSWORD OR USERNAME NOT CORRECT");
     }
   }
 }

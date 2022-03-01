@@ -10,3 +10,7 @@
 #SignInBackground {
 -fx-background-color: #1F58AF !important;
 }
+
+#SignInBackground2 {
+    -fx-background-color: #1F58AF !important;
+}

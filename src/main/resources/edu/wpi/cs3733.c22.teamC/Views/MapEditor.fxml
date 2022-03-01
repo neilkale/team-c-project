@@ -1,26 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXCheckBox?>
-<?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXTextArea?>
-<?import com.jfoenix.controls.JFXTreeTableView?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="665.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.mapEditor.MapEditorController">
+<AnchorPane prefHeight="665.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.mapEditor.MapEditorController">
    <children>
       <BorderPane layoutX="107.0" layoutY="107.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -33,7 +20,7 @@
                      <children>
                         <ImageView fx:id="mapView" fitHeight="425.0" fitWidth="638.0" pickOnBounds="true" preserveRatio="true" />
                         <Pane fx:id="iconPane" maxWidth="-Infinity" prefHeight="425.0" prefWidth="638.0" />
-                        <TabPane fx:id="tabPane" prefHeight="273.0" prefWidth="150.0" tabClosingPolicy="UNAVAILABLE" visible="false">
+                        <TabPane fx:id="tabPane" onMouseClicked="#updateOnClickMenuTabs" prefHeight="273.0" prefWidth="150.0" tabClosingPolicy="UNAVAILABLE" visible="false">
                           <tabs>
                             <Tab fx:id="locationTab" text="Location">
                               <content>
@@ -86,16 +73,8 @@
                                                       <Insets top="2.0" />
                                                    </GridPane.margin>
                                                 </JFXComboBox>
-                                                <JFXTextArea fx:id="longNameField" accessibleRole="TEXT_FIELD" focusColor="#1f58af" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="120.0" text="Long Name" unFocusColor="#c04878" GridPane.rowIndex="3">
-                                                   <GridPane.margin>
-                                                      <Insets top="2.0" />
-                                                   </GridPane.margin>
-                                                </JFXTextArea>
-                                                <JFXTextArea fx:id="shortNameField" accessibleRole="TEXT_FIELD" focusColor="#1f58af" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="120.0" text="Short Name" unFocusColor="#c04878" GridPane.rowIndex="4">
-                                                   <GridPane.margin>
-                                                      <Insets top="2.0" />
-                                                   </GridPane.margin>
-                                                </JFXTextArea>
+                                                <JFXTextField fx:id="longNameField" focusColor="#1f58af" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="120.0" promptText="Long Name" unFocusColor="#c04878" GridPane.rowIndex="3" />
+                                                <JFXTextField fx:id="shortNameField" focusColor="#1f58af" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="120.0" promptText="Short Name" unFocusColor="#c04878" GridPane.rowIndex="4" />
                                                 <JFXButton fx:id="locationUpdateButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#updateButtonPressed" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #1F58AF;" text="UPDATE" textFill="WHITE" GridPane.rowIndex="5">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
@@ -188,11 +167,6 @@
                                                       <Insets top="2.0" />
                                                    </GridPane.margin>
                                                 </JFXComboBox>
-                                                <JFXTextArea fx:id="nameField" accessibleRole="TEXT_FIELD" focusColor="#1f58af" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="120.0" text="Name" unFocusColor="#c04878" GridPane.rowIndex="3">
-                                                   <GridPane.margin>
-                                                      <Insets top="2.0" />
-                                                   </GridPane.margin>
-                                                </JFXTextArea>
                                                 <JFXButton fx:id="equipmentUpdateButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#updateButtonPressed" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #1F58AF;" text="UPDATE" textFill="WHITE" GridPane.rowIndex="4" GridPane.valignment="TOP">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
@@ -206,6 +180,7 @@
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
                                                 </JFXButton>
+                                                <JFXTextField fx:id="nameField" focusColor="#1f58af" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="120.0" promptText="Equipment Name" unFocusColor="#c04878" GridPane.rowIndex="3" />
                                              </children>
                                           </GridPane>
                                        </children>
@@ -228,14 +203,9 @@
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                                             </rowConstraints>
                                              <children>
-                                                <FlowPane alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="60.0" prefWidth="100.0" GridPane.halignment="CENTER">
+                                                <FlowPane alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="30.0" prefWidth="100.0" GridPane.halignment="CENTER">
                                                    <children>
                                                       <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#removeButtonPressed" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #BB0000;" text="x" textFill="WHITE">
-                                                         <font>
-                                                            <Font name="System Bold" size="14.0" />
-                                                         </font>
-                                                      </JFXButton>
-                                                      <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#moveButtonPressed" prefHeight="30.0" prefWidth="63.0" style="-fx-background-color: #1F58AF;" text="MOVE" textFill="WHITE">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -282,7 +252,8 @@
                 <ColumnConstraints hgrow="NEVER" />
                   <ColumnConstraints hgrow="NEVER" />
                 <ColumnConstraints hgrow="NEVER" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="NEVER" />
                   <ColumnConstraints hgrow="NEVER" />
                   <ColumnConstraints hgrow="NEVER" />
                   <ColumnConstraints hgrow="NEVER" />
@@ -306,7 +277,7 @@
                         <Font name="System Bold" size="22.0" />
                      </font>
                   </JFXButton>
-                  <GridPane GridPane.columnIndex="6">
+                  <GridPane GridPane.columnIndex="7">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity" />
                     </columnConstraints>
@@ -336,14 +307,25 @@
                         </JFXCheckBox>
                      </children>
                   </GridPane>
-                  <JFXButton fx:id="computeButton" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#computeButtonPressed" prefHeight="30.0" prefWidth="164.0" style="-fx-background-color: #001A3C;" text="COMPUTE PATH" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
+                  <VBox alignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
+                     <children>
+                        <JFXButton fx:id="computeButton" alignment="CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#computeButtonPressed" prefHeight="30.0" prefWidth="164.0" style="-fx-background-color: #001A3C;" text="COMPUTE PATH" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXCheckBox fx:id="disableStairsCheckBox" checkedColor="#001a3c" mnemonicParsing="false" onMouseClicked="#toggleDisableStairs" text="DISABLE STAIRS" textFill="WHITE" unCheckedColor="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin></JFXCheckBox>
+                     </children>
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
-                  </JFXButton>
+                  </VBox>
                </children>
             </GridPane>
          </top>

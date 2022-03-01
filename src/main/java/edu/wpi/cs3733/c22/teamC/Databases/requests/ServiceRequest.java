@@ -256,6 +256,7 @@ public abstract class ServiceRequest implements DatabaseInterface {
     return new int[] {total.size(), completed};
   }
 
+
   // return all of the current ticketIDs being used for submitted requests
   public static ArrayList<String> getAvailableTicketIDs() {
     ArrayList<ServiceRequest> total = getAllServiceRequests();
@@ -265,10 +266,11 @@ public abstract class ServiceRequest implements DatabaseInterface {
           ids.add(serviceRequest.get_ticketID());
         });
     return ids;
-}
+  }
+
   protected static ArrayList<String> getServiceRequestTables() {
     ArrayList<String> list = new ArrayList<>();
-    for (String each : DatabaseConnection.getTableNames()) {
+    for (String each : Query.getTableNames()) {
       if (each.toUpperCase().contains("REQUEST")) list.add(each);
     }
     return list;
@@ -281,13 +283,14 @@ public abstract class ServiceRequest implements DatabaseInterface {
   public abstract String getRequestType();
 
   @Override
-  public String[] setValues() {
+  public String[] setValues(String[] values) {
     List<String> a = new ArrayList<>();
-    Method getter;
-    for (String s : getFields()) {
+    Method setter;
+    String[] fields = getFields();
+    for(int i = 0; i < getFields().length; i++){
       try {
-        getter = this.getClass().getMethod("set_" + s);
-        a.add((String) getter.invoke(this, new Object[] {}));
+        setter = this.getClass().getMethod("set_" + fields[i]);
+        a.add((String) setter.invoke(this, new Object[] {values[i]}));
       } catch (NoSuchMethodException e) {
         e.printStackTrace();
       } catch (InvocationTargetException e) {
@@ -295,6 +298,9 @@ public abstract class ServiceRequest implements DatabaseInterface {
       } catch (IllegalAccessException e) {
         e.printStackTrace();
       }
+    }
+    for (String s : getFields()) {
+
     }
     String[] toReturn = new String[a.size()];
     for (int i = 0; i < a.size(); i++) {

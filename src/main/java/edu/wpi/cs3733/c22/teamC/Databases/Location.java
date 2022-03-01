@@ -32,6 +32,35 @@ public class Location implements DatabaseInterface {
     return _floor;
   }
 
+  public Integer get_zcoord() {
+    switch (_floor) {
+      case "L2":
+        {
+          return 100;
+        }
+      case "L1":
+        {
+          return 200;
+        }
+      case "1":
+        {
+          return 300;
+        }
+      case "2":
+        {
+          return 400;
+        }
+      case "3":
+        {
+          return 500;
+        }
+      default:
+        {
+          return 000;
+        }
+    }
+  }
+
   public String get_building() {
     return _building;
   }
@@ -166,13 +195,14 @@ public class Location implements DatabaseInterface {
   }
 
   @Override
-  public String[] setValues() {
+  public String[] setValues(String[] values) {
     List<String> a = new ArrayList<>();
-    Method getter;
-    for (String s : getFields()) {
+    Method setter;
+    String[] fields = getFields();
+    for(int i = 0; i < getFields().length; i++){
       try {
-        getter = this.getClass().getMethod("set_" + s);
-        a.add((String) getter.invoke(this, new Object[] {}));
+        setter = this.getClass().getMethod("set_" + fields[i]);
+        a.add((String) setter.invoke(this, new Object[] {values[i]}));
       } catch (NoSuchMethodException e) {
         e.printStackTrace();
       } catch (InvocationTargetException e) {
@@ -180,6 +210,9 @@ public class Location implements DatabaseInterface {
       } catch (IllegalAccessException e) {
         e.printStackTrace();
       }
+    }
+    for (String s : getFields()) {
+
     }
     String[] toReturn = new String[a.size()];
     for (int i = 0; i < a.size(); i++) {
@@ -194,6 +227,7 @@ public class Location implements DatabaseInterface {
       "nodeID", "xcoord", "ycoord", "floor", "building", "nodeType", "longName", "shortName"
     };
   }
+
   // For the purpose of the project we will be phasing out the hash map idea for the location of
   // towers.
   //  public int hashCode() {

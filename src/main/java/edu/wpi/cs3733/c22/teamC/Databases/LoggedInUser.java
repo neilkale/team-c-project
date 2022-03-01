@@ -3,6 +3,7 @@ package edu.wpi.cs3733.c22.teamC.Databases;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.filters.CriteriaUserSpecific;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.EmployeeQuery;
 import edu.wpi.cs3733.c22.teamC.controllers.ImageLoader;
+import java.sql.SQLException;
 import javafx.scene.image.Image;
 
 public class LoggedInUser {
@@ -36,5 +37,18 @@ public class LoggedInUser {
         || ImageLoader.loadImage(signedInUser.get_profilePicture()) == null)
       return ImageLoader.loadImage("DefaultProfile");
     return ImageLoader.loadImage(signedInUser.get_profilePicture());
+  }
+
+  public static void setProfilePic(String newPicName) {
+    profilePic = ImageLoader.loadImage(newPicName);
+    signedInUser.set_profilePicture(newPicName);
+    // todo: set the new profile pic in DB
+    try {
+      EmployeeQuery employeeQuery = new EmployeeQuery();
+      employeeQuery.editNode(signedInUser);
+    } catch (SQLException e) {
+      e.printStackTrace();
+      System.out.println("Failed to set profile pic");
+    }
   }
 }

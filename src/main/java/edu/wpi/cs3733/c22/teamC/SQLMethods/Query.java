@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.SQLMethods;
 
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.*;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.SecurityRequestQuery;
 import java.io.*;
@@ -194,6 +195,10 @@ public abstract class Query<T> {
 
   public abstract String getUID(T each) throws SQLException;
 
+  public static ArrayList<String> getTableNames() {
+    return DatabaseConnection.getTableNames();
+  }
+
   public ArrayList<T> getAllNodeData() {
     T queryResult = null;
     ArrayList<T> allNodes = new ArrayList<>();
@@ -216,11 +221,8 @@ public abstract class Query<T> {
         e.printStackTrace();
       }
     } else {
-      List<Object> fromMongo =
-          (List<Object>) dbConnection.getFromMongo("SELECT * FROM " + getQueryInput());
-      for (Object o : fromMongo) {
-        allNodes.add((T) o);
-      }
+      allNodes =
+          (ArrayList<T>)  dbConnection.getFromMongo("SELECT * FROM " + getQueryInput());
     }
     return allNodes;
   }

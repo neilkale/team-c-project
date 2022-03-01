@@ -7,10 +7,13 @@ import edu.wpi.cs3733.c22.teamC.SQLMethods.LocationQuery;
 import edu.wpi.cs3733.c22.teamC.controllers.ImageLoader;
 import java.util.ArrayList;
 import java.util.Random;
+import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 public class MapNode extends ImageView {
   private final int locationIconRadius = 8;
@@ -270,5 +273,30 @@ public class MapNode extends ImageView {
 
   public void setStopPoint(boolean stopPoint) {
     this.stopPoint = stopPoint;
+  }
+
+  public void playEnlargeAnimation() {
+    ScaleTransition scaleTransition = new ScaleTransition();
+    scaleTransition.setNode(this);
+
+    scaleTransition.setByY(.5);
+    scaleTransition.setByX(.5);
+    scaleTransition.setDuration(Duration.millis(100));
+    scaleTransition.setCycleCount(2);
+    scaleTransition.setAutoReverse(true);
+
+    scaleTransition.play();
+  }
+
+  public void playWiggleAnimation() {
+    RotateTransition rotateTransition = new RotateTransition();
+    rotateTransition.setNode(this);
+
+    rotateTransition.setByAngle(30);
+    rotateTransition.setDuration(Duration.millis(100));
+    rotateTransition.setCycleCount(2);
+    rotateTransition.setAutoReverse(true);
+
+    rotateTransition.play();
   }
 }

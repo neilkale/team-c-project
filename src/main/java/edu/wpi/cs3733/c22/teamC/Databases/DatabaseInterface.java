@@ -5,7 +5,7 @@ public interface DatabaseInterface {
 
   String[] getValues();
 
-  String[] setValues();
+  String[] setValues(String[] values);
 
   String getName();
 }

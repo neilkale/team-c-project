@@ -2,10 +2,14 @@ package edu.wpi.cs3733.c22.teamC.controllers;
 
 import edu.wpi.cs3733.c22.teamC.Main;
 import java.io.IOException;
+import java.util.ArrayList;
+import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.util.Duration;
 
 public abstract class AbstractController {
   protected ControllerMediator controllerMediator = ControllerMediator.getInstance();
@@ -52,5 +56,29 @@ public abstract class AbstractController {
   @FXML
   protected void backButtonPressed() throws IOException {
     controllerMediator.backButtonPressed();
+  }
+
+  public void angryWiggle(ArrayList<Node> nodes) {
+    for (Node n : nodes) {
+      ScaleTransition scaleTransition = new ScaleTransition();
+      scaleTransition.setNode(n);
+
+      scaleTransition.setByY(.15);
+      scaleTransition.setByX(.15);
+      scaleTransition.setDuration(Duration.millis(100));
+      scaleTransition.setCycleCount(2);
+      scaleTransition.setAutoReverse(true);
+
+      /*TranslateTransition translateTransition = new TranslateTransition();
+      translateTransition.setNode(n);
+
+      translateTransition.setByX(10);
+      translateTransition.setDuration(Duration.millis(100));
+      translateTransition.setCycleCount(2);
+      translateTransition.setAutoReverse(true);
+
+      translateTransition.play();*/
+      scaleTransition.play();
+    }
   }
 }

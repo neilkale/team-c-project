@@ -14,6 +14,10 @@
     -fx-background-color: #1F58AF !important;
 }
 
+#dashboardLabel {
+    -fx-background-color: #1F58AF !important;
+}
+
 #progressCircle {
     -fx-progress-color: #1F58AF !important;
 }

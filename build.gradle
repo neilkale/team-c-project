@@ -29,6 +29,11 @@ javafx {
 
 
 dependencies {
+    compile files('libs/TeamDAPI.jar')
+    compile files('libs/CS3733-C22-Team-B-SR-API.jar')
+    compile files('libs/CS3733-C22-Team-A-API.jar')
+    compile files('libs/Iteration-3-API.jar')
+
     implementation(
             'com.jfoenix:jfoenix:9.0.10',
 

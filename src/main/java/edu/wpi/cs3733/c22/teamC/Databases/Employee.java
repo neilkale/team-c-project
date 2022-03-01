@@ -171,4 +171,8 @@ public class Employee implements DatabaseInterface {
   public String getName() {
     return this.getClass().getName();
   }
+
+  public String get_Service_Type() {
+    return serviceType;
+  }
 }

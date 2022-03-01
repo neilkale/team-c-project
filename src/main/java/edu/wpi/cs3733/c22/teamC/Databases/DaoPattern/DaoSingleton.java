@@ -19,10 +19,6 @@ public class DaoSingleton {
     private static MapDaoImpl mapDao;
     private static GiftRequestDaoImpl giftRequestDao;
 
-    public static GiftRequestDaoImpl getGiftRequestDao() {
-        return giftRequestDao;
-    }
-
     public static void makeDaoSingleton(){
         employeeDao = new EmployeeDaoImpl();
         equipmentRequestDao = new EquipmentRequestDaoImpl();
@@ -92,5 +88,8 @@ public class DaoSingleton {
     }
     public static MapDaoImpl getMapDao() {
         return mapDao;
+    }
+    public static GiftRequestDaoImpl getGiftRequestDao() {
+        return giftRequestDao;
     }
 }

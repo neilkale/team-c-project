@@ -2,6 +2,9 @@ package edu.wpi.cs3733.c22.teamC.controllers.requests;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.EquipmentDaoImpl;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.LocationDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.Employee;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.InternalTransportRequest;
@@ -39,8 +42,11 @@ public class InternalTransportController extends AbstractController {
 
   @FXML
   private void initialize() {
-    locations = locationQuery.getAllNodeData();
-    employees = employeeQuery.getAllNodeData();
+
+    LocationDaoImpl lDao = DaoSingleton.getLocationDao();
+    EquipmentDaoImpl eDao = DaoSingleton.getEquipmentDao();
+    locations = lDao.getAllNodes();
+    employees = eDao.getAllNodes();
 
     imageView.setImage(ImageLoader.loadImage("Transport"));
 

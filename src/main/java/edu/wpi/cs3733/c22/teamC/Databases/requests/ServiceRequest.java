@@ -85,11 +85,11 @@ public abstract class ServiceRequest implements DatabaseInterface {
 
     SanitationRequestDaoImpl j;
     j = DaoSingleton.getSanitationRequestDao();
-    output.addAll(i.getAllNodes());
+    output.addAll(j.getAllNodes());
 
     SecurityRequestDaoImpl k;
     k = DaoSingleton.getSecurityRequestDao();
-    output.addAll(i.getAllNodes());
+    output.addAll(k.getAllNodes());
 
     return output;
   }

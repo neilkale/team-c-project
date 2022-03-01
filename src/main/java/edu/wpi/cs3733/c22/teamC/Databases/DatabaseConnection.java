@@ -212,8 +212,15 @@ public class DatabaseConnection {
    * @param query
    * @return
    */
-  public List<? extends Object> getFromMongo(String query) {
-    return canMongo ? mongoDatabase.select(query) : null;
+  public List<DatabaseInterface> getFromMongo(String query) {
+    List<DatabaseInterface> toReturn = (List<DatabaseInterface>) mongoDatabase.select(query);
+
+    if (toReturn == null){
+
+    }
+
+
+    return toReturn;
   }
 
   public void close() {

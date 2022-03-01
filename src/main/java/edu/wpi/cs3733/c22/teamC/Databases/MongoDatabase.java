@@ -141,9 +141,18 @@ public class MongoDatabase {
       actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
       String table = actQuery.substring(0, actQuery.indexOf(' '));
       String keyVal = actQuery.substring(actQuery.indexOf('\'') + 1, actQuery.length() - 1);
-      teamC_db.getCollection(table).deleteOne(new Document(map.get(table).get(0), keyVal));
+
+      try{
+        teamC_db.getCollection(table).deleteOne(new Document(map.get(table).get(0), keyVal));
+      } catch (Exception e){
+        databaseConnection.disableMongo();
+      }
     } else {
-      teamC_db.getCollection(query.substring(query.lastIndexOf(' ') + 1)).drop();
+      try{
+        teamC_db.getCollection(query.substring(query.lastIndexOf(' ') + 1)).drop();
+      } catch (Exception e){
+        databaseConnection.disableMongo();
+      }
     }
     return "DELETE";
   }
@@ -152,7 +161,12 @@ public class MongoDatabase {
     String actQuery = query;
     actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
     actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
-    teamC_db.getCollection(actQuery).drop();
+
+    try{
+      teamC_db.getCollection(actQuery).drop();
+    } catch (Exception e){
+      databaseConnection.disableMongo();
+    }
     return "TRUNCATE";
   }
 
@@ -175,6 +189,7 @@ public class MongoDatabase {
     try {
       teamC_db.createCollection(table);
     } catch (Exception e) {
+      databaseConnection.disableMongo();
     }
 
     return "CREATE";
@@ -201,8 +216,14 @@ public class MongoDatabase {
       document.append(fields.get(i), values.get(i));
     }
     Document filterDoc = new Document(fields.get(0), values.get(0));
-    teamC_db.getCollection(table).deleteOne(filterDoc);
-    teamC_db.getCollection(table).insertOne(document);
+
+    try{
+      teamC_db.getCollection(table).deleteOne(filterDoc);
+      teamC_db.getCollection(table).insertOne(document);
+    } catch (Exception e){
+      databaseConnection.disableMongo();
+    }
+
     return "UPDATE";
   }
 
@@ -215,7 +236,13 @@ public class MongoDatabase {
     } else {
       table = query.substring(query.lastIndexOf(' ') + 1);
     }
-    MongoCollection<Document> collection = teamC_db.getCollection(table);
+    MongoCollection<Document> collection;
+    try {
+      collection = teamC_db.getCollection(table);
+    } catch (Exception e){
+      databaseConnection.disableMongo();
+      return null;
+    }
     ArrayList<DatabaseInterface> toReturn = new ArrayList<>();
     ArrayList<String> fields = map.get(table);
     Class<? extends Query> queryClass;
@@ -232,9 +259,20 @@ public class MongoDatabase {
         Document filter =
             new Document(
                 fields.get(0), query.substring(query.indexOf('\'') + 1, query.length() - 1));
-        toIterate = collection.find(filter);
+
+        try {
+          toIterate = collection.find(filter);
+        } catch (Exception e){
+          databaseConnection.disableMongo();
+          return null;
+        }
       } else {
-        toIterate = collection.find();
+        try {
+          toIterate = collection.find();
+        } catch (Exception e){
+          databaseConnection.disableMongo();
+          return null;
+        }
       }
 
       for (Document d : toIterate) {
@@ -262,7 +300,6 @@ public class MongoDatabase {
       System.out.println("IllegalAccess");
       e.printStackTrace();
     }
-    System.out.println(toReturn);
     return toReturn;
   }
 
@@ -272,7 +309,15 @@ public class MongoDatabase {
     actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
     String table = actQuery.substring(0, actQuery.indexOf(' '));
 
-    MongoCollection<Document> collection = teamC_db.getCollection(table);
+    MongoCollection<Document> collection;
+
+    try{
+      collection = teamC_db.getCollection(table);
+    } catch (Exception e){
+      databaseConnection.disableMongo();
+      return null;
+    }
+
     ArrayList<String> toReturn = new ArrayList<>();
 
     FindIterable<Document> toIterate;

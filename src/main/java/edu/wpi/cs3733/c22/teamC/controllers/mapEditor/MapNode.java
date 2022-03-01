@@ -292,7 +292,7 @@ public class MapNode extends ImageView {
     RotateTransition rotateTransition = new RotateTransition();
     rotateTransition.setNode(this);
 
-    rotateTransition.setByAngle(10);
+    rotateTransition.setByAngle(30);
     rotateTransition.setDuration(Duration.millis(100));
     rotateTransition.setCycleCount(2);
     rotateTransition.setAutoReverse(true);

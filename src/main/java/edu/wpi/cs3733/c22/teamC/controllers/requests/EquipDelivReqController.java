@@ -66,7 +66,7 @@ public class EquipDelivReqController extends AbstractController {
     equipmentComboBox.getItems().add("Recliner");
 
     for (Employee e : employees) {
-      if (e.get_Service_Type().toLowerCase().equals("nurse")) {
+      if (e.get_service_type().toLowerCase().equals("nurse")) {
         String name = e.get_firstName() + " " + e.get_lastName().charAt(0);
         String fullName = e.get_firstName() + " " + e.get_lastName();
         employeeNames.put(name, fullName);

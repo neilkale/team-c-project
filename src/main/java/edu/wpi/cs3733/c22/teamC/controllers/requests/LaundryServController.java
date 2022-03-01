@@ -43,7 +43,7 @@ public class LaundryServController extends AbstractController {
     DatabaseUtil.getLongNames(locationComboBox, "PATI");
 
     for (Employee e : employees) {
-      if (e.get_Service_Type().toLowerCase().equals("laundry")) {
+      if (e.get_service_type().toLowerCase().equals("laundry")) {
         String name = e.get_firstName() + " " + e.get_lastName().charAt(0);
         String fullName = e.get_firstName() + " " + e.get_lastName();
         employeeNames.put(name, fullName);

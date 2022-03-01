@@ -52,7 +52,7 @@ public class SanitationServController extends AbstractController {
     messTypeComboBox.getItems().addAll("Spill", "Disinfect", "Room Cleaning");
 
     for (Employee e : employees) {
-      if (e.get_Service_Type().toLowerCase().equals("sanitation")) {
+      if (e.get_service_type().toLowerCase().equals("sanitation")) {
         String name = e.get_firstName() + " " + e.get_lastName().charAt(0);
         String fullName = e.get_firstName() + " " + e.get_lastName();
         employeeNames.put(name, fullName);

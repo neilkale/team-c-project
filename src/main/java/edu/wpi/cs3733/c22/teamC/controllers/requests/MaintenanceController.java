@@ -50,7 +50,7 @@ public class MaintenanceController extends AbstractController {
     issueComboBox.getItems().addAll("Lights", "Elevator", "Building damage", "HVAC");
 
     for (Employee e : employees) {
-      if (e.get_Service_Type().toLowerCase().equals("maintenance")) {
+      if (e.get_service_type().toLowerCase().equals("maintenance")) {
         String name = e.get_firstName() + " " + e.get_lastName().charAt(0);
         String fullName = e.get_firstName() + " " + e.get_lastName();
         employeeNames.put(name, fullName);

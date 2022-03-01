@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 public class DatabaseConnection {
   private Connection connection;
+
   private MongoDatabase mongoDatabase;
 
   private static ArrayList<String> tableNames;

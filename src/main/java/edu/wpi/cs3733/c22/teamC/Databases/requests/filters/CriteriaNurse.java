@@ -12,7 +12,7 @@ public class CriteriaNurse implements Criteria {
     List<Employee> nurses = new ArrayList<Employee>();
 
     for (Employee e : employees) {
-      if (e.get_Service_Type().equalsIgnoreCase("nurse")) {
+      if (e.get_service_type().equalsIgnoreCase("nurse")) {
         nurses.add(e);
       }
     }

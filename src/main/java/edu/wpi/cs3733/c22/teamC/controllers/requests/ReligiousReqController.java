@@ -50,7 +50,7 @@ public class ReligiousReqController extends AbstractController {
 
     religionComboBox.getItems().addAll("Islam", "Jewish", "Catholic", "Protestant", "Hindu");
     for (Employee e : employees) {
-      if (e.get_Service_Type().toLowerCase().equals("religion")) {
+      if (e.get_service_type().toLowerCase().equals("religion")) {
         String name = e.get_firstName() + " " + e.get_lastName().charAt(0);
         String fullName = e.get_firstName() + " " + e.get_lastName();
         employeeNames.put(name, fullName);

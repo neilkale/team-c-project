@@ -12,7 +12,7 @@ public class CriteriaGiftDistributor implements Criteria {
     List<Employee> giftDistributorEmployees = new ArrayList<Employee>();
 
     for (Employee e : employees) {
-      if (e.get_Service_Type().equalsIgnoreCase("gift-distributor")) {
+      if (e.get_service_type().equalsIgnoreCase("gift-distributor")) {
         giftDistributorEmployees.add(e);
       }
     }

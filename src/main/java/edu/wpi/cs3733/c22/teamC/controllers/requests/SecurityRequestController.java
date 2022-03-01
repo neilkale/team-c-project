@@ -54,7 +54,7 @@ public class SecurityRequestController extends AbstractController {
         .getItems()
         .addAll("Surveillance", "Security Guard", "Buddy System", "Security Support");
     for (Employee e : employees) {
-      if (e.get_Service_Type().toLowerCase().equals("security")) {
+      if (e.get_service_type().toLowerCase().equals("security")) {
         String name = e.get_firstName() + " " + e.get_lastName().charAt(0);
         String fullName = e.get_firstName() + " " + e.get_lastName();
         employeeNames.put(name, fullName);

@@ -53,7 +53,7 @@ public class LangInterpreterController extends AbstractController {
     languageComboBox.getItems().addAll("Spanish", "French", "German", "ASL");
 
     for (Employee e : employees) {
-      if (e.get_Service_Type().toLowerCase().equals("interpreter")) {
+      if (e.get_service_type().toLowerCase().equals("interpreter")) {
         String name = e.get_firstName() + " " + e.get_lastName().charAt(0);
         String fullName = e.get_firstName() + " " + e.get_lastName();
         employeeNames.put(name, fullName);

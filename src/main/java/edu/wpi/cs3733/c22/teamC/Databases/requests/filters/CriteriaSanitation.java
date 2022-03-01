@@ -12,7 +12,7 @@ public class CriteriaSanitation implements Criteria {
     List<Employee> sanitationEmployees = new ArrayList<Employee>();
 
     for (Employee e : employees) {
-      if (e.get_Service_Type().equalsIgnoreCase("sanitation")) {
+      if (e.get_service_type().equalsIgnoreCase("sanitation")) {
         sanitationEmployees.add(e);
       }
     }

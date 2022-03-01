@@ -262,7 +262,7 @@ public abstract class ServiceRequest {
 
   protected static ArrayList<String> getServiceRequestTables() {
     ArrayList<String> list = new ArrayList<>();
-    for (String each : DatabaseConnection.getTableNames()) {
+    for (String each : Query.getTableNames()) {
       if (each.toUpperCase().contains("REQUEST")) list.add(each);
     }
     return list;

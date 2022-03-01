@@ -261,6 +261,10 @@ public abstract class Query<T> {
 
   public abstract String getUID(T each) throws SQLException;
 
+  public static ArrayList<String> getTableNames() {
+    return DatabaseConnection.getTableNames();
+  }
+
   public ArrayList<T> getAllNodeData() {
     T queryResult = null;
     ArrayList<T> allNodes = new ArrayList<>();

@@ -12,12 +12,15 @@ public class EmployeeQuery extends Query<Employee> {
 
   public EmployeeQuery() {}
 
-  @Override
   public Employee queryFactory(String[] inputs) {
+    return staticQueryFactory(inputs);
+  }
+
+  public static Employee staticQueryFactory(String[] inputs) {
     if (inputs.length != 8) {
       System.out.println(
           "[QueryFactory of QueryType]: "
-              + getQueryInput()
+              + staticGetQueryInput()
               + "has failed | Input arguments does not match the allotted arguments for the creation of the object - NULL has been returned");
       return null;
     }
@@ -152,6 +155,10 @@ public class EmployeeQuery extends Query<Employee> {
 
   @Override
   public String getQueryInput() {
+    return staticGetQueryInput();
+  }
+
+  public static String staticGetQueryInput() {
     return "EMPLOYEEC";
   }
 

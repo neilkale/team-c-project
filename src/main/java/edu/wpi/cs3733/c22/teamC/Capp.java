@@ -73,6 +73,7 @@ public class Capp extends Application {
   public void stop() {
     // log.info("Shutting Down");
     dbSave();
+    DatabaseConnection.getInstance().close();
   }
 
   // Implements persistent storage of databases when app is closed

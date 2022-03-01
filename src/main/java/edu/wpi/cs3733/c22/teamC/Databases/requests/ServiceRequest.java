@@ -249,9 +249,21 @@ public abstract class ServiceRequest {
     return new int[] {total.size(), completed};
   }
 
+
+  // return all of the current ticketIDs being used for submitted requests
+  public static ArrayList<String> getAvailableTicketIDs() {
+    ArrayList<ServiceRequest> total = getAllServiceRequests();
+    ArrayList<String> ids = new ArrayList<String>();
+    total.forEach(
+        serviceRequest -> {
+          ids.add(serviceRequest.get_ticketID());
+        });
+    return ids;
+  }
+
   protected static ArrayList<String> getServiceRequestTables() {
     ArrayList<String> list = new ArrayList<>();
-    for (String each : DatabaseConnection.getTableNames()) {
+    for (String each : Query.getTableNames()) {
       if (each.toUpperCase().contains("REQUEST")) list.add(each);
     }
     return list;

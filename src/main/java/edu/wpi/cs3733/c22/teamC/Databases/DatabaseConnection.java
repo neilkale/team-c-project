@@ -18,8 +18,9 @@ import java.util.ArrayList;
 
 public class DatabaseConnection {
   private Connection connection;
-  // private MongoEquipment mongoEquipment;
-  // private MongoLocation mongoLocation;
+
+  private MongoDatabase mongoDatabase;
+
   private static ArrayList<String> tableNames;
 
   public boolean isClientDatabase() {
@@ -80,6 +81,11 @@ public class DatabaseConnection {
    * a way where we declare the embedded db and then switch over tto the new client server db?
    */
   public DatabaseConnection() {
+    try {
+      mongoDatabase = new MongoDatabase();
+    } catch (Exception e) {
+      System.out.println("oops no mongo!");
+    }
     // this.isMongulDB = false;
     startDbConnection();
   }
@@ -153,6 +159,17 @@ public class DatabaseConnection {
   public void executeUpdate(String query) throws SQLException {
     Statement statement = connection.createStatement();
     statement.executeUpdate(query);
+  }
+
+  public void close() {
+    try {
+      connection.close();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    if (mongoDatabase != null) {
+      mongoDatabase.closeMongo();
+    }
   }
 
   /*public MongoEquipment getMongoEquipment() {

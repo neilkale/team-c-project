@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXDrawersStack?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -23,7 +24,7 @@
          <left>
             <GridPane BorderPane.alignment="CENTER">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                  <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="150.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -108,6 +109,18 @@
                                     </ImageView>
                                  </graphic>
                               </JFXButton>
+                              <JFXButton fx:id="infoButton" alignment="TOP_LEFT" prefHeight="50.0" prefWidth="500.0" text="Information" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/DashboardIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
                               <JFXButton fx:id="exitButton" alignment="TOP_LEFT" prefHeight="50.0" prefWidth="500.0" text="Exit" textFill="WHITE" VBox.vgrow="NEVER">
                                  <VBox.margin>
                                     <Insets bottom="20.0" />
@@ -127,7 +140,7 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="138.0" prefWidth="150.0" VBox.vgrow="NEVER">
                            <children>
-                              <Circle fx:id="profileCircle" fill="#1f58af" radius="55.0" stroke="#1f58af" strokeType="INSIDE" />
+                              <Circle fx:id="profileCircle" fill="#1f58af" onMouseClicked="#profileButtonPressed" radius="55.0" stroke="#1f58af" strokeType="INSIDE" />
                               <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="First Last" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                  <font>
                                     <Font size="15.0" />
@@ -143,6 +156,11 @@
                         <Insets />
                      </opaqueInsets>
                   </VBox>
+                  <JFXDrawer fx:id="profileDrawer" defaultDrawerSize="400.0" direction="BOTTOM" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" GridPane.valignment="BOTTOM">
+                     <GridPane.margin>
+                        <Insets left="150.0" />
+                     </GridPane.margin>
+                  </JFXDrawer>
                </children>
                <effect>
                   <DropShadow />
@@ -153,6 +171,6 @@
             <Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
-      <JFXDrawersStack fx:id="drawerStack" layoutX="150.0" prefHeight="600.0" prefWidth="235.0" />
+      <JFXDrawersStack fx:id="drawerStack" layoutX="150.0" prefHeight="400.0" prefWidth="300.0" />
    </children>
 </AnchorPane>

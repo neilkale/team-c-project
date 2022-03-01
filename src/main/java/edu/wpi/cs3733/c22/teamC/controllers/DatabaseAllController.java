@@ -44,6 +44,7 @@ public class DatabaseAllController extends AbstractController {
     try {
       ObservableList<String> list =
           FXCollections.observableArrayList(DatabaseConnection.getTableNames());
+
       comboBox.getItems().setAll(list);
 
     } catch (Exception e) {

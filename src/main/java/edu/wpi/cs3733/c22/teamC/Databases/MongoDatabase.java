@@ -136,12 +136,14 @@ public class MongoDatabase {
       try {
         teamC_db.getCollection(table).deleteOne(new Document(map.get(table).get(0), keyVal));
       } catch (Exception e) {
+
         databaseConnection.disableMongo("Mongo Failed to Delete " + query);
       }
     } else {
       try {
         teamC_db.getCollection(query.substring(query.lastIndexOf(' ') + 1)).drop();
       } catch (Exception e) {
+
         databaseConnection.disableMongo("Mongo Failed to Delete " + query);
       }
     }
@@ -156,6 +158,7 @@ public class MongoDatabase {
     try {
       teamC_db.getCollection(actQuery).drop();
     } catch (Exception e) {
+
       databaseConnection.disableMongo("Mongo Failed to truncate " + query);
     }
     return "TRUNCATE";
@@ -177,6 +180,7 @@ public class MongoDatabase {
     }
     fields.add(toIterate.substring(1, toIterate.indexOf('V') - 1));
     map.put(table, fields);
+
 
     try {
       teamC_db.getCollection(table);

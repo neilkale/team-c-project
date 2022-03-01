@@ -15,7 +15,7 @@ public class EmployeeQuery extends Query<Employee> {
   }
 
   public static Employee staticQueryFactory(String[] inputs) {
-    if (inputs.length != 8) {
+    if (inputs.length != 10) {
       System.out.println(
           "[QueryFactory of QueryType]: "
               + staticGetQueryInput()
@@ -23,13 +23,15 @@ public class EmployeeQuery extends Query<Employee> {
       return null;
     }
     return new Employee(
-        inputs[0], inputs[1], inputs[2], inputs[3], inputs[4], inputs[5], inputs[6], inputs[7]);
+        inputs[0], inputs[1], inputs[2], inputs[3], inputs[4], inputs[5], inputs[6], inputs[7],
+        inputs[8], inputs[9]);
   }
 
   @Override
   public String getUID(Employee each) throws SQLException {
     return each.get_username();
   }
+
 
   public static ArrayList<String> getFullNameAll() {
     ArrayList<String> allNodes = new ArrayList<>();
@@ -75,6 +77,10 @@ public class EmployeeQuery extends Query<Employee> {
               + employee.get_id()
               + "', '"
               + employee.get_profilePicture()
+              + "', '"
+              + employee.get_phoneNumber()
+              + "', '"
+              + employee.get_email()
               + "')";
       dbConnection.execute(query);
     } catch (SQLException e) {
@@ -111,6 +117,10 @@ public class EmployeeQuery extends Query<Employee> {
             + employee.get_id()
             + "', profilePicture ='"
             + employee.get_profilePicture()
+            + "', phoneNumber = '"
+            + employee.get_phoneNumber()
+            + "', email = '"
+            + employee.get_email()
             + "' WHERE "
             + "username = '"
             + employee.get_username()

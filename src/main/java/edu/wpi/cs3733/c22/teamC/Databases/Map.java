@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.Databases;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoInterface;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -74,6 +76,11 @@ public class Map implements DatabaseInterface {
   }
 
   @Override
+  public String getUID() {
+    return imagePath;
+  }
+
+  @Override
   public String[] setValues(String[] values) {
     List<String> a = new ArrayList<>();
     Method setter;
@@ -90,7 +97,6 @@ public class Map implements DatabaseInterface {
         e.printStackTrace();
       }
     }
-    for (String s : getFields()) {}
 
     String[] toReturn = new String[a.size()];
     for (int i = 0; i < a.size(); i++) {
@@ -107,5 +113,10 @@ public class Map implements DatabaseInterface {
   @Override
   public String getName() {
     return null;
+  }
+
+  @Override
+  public DaoInterface getDao() {
+    return DaoSingleton.getMapDao();
   }
 }

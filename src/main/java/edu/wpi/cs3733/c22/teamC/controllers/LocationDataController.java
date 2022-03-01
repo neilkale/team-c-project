@@ -1,8 +1,9 @@
 package edu.wpi.cs3733.c22.teamC.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.LocationDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
-import edu.wpi.cs3733.c22.teamC.SQLMethods.LocationQuery;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,8 +18,8 @@ public class LocationDataController extends AbstractController {
 
   @FXML
   public void initialize() {
-    LocationQuery locationQuery = new LocationQuery();
-    List<Location> locationList = locationQuery.getAllNodeData();
+    LocationDaoImpl e = DaoSingleton.getLocationDao();
+    List<Location> locationList = e.getAllNodes();
 
     TableColumn<Location, String> column1 = new TableColumn<>("Node ID");
     column1.setCellValueFactory(new PropertyValueFactory<>("_nodeID"));

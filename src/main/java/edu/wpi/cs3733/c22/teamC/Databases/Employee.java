@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.Databases;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoInterface;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -15,6 +17,8 @@ public class Employee implements DatabaseInterface {
   private String _access;
   private String _id;
   private String _profilePicture;
+  private String phoneNumber;
+  private String email;
 
   public String get_username() {
     return _username;
@@ -40,12 +44,24 @@ public class Employee implements DatabaseInterface {
     return _serviceType;
   }
 
+  public String get_serviceType() {
+    return _serviceType;
+  }
+
   public String get_access() {
     return _access;
   }
 
   public String get_id() {
     return _id;
+  }
+
+  public String get_phoneNumber() {
+    return phoneNumber;
+  }
+
+  public String get_email() {
+    return email;
   }
 
   public void set_username(String username) {
@@ -76,6 +92,14 @@ public class Employee implements DatabaseInterface {
     this._id = id;
   }
 
+  public void set_phoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+  }
+
+  public void set_email(String email) {
+    this.email = email;
+  }
+
   public Employee(
       String username,
       String password,
@@ -84,7 +108,9 @@ public class Employee implements DatabaseInterface {
       String serviceType,
       String access,
       String id,
-      String profilePicture) {
+      String picture,
+      String phoneNumber,
+      String email) {
     this._username = username;
     this._password = password;
     this._firstName = firstName;
@@ -92,7 +118,9 @@ public class Employee implements DatabaseInterface {
     this._serviceType = serviceType;
     this._access = access;
     this._id = id;
-    this._profilePicture = profilePicture;
+    this._profilePicture = picture;
+    this.phoneNumber = phoneNumber;
+    this.email = email;
   }
 
   public String get_profilePicture() {
@@ -113,7 +141,9 @@ public class Employee implements DatabaseInterface {
       "serviceType",
       "access",
       "id",
-      "profilePicture"
+      "profilePicture",
+      "phoneNumber",
+      "email"
     };
   }
 
@@ -141,10 +171,16 @@ public class Employee implements DatabaseInterface {
   }
 
   @Override
+  public String getUID() {
+    return _username;
+  }
+
+  @Override
   public String[] setValues(String[] values) {
     List<String> a = new ArrayList<>();
-    Method setter;
     String[] fields = getFields();
+    Method setter;
+
     for (int i = 0; i < getFields().length; i++) {
       try {
         setter = this.getClass().getMethod("set_" + fields[i]);
@@ -157,7 +193,7 @@ public class Employee implements DatabaseInterface {
         e.printStackTrace();
       }
     }
-    for (String s : getFields()) {}
+
 
     String[] toReturn = new String[a.size()];
     for (int i = 0; i < a.size(); i++) {
@@ -170,4 +206,10 @@ public class Employee implements DatabaseInterface {
   public String getName() {
     return this.getClass().getName();
   }
+
+  @Override
+  public DaoInterface getDao() {
+    return DaoSingleton.getEmployeeDao();
+  }
+
 }

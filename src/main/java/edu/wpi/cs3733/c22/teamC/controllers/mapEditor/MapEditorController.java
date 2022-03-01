@@ -6,7 +6,6 @@ import edu.wpi.cs3733.c22.teamC.Databases.MedicalEquipment;
 import edu.wpi.cs3733.c22.teamC.PathFinding.PathFinder;
 import edu.wpi.cs3733.c22.teamC.controllers.AbstractController;
 import edu.wpi.cs3733.c22.teamC.controllers.ImageLoader;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javafx.fxml.FXML;
@@ -89,8 +88,6 @@ public class MapEditorController extends AbstractController { // todo implement 
   private List<Location> path = null;
 
   private PathFinder pf = new PathFinder();
-
-  private boolean pathDrawn = false;
 
   @FXML
   private void initialize() {
@@ -750,12 +747,6 @@ public class MapEditorController extends AbstractController { // todo implement 
   @FXML
   private void computeButtonPressed() {
     hideOnClickMenu();
-    if (pathDrawn) {
-      path = new ArrayList<Location>();
-      refresh();
-      pathDrawn = false;
-      return;
-    }
     if (MapState.getStartIndex() != -1
         && MapState.getStopIndex() != -1
         && MapState.getStopIndex() != MapState.getStartIndex()) {
@@ -763,21 +754,18 @@ public class MapEditorController extends AbstractController { // todo implement 
           pf.findPath(
               list.nodes.get(MapState.getStartIndex()).getLocation(),
               list.nodes.get(MapState.getStopIndex()).getLocation());
-      System.out.println(path.size());
       refresh();
-      pathDrawn = true;
     } else {
-      path = new ArrayList<Location>();
+      path = null;
       refresh();
-      pathDrawn = false;
     }
   }
 
   @FXML
   void toggleDisableStairs() {
     pf.setDisabilityFriendly(disableStairsCheckBox.isSelected());
-    if (pathDrawn) {
-      pathDrawn = false;
+    if (path != null) {
+      path = null;
       computeButtonPressed();
     }
   }

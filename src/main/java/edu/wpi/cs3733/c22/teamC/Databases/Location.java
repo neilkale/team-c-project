@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.Databases;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoInterface;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -172,6 +174,11 @@ public class Location implements DatabaseInterface {
   }
 
   @Override
+  public DaoInterface getDao() {
+    return DaoSingleton.getLocationDao();
+  }
+
+  @Override
   public String[] getValues() {
     List<String> a = new ArrayList<>();
     Method getter;
@@ -195,6 +202,10 @@ public class Location implements DatabaseInterface {
   }
 
   @Override
+  public String getUID() {
+    return _nodeID;
+  }
+
   public String[] setValues(String[] values) {
     List<String> a = new ArrayList<>();
     Method setter;
@@ -211,7 +222,6 @@ public class Location implements DatabaseInterface {
         e.printStackTrace();
       }
     }
-    for (String s : getFields()) {}
 
     String[] toReturn = new String[a.size()];
     for (int i = 0; i < a.size(); i++) {

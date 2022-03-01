@@ -19,6 +19,7 @@ public class DatabaseConnection {
   private boolean canMongo;
   private List<String> startupInsert;
   private static ArrayList<String> tableNames;
+
   private TableFields tableFields;
 
   public boolean isClientDatabase() {
@@ -28,6 +29,7 @@ public class DatabaseConnection {
   public void setStartup(boolean b) {
     justStartup = b;
   }
+
 
   public boolean isJustStartup() {
     return justStartup;
@@ -42,6 +44,7 @@ public class DatabaseConnection {
   }
 
   public boolean canMongo() {
+
     return canMongo && (mongoDatabase != null);
   }
 
@@ -84,6 +87,7 @@ public class DatabaseConnection {
    * embedded db has to create the initial CDB instance so could this implementation be used in such
    * a way where we declare the embedded db and then switch over tto the new client server db?
    */
+
   private DatabaseConnection() {
     setStartup(true);
     tableFields = new TableFields();
@@ -120,7 +124,7 @@ public class DatabaseConnection {
   public void startServerClientDbConnection() {
     try {
       Class.forName(driverCS);
-      connection = DriverManager.getConnection(db_s_c_url, "admin", "admin");
+      connection = DriverManager.getConnection(db_s_c_url);
       isClientDatabase = true;
       setMongo(false);
       if (connection != null) {
@@ -188,6 +192,7 @@ public class DatabaseConnection {
   public void execute(String query) throws SQLException {
     System.out.println(query);
     // If Database can handle Mongo
+
     if (justStartup) {
       if (query.contains("CREATE TABLE")) {
         tableFields.addToMap(query);
@@ -217,6 +222,7 @@ public class DatabaseConnection {
       } catch (Exception f) {
         disableMongo("Mongo Failed on initilize");
       }
+
     } else if (canMongo()) {
       mongoDatabase.insert(query);
     }
@@ -236,6 +242,7 @@ public class DatabaseConnection {
     statement.executeUpdate(query);
   }
 
+
   public void close() {
     try {
       connection.close();
@@ -246,6 +253,7 @@ public class DatabaseConnection {
       mongoDatabase.closeMongo();
     }
   }
+
 
   public List<String> getFieldsFromTable(String table) {
     return tableFields.tableToFields(table);

@@ -41,6 +41,7 @@ public class ServiceRequestController extends AbstractController {
   @FXML ImageView giftButtonIcon;
   @FXML ImageView religiousButtonIcon;
   @FXML ImageView securityButtonIcon;
+  @FXML ImageView APIButtonIcon;
 
   @FXML private TextField searchBox;
   private ArrayList<JFXButton> jfxButtonList = new ArrayList<JFXButton>();
@@ -59,6 +60,7 @@ public class ServiceRequestController extends AbstractController {
     giftButtonIcon.setImage(ImageLoader.loadImage("Gifts"));
     religiousButtonIcon.setImage(ImageLoader.loadImage("Religion"));
     securityButtonIcon.setImage(ImageLoader.loadImage("Security"));
+    APIButtonIcon.setImage(ImageLoader.loadImage("IT"));
 
     // BE CAREFUL, ADDING BUTTONS THAT DON'T EXIST ON SlideNavMenu.stafffxml WILL BREAK SEARCH
     jfxButtonList.addAll(

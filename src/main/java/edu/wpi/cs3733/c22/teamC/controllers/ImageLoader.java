@@ -98,6 +98,12 @@ public class ImageLoader {
     imageFileNames.put("Security", "Icons/SecurityIcon.png");
     images.put("Security", null);
 
+    imageFileNames.put("End", "Icons/EndIcon.png");
+    images.put("End", null);
+
+    imageFileNames.put("Start", "Icons/StartIcon.png");
+    images.put("Start", null);
+
     // Profile Pics
     imageFileNames.put("DefaultProfile", "ProfilePics/DefaultUserIcon.png");
     images.put("DefaultProfile", null);

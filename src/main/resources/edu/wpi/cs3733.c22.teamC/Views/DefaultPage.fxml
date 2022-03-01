@@ -168,9 +168,9 @@
             </GridPane>
          </left>
          <center>
-            <Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0" visible="false" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
-      <JFXDrawersStack fx:id="drawerStack" layoutX="150.0" prefHeight="400.0" prefWidth="300.0" />
+      <JFXDrawersStack fx:id="drawerStack" layoutX="150.0" prefHeight="400.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

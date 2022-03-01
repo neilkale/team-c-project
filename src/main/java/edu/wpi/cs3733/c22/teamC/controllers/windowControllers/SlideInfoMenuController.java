@@ -15,11 +15,16 @@ public class SlideInfoMenuController extends AbstractController {
 
   @FXML
   private void covidButtonPressed() throws IOException {
-    // controllerMediator.setDefaultPageCenter(".fxml");
+    controllerMediator.setDefaultPageCenter("CovidPage.fxml");
   }
 
   @FXML
   private void helpButtonPressed() throws IOException {
-    // controllerMediator.setDefaultPageCenter(".fxml");
+    controllerMediator.setDefaultPageCenter("HelpPage.fxml");
+  }
+
+  @FXML
+  private void creditsButtonPressed() throws IOException {
+    controllerMediator.setDefaultPageCenter("CreditsPage.fxml");
   }
 }

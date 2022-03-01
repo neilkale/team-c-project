@@ -12,7 +12,7 @@ public class CriteriaReligion implements Criteria {
     List<Employee> religionEmployees = new ArrayList<Employee>();
 
     for (Employee e : employees) {
-      if (e.get_Service_Type().equalsIgnoreCase("religion")) {
+      if (e.get_service_type().equalsIgnoreCase("religion")) {
         religionEmployees.add(e);
       }
     }

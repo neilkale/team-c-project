@@ -12,7 +12,7 @@ public class CriteriaLaundry implements Criteria {
     List<Employee> laundryEmployees = new ArrayList<Employee>();
 
     for (Employee e : employees) {
-      if (e.get_Service_Type().equalsIgnoreCase("laundry")) {
+      if (e.get_service_type().equalsIgnoreCase("laundry")) {
         laundryEmployees.add(e);
       }
     }

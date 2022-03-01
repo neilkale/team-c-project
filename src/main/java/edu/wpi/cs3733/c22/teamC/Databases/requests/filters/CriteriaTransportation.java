@@ -12,7 +12,7 @@ public class CriteriaTransportation implements Criteria {
     List<Employee> transportationEmployees = new ArrayList<Employee>();
 
     for (Employee e : employees) {
-      if (e.get_Service_Type().equalsIgnoreCase("transportation")) {
+      if (e.get_service_type().equalsIgnoreCase("transportation")) {
         transportationEmployees.add(e);
       }
     }

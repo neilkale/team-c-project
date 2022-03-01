@@ -27,7 +27,7 @@ public class Employee {
     return lastName;
   }
 
-  public String get_Service_Type() {
+  public String get_service_type() {
     return serviceType;
   }
 

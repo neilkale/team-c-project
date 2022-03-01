@@ -12,7 +12,7 @@ public class CriteriaITAgent implements Criteria {
     List<Employee> itAgentEmployees = new ArrayList<Employee>();
 
     for (Employee e : employees) {
-      if (e.get_Service_Type().equalsIgnoreCase("it-agent")) {
+      if (e.get_service_type().equalsIgnoreCase("it-agent")) {
         itAgentEmployees.add(e);
       }
     }

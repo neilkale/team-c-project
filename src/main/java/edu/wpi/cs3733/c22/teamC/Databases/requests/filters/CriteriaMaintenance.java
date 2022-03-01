@@ -12,7 +12,7 @@ public class CriteriaMaintenance implements Criteria {
     List<Employee> maintenanceEmployees = new ArrayList<Employee>();
 
     for (Employee e : employees) {
-      if (e.get_Service_Type().equalsIgnoreCase("maintenance")) {
+      if (e.get_service_type().equalsIgnoreCase("maintenance")) {
         maintenanceEmployees.add(e);
       }
     }

@@ -47,7 +47,7 @@ public class ITReqController extends AbstractController {
     issueComboBox.getItems().addAll("Internet Down", "Device Crash", "Electrical Fire");
 
     for (Employee e : employees) {
-      if (e.get_Service_Type().toLowerCase().equals("it-agent")) {
+      if (e.get_service_type().toLowerCase().equals("it-agent")) {
         String name = e.get_firstName() + " " + e.get_lastName().charAt(0);
         String fullName = e.get_firstName() + " " + e.get_lastName();
         employeeNames.put(name, fullName);

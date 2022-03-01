@@ -5,7 +5,6 @@ import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.*;
-import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.LaundryRequestQuery;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.ResultSet;
@@ -76,12 +75,11 @@ public abstract class ServiceRequest implements DatabaseInterface {
     g = DaoSingleton.getMaintenanceRequestDao();
     output.addAll(g.getAllNodes());
 
-
     MedicineRequestDaoImpl h;
     h = DaoSingleton.getMedicineRequestDao();
     output.addAll(h.getAllNodes());
 
-    ReligiousRequestDaoImpl i; //jklm
+    ReligiousRequestDaoImpl i; // jklm
     i = DaoSingleton.getReligiousRequestDao();
     output.addAll(i.getAllNodes());
 

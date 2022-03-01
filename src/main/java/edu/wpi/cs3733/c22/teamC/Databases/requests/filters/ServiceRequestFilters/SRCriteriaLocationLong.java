@@ -4,7 +4,6 @@ import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.LocationDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.ServiceRequest;
-import edu.wpi.cs3733.c22.teamC.SQLMethods.LocationQuery;
 import java.util.ArrayList;
 import java.util.List;
 

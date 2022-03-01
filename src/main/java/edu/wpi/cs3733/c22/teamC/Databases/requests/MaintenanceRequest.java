@@ -68,4 +68,3 @@ public class MaintenanceRequest extends ServiceRequest implements DatabaseInterf
     return DaoSingleton.getMaintenanceRequestDao();
   }
 }
-

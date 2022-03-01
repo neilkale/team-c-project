@@ -3,8 +3,8 @@ package edu.wpi.cs3733.c22.teamC.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
-import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.EmployeeDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.LocationDaoImpl;
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.*;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.filters.ServiceRequestFilters.*;
@@ -78,8 +78,7 @@ public class OrderTrackerController extends AbstractController {
         .getItems()
         .addAll(FXCollections.observableArrayList(ServiceRequest.getAvailableTicketIDs()));
     LocationDaoImpl e = DaoSingleton.getLocationDao();
-    e
-        .getAllNodes()
+    e.getAllNodes()
         .forEach(
             node -> {
               locComboBox.getItems().add(node.get_longName());
@@ -249,10 +248,13 @@ public class OrderTrackerController extends AbstractController {
       Query requestQuery = request.getQueryInstance(); // get query instance of the request
 
       try {
-        requestQuery.removeNode(
-            request); // call removeNode of query and pass in request corresponding to this order
+        ((DatabaseInterface) requestQuery)
+            .getDao()
+            .deleteNode(
+                request); // call removeNode of query and pass in request corresponding to this
+        // order
         // pane
-      } catch (SQLException e) {
+      } catch (Exception e) {
         e.printStackTrace();
       }
       requestHashMap.remove(orderKey);

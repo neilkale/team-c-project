@@ -3,9 +3,7 @@ package edu.wpi.cs3733.c22.teamC.Databases;
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.EmployeeDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.filters.CriteriaUserSpecific;
-import edu.wpi.cs3733.c22.teamC.SQLMethods.EmployeeQuery;
 import edu.wpi.cs3733.c22.teamC.controllers.ImageLoader;
-import java.sql.SQLException;
 import javafx.scene.image.Image;
 
 public class LoggedInUser {
@@ -20,10 +18,7 @@ public class LoggedInUser {
   public static void signInEmployee(String employeeIn) {
     signOutEmployee();
     EmployeeDaoImpl e = DaoSingleton.getEmployeeDao();
-    signedInUser =
-        (new CriteriaUserSpecific(employeeIn))
-            .meetCriteria((e.getAllNodes()))
-            .get(0);
+    signedInUser = (new CriteriaUserSpecific(employeeIn)).meetCriteria((e.getAllNodes())).get(0);
   }
 
   public static void signOutEmployee() {

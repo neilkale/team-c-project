@@ -40,8 +40,8 @@ public class MapNode extends ImageView {
     this.location =
         new Location(
             LocationQuery.createUniqueNodeID("HALL", MapState.getCurrentFloor()),
-            Double.toString(clickX / MapState.getZoomFactor()),
-            Double.toString(clickY / MapState.getZoomFactor()),
+            Integer.toString((int) (clickX / MapState.getZoomFactor())),
+            Integer.toString((int) (clickY / MapState.getZoomFactor())),
             MapState.getCurrentFloor(),
             "Tower",
             "",

@@ -3,7 +3,6 @@ package edu.wpi.cs3733.c22.teamC.controllers.requests;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.c22.teamC.Databases.*;
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
-import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.InternalTransportRequestDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.LaundryRequestDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.LaundryRequest;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.ServiceRequest;

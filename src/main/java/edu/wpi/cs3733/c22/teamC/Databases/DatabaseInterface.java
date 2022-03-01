@@ -13,5 +13,6 @@ public interface DatabaseInterface {
   public String[] setValues(String[] values);
 
   public String getName();
+
   public DaoInterface getDao();
 }

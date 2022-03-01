@@ -2,10 +2,8 @@ package edu.wpi.cs3733.c22.teamC.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
-import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.EmployeeDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.LocationDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
-import edu.wpi.cs3733.c22.teamC.SQLMethods.LocationQuery;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

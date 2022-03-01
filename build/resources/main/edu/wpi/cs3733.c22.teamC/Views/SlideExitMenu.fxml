@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="borderPane" minWidth="-Infinity" prefHeight="550.0" prefWidth="200.0" style="-fx-background-color: #FFF;" stylesheets="@../Stylesheets/SlideNavMenu.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.windowControllers.SlideExitMenuController">
+   <center>
+      <VBox prefHeight="550.0" prefWidth="220.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton fx:id="logoutButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#logoutButtonPressed" prefWidth="175.0" ripplerFill="WHITE" style="-fx-background-color: #1f58af;" styleClass="JFXButton" text="Logout" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" top="10.0" />
+               </VBox.margin>
+            </JFXButton>
+            <JFXButton fx:id="locDataButton1" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#logoutExitButtonPressed" prefWidth="175.0" ripplerFill="WHITE" style="-fx-background-color: #1f58af;" styleClass="JFXButton" text="Logout &amp; Exit" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </JFXButton>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

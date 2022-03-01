@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.c22.teamC;
 
 import edu.wpi.cs3733.c22.teamC.Databases.*;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.*;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.*;
 import edu.wpi.cs3733.c22.teamC.controllers.ImageLoader;
@@ -64,8 +65,8 @@ public class Capp extends Application {
       DatabaseCreation.makeReligionTable();
       DatabaseCreation.makeLanguageTable();
       DatabaseCreation.makeSecurityRequestTable();
-
       DatabaseCreation.readDatabasesFromCsv();
+      DaoSingleton.makeDaoSingleton();
     } catch (SQLException e) {
       e.printStackTrace();
     }

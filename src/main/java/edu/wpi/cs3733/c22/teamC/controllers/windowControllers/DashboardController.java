@@ -115,7 +115,7 @@ public class DashboardController extends AbstractController {
 
   private void setUserInfo() {
     idLabel.setText("ID: " + currentUser.get_id());
-    typeLabel.setText("Service Type: " + currentUser.get_Service_Type());
+    typeLabel.setText("Service Type: " + currentUser.get_serviceType());
     firstTextField.setText(currentUser.get_firstName());
     lastTextField.setText(currentUser.get_lastName());
     usernameTextField.setText(currentUser.get_username());

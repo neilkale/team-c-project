@@ -211,9 +211,6 @@ public class Location implements DatabaseInterface {
         e.printStackTrace();
       }
     }
-    for (String s : getFields()) {
-
-    }
     String[] toReturn = new String[a.size()];
     for (int i = 0; i < a.size(); i++) {
       toReturn[i] = a.get(i);

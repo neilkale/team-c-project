@@ -126,7 +126,7 @@ public class DatabaseConnection {
   public void startServerClientDbConnection() {
     try {
       Class.forName(driverCS);
-      connection = DriverManager.getConnection(db_s_c_url, "admin", "admin");
+      connection = DriverManager.getConnection(db_s_c_url);
       isClientDatabase = true;
       setMongo(false);
       if (connection != null) {
@@ -233,6 +233,7 @@ public class DatabaseConnection {
       mongoDatabase.closeMongo();
     }
   }
+
 
   public List<String> fieldsFromMongo(String table) {
     return canMongo ?  mongoDatabase.tableToFields(table) : null;

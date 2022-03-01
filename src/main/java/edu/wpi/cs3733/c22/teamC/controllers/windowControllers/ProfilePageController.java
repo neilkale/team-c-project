@@ -30,7 +30,7 @@ public class ProfilePageController {
 
     firstNameLabel.setText(LoggedInUser.getCurrentUser().get_firstName());
     lastNameLabel.setText(LoggedInUser.getCurrentUser().get_lastName());
-    jobTypeLabel.setText(LoggedInUser.getCurrentUser().get_Service_Type());
+    jobTypeLabel.setText(LoggedInUser.getCurrentUser().get_serviceType());
     imageView.setImage(LoggedInUser.getProfilePic());
 
     for (String s : picNames) {

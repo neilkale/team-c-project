@@ -109,7 +109,7 @@ public class DefaultController extends AbstractController {
     root.prefHeightProperty().bind(borderPane.heightProperty());
 
     borderPane.setCenter(root);
-    borderPane.getLeft().toFront();
+    // borderPane.getLeft().toFront();
 
     AnchorPane.setTopAnchor(root, 0.0);
     AnchorPane.setBottomAnchor(root, 0.0);
@@ -150,7 +150,9 @@ public class DefaultController extends AbstractController {
     prevPageList.remove(prevPageList.size() - 1); // remove the current page from the tracking list
 
     if (prevPageList.isEmpty()) { // base case
-      setCenter(new Pane(), "DefaultPage.fxml");
+      Pane emptyPane = new Pane();
+      emptyPane.setVisible(false);
+      setCenter(emptyPane, "DefaultPage.fxml");
     } else { // we get last page of list and go to that
       String prevPage = prevPageList.get(prevPageList.size() - 1);
       setCenter(prevPage);
@@ -197,5 +199,6 @@ public class DefaultController extends AbstractController {
   @FXML
   void profileButtonPressed() throws IOException {
     profileDrawer.open();
+    profileDrawer.toFront();
   }
 }

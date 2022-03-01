@@ -33,16 +33,14 @@ public class Employee implements DatabaseInterface {
   }
 
 
-  public String get_Service_Type() {
+  public String get_serviceType() {
     return _serviceType;
   }
 
   public String get_service_type() {
-    return _serviceType;
+    return get_serviceType();
   }
-  public String get_serviceType(){
-    return _serviceType;
-  }
+
 
   public String get_access() {
     return _access;
@@ -145,13 +143,14 @@ public class Employee implements DatabaseInterface {
   }
 
   @Override
-  public String[] setValues() {
+  public String[] setValues(String[] values) {
     List<String> a = new ArrayList<>();
     Method getter;
-    for (String s : getFields()) {
+    String[] fields = getFields();
+    for(int i = 0; i < getFields().length; i++){
       try {
-        getter = this.getClass().getMethod("set_" + s);
-        a.add((String) getter.invoke(this, new Object[] {}));
+        getter = this.getClass().getMethod("set_" + fields[i]);
+        a.add((String) getter.invoke(this, new Object[] {values[i]}));
       } catch (NoSuchMethodException e) {
         e.printStackTrace();
       } catch (InvocationTargetException e) {
@@ -160,6 +159,7 @@ public class Employee implements DatabaseInterface {
         e.printStackTrace();
       }
     }
+
     String[] toReturn = new String[a.size()];
     for (int i = 0; i < a.size(); i++) {
       toReturn[i] = a.get(i);
@@ -172,7 +172,5 @@ public class Employee implements DatabaseInterface {
     return this.getClass().getName();
   }
 
-  public String get_Service_Type() {
-    return serviceType;
-  }
+
 }

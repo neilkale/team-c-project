@@ -256,7 +256,6 @@ public abstract class ServiceRequest implements DatabaseInterface {
     return new int[] {total.size(), completed};
   }
 
-
   // return all of the current ticketIDs being used for submitted requests
   public static ArrayList<String> getAvailableTicketIDs() {
     ArrayList<ServiceRequest> total = getAllServiceRequests();
@@ -285,12 +284,12 @@ public abstract class ServiceRequest implements DatabaseInterface {
   @Override
   public String[] setValues(String[] values) {
     List<String> a = new ArrayList<>();
-    Method setter;
+    Method getter;
     String[] fields = getFields();
     for(int i = 0; i < getFields().length; i++){
       try {
-        setter = this.getClass().getMethod("set_" + fields[i]);
-        a.add((String) setter.invoke(this, new Object[] {values[i]}));
+        getter = this.getClass().getMethod("set_" + fields[i]);
+        a.add((String) getter.invoke(this, new Object[] {values[i]}));
       } catch (NoSuchMethodException e) {
         e.printStackTrace();
       } catch (InvocationTargetException e) {
@@ -299,9 +298,7 @@ public abstract class ServiceRequest implements DatabaseInterface {
         e.printStackTrace();
       }
     }
-    for (String s : getFields()) {
 
-    }
     String[] toReturn = new String[a.size()];
     for (int i = 0; i < a.size(); i++) {
       toReturn[i] = a.get(i);

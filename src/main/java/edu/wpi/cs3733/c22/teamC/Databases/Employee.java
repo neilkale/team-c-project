@@ -9,14 +9,17 @@ import java.util.List;
 
 public class Employee implements DatabaseInterface {
 
-  private String _username;
-  private String _password;
-  private String _firstName;
-  private String _lastName;
-  private String _serviceType;
-  private String _access;
-  private String _id;
-  private String _profilePicture;
+  private String username;
+  private String password;
+  private String firstName;
+  private String lastName;
+  private String serviceType;
+  private String access;
+  private String id;
+  private String profilePicture;
+  private String phoneNumber;
+  private String email;
+
 
   public String get_username() {
     return _username;
@@ -54,6 +57,14 @@ public class Employee implements DatabaseInterface {
     return _id;
   }
 
+  public String get_phoneNumber() {
+    return phoneNumber;
+  }
+
+  public String get_email() {
+    return email;
+  }
+
   public void set_username(String username) {
     this._username = username;
   }
@@ -82,6 +93,14 @@ public class Employee implements DatabaseInterface {
     this._id = id;
   }
 
+  public void set_phoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+  }
+
+  public void set_email(String email) {
+    this.email = email;
+  }
+
   public Employee(
       String username,
       String password,
@@ -90,15 +109,19 @@ public class Employee implements DatabaseInterface {
       String serviceType,
       String access,
       String id,
-      String profilePicture) {
-    this._username = username;
-    this._password = password;
-    this._firstName = firstName;
-    this._lastName = lastName;
-    this._serviceType = serviceType;
-    this._access = access;
-    this._id = id;
-    this._profilePicture = profilePicture;
+      String picture,
+      String phoneNumber,
+      String email) {
+    this.username = username;
+    this.password = password;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.serviceType = serviceType;
+    this.access = access;
+    this.id = id;
+    this.profilePicture = picture;
+    this.phoneNumber = phoneNumber;
+    this.email = email;
   }
 
   public String get_profilePicture() {
@@ -119,7 +142,9 @@ public class Employee implements DatabaseInterface {
       "serviceType",
       "access",
       "id",
-      "profilePicture"
+      "profilePicture",
+      "phoneNumber",
+      "email"
     };
   }
 

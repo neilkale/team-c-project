@@ -141,7 +141,8 @@ public class DefaultController extends AbstractController {
     String tabName = splitCamelCase(fxmlFileName.replace(".fxml", ""));
     controllerMediator.setTabName(tabName); // set tab text to tabName
 
-    if (prevPageList.isEmpty() || prevPageList.get(prevPageList.size() - 1) != fxmlFileName)
+    if (!fxmlFileName.equals("DefaultPage.fxml")
+        && (prevPageList.isEmpty() || prevPageList.get(prevPageList.size() - 1) != fxmlFileName))
       prevPageList.add(fxmlFileName); // add this page to tracking list of previous pages
   }
 

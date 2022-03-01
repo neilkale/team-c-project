@@ -15,8 +15,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class DatabaseConnection {
   private Connection connection;
   private MongoDatabase mongoDatabase;
@@ -26,8 +24,6 @@ public class DatabaseConnection {
   private List<String> startupInsert;
   private static ArrayList<String> tableNames;
 
-
-
   public boolean isClientDatabase() {
     return isClientDatabase;
   }
@@ -36,13 +32,13 @@ public class DatabaseConnection {
     justStartup = b;
   }
 
-  public void disableMongo(){
+  public void disableMongo() {
     mongoDatabase = null;
     isMongo = false;
     canMongo = false;
   }
 
-  public boolean canMongo(){
+  public boolean canMongo() {
     return canMongo;
   }
 
@@ -65,10 +61,8 @@ public class DatabaseConnection {
     tableNames = list;
   }
 
-
   /** databaseType is false if embedded, true if client */
   private boolean isClientDatabase = false;
-
 
   private static DatabaseConnection dbcInstance = new DatabaseConnection();
 
@@ -82,21 +76,19 @@ public class DatabaseConnection {
   private String db_url = "jdbc:derby:CDB;create=true";
   private String db_s_c_url = "jdbc:derby://localhost:1527/CDB;create=true";
 
-
-
   /**
    * This url should be tested because I am unsure of the port type. I know that the current
    * embedded db has to create the initial CDB instance so could this implementation be used in such
    * a way where we declare the embedded db and then switch over tto the new client server db?
    */
   public DatabaseConnection() {
-    try{
+    try {
       mongoDatabase = new MongoDatabase();
       justStartup = true;
       isMongo = false;
       canMongo = true;
       startupInsert = new ArrayList<>();
-    } catch (Exception e){
+    } catch (Exception e) {
       System.out.println("oops no mongo!");
       disableMongo();
     }
@@ -118,8 +110,6 @@ public class DatabaseConnection {
     }
   }
 
-
-
   /**
    * This will connect to the database once signed in and treat the database as a client server db.
    */
@@ -133,7 +123,6 @@ public class DatabaseConnection {
         dbCreation();
         System.out.println("Connected to the Client DB");
       }
-
 
     } catch (SQLException | ClassNotFoundException e) {
       e.printStackTrace();
@@ -172,9 +161,9 @@ public class DatabaseConnection {
     // If Database can handle Mongo
     try {
       if (mongoDatabase != null && justStartup) {
-        //If Mongo is instanced, and is just starting up
+        // If Mongo is instanced, and is just starting up
         if (query.substring(0, query.indexOf(' ')).equals("INSERT")) {
-          //This just waits to add everything when doing batch writes to mono
+          // This just waits to add everything when doing batch writes to mono
           startupInsert.add(query);
         } else {
           if (startupInsert.size() > 0) {
@@ -188,37 +177,31 @@ public class DatabaseConnection {
       } else if (mongoDatabase != null && isMongo) {
         mongoDatabase.insert(query);
       }
-    } catch (Exception e){
+    } catch (Exception e) {
       disableMongo();
     }
 
-    if (!canMongo){
+    if (!canMongo) {
       Statement statement = connection.createStatement();
       statement.execute(query);
     }
-
-
   }
 
-  
   public void executeUpdate(String query) throws SQLException {
     Statement statement = connection.createStatement();
     statement.executeUpdate(query);
   }
 
-
   /**
    * TEMPORARY CLASS WHILE RESULT SET IS STILL IN USE
+   *
    * @param query
    * @return
    */
   public List<DatabaseInterface> getFromMongo(String query) {
     List<DatabaseInterface> toReturn = (List<DatabaseInterface>) mongoDatabase.select(query);
 
-    if (toReturn == null){
-
-    }
-
+    if (toReturn == null) {}
 
     return toReturn;
   }
@@ -235,6 +218,6 @@ public class DatabaseConnection {
   }
 
   public List<String> fieldsFromMongo(String table) {
-    return canMongo ?  mongoDatabase.tableToFields(table) : null;
+    return canMongo ? mongoDatabase.tableToFields(table) : null;
   }
 }

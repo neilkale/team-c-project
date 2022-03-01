@@ -24,7 +24,6 @@ public class MongoDatabase {
     teamC_db = mongoClient.getDatabase("teamC_DB");
     map = new HashMap<>();
     databaseConnection = DatabaseConnection.getInstance();
-
   }
 
   public void closeMongo() {
@@ -61,7 +60,6 @@ public class MongoDatabase {
     }
 
     teamC_db.getCollection(table).insertMany(docList);
-
   }
 
   public String getAction(String query) {
@@ -120,10 +118,10 @@ public class MongoDatabase {
 
   public List<? extends Object> select(String query) {
     if (query.contains("*")) {
-      //Returns List of databaseInterface
+      // Returns List of databaseInterface
       return selectAllObjectFromQuery(query);
     } else {
-      //Returns List of String
+      // Returns List of String
       return selectColumnFromQuery(query);
     }
   }
@@ -135,15 +133,15 @@ public class MongoDatabase {
       String table = actQuery.substring(0, actQuery.indexOf(' '));
       String keyVal = actQuery.substring(actQuery.indexOf('\'') + 1, actQuery.length() - 1);
 
-      try{
+      try {
         teamC_db.getCollection(table).deleteOne(new Document(map.get(table).get(0), keyVal));
-      } catch (Exception e){
+      } catch (Exception e) {
         databaseConnection.disableMongo();
       }
     } else {
-      try{
+      try {
         teamC_db.getCollection(query.substring(query.lastIndexOf(' ') + 1)).drop();
-      } catch (Exception e){
+      } catch (Exception e) {
         databaseConnection.disableMongo();
       }
     }
@@ -155,9 +153,9 @@ public class MongoDatabase {
     actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
     actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
 
-    try{
+    try {
       teamC_db.getCollection(actQuery).drop();
-    } catch (Exception e){
+    } catch (Exception e) {
       databaseConnection.disableMongo();
     }
     return "TRUNCATE";
@@ -180,7 +178,6 @@ public class MongoDatabase {
     fields.add(toIterate.substring(1, toIterate.indexOf('V') - 1));
     map.put(table, fields);
     teamC_db.createCollection(table);
-
 
     return "CREATE";
   }
@@ -209,7 +206,6 @@ public class MongoDatabase {
 
     teamC_db.getCollection(table).deleteOne(filterDoc);
     teamC_db.getCollection(table).insertOne(document);
-
 
     return "UPDATE";
   }
@@ -287,7 +283,6 @@ public class MongoDatabase {
     MongoCollection<Document> collection;
 
     collection = teamC_db.getCollection(table);
-
 
     ArrayList<String> toReturn = new ArrayList<>();
 

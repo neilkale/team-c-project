@@ -134,11 +134,16 @@ public class MedicalEquipment implements DatabaseInterface {
   }
 
   @Override
+  public String getUID() {
+    return _equipmentID;
+  }
+
+  @Override
   public String[] setValues(String[] values) {
     List<String> a = new ArrayList<>();
     Method setter;
     String[] fields = getFields();
-    for(int i = 0; i < getFields().length; i++){
+    for (int i = 0; i < getFields().length; i++) {
       try {
         setter = this.getClass().getMethod("set_" + fields[i]);
         a.add((String) setter.invoke(this, new Object[] {values[i]}));
@@ -150,9 +155,8 @@ public class MedicalEquipment implements DatabaseInterface {
         e.printStackTrace();
       }
     }
-    for (String s : getFields()) {
+    for (String s : getFields()) {}
 
-    }
     String[] toReturn = new String[a.size()];
     for (int i = 0; i < a.size(); i++) {
       toReturn[i] = a.get(i);

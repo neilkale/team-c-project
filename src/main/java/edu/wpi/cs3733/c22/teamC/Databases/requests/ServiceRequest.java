@@ -7,8 +7,6 @@ import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.*;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.LaundryRequestQuery;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.sql.Connection;
-
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +18,11 @@ public abstract class ServiceRequest implements DatabaseInterface {
   private String _serviceType;
   private String _status;
   private String _assignment; // this would really be an employee
+
+  @Override
+  public String getUID() {
+    return _ticketID;
+  }
 
   public ServiceRequest(
       String ticketID,
@@ -256,7 +259,6 @@ public abstract class ServiceRequest implements DatabaseInterface {
     return new int[] {total.size(), completed};
   }
 
-
   // return all of the current ticketIDs being used for submitted requests
   public static ArrayList<String> getAvailableTicketIDs() {
     ArrayList<ServiceRequest> total = getAllServiceRequests();
@@ -287,7 +289,7 @@ public abstract class ServiceRequest implements DatabaseInterface {
     List<String> a = new ArrayList<>();
     Method setter;
     String[] fields = getFields();
-    for(int i = 0; i < getFields().length; i++){
+    for (int i = 0; i < getFields().length; i++) {
       try {
         setter = this.getClass().getMethod("set_" + fields[i]);
         a.add((String) setter.invoke(this, new Object[] {values[i]}));
@@ -299,9 +301,8 @@ public abstract class ServiceRequest implements DatabaseInterface {
         e.printStackTrace();
       }
     }
-    for (String s : getFields()) {
+    for (String s : getFields()) {}
 
-    }
     String[] toReturn = new String[a.size()];
     for (int i = 0; i < a.size(); i++) {
       toReturn[i] = a.get(i);

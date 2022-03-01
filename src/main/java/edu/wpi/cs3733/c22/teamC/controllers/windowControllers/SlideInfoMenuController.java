@@ -22,4 +22,9 @@ public class SlideInfoMenuController extends AbstractController {
   private void helpButtonPressed() throws IOException {
     controllerMediator.setDefaultPageCenter("HelpPage.fxml");
   }
+
+  @FXML
+  private void creditsButtonPressed() throws IOException {
+    controllerMediator.setDefaultPageCenter("CreditsPage.fxml");
+  }
 }

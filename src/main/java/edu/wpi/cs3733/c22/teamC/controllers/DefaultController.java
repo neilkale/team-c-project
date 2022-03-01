@@ -24,6 +24,7 @@ public class DefaultController extends AbstractController {
   @FXML private JFXButton infoButton;
   @FXML private Circle profileCircle;
   @FXML private Label nameLabel;
+  @FXML private JFXDrawer profileDrawer;
 
   private JFXDrawer navDrawer = new JFXDrawer();
   private JFXDrawer exitDrawer = new JFXDrawer();
@@ -69,6 +70,18 @@ public class DefaultController extends AbstractController {
               }
               if (newValue && !drawerIsOpened) drawerStack.toBack();
             });
+
+    FXMLLoader profileLoader = getLoader("ProfilePage.fxml");
+    Pane profilePane = profileLoader.load();
+    profileDrawer.setSidePane(profilePane);
+
+    profileDrawer.setOnMouseExited(
+        evt -> {
+          profileDrawer.close();
+          profileCircle.setFill(new ImagePattern(LoggedInUser.getProfilePic()));
+        });
+
+    profileDrawer.close();
 
     ControllerUtil.addDrawerButtonHover(
         navButton, navDrawer, slideNavMenu, drawerList, drawerStack);
@@ -174,5 +187,10 @@ public class DefaultController extends AbstractController {
             "%s|%s|%s",
             "(?<=[A-Z])(?=[A-Z][a-z])", "(?<=[^A-Z])(?=[A-Z])", "(?<=[A-Za-z])(?=[^A-Za-z])"),
         " ");
+  }
+
+  @FXML
+  void profileButtonPressed() throws IOException {
+    profileDrawer.open();
   }
 }

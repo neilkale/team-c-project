@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXDrawersStack?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -139,7 +140,7 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="138.0" prefWidth="150.0" VBox.vgrow="NEVER">
                            <children>
-                              <Circle fx:id="profileCircle" fill="#1f58af" radius="55.0" stroke="#1f58af" strokeType="INSIDE" />
+                              <Circle fx:id="profileCircle" fill="#1f58af" onMouseClicked="#profileButtonPressed" radius="55.0" stroke="#1f58af" strokeType="INSIDE" />
                               <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="First Last" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                  <font>
                                     <Font size="15.0" />
@@ -162,9 +163,20 @@
             </GridPane>
          </left>
          <center>
-            <Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="300.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0" />
+                  <JFXDrawersStack fx:id="drawerStack" prefHeight="600.0" prefWidth="200.0" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
+                  <JFXDrawer fx:id="profileDrawer" defaultDrawerSize="400.0" direction="BOTTOM" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" GridPane.valignment="BOTTOM" />
+               </children>
+            </GridPane>
          </center>
       </BorderPane>
-      <JFXDrawersStack fx:id="drawerStack" layoutX="150.0" prefHeight="600.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

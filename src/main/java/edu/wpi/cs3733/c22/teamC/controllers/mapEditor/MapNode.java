@@ -18,6 +18,7 @@ import javafx.util.Duration;
 public class MapNode extends ImageView {
   private final int locationIconRadius = 8;
   private final int itemIconRadius = 12;
+  private final int startStopIconRadius = 15;
   private boolean newPoint;
   private boolean selected = false;
   private int radius;
@@ -134,9 +135,12 @@ public class MapNode extends ImageView {
   }
 
   void updateImage() { // Changes the image according to the nature of the MapNode
-    if (startPoint || stopPoint) {
-      super.setImage(ImageLoader.loadImage("New"));
-      radius = itemIconRadius;
+    if (startPoint) {
+      super.setImage(ImageLoader.loadImage("Start"));
+      radius = startStopIconRadius;
+    } else if (stopPoint) {
+      super.setImage(ImageLoader.loadImage("End"));
+      radius = startStopIconRadius;
     } else if (MapState.isEquipmentShown() && hasEquipment()) {
       MedicalEquipment e = equipment.get(equipmentIndex % equipment.size());
       if (e.get_status().equals("DIRTY"))

@@ -101,6 +101,11 @@ public class ControllerMediator {
     return getOrderController(orderKey).getAllFieldValues();
   }
 
+  // returns index of location field from an order
+  public int getLocationFieldIndex(String orderKey) {
+    return getOrderController(orderKey).getLocationFieldIndex();
+  }
+
   public void setOrderTitle(String orderKey, String titleText) {
     getOrderController(orderKey).setTitleLabelText(titleText);
   }

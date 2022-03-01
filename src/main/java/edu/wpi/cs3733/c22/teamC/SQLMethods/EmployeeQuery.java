@@ -142,9 +142,9 @@ public class EmployeeQuery extends Query<Employee> {
             + employee.get_service_type()
             + "', access = '"
             + employee.get_access()
-            + "', id ="
+            + "', id ='"
             + employee.get_id()
-            + "', profilePicture ="
+            + "', profilePicture ='"
             + employee.get_profilePicture()
             + "' WHERE "
             + "username = '"

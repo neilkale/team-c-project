@@ -42,7 +42,7 @@ public class InternalTransportController extends AbstractController {
   private void initialize() {
 
     LocationDaoImpl lDao = DaoSingleton.getLocationDao();
-    EquipmentDaoImpl eDao = DaoSingleton.getEquipmentDao();
+    EmployeeDaoImpl eDao = DaoSingleton.getEmployeeDao();
     locations = lDao.getAllNodes();
     employees = eDao.getAllNodes();
 
@@ -50,6 +50,8 @@ public class InternalTransportController extends AbstractController {
 
     DatabaseUtil.getLongNames(pickUpLocationComboBox, "PATI", "ELEV", "HALL");
     DatabaseUtil.getLongNames(dropOffLocationComboBox, "PATI", "ELEV", "HALL");
+
+    System.out.println(employees);
 
     for (Employee e : employees) {
       if (e.get_service_type().toLowerCase().equals("transportation")) {

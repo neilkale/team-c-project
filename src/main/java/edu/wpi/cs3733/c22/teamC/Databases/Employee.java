@@ -44,7 +44,6 @@ public class Employee implements DatabaseInterface {
     return _serviceType;
   }
 
-
   public String get_access() {
     return _access;
   }
@@ -179,6 +178,4 @@ public class Employee implements DatabaseInterface {
   public String getName() {
     return this.getClass().getName();
   }
-
-
 }

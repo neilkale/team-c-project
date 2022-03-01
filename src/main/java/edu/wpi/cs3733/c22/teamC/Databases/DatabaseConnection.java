@@ -217,7 +217,6 @@ public class DatabaseConnection {
     }
   }
 
-
   public List<String> fieldsFromMongo(String table) {
     return canMongo ? mongoDatabase.tableToFields(table) : null;
   }

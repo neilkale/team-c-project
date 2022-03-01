@@ -10,8 +10,6 @@ public class SRLooseAndCriteria implements SRCriteria {
 
   public SRLooseAndCriteria(SRCriteria... criteria) {
     this.criteria = new ArrayList<>(Arrays.asList(criteria));
-    //    System.out.println("THIS.Crit: " + this.criteria);
-    //    System.out.println("Crit: " + criteria);
   }
 
   public SRLooseAndCriteria(ArrayList<SRCriteria> in) {

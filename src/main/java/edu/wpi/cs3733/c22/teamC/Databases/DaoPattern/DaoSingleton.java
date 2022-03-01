@@ -15,6 +15,8 @@ public class DaoSingleton {
     private static ReligiousRequestDaoImpl religiousRequestDao;
     private static SanitationRequestDaoImpl sanitationRequestDao;
     private static SecurityRequestDaoImpl securityRequestDao;
+    private static EquipmentDaoImpl equipmentDao;
+    private static MapDaoImpl mapDao;
     private static GiftRequestDaoImpl giftRequestDao;
 
     public static GiftRequestDaoImpl getGiftRequestDao() {
@@ -83,5 +85,12 @@ public class DaoSingleton {
 
     public static SecurityRequestDaoImpl getSecurityRequestDao() {
         return securityRequestDao;
+    }
+
+    public static EquipmentDaoImpl getEquipmentDao() {
+        return equipmentDao;
+    }
+    public static MapDaoImpl getMapDao() {
+        return mapDao;
     }
 }

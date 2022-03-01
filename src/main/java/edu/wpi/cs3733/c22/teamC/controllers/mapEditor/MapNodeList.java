@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.c22.teamC.controllers.mapEditor;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.*;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import edu.wpi.cs3733.c22.teamC.Databases.MedicalEquipment;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.*;
@@ -98,8 +99,9 @@ public class MapNodeList {
   void load() {
     nodes.clear();
 
+    LocationDaoImpl e = DaoSingleton.getLocationDao();
     // put locations from the databases on the map
-    ArrayList<Location> locations = locationQuery.getAllNodeData();
+    ArrayList<Location> locations = e.getAllNodes();
     locations.remove(0);
 
     for (Location l : locations) {
@@ -109,12 +111,13 @@ public class MapNodeList {
       nodes.add(node);
     }
     // put medical equipment on the map
-    ArrayList<MedicalEquipment> equipment = medicalEquipmentQuery.getAllNodeData();
+    EquipmentDaoImpl eDao = DaoSingleton.getEquipmentDao();
+    ArrayList<MedicalEquipment> equipment = eDao.getAllNodes();
 
-    for (MedicalEquipment e : equipment) {
+    for (MedicalEquipment equip : equipment) {
       for (MapNode n : nodes) {
-        if (n.checkLocation(e.get_locationID())) {
-          n.addEquipment(e);
+        if (n.checkLocation(equip.get_locationID())) {
+          n.addEquipment(equip);
         }
       }
     }

@@ -15,7 +15,7 @@ public class SlideInfoMenuController extends AbstractController {
 
   @FXML
   private void covidButtonPressed() throws IOException {
-    // controllerMediator.setDefaultPageCenter(".fxml");
+    controllerMediator.setDefaultPageCenter("CovidPage.fxml");
   }
 
   @FXML

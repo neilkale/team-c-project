@@ -37,9 +37,17 @@ public class LaundryRequest extends ServiceRequest implements DatabaseInterface 
         + get_assignment();
   }
 
+  /*
+  _ticketID;
+  private String _locationID;
+  private String _serviceType;
+  private String _status;
+  private String _assignment
+   */
+
   @Override
   public String[] getFields() {
-    return new String[] {"ID", "Location", "Status", "Service Type", "Assignment"};
+    return new String[] {"ticketID", "locationID", "status", "serviceType", "assignment"};
   }
 
   @Override

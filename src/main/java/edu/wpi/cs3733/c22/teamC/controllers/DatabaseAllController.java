@@ -38,10 +38,14 @@ public class DatabaseAllController extends AbstractController {
 
   @FXML
   public void initialize() {
-    switchDBButton.setText("Switch to Client-Server Database");
-
-    queryType = (new LocationQuery()).getQueryInput();
     dbConnection = DatabaseConnection.getInstance();
+    switchDBButton.setText("Switch to Client-Server Database");
+    if (dbConnection.isMongo()) {
+      btnToMongo.setText("Switch to Embedded Database");
+    } else {
+      btnToMongo.setText("Switch to NoSQL");
+    }
+    queryType = (new LocationQuery()).getQueryInput();
     try {
       ObservableList<String> list = FXCollections.observableArrayList();
       ResultSet rs =
@@ -200,25 +204,26 @@ public class DatabaseAllController extends AbstractController {
       String query = "SELECT * FROM " + queryType.toUpperCase();
       List<DatabaseInterface> fromMongo =
           (List<DatabaseInterface>) dbConnection.getFromMongo(query);
-      System.out.println(dbConnection.fieldsFromMongo(queryType.toUpperCase()));
-
+      int i = 0;
       for (String s : dbConnection.fieldsFromMongo(queryType.toUpperCase())) {
+        final int j = i;
         TableColumn col = new TableColumn(s);
+        col.setSortable(true);
         col.setCellValueFactory(
             new Callback<
                 TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
               public ObservableValue<String> call(
                   TableColumn.CellDataFeatures<ObservableList, String> param) {
-                return new SimpleStringProperty(s);
+                return new SimpleStringProperty(param.getValue().get(j).toString());
               }
             });
         tableView.getColumns().add(col);
+        i++;
       }
+
       for (DatabaseInterface d : fromMongo) {
-        System.out.println(d);
         ObservableList<String> row = FXCollections.observableArrayList();
         for (String s : d.getValues()) {
-          System.out.println(s);
           row.add(s);
         }
         data.add(row);

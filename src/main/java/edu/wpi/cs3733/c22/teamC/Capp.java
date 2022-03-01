@@ -39,6 +39,7 @@ public class Capp extends Application {
       primaryStage.setTitle("Team Cyan Cyclops App");
       primaryStage.setScene(scene);
       primaryStage.show();
+      DatabaseConnection.getInstance().setMongo(false);
 
     } catch (IOException e) {
       e.printStackTrace();

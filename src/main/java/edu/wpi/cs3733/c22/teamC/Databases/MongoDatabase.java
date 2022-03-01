@@ -200,7 +200,6 @@ public class MongoDatabase {
     } else {
       table = query.substring(query.lastIndexOf(' ') + 1);
     }
-    System.out.println(table);
     MongoCollection<Document> collection = teamC_db.getCollection(table);
     ArrayList<DatabaseInterface> toReturn = new ArrayList<>();
     ArrayList<String> fields = map.get(table);

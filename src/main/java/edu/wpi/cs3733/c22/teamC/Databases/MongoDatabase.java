@@ -24,7 +24,6 @@ public class MongoDatabase {
     teamC_db = mongoClient.getDatabase("teamC_DB");
     map = new HashMap<>();
     databaseConnection = DatabaseConnection.getInstance();
-
   }
 
   public void closeMongo() {
@@ -61,7 +60,6 @@ public class MongoDatabase {
     }
 
     teamC_db.getCollection(table).insertMany(docList);
-
   }
 
   public String getAction(String query) {
@@ -120,10 +118,10 @@ public class MongoDatabase {
 
   public List<? extends Object> select(String query) {
     if (query.contains("*")) {
-      //Returns List of databaseInterface
+      // Returns List of databaseInterface
       return selectAllObjectFromQuery(query);
     } else {
-      //Returns List of String
+      // Returns List of String
       return selectColumnFromQuery(query);
     }
   }
@@ -135,16 +133,16 @@ public class MongoDatabase {
       String table = actQuery.substring(0, actQuery.indexOf(' '));
       String keyVal = actQuery.substring(actQuery.indexOf('\'') + 1, actQuery.length() - 1);
 
-      try{
+      try {
         teamC_db.getCollection(table).deleteOne(new Document(map.get(table).get(0), keyVal));
-      } catch (Exception e){
-        databaseConnection.disableMongo();
+      } catch (Exception e) {
+        databaseConnection.disableMongo("Mongo Failed to Delete " + query);
       }
     } else {
-      try{
+      try {
         teamC_db.getCollection(query.substring(query.lastIndexOf(' ') + 1)).drop();
-      } catch (Exception e){
-        databaseConnection.disableMongo();
+      } catch (Exception e) {
+        databaseConnection.disableMongo("Mongo Failed to Delete " + query);
       }
     }
     return "DELETE";
@@ -155,10 +153,10 @@ public class MongoDatabase {
     actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
     actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
 
-    try{
+    try {
       teamC_db.getCollection(actQuery).drop();
-    } catch (Exception e){
-      databaseConnection.disableMongo();
+    } catch (Exception e) {
+      databaseConnection.disableMongo("Mongo Failed to truncate " + query);
     }
     return "TRUNCATE";
   }
@@ -167,6 +165,7 @@ public class MongoDatabase {
     String actQuery = query.substring(query.indexOf(' ') + 1);
     actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
     String table = actQuery.substring(0, actQuery.indexOf('('));
+    System.out.println("TABLE IN CREATETABLE:" + table);
     actQuery = actQuery.substring(actQuery.indexOf('('), actQuery.lastIndexOf(')'));
     String toIterate = actQuery;
     ArrayList<String> fields = new ArrayList<>();
@@ -179,8 +178,12 @@ public class MongoDatabase {
     }
     fields.add(toIterate.substring(1, toIterate.indexOf('V') - 1));
     map.put(table, fields);
-    teamC_db.createCollection(table);
 
+    try {
+      teamC_db.getCollection(table);
+    } catch (Exception e) {
+      teamC_db.createCollection(table);
+    }
 
     return "CREATE";
   }
@@ -210,7 +213,6 @@ public class MongoDatabase {
     teamC_db.getCollection(table).deleteOne(filterDoc);
     teamC_db.getCollection(table).insertOne(document);
 
-
     return "UPDATE";
   }
 
@@ -220,6 +222,7 @@ public class MongoDatabase {
       String actQuery = query.substring(query.indexOf(' ') + 1);
       actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
       table = actQuery.substring(0, actQuery.indexOf(' '));
+      System.out.println(table);
     } else {
       table = query.substring(query.lastIndexOf(' ') + 1);
     }
@@ -287,7 +290,6 @@ public class MongoDatabase {
     MongoCollection<Document> collection;
 
     collection = teamC_db.getCollection(table);
-
 
     ArrayList<String> toReturn = new ArrayList<>();
 

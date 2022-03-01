@@ -5,17 +5,11 @@
  */
 package edu.wpi.cs3733.c22.teamC.Databases;
 
-import static edu.wpi.cs3733.c22.teamC.Capp.dbCreation;
-
+import edu.wpi.cs3733.c22.teamC.SQLMethods.ResultSetParser;
+import edu.wpi.cs3733.c22.teamC.SQLMethods.TableFields;
 import java.sql.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 public class DatabaseConnection {
   private Connection connection;
@@ -25,8 +19,7 @@ public class DatabaseConnection {
   private boolean canMongo;
   private List<String> startupInsert;
   private static ArrayList<String> tableNames;
-
-
+  private TableFields tableFields;
 
   public boolean isClientDatabase() {
     return isClientDatabase;
@@ -36,14 +29,20 @@ public class DatabaseConnection {
     justStartup = b;
   }
 
-  public void disableMongo(){
+  public boolean isJustStartup() {
+    return justStartup;
+  }
+
+  public void disableMongo(String cause) {
+    System.out.println("MONGOISBEINGDISABLED:  " + cause);
+    mongoDatabase.closeMongo();
     mongoDatabase = null;
     isMongo = false;
     canMongo = false;
   }
 
-  public boolean canMongo(){
-    return canMongo;
+  public boolean canMongo() {
+    return canMongo && (mongoDatabase != null);
   }
 
   public static ArrayList<String> getTableNames() {
@@ -65,10 +64,8 @@ public class DatabaseConnection {
     tableNames = list;
   }
 
-
   /** databaseType is false if embedded, true if client */
   private boolean isClientDatabase = false;
-
 
   private static DatabaseConnection dbcInstance = new DatabaseConnection();
 
@@ -82,23 +79,22 @@ public class DatabaseConnection {
   private String db_url = "jdbc:derby:CDB;create=true";
   private String db_s_c_url = "jdbc:derby://localhost:1527/CDB;create=true";
 
-
-
   /**
    * This url should be tested because I am unsure of the port type. I know that the current
    * embedded db has to create the initial CDB instance so could this implementation be used in such
    * a way where we declare the embedded db and then switch over tto the new client server db?
    */
-  public DatabaseConnection() {
-    try{
+  private DatabaseConnection() {
+    setStartup(true);
+    tableFields = new TableFields();
+    startupInsert = new ArrayList<>();
+    try {
       mongoDatabase = new MongoDatabase();
-      justStartup = true;
-      isMongo = false;
       canMongo = true;
-      startupInsert = new ArrayList<>();
-    } catch (Exception e){
+      setMongo(false);
+    } catch (Exception e) {
       System.out.println("oops no mongo!");
-      disableMongo();
+      disableMongo("Failed on Startup");
     }
     startDbConnection();
   }
@@ -118,8 +114,6 @@ public class DatabaseConnection {
     }
   }
 
-
-
   /**
    * This will connect to the database once signed in and treat the database as a client server db.
    */
@@ -130,10 +124,9 @@ public class DatabaseConnection {
       isClientDatabase = true;
       setMongo(false);
       if (connection != null) {
-        dbCreation();
+        startDbConnection();
         System.out.println("Connected to the Client DB");
       }
-
 
     } catch (SQLException | ClassNotFoundException e) {
       e.printStackTrace();
@@ -141,11 +134,11 @@ public class DatabaseConnection {
   }
 
   public void setMongo(boolean b) {
-    isMongo = b && canMongo;
+    isMongo = b && canMongo();
   }
 
   public boolean isMongo() {
-    return canMongo && isMongo;
+    return canMongo() && isMongo && (mongoDatabase != null);
   }
 
   /**
@@ -162,65 +155,85 @@ public class DatabaseConnection {
   }
 
   /** Standardizes executeQuery to method, so we don't have 100 query names */
-  public ResultSet executeQuery(String query) throws SQLException {
+  public ArrayList<? extends Object> executeQuery(String query) throws SQLException {
+    System.out.println(query);
+    if (isMongo()) {
+      if (query.contains("*")) {
+        ArrayList<DatabaseInterface> toReturn =
+            (ArrayList<DatabaseInterface>) mongoDatabase.select(query);
+        return toReturn;
+      } else {
+        ArrayList<String> toReturn = (ArrayList<String>) mongoDatabase.select(query);
+        return toReturn;
+      }
+    } else {
+      if (query.contains("*")) {
+        ArrayList<DatabaseInterface> toReturn =
+            ResultSetParser.resultDatabaseParser(sqlExecuteQuery(query), query);
+        return toReturn;
+      } else {
+        ArrayList<String> toReturn =
+            ResultSetParser.resultStringParser(sqlExecuteQuery(query), query);
+        return toReturn;
+      }
+    }
+  }
+
+  private ResultSet sqlExecuteQuery(String query) throws SQLException {
     Statement statement = connection.createStatement();
     ResultSet rs = statement.executeQuery(query);
     return rs;
   }
 
   public void execute(String query) throws SQLException {
+    System.out.println(query);
     // If Database can handle Mongo
-    try {
-      if (mongoDatabase != null && justStartup) {
-        //If Mongo is instanced, and is just starting up
-        if (query.substring(0, query.indexOf(' ')).equals("INSERT")) {
-          //This just waits to add everything when doing batch writes to mono
-          startupInsert.add(query);
-        } else {
-          if (startupInsert.size() > 0) {
-            mongoDatabase.batchInsert(startupInsert);
-          }
-          startupInsert = new ArrayList<>();
-          mongoDatabase.getAction(query);
-          Statement statement = connection.createStatement();
-          statement.execute(query);
-        }
-      } else if (mongoDatabase != null && isMongo) {
-        mongoDatabase.insert(query);
+    if (justStartup) {
+      if (query.contains("CREATE TABLE")) {
+        tableFields.addToMap(query);
       }
-    } catch (Exception e){
-      disableMongo();
+      try {
+        if (canMongo()) {
+          // If Mongo is instanced, and is just starting up
+          if (query.substring(0, query.indexOf(' ')).equals("INSERT")) {
+            // This just waits to add everything when doing batch writes to mono
+            startupInsert.add(query);
+          } else {
+            if (startupInsert.size() > 0) {
+              mongoDatabase.batchInsert(startupInsert);
+            }
+            startupInsert = new ArrayList<>();
+            mongoDatabase.getAction(query);
+            Statement statement = connection.createStatement();
+            if (query.contains("UPDATE")) {
+              statement.executeUpdate(query);
+            } else {
+              statement.execute(query);
+            }
+          }
+        }
+      } catch (SQLException e) {
+
+      } catch (Exception f) {
+        disableMongo("Mongo Failed on initilize");
+      }
+    } else if (canMongo()) {
+      mongoDatabase.insert(query);
     }
 
-    if (!canMongo){
+    if (!canMongo()) {
       Statement statement = connection.createStatement();
-      statement.execute(query);
+      if (query.contains("UPDATE")) {
+        statement.executeUpdate(query);
+      } else {
+        statement.execute(query);
+      }
     }
-
-
   }
 
-  
   public void executeUpdate(String query) throws SQLException {
     Statement statement = connection.createStatement();
     statement.executeUpdate(query);
-  }
-
-
-  /**
-   * TEMPORARY CLASS WHILE RESULT SET IS STILL IN USE
-   * @param query
-   * @return
-   */
-  public List<DatabaseInterface> getFromMongo(String query) {
-    List<DatabaseInterface> toReturn = (List<DatabaseInterface>) mongoDatabase.select(query);
-
-    if (toReturn == null){
-
-    }
-
-
-    return toReturn;
   }
 
   public void close() {
@@ -234,7 +247,7 @@ public class DatabaseConnection {
     }
   }
 
-  public List<String> fieldsFromMongo(String table) {
-    return canMongo ?  mongoDatabase.tableToFields(table) : null;
+  public List<String> getFieldsFromTable(String table) {
+    return tableFields.tableToFields(table);
   }
 }

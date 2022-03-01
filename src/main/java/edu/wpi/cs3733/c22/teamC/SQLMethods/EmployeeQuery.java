@@ -2,8 +2,6 @@ package edu.wpi.cs3733.c22.teamC.SQLMethods;
 
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
 import edu.wpi.cs3733.c22.teamC.Databases.Employee;
-import edu.wpi.cs3733.c22.teamC.Databases.requests.filters.CriteriaUserSpecific;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -33,35 +31,6 @@ public class EmployeeQuery extends Query<Employee> {
     return each.get_username();
   }
 
-  public ArrayList<Employee> getAllNodeData() {
-    Employee queryResult = null;
-    ArrayList<Employee> allNodes = new ArrayList<Employee>();
-
-    try {
-      String query = "SELECT * FROM " + getQueryInput();
-      ResultSet rs = dbConnection.executeQuery(query);
-
-      while (rs.next()) {
-        String username = rs.getString("username");
-        String password = rs.getString("password");
-        String firstName = rs.getString("firstName");
-        String lastName = rs.getString("lastName");
-        String serviceType = rs.getString("serviceType");
-        String access = rs.getString("access");
-        String id = rs.getString("ID");
-        String pic = rs.getString("profilePicture");
-
-        queryResult =
-            new Employee(username, password, firstName, lastName, serviceType, access, id, pic);
-        allNodes.add(queryResult);
-      }
-
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return allNodes;
-  }
-
   public static ArrayList<String> getFullNameAll() {
     ArrayList<String> allNodes = new ArrayList<>();
     ArrayList<Employee> allEmployees = (new EmployeeQuery()).getAllNodeData();
@@ -81,10 +50,6 @@ public class EmployeeQuery extends Query<Employee> {
       if ((each.get_lastName() + "," + each.get_firstName()).equals(fullName)) return each;
     }
     return null;
-  }
-
-  public static String fullNameToUsername(String fullName) {
-    return fullNameToEmployee(fullName).get_username();
   }
 
   @Override
@@ -162,26 +127,29 @@ public class EmployeeQuery extends Query<Employee> {
     return "EMPLOYEEC";
   }
 
-  @Override
-  public Integer getNumRows() throws SQLException {
-    String sql = "SELECT * FROM " + getQueryInput();
-    ResultSet rs = dbConnection.executeQuery(sql);
-    Integer rowCount = 0;
-    while (rs.next()) {
-      rowCount++;
-    }
-    return rowCount;
-  }
-
   /**
    * Finds an employee corresponding to input username
    *
    * @return employee if exists, else null
    */
   public Employee findNodeByUsername(String target_user) {
-    return (new CriteriaUserSpecific(target_user))
-        .meetCriteria((new EmployeeQuery().getAllNodeData()))
-        .get(0);
+    try {
+      System.out.println(
+          dbConnection.executeQuery(
+              "SELECT * FROM " + getQueryInput() + " WHERE username = '" + target_user + "'"));
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    try {
+      return (Employee)
+          dbConnection
+              .executeQuery(
+                  "SELECT * FROM " + getQueryInput() + " WHERE username = '" + target_user + "'")
+              .get(0);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
   public Employee findNodeByID(String id) {

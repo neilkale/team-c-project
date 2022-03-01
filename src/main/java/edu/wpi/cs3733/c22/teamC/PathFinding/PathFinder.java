@@ -83,9 +83,7 @@ public class PathFinder {
     return nodeMap;
   }
 
-  /**
-   * Blocks nodes with live maintenance requests
-   */
+  /** Blocks nodes with live maintenance requests */
   private void blockMaintenance() {
     MaintenanceRequestQuery maintenanceRequestQuery = new MaintenanceRequestQuery();
     ArrayList<MaintenanceRequest> allMaintenanceRequests = maintenanceRequestQuery.getAllNodeData();
@@ -95,15 +93,14 @@ public class PathFinder {
     }
   }
 
-  /**
-   * Blocks stairs for disabled guests
-   */
+  /** Blocks stairs for disabled guests */
   public void setDisabilityFriendly(boolean enabled) {
-    nodeMap.forEach((key,value) -> {
-      if (key.toUpperCase().contains("STAI")) {
-        value.setBlock(enabled);
-      }
-    });
+    nodeMap.forEach(
+        (key, value) -> {
+          if (key.toUpperCase().contains("STAI")) {
+            value.setBlock(enabled);
+          }
+        });
   }
 
   public Node getNodeByID(String nodeID) {

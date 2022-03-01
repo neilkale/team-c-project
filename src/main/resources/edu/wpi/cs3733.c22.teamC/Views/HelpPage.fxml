@@ -37,30 +37,30 @@
                </children>
             </GridPane>
          </top>
-         <right>
+         <center>
             <ScrollPane prefHeight="200.0" prefWidth="800.0" BorderPane.alignment="CENTER">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="717.0" prefWidth="779.0">
                      <children>
-                        <Label layoutX="8.0" layoutY="14.0" text="Creating a Service Request:">
+                        <Label layoutX="8.0" layoutY="14.0" text="Creating a Service Request:" textFill="#1f58af">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
                         <Label layoutX="12.0" layoutY="34.0" prefHeight="139.0" prefWidth="755.0" text="Select the service request page for the request you are looking to create from either the side menu or the systems service page. You &#10;must fill out all the fields on the request page before submitting otherwise the request will not submit. For each page this will include&#10;at least &#10;- Location of where the request needs to be done&#10;- Assignment to the staff memeber that is expected to complete the request&#10;- Status whether the request has been completed or not ( you will most likely set this to waiting  when you create the request)&#10;Then you hit the submit button and you will get a ouhs notification to show it has gone through, or you can hit cancel and it will reset&#10;the page&#10;" />
-                        <Label layoutX="11.0" layoutY="186.0" text="Viewing a Service Request">
+                        <Label layoutX="11.0" layoutY="186.0" text="Viewing a Service Request:" textFill="#1f58af">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
                         <Label layoutX="12.0" layoutY="206.0" prefHeight="93.0" prefWidth="755.0" text="You are able to view the service requests made in two main locations&#10;1) the Order traxker page you can access throguh the side menu where you can view the status of all the requests and who they are&#10;assigned to. You may aso updte the status of the reuqets throuh this page or delte it entirely to cancel it&#10;2) the Map Editor Page, you can see the service request created depedning on the location they were assigned to be completed at. You &#10;may also cancel the requests through the map by right-clicking on the icon of the request on the map and then selecting the x to cancel" />
-                        <Label layoutX="12.0" layoutY="299.0" text="Side View Map">
+                        <Label layoutX="12.0" layoutY="299.0" text="Side View Map:" textFill="#1f58af">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
                         <Label layoutX="12.0" layoutY="318.0" prefHeight="82.0" prefWidth="755.0" text="When selected from the side menu this will display the general outline of the hospital's tower with the floors outlined. On the left of each&#10;floor in green numbers is the amount of clean equipment on each floor and on the right in red is the number of dirty equipment on each &#10;floor. If you select a specific floor you are able to see in more detail which specific equipment is on each floor and whetehr or not it is &#10;dirty and thier locations on the floor." />
-                        <Label layoutX="14.0" layoutY="400.0" text="Map Editor">
+                        <Label layoutX="14.0" layoutY="400.0" text="Map Editor:" textFill="#1f58af">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -70,8 +70,19 @@
                   </AnchorPane>
               </content>
             </ScrollPane>
-         </right>
+         </center>
       </BorderPane>
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
    </children>
    <stylesheets>
       <URL value="@../Stylesheets/ServiceRequestConstants.css" />

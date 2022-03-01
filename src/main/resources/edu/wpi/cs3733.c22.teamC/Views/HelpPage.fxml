@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,6 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.HelpPageController">
@@ -39,46 +41,50 @@
             </GridPane>
          </top>
          <center>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <AnchorPane HBox.hgrow="ALWAYS">
+            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <content>
+                  <HBox alignment="CENTER">
                      <children>
-                        <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <content>
-                            <AnchorPane>
-                                 <children>
-                                    <Label layoutX="8.0" layoutY="14.0" text="Creating a Service Request:">
-                                       <font>
-                                          <Font name="System Bold" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="12.0" layoutY="34.0" prefHeight="139.0" prefWidth="755.0" text="Select the service request page for the request you are looking to create from either the side menu or the systems service page. You &#10;must fill out all the fields on the request page before submitting otherwise the request will not submit. For each page this will include&#10;at least &#10;- Location of where the request needs to be done&#10;- Assignment to the staff memeber that is expected to complete the request&#10;- Status whether the request has been completed or not ( you will most likely set this to waiting  when you create the request)&#10;Then you hit the submit button and you will get a ouhs notification to show it has gone through, or you can hit cancel and it will reset&#10;the page&#10;" />
-                                    <Label layoutX="10.0" layoutY="185.0" text="Viewing a Service Request">
-                                       <font>
-                                          <Font name="System Bold" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="12.0" layoutY="202.0" prefHeight="93.0" prefWidth="755.0" text="You are able to view the service requests made in two main locations&#10;1) the Order traxker page you can access throguh the side menu where you can view the status of all the requests and who they are&#10;assigned to. You may aso updte the status of the reuqets throuh this page or delte it entirely to cancel it&#10;2) the Map Editor Page, you can see the service request created depedning on the location they were assigned to be completed at. You &#10;may also cancel the requests through the map by right-clicking on the icon of the request on the map and then selecting the x to cancel" />
-                                    <Label layoutX="11.0" layoutY="304.0" text="Side View Map">
-                                       <font>
-                                          <Font name="System Bold" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="12.0" layoutY="318.0" prefHeight="82.0" prefWidth="755.0" text="When selected from the side menu this will display the general outline of the hospital's tower with the floors outlined. On the left of each&#10;floor in green numbers is the amount of clean equipment on each floor and on the right in red is the number of dirty equipment on each &#10;floor. If you select a specific floor you are able to see in more detail which specific equipment is on each floor and whetehr or not it is &#10;dirty and thier locations on the floor." />
-                                    <Label layoutX="11.0" layoutY="403.0" text="Map Editor">
-                                       <font>
-                                          <Font name="System Bold" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="12.0" layoutY="420.0" prefHeight="281.0" prefWidth="755.0" text="You can choose which icons are shown on the map by checking the specific icons you would like to see displayed in the top right corner.&#10;&#10;You are able to change floors by clicking the number of floor you woud like to go to in the buttons in the top left of the map editor, or by&#10;selecting the floor on the side using the feature tree on the left.&#10;&#10;if you want to change the location of a location icon, as long as it is clear of equipment you can drag it to a new spot or right-click the &#10;icon and select move and use the feature tree, you can aslo choose to delete this location if there is no equipment&#10;&#10;if you want to add a location you click on a new spot on the map and hit the green add button and you then fill out the required fields&#10;&#10;to move medical equipment you can click and drag it near the next location or you may right-click and use the feature tree to select a&#10;new location. You may also edit the properties of this peice of equipment and mark it as dirty.&#10;&#10;To use Path finder you right-click the location you would like to start at and hit the start button. You then right-click the location on &#10;any floor you would like to end on and select the end button. The computer path button in the top right of the page. The shortest path&#10;will then be displayed.&#10;&#10;&#10;&#10;&#10;" />
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                        </ScrollPane>
+                        <VBox alignment="CENTER" HBox.hgrow="ALWAYS" />
+                        <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="Creating a Service Request" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label prefHeight="300.0" text="Select the service request page for the request you are looking to create from either the side menu or the systems service page. You &#10;must fill out all the fields on the request page before submitting otherwise the request will not submit. For each page this will include&#10;at least &#10;- Location of where the request needs to be done&#10;- Assignment to the staff memeber that is expected to complete the request&#10;- Status whether the request has been completed or not ( you will most likely set this to waiting  when you create the request)&#10;Then you hit the submit button and you will get a ouhs notification to show it has gone through, or you can hit cancel and it will reset&#10;the page&#10;" VBox.vgrow="ALWAYS" />
+                              <Label text="Viewing a Service Request" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="200.0" text="You are able to view the service requests made in two main locations&#10;1) the Order traxker page you can access throguh the side menu where you can view the status of all the requests and who they are&#10;assigned to. You may aso updte the status of the reuqets throuh this page or delte it entirely to cancel it&#10;2) the Map Editor Page, you can see the service request created depedning on the location they were assigned to be completed at. You &#10;may also cancel the requests through the map by right-clicking on the icon of the request on the map and then selecting the x to cancel" VBox.vgrow="ALWAYS" />
+                              <Label prefHeight="100.0" text="Side View Map" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label prefHeight="250.0" text="When selected from the side menu this will display the general outline of the hospital's tower with the floors outlined. On the left of each&#10;floor in green numbers is the amount of clean equipment on each floor and on the right in red is the number of dirty equipment on each &#10;floor. If you select a specific floor you are able to see in more detail which specific equipment is on each floor and whetehr or not it is &#10;dirty and thier locations on the floor." VBox.vgrow="ALWAYS" />
+                              <Label prefHeight="100.0" text="Map Editor" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="200.0" text="You can choose which icons are shown on the map by checking the specific icons you would like to see displayed in the top right corner.&#10;&#10;You are able to change floors by clicking the number of floor you woud like to go to in the buttons in the top left of the map editor, or by&#10;selecting the floor on the side using the feature tree on the left.&#10;&#10;if you want to change the location of a location icon, as long as it is clear of equipment you can drag it to a new spot or right-click the &#10;icon and select move and use the feature tree, you can aslo choose to delete this location if there is no equipment&#10;&#10;if you want to add a location you click on a new spot on the map and hit the green add button and you then fill out the required fields&#10;&#10;to move medical equipment you can click and drag it near the next location or you may right-click and use the feature tree to select a&#10;new location. You may also edit the properties of this peice of equipment and mark it as dirty.&#10;&#10;To use Path finder you right-click the location you would like to start at and hit the start button. You then right-click the location on &#10;any floor you would like to end on and select the end button. The computer path button in the top right of the page. The shortest path&#10;will then be displayed.&#10;&#10;&#10;&#10;&#10;" VBox.vgrow="ALWAYS" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" HBox.hgrow="ALWAYS" />
                      </children>
-                  </AnchorPane>
-               </children>
-            </HBox>
+                  </HBox>
+               </content>
+            </ScrollPane>
          </center>
       </BorderPane>
    </children>

@@ -47,14 +47,11 @@ public class ResultSetParser {
     String className = tableToQueryClass(table);
     List<String> fields = dbConnection.getFieldsFromTable(table);
     try {
-      System.out.println(table);
       queryClass = (Class<? extends Query>) Class.forName(className);
       queryFactory = queryClass.getMethod("staticQueryFactory", String[].class);
 
       while (rs.next()) {
-        System.out.println(fields.size());
         String[] args = new String[fields.size()];
-
         for (int i = 0; i < args.length; i++) {
           args[i] = rs.getString(fields.get(i));
         }

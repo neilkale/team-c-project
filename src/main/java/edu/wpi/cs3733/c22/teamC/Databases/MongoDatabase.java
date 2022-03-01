@@ -165,7 +165,6 @@ public class MongoDatabase {
     String actQuery = query.substring(query.indexOf(' ') + 1);
     actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
     String table = actQuery.substring(0, actQuery.indexOf('('));
-    System.out.println("TABLE IN CREATETABLE:" + table);
     actQuery = actQuery.substring(actQuery.indexOf('('), actQuery.lastIndexOf(')'));
     String toIterate = actQuery;
     ArrayList<String> fields = new ArrayList<>();

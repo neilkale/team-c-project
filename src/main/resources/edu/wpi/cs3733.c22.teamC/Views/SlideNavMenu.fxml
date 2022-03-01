@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" minWidth="-Infinity" prefHeight="680.0" prefWidth="200.0" style="-fx-background-color: #FFF;" stylesheets="@../../../../../../../../Iteration-1/src/main/resources/edu/wpi/cs3733.c22.teamC/Stylesheets/SlideNavMenu.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.windowControllers.SlideNavMenuController">
+<BorderPane fx:id="borderPane" minWidth="-Infinity" prefHeight="680.0" prefWidth="200.0" style="-fx-background-color: #FFF;" stylesheets="@../Stylesheets/SlideNavMenu.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.windowControllers.SlideNavMenuController">
    <center>
       <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="597.0" prefWidth="183.0" style="-fx-background-color: #f5f5f5;" BorderPane.alignment="CENTER">
          <content>

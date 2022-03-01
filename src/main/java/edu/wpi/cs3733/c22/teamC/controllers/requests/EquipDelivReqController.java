@@ -2,6 +2,7 @@ package edu.wpi.cs3733.c22.teamC.controllers.requests;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.*;
 import edu.wpi.cs3733.c22.teamC.Databases.Employee;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.EquipmentRequest;
@@ -50,8 +51,10 @@ public class EquipDelivReqController extends AbstractController {
 
     equipmentIcon.setImage(ImageLoader.loadImage("EquipDelivery"));
 
-    locations = locationQuery.getAllNodeData();
-    employees = employeeQuery.getAllNodeData();
+    LocationDaoImpl lDao = DaoSingleton.getLocationDao();
+    EmployeeDaoImpl eDao = DaoSingleton.getEmployeeDao();
+    locations = lDao.getAllNodes();
+    employees = eDao.getAllNodes();
 
     String nodeTypeDesired = "PATI";
 
@@ -86,7 +89,8 @@ public class EquipDelivReqController extends AbstractController {
   private void confirmButtonPressed() throws IOException, SQLException {
     if (comboBoxesFilled()) {
       EquipmentRequestQuery allNodeValues = new EquipmentRequestQuery();
-      List<EquipmentRequest> serviceRequestList = allNodeValues.getAllNodeData();
+      EquipmentRequestDaoImpl erDao = DaoSingleton.getEquipmentRequestDao();
+      List<EquipmentRequest> serviceRequestList = erDao.getAllNodes();
 
       String nodeIDSelected = "";
 
@@ -136,7 +140,7 @@ public class EquipDelivReqController extends AbstractController {
                       .getValue()
                       .toString()));
       System.out.println(request.get_assignment());
-      allNodeValues.addNode(request);
+      erDao.addNode(request);
 
       String[] toString = request.toString().split("\n", 2);
       controllerMediator.anchorPushNotification(toString[0], toString[1]);

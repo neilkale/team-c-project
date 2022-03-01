@@ -1,5 +1,12 @@
 package edu.wpi.cs3733.c22.teamC.Databases;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoInterface;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Employee implements DatabaseInterface {
 
   private String username;
@@ -13,32 +20,41 @@ public class Employee implements DatabaseInterface {
   private String phoneNumber;
   private String email;
 
+
   public String get_username() {
-    return username;
+    return _username;
   }
 
   public String get_password() {
-    return password;
+    return _password;
   }
 
   public String get_firstName() {
-    return firstName;
+    return _firstName;
   }
 
   public String get_lastName() {
-    return lastName;
+    return _lastName;
+  }
+
+  public String get_Service_Type() {
+    return _serviceType;
   }
 
   public String get_service_type() {
-    return serviceType;
+    return _serviceType;
+  }
+
+  public String get_serviceType() {
+    return _serviceType;
   }
 
   public String get_access() {
-    return access;
+    return _access;
   }
 
   public String get_id() {
-    return id;
+    return _id;
   }
 
   public String get_phoneNumber() {
@@ -50,31 +66,31 @@ public class Employee implements DatabaseInterface {
   }
 
   public void set_username(String username) {
-    this.username = username;
+    this._username = username;
   }
 
   public void set_password(String password) {
-    this.password = password;
+    this._password = password;
   }
 
   public void set_firstName(String firstName) {
-    this.firstName = firstName;
+    this._firstName = firstName;
   }
 
   public void set_lastName(String lastName) {
-    this.lastName = lastName;
+    this._lastName = lastName;
   }
 
   public void set_serviceType(String serviceType) {
-    this.serviceType = serviceType;
+    this._serviceType = serviceType;
   }
 
   public void set_access(String access) {
-    this.access = access;
+    this._access = access;
   }
 
   public void set_id(String id) {
-    this.id = id;
+    this._id = id;
   }
 
   public void set_phoneNumber(String phoneNumber) {
@@ -109,15 +125,15 @@ public class Employee implements DatabaseInterface {
   }
 
   public String get_profilePicture() {
-    return profilePicture;
+    return _profilePicture;
   }
 
   public void set_profilePicture(String profilePicture) {
-    this.profilePicture = profilePicture;
+    this._profilePicture = profilePicture;
   }
 
   @Override
-  public String[] getValues() {
+  public String[] getFields() {
     return new String[] {
       "username",
       "password",
@@ -133,11 +149,65 @@ public class Employee implements DatabaseInterface {
   }
 
   @Override
-  public String getName() {
-    return null;
+  public String[] getValues() {
+    List<String> a = new ArrayList<>();
+    Method getter;
+    for (String s : getFields()) {
+      try {
+        getter = this.getClass().getMethod("get_" + s);
+        a.add((String) getter.invoke(this, new Object[] {}));
+      } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+      } catch (InvocationTargetException e) {
+        e.printStackTrace();
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      }
+    }
+    String[] toReturn = new String[a.size()];
+    for (int i = 0; i < a.size(); i++) {
+      toReturn[i] = a.get(i);
+    }
+    return toReturn;
   }
 
-  public String get_Service_Type() {
-    return serviceType;
+  @Override
+  public String getUID() {
+    return _username;
+  }
+
+  @Override
+  public String[] setValues(String[] values) {
+    List<String> a = new ArrayList<>();
+    String[] fields = getFields();
+    Method setter;
+    for (int i = 0; i < getFields().length; i++) {
+      try {
+        setter = this.getClass().getMethod("set_" + fields[i]);
+        a.add((String) setter.invoke(this, new Object[] {values[i]}));
+      } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+      } catch (InvocationTargetException e) {
+        e.printStackTrace();
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      }
+    }
+
+    String[] toReturn = new String[a.size()];
+    for (int i = 0; i < a.size(); i++) {
+      toReturn[i] = a.get(i);
+    }
+    return toReturn;
+  }
+
+  @Override
+  public String getName() {
+    return this.getClass().getName();
+  }
+
+  @Override
+  public DaoInterface getDao() {
+    return DaoSingleton.getEmployeeDao();
   }
 }

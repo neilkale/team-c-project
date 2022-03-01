@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoInterface;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.MaintenanceRequestQuery;
 
@@ -36,18 +38,6 @@ public class MaintenanceRequest extends ServiceRequest implements DatabaseInterf
     return "Maintenance Request";
   }
 
-  @Override
-  public String[] getFieldNames() {
-    String[] in = getGenericFieldNames();
-    return new String[] {in[0], in[1], in[2], in[3], in[4], "Issue Type"};
-  }
-
-  @Override
-  public String[] getFieldValues() {
-    String[] in = getGenericFieldValues();
-    return new String[] {in[0], in[1], in[2], in[3], in[4], this._issueType};
-  }
-
   public String toString() {
     return "Maintenance Request\nID: "
         + get_ticketID()
@@ -64,12 +54,17 @@ public class MaintenanceRequest extends ServiceRequest implements DatabaseInterf
   }
 
   @Override
-  public String[] getValues() {
+  public String[] getFields() {
     return new String[] {"ID", "Location", "Status", "Service Type", "Assignment", "Issue Type"};
   }
 
   @Override
   public String getName() {
     return this.getClass().getName();
+  }
+
+  @Override
+  public DaoInterface getDao() {
+    return DaoSingleton.getMaintenanceRequestDao();
   }
 }

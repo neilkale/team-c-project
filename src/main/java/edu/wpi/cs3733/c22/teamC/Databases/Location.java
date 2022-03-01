@@ -1,5 +1,12 @@
 package edu.wpi.cs3733.c22.teamC.Databases;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoInterface;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Location implements DatabaseInterface {
 
   private String _nodeID;
@@ -162,27 +169,70 @@ public class Location implements DatabaseInterface {
     this._shortName = null;
   }
 
-  public String[] getarguments() {
-    return new String[] {
-      "nodeID", "xcoord", "ycoord", "floor", "building", "nodeType", "longName", "shortName"
-    };
-  }
-
   public String getName() {
     return "Location";
   }
 
   @Override
+  public DaoInterface getDao() {
+    return DaoSingleton.getLocationDao();
+  }
+
+  @Override
   public String[] getValues() {
+    List<String> a = new ArrayList<>();
+    Method getter;
+    for (String s : getFields()) {
+      try {
+        getter = this.getClass().getMethod("get_" + s);
+        a.add((String) getter.invoke(this, new Object[] {}));
+      } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+      } catch (InvocationTargetException e) {
+        e.printStackTrace();
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      }
+    }
+    String[] toReturn = new String[a.size()];
+    for (int i = 0; i < a.size(); i++) {
+      toReturn[i] = a.get(i);
+    }
+    return toReturn;
+  }
+
+  @Override
+  public String getUID() {
+    return _nodeID;
+  }
+
+  public String[] setValues(String[] values) {
+    List<String> a = new ArrayList<>();
+    Method setter;
+    String[] fields = getFields();
+    for (int i = 0; i < getFields().length; i++) {
+      try {
+        setter = this.getClass().getMethod("set_" + fields[i]);
+        a.add((String) setter.invoke(this, new Object[] {values[i]}));
+      } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+      } catch (InvocationTargetException e) {
+        e.printStackTrace();
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      }
+    }
+    String[] toReturn = new String[a.size()];
+    for (int i = 0; i < a.size(); i++) {
+      toReturn[i] = a.get(i);
+    }
+    return toReturn;
+  }
+
+  @Override
+  public String[] getFields() {
     return new String[] {
-      get_nodeID(),
-      get_xcoord(),
-      get_ycoord(),
-      get_floor(),
-      get_building(),
-      get_nodeType(),
-      get_longName(),
-      get_shortName()
+      "nodeID", "xcoord", "ycoord", "floor", "building", "nodeType", "longName", "shortName"
     };
   }
 

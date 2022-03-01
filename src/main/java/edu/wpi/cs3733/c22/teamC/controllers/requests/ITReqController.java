@@ -2,13 +2,14 @@ package edu.wpi.cs3733.c22.teamC.controllers.requests;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.ITRequestDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.Employee;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.ITRequest;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.ServiceRequest;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.EmployeeQuery;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.LocationQuery;
-import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.ITRequestQuery;
 import edu.wpi.cs3733.c22.teamC.controllers.AbstractController;
 import edu.wpi.cs3733.c22.teamC.controllers.ControllerUtil;
 import edu.wpi.cs3733.c22.teamC.controllers.DatabaseUtil;
@@ -39,8 +40,8 @@ public class ITReqController extends AbstractController {
 
   @FXML
   private void initialize() {
-    locations = locationQuery.getAllNodeData();
-    employees = employeeQuery.getAllNodeData();
+    locations = DaoSingleton.getLocationDao().getAllNodes();
+    employees = DaoSingleton.getEmployeeDao().getAllNodes();
 
     imageView.setImage(ImageLoader.loadImage("IT"));
 
@@ -92,8 +93,9 @@ public class ITReqController extends AbstractController {
               issueComboBox.getSelectionModel().selectedItemProperty().getValue().toString());
 
       System.out.println(request.toString());
-      ITRequestQuery reqQuery = new ITRequestQuery();
-      reqQuery.addNode(request);
+      // ITRequestQuery reqQuery = new ITRequestQuery();
+      ITRequestDaoImpl itDao = DaoSingleton.getItRequestDao();
+      itDao.addNode(request);
 
       String[] toString = request.toString().split("\n", 2);
       controllerMediator.anchorPushNotification(toString[0], toString[1]);

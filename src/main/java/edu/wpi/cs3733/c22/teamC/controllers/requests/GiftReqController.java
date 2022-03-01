@@ -2,6 +2,7 @@ package edu.wpi.cs3733.c22.teamC.controllers.requests;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.*;
 import edu.wpi.cs3733.c22.teamC.Databases.Employee;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.GiftRequest;
@@ -43,8 +44,10 @@ public class GiftReqController extends AbstractController {
 
     imageView.setImage(ImageLoader.loadImage("Gifts"));
 
-    locations = locationQuery.getAllNodeData();
-    employees = employeeQuery.getAllNodeData();
+    LocationDaoImpl lDao = DaoSingleton.getLocationDao();
+    EquipmentDaoImpl eDao = DaoSingleton.getEquipmentDao();
+    locations = lDao.getAllNodes();
+    employees = eDao.getAllNodes();
 
     DatabaseUtil.getLongNames(locationComboBox, "PATI");
 
@@ -87,8 +90,10 @@ public class GiftReqController extends AbstractController {
               giftTypeComboBox.getSelectionModel().selectedItemProperty().getValue().toString());
 
       System.out.println(request.toString());
+
       GiftRequestQuery giftReqQuery = new GiftRequestQuery();
-      giftReqQuery.addNode(request);
+      GiftRequestDaoImpl gDao = DaoSingleton.getGiftRequestDao();
+      gDao.addNode(request);
 
       String[] toString = request.toString().split("\n", 2);
       controllerMediator.anchorPushNotification(toString[0], toString[1]);

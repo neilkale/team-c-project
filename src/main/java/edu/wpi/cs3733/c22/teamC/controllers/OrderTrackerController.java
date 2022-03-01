@@ -2,6 +2,9 @@ package edu.wpi.cs3733.c22.teamC.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.LocationDaoImpl;
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.*;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.filters.ServiceRequestFilters.*;
@@ -74,9 +77,8 @@ public class OrderTrackerController extends AbstractController {
     idComboBox
         .getItems()
         .addAll(FXCollections.observableArrayList(ServiceRequest.getAvailableTicketIDs()));
-    LocationQuery locationQuery = new LocationQuery();
-    locationQuery
-        .getAllNodeData()
+    LocationDaoImpl e = DaoSingleton.getLocationDao();
+    e.getAllNodes()
         .forEach(
             node -> {
               locComboBox.getItems().add(node.get_longName());
@@ -162,9 +164,9 @@ public class OrderTrackerController extends AbstractController {
 
             // get fieldName and fieldValue arrays and convert to ArrayLists
             ArrayList<String> fieldNamesArrayList =
-                new ArrayList<String>(Arrays.asList(serviceRequest.getFieldNames()));
+                new ArrayList<String>(Arrays.asList(serviceRequest.getFields()));
             ArrayList<String> fieldValuesArrayList =
-                new ArrayList<String>(Arrays.asList(serviceRequest.getFieldValues()));
+                new ArrayList<String>(Arrays.asList(serviceRequest.getValues()));
 
             fieldNamesArrayList.forEach(
                 fieldName -> {
@@ -246,10 +248,13 @@ public class OrderTrackerController extends AbstractController {
       Query requestQuery = request.getQueryInstance(); // get query instance of the request
 
       try {
-        requestQuery.removeNode(
-            request); // call removeNode of query and pass in request corresponding to this order
+        ((DatabaseInterface) requestQuery)
+            .getDao()
+            .deleteNode(
+                request); // call removeNode of query and pass in request corresponding to this
+        // order
         // pane
-      } catch (SQLException e) {
+      } catch (Exception e) {
         e.printStackTrace();
       }
       requestHashMap.remove(orderKey);

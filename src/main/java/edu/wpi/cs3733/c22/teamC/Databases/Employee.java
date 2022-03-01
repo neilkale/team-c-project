@@ -10,6 +10,8 @@ public class Employee implements DatabaseInterface {
   private String access;
   private String id;
   private String profilePicture;
+  private String phoneNumber;
+  private String email;
 
   public String get_username() {
     return username;
@@ -37,6 +39,14 @@ public class Employee implements DatabaseInterface {
 
   public String get_id() {
     return id;
+  }
+
+  public String get_phoneNumber() {
+    return phoneNumber;
+  }
+
+  public String get_email() {
+    return email;
   }
 
   public void set_username(String username) {
@@ -67,6 +77,14 @@ public class Employee implements DatabaseInterface {
     this.id = id;
   }
 
+  public void set_phoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+  }
+
+  public void set_email(String email) {
+    this.email = email;
+  }
+
   public Employee(
       String username,
       String password,
@@ -75,7 +93,9 @@ public class Employee implements DatabaseInterface {
       String serviceType,
       String access,
       String id,
-      String picture) {
+      String picture,
+      String phoneNumber,
+      String email) {
     this.username = username;
     this.password = password;
     this.firstName = firstName;
@@ -84,6 +104,8 @@ public class Employee implements DatabaseInterface {
     this.access = access;
     this.id = id;
     this.profilePicture = picture;
+    this.phoneNumber = phoneNumber;
+    this.email = email;
   }
 
   public String get_profilePicture() {
@@ -104,7 +126,9 @@ public class Employee implements DatabaseInterface {
       "serviceType",
       "access",
       "id",
-      "profilePicture"
+      "profilePicture",
+      "phoneNumber",
+      "email"
     };
   }
 

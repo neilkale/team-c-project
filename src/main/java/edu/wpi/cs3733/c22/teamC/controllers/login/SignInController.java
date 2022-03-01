@@ -8,12 +8,14 @@ import edu.wpi.cs3733.c22.teamC.controllers.AbstractController;
 import edu.wpi.cs3733.c22.teamC.controllers.ControllerMediator;
 import edu.wpi.cs3733.c22.teamC.controllers.ControllerUtil;
 import java.io.IOException;
+import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.util.Duration;
 
 public class SignInController extends AbstractController {
   @FXML private Button loginButton;
@@ -66,7 +68,20 @@ public class SignInController extends AbstractController {
         e.printStackTrace();
       }
     } else {
-      System.out.println("WRONG USERNAME/PASSWORD. TRY AGAIN.");
+      ScaleTransition scaleTransition = new ScaleTransition();
+
+      scaleTransition.setByY(.15);
+      scaleTransition.setByX(.15);
+      scaleTransition.setDuration(Duration.millis(100));
+      scaleTransition.setCycleCount(2);
+      scaleTransition.setAutoReverse(true);
+
+      scaleTransition.setNode(username);
+      scaleTransition.play();
+
+      scaleTransition.setNode(psswd);
+      scaleTransition.play();
+
       ControllerUtil.popUpMessage(
           "Incorrect User/Password", "There was an error with your Username/Password");
     }

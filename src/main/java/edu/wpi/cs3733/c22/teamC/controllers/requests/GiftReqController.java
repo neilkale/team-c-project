@@ -14,9 +14,11 @@ import edu.wpi.cs3733.c22.teamC.controllers.ControllerUtil;
 import edu.wpi.cs3733.c22.teamC.controllers.DatabaseUtil;
 import edu.wpi.cs3733.c22.teamC.controllers.ImageLoader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 
 public class GiftReqController extends AbstractController {
@@ -90,9 +92,6 @@ public class GiftReqController extends AbstractController {
 
       String[] toString = request.toString().split("\n", 2);
       controllerMediator.anchorPushNotification(toString[0], toString[1]);
-
-    } else {
-      ControllerUtil.popUpMessage("Error with fields", "Not enough fields filled out");
     }
   }
 
@@ -110,16 +109,21 @@ public class GiftReqController extends AbstractController {
    * @return boolean value for if all the combo boxes have selections that are
    */
   private boolean comboBoxesFilled() {
+    ArrayList<Node> nodes = new ArrayList<>();
     if (locationComboBox.getSelectionModel().isEmpty()) {
-      return false;
+      nodes.add(locationComboBox);
     }
     if (giftTypeComboBox.getSelectionModel().isEmpty()) {
-      return false;
+      nodes.add(giftTypeComboBox);
     }
     if (statusComboBox.getSelectionModel().isEmpty()) {
-      return false;
+      nodes.add(statusComboBox);
     }
     if (assignmentComboBox.getSelectionModel().isEmpty()) {
+      nodes.add(assignmentComboBox);
+    }
+    if (!nodes.isEmpty()) {
+      angryWiggle(nodes);
       return false;
     }
     return true;

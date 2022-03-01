@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
@@ -139,9 +140,6 @@ public class EquipDelivReqController extends AbstractController {
 
       String[] toString = request.toString().split("\n", 2);
       controllerMediator.anchorPushNotification(toString[0], toString[1]);
-
-    } else {
-      ControllerUtil.popUpMessage("Error with fields", "Not enough fields filled out");
     }
   }
 
@@ -152,16 +150,25 @@ public class EquipDelivReqController extends AbstractController {
    * @return boolean value for if all the combo boxes have selections that are
    */
   private boolean comboBoxesFilled() {
+    ArrayList<Node> nodes = new ArrayList<>();
+
+    if (equipmentComboBox.getSelectionModel().isEmpty()) {
+      nodes.add(equipmentComboBox);
+    }
     if (locationComboBox.getSelectionModel().isEmpty()) {
-      return false;
+      nodes.add(locationComboBox);
     }
     if (urgencyComboBox.getSelectionModel().isEmpty()) {
-      return false;
+      nodes.add(urgencyComboBox);
     }
     if (statusComboBox.getSelectionModel().isEmpty()) {
-      return false;
+      nodes.add(statusComboBox);
     }
     if (assignmentComboBox.getSelectionModel().isEmpty()) {
+      nodes.add(assignmentComboBox);
+    }
+    if (!nodes.isEmpty()) {
+      angryWiggle(nodes);
       return false;
     }
     return true;

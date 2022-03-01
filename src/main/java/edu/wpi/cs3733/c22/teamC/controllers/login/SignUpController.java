@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.controllers.login;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.EmployeeDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.Employee;
 import edu.wpi.cs3733.c22.teamC.Main;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.EmployeeQuery;
@@ -135,7 +137,7 @@ public class SignUpController extends AbstractController {
     user = username.getText();
     psswd = password.getText();
     psswd2 = password2.getText();
-    EmployeeQuery e = new EmployeeQuery();
+    EmployeeDaoImpl e = DaoSingleton.getEmployeeDao();
     Employee employee = new Employee(user, psswd, null, null, null, null, null, null);
     if (psswd.equals(psswd2)) {
       e.addNode(employee);

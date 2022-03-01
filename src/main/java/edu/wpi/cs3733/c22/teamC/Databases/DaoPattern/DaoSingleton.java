@@ -13,6 +13,8 @@ public class DaoSingleton {
     private static ReligiousRequestDaoImpl religiousRequestDao;
     private static SanitationRequestDaoImpl sanitationRequestDao;
     private static SecurityRequestDaoImpl securityRequestDao;
+    private static EquipmentDaoImpl equipmentDao;
+    private static MapDaoImpl mapDao;
 
     public static void makeDaoSingleton(){
         employeeDao = new EmployeeDaoImpl();
@@ -75,5 +77,12 @@ public class DaoSingleton {
 
     public static SecurityRequestDaoImpl getSecurityRequestDao() {
         return securityRequestDao;
+    }
+
+    public static EquipmentDaoImpl getEquipmentDao() {
+        return equipmentDao;
+    }
+    public static MapDaoImpl getMapDao() {
+        return mapDao;
     }
 }

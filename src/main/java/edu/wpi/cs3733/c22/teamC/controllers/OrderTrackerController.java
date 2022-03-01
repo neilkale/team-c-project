@@ -2,6 +2,9 @@ package edu.wpi.cs3733.c22.teamC.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.EmployeeDaoImpl;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.LocationDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.*;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.filters.ServiceRequestFilters.*;
@@ -74,9 +77,9 @@ public class OrderTrackerController extends AbstractController {
     idComboBox
         .getItems()
         .addAll(FXCollections.observableArrayList(ServiceRequest.getAvailableTicketIDs()));
-    LocationQuery locationQuery = new LocationQuery();
-    locationQuery
-        .getAllNodeData()
+    LocationDaoImpl e = DaoSingleton.getLocationDao();
+    e
+        .getAllNodes()
         .forEach(
             node -> {
               locComboBox.getItems().add(node.get_longName());

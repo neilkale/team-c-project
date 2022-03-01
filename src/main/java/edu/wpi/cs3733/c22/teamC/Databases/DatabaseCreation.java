@@ -179,6 +179,8 @@ public class DatabaseCreation {
               + "access VARCHAR(255), "
               + "id VARCHAR(255), "
               + "profilePicture VARCHAR(255)"
+              + "phoneNumber VARCHAR(255),"
+              + "email VARCHAR(255),"
               + ")";
       dbConnection.execute(query);
     } catch (SQLException e) {

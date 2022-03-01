@@ -25,6 +25,9 @@ public class ProfilePageController {
 
   @FXML
   void initialize() {
+    firstNameLabel.setText(LoggedInUser.getCurrentUser().get_firstName());
+    lastNameLabel.setText(LoggedInUser.getCurrentUser().get_lastName());
+    jobTypeLabel.setText(LoggedInUser.getCurrentUser().get_Service_Type());
     imageView.setImage(LoggedInUser.getProfilePic());
 
     for (String s : picNames) {

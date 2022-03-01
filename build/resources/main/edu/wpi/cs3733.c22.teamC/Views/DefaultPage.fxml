@@ -24,7 +24,7 @@
          <left>
             <GridPane BorderPane.alignment="CENTER">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                  <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="150.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -156,6 +156,11 @@
                         <Insets />
                      </opaqueInsets>
                   </VBox>
+                  <JFXDrawer fx:id="profileDrawer" defaultDrawerSize="400.0" direction="BOTTOM" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" GridPane.valignment="BOTTOM">
+                     <GridPane.margin>
+                        <Insets left="150.0" />
+                     </GridPane.margin>
+                  </JFXDrawer>
                </children>
                <effect>
                   <DropShadow />
@@ -163,20 +168,9 @@
             </GridPane>
          </left>
          <center>
-            <GridPane BorderPane.alignment="CENTER">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="300.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0" />
-                  <JFXDrawersStack fx:id="drawerStack" prefHeight="600.0" prefWidth="200.0" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
-                  <JFXDrawer fx:id="profileDrawer" defaultDrawerSize="400.0" direction="BOTTOM" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" GridPane.valignment="BOTTOM" />
-               </children>
-            </GridPane>
+            <Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
+      <JFXDrawersStack fx:id="drawerStack" layoutX="150.0" prefHeight="400.0" prefWidth="300.0" />
    </children>
 </AnchorPane>

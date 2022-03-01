@@ -9,7 +9,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.HelpPageController">
@@ -41,91 +43,98 @@
          <center>
             <ScrollPane prefHeight="648.0" prefWidth="800.0" BorderPane.alignment="CENTER">
                <content>
-                  <GridPane prefHeight="722.0" prefWidth="796.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints maxHeight="292.3333079020182" minHeight="10.0" prefHeight="152.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="255.33333015441895" minHeight="0.0" prefHeight="132.66668701171875" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="488.66666666666663" minHeight="10.0" prefHeight="116.33331298828125" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="488.66666666666663" minHeight="10.0" prefHeight="213.00002034505206" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="488.66666666666663" minHeight="0.0" prefHeight="75.66664632161462" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Creating a Service Request:" textFill="#1c5099" GridPane.halignment="LEFT" GridPane.valignment="TOP">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets left="10.0" />
-                           </GridPane.margin>
-                        </Label>
-                        <Label lineSpacing="2.0" minWidth="-Infinity" prefWidth="1200.0" text="Select the service request page for the request you are looking to create from either the side menu or the systems service page. You must fill out all the fields on the request page before submitting otherwise the request will not submit. For each page this will include at least &#10;- Location of where the request needs to be done&#10;- Assignment to the staff memeber that is expected to complete the request&#10;- Status whether the request has been completed or not ( you will most likely set this to waiting  when you create the request)&#10;Then you hit the submit button and you will get a ouhs notification to show it has gone through, or you can hit cancel and it will reset the page&#10;" textFill="#477ccc" wrapText="true" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
-                           <GridPane.margin>
-                              <Insets left="10.0" top="10.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label text="Viewing a Service Request:" textFill="#1c5099" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets left="10.0" />
-                           </GridPane.margin>
-                        </Label>
-                        <Label lineSpacing="2.0" minWidth="-Infinity" prefWidth="1200.0" text="You are able to view the service requests made in two main locations&#10;1) the Order tracker page you can access throguh the side menu where you can view the status of all the requests and who they are assigned to. You may aso updte the status of the requests through this page or delete it entirely to cancel it.&#10;2) the Map Editor Page, you can see the service request created depedning on the location they were assigned to be completed at. You may also cancel the requests through the map by right-clicking on the icon of the request on the map and then selecting the x to cancel" textFill="#477ccc" wrapText="true" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                           <GridPane.margin>
-                              <Insets left="10.0" top="10.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label text="Side View Map:" textFill="#1c5099" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets left="10.0" />
-                           </GridPane.margin>
-                        </Label>
-                        <Label lineSpacing="2.0" minWidth="-Infinity" prefWidth="1200.0" text="When selected from the side menu this will display the general outline of the hospital's tower with the floors outlined. On the left of each floor in green numbers is the amount of clean equipment on each floor and on the right in red is the number of dirty equipment on each floor. If you select a specific floor you are able to see in more detail which specific equipment is on each floor and whetehr or not it is dirty and thier locations on the floor." textFill="#477ccc" wrapText="true" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                           <GridPane.margin>
-                              <Insets left="10.0" top="10.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label text="Map Editor:" textFill="#1c5099" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="TOP">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets left="10.0" />
-                           </GridPane.margin>
-                        </Label>
-                        <Label lineSpacing="2.0" minWidth="-Infinity" prefWidth="1200.0" text="You can choose which icons are shown on the map by checking the specific icons you would like to see displayed in the top right corner.&#10;&#10;You are able to change floors by clicking the number of floor you woud like to go to in the buttons in the top left of the map editor, or by selecting the floor on the side using the feature tree on the left.&#10;&#10;if you want to change the location of a location icon, as long as it is clear of equipment you can drag it to a new spot or right-click the icon and select move and use the feature tree, you can aslo choose to delete this location if there is no equipment&#10;&#10;if you want to add a location you click on a new spot on the map and hit the green add button and you then fill out the required fields&#10;&#10;to move medical equipment you can click and drag it near the next location or you may right-click and use the feature tree to select a new location. You may also edit the properties of this peice of equipment and mark it as dirty.&#10;&#10;To use Path finder you right-click the location you would like to start at and hit the start button. You then right-click the location on &#10;any floor you would like to end on and select the end button. The computer path button in the top right of the page. The shortest path&#10;will then be displayed.&#10;&#10;&#10;&#10;&#10;" textFill="#477ccc" wrapText="true" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                           <GridPane.margin>
-                              <Insets left="10.0" top="10.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                           <padding>
-                              <Insets top="20.0" />
-                           </padding>
-                        </Label>
+                        <VBox prefHeight="200.0" prefWidth="100.0" />
+                        <VBox prefHeight="200.0" prefWidth="100.0" />
+                        <VBox prefHeight="200.0" prefWidth="100.0" />
                      </children>
-                  </GridPane>
+                  </HBox>
                </content>
             </ScrollPane>
          </center>
       </BorderPane>
+      <GridPane prefHeight="722.0" prefWidth="796.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="292.3333079020182" minHeight="10.0" prefHeight="152.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="255.33333015441895" minHeight="0.0" prefHeight="132.66668701171875" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="488.66666666666663" minHeight="10.0" prefHeight="116.33331298828125" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="488.66666666666663" minHeight="10.0" prefHeight="213.00002034505206" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="488.66666666666663" minHeight="0.0" prefHeight="75.66664632161462" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Creating a Service Request:" textFill="#1c5099" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label lineSpacing="2.0" minWidth="-Infinity" prefWidth="1200.0" text="Select the service request page for the request you are looking to create from either the side menu or the systems service page. You must fill out all the fields on the request page before submitting otherwise the request will not submit. For each page this will include at least &#10;- Location of where the request needs to be done&#10;- Assignment to the staff memeber that is expected to complete the request&#10;- Status whether the request has been completed or not ( you will most likely set this to waiting  when you create the request)&#10;Then you hit the submit button and you will get a ouhs notification to show it has gone through, or you can hit cancel and it will reset the page&#10;" textFill="#477ccc" wrapText="true" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="10.0" top="10.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label text="Viewing a Service Request:" textFill="#1c5099" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label lineSpacing="2.0" minWidth="-Infinity" prefWidth="1200.0" text="You are able to view the service requests made in two main locations&#10;1) the Order tracker page you can access throguh the side menu where you can view the status of all the requests and who they are assigned to. You may aso updte the status of the requests through this page or delete it entirely to cancel it.&#10;2) the Map Editor Page, you can see the service request created depedning on the location they were assigned to be completed at. You may also cancel the requests through the map by right-clicking on the icon of the request on the map and then selecting the x to cancel" textFill="#477ccc" wrapText="true" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="10.0" top="10.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label text="Side View Map:" textFill="#1c5099" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label lineSpacing="2.0" minWidth="-Infinity" prefWidth="1200.0" text="When selected from the side menu this will display the general outline of the hospital's tower with the floors outlined. On the left of each floor in green numbers is the amount of clean equipment on each floor and on the right in red is the number of dirty equipment on each floor. If you select a specific floor you are able to see in more detail which specific equipment is on each floor and whetehr or not it is dirty and thier locations on the floor." textFill="#477ccc" wrapText="true" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="10.0" top="10.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label text="Map Editor:" textFill="#1c5099" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label lineSpacing="2.0" minWidth="-Infinity" prefWidth="1200.0" text="You can choose which icons are shown on the map by checking the specific icons you would like to see displayed in the top right corner.&#10;&#10;You are able to change floors by clicking the number of floor you woud like to go to in the buttons in the top left of the map editor, or by selecting the floor on the side using the feature tree on the left.&#10;&#10;if you want to change the location of a location icon, as long as it is clear of equipment you can drag it to a new spot or right-click the icon and select move and use the feature tree, you can aslo choose to delete this location if there is no equipment&#10;&#10;if you want to add a location you click on a new spot on the map and hit the green add button and you then fill out the required fields&#10;&#10;to move medical equipment you can click and drag it near the next location or you may right-click and use the feature tree to select a new location. You may also edit the properties of this peice of equipment and mark it as dirty.&#10;&#10;To use Path finder you right-click the location you would like to start at and hit the start button. You then right-click the location on &#10;any floor you would like to end on and select the end button. The computer path button in the top right of the page. The shortest path&#10;will then be displayed.&#10;&#10;&#10;&#10;&#10;" textFill="#477ccc" wrapText="true" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="10.0" top="10.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+            </Label>
+         </children>
+      </GridPane>
    </children>
    <stylesheets>
       <URL value="@../Stylesheets/ServiceRequestConstants.css" />

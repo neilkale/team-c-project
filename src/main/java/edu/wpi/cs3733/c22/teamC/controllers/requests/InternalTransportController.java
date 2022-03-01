@@ -14,9 +14,11 @@ import edu.wpi.cs3733.c22.teamC.controllers.ControllerUtil;
 import edu.wpi.cs3733.c22.teamC.controllers.DatabaseUtil;
 import edu.wpi.cs3733.c22.teamC.controllers.ImageLoader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 
 public class InternalTransportController extends AbstractController {
@@ -122,19 +124,24 @@ public class InternalTransportController extends AbstractController {
    * @return boolean value for if all the combo boxes have selections that are
    */
   private boolean comboBoxesFilled() {
+    ArrayList<Node> nodes = new ArrayList<>();
     if (statusComboBox.getSelectionModel().isEmpty()) {
-      return false;
+      nodes.add(statusComboBox);
     }
     if (assignmentComboBox.getSelectionModel().isEmpty()) {
-      return false;
+      nodes.add(assignmentComboBox);
     }
     if (pickUpLocationComboBox.getSelectionModel().isEmpty()) {
-      return false;
+      nodes.add(pickUpLocationComboBox);
     }
     if (dropOffLocationComboBox.getSelectionModel().isEmpty()) {
-      return false;
+      nodes.add(dropOffLocationComboBox);
     }
     if (urgencyComboBox.getSelectionModel().isEmpty()) {
+      nodes.add(urgencyComboBox);
+    }
+    if (!nodes.isEmpty()) {
+      angryWiggle(nodes);
       return false;
     }
     return true;

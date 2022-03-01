@@ -14,9 +14,11 @@ import edu.wpi.cs3733.c22.teamC.controllers.ControllerUtil;
 import edu.wpi.cs3733.c22.teamC.controllers.DatabaseUtil;
 import edu.wpi.cs3733.c22.teamC.controllers.ImageLoader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 
 public class LangInterpreterController extends AbstractController {
@@ -117,16 +119,21 @@ public class LangInterpreterController extends AbstractController {
    * @return boolean value for if all the combo boxes have selections that are
    */
   private boolean comboBoxesFilled() {
+    ArrayList<Node> nodes = new ArrayList<>();
     if (locationComboBox.getSelectionModel().isEmpty()) {
-      return false;
-    }
-    if (languageComboBox.getSelectionModel().isEmpty()) {
-      return false;
-    }
-    if (statusComboBox.getSelectionModel().isEmpty()) {
-      return false;
+      nodes.add(locationComboBox);
     }
     if (assignmentComboBox.getSelectionModel().isEmpty()) {
+      nodes.add(assignmentComboBox);
+    }
+    if (languageComboBox.getSelectionModel().isEmpty()) {
+      nodes.add(languageComboBox);
+    }
+    if (statusComboBox.getSelectionModel().isEmpty()) {
+      nodes.add(statusComboBox);
+    }
+    if (!nodes.isEmpty()) {
+      angryWiggle(nodes);
       return false;
     }
     return true;

@@ -14,9 +14,11 @@ import edu.wpi.cs3733.c22.teamC.controllers.ControllerUtil;
 import edu.wpi.cs3733.c22.teamC.controllers.DatabaseUtil;
 import edu.wpi.cs3733.c22.teamC.controllers.ImageLoader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 
 public class MedicineDeliveryController extends AbstractController {
@@ -126,22 +128,27 @@ public class MedicineDeliveryController extends AbstractController {
    * @return boolean value for if all the combo boxes have selections that are
    */
   private boolean comboBoxesFilled() {
+    ArrayList<Node> nodes = new ArrayList<>();
     if (locationComboBox.getSelectionModel().isEmpty()) {
-      return false;
-    }
-    if (medicineComboBox.getSelectionModel().isEmpty()) {
-      return false;
+      nodes.add(locationComboBox);
     }
     if (assignmentComboBox.getSelectionModel().isEmpty()) {
-      return false;
+      nodes.add(assignmentComboBox);
+    }
+    if (medicineComboBox.getSelectionModel().isEmpty()) {
+      nodes.add(medicineComboBox);
     }
     if (statusComboBox.getSelectionModel().isEmpty()) {
-      return false;
+      nodes.add(statusComboBox);
     }
     if (quantityComboBox.getSelectionModel().isEmpty()) {
-      return false;
+      nodes.add(quantityComboBox);
     }
     if (urgencyComboBox.getSelectionModel().isEmpty()) {
+      nodes.add(urgencyComboBox);
+    }
+    if (!nodes.isEmpty()) {
+      angryWiggle(nodes);
       return false;
     }
     return true;

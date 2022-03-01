@@ -20,7 +20,7 @@ public abstract class Query<T> {
 
   protected DatabaseConnection dbConnection = DatabaseConnection.getInstance();
 
-  public abstract T queryFactory(String[] inputs);
+  public abstract T queryFactory(String[] args);
 
   public static Object factoryGeneric(
       String table,
@@ -261,6 +261,10 @@ public abstract class Query<T> {
 
   public abstract String getUID(T each) throws SQLException;
 
+  public static ArrayList<String> getTableNames() {
+    return DatabaseConnection.getTableNames();
+  }
+
   public ArrayList<T> getAllNodeData() {
     T queryResult = null;
     ArrayList<T> allNodes = new ArrayList<>();
@@ -286,6 +290,7 @@ public abstract class Query<T> {
 
   public abstract String
       getQueryInput(); // Returns the table name so that I can query it (For example in locations
+
   // this would be "TowerLocationsC")
 
   public void readCsv(String fileName) {

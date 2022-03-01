@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 
 // this singleton mediator will be used for all incoming and outgoing controller communication
 // now controllers don't call each other directly, leading to low coupling and centralized
@@ -17,6 +18,7 @@ public class ControllerMediator {
   // create an object of SingleObject
   private static ControllerMediator instance = new ControllerMediator();
   private TabPaneController tabPaneController;
+  private OrderTrackerController orderTrackerController;
   private HashMap<String, DefaultController> defaultControllerMap =
       new HashMap<String, DefaultController>();
   private HashMap<String, OrderController> orderControllerMap =
@@ -33,6 +35,15 @@ public class ControllerMediator {
 
   public void setTabPaneController(TabPaneController tabPaneController) {
     this.tabPaneController = tabPaneController;
+  }
+
+  public void setOrderTrackerController(OrderTrackerController orderTrackerController) {
+    this.orderTrackerController = orderTrackerController;
+  }
+
+  public void setOrderTrackerControllerAssigned(String employeeName) {
+    orderTrackerController.getEmployeeComboBox().getEditor().setText(employeeName);
+    orderTrackerController.getEmployeeComboBox().requestFocus();
   }
 
   // takes in the hashcode key of a Tab and a Default Controller instance
@@ -90,6 +101,11 @@ public class ControllerMediator {
     return getOrderController(orderKey).getAllFieldValues();
   }
 
+  // returns index of location field from an order
+  public int getLocationFieldIndex(String orderKey) {
+    return getOrderController(orderKey).getLocationFieldIndex();
+  }
+
   public void setOrderTitle(String orderKey, String titleText) {
     getOrderController(orderKey).setTitleLabelText(titleText);
   }
@@ -99,6 +115,15 @@ public class ControllerMediator {
   public void setDefaultPageCenter(String fxmlFileName) {
     try {
       this.getDefaultController().setCenter(fxmlFileName);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  // overloaded constructor
+  public void setDefaultPageCenter(Pane pane, String fxmlFileName) {
+    try {
+      this.getDefaultController().setCenter(pane, fxmlFileName);
     } catch (IOException e) {
       e.printStackTrace();
     }

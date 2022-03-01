@@ -1,9 +1,10 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.ITRequestQuery;
 
 /** this class is for the IT service request data */
-public class ITRequest extends ServiceRequest {
+public class ITRequest extends ServiceRequest implements DatabaseInterface {
   private String _issueType;
 
   public ITRequest(
@@ -60,5 +61,15 @@ public class ITRequest extends ServiceRequest {
         + get_assignment()
         + "\nIssue Type: "
         + _issueType;
+  }
+
+  @Override
+  public String[] getValues() {
+    return new String[] {"ID", "Location", "Status", "Service Type", "Assignment", "Issue Type"};
+  }
+
+  @Override
+  public String getName() {
+    return this.getClass().getName();
   }
 }

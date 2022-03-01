@@ -1,8 +1,9 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.LaundryRequestQuery;
 
-public class LaundryRequest extends ServiceRequest {
+public class LaundryRequest extends ServiceRequest implements DatabaseInterface {
 
   public LaundryRequest(
       String _ticketID,
@@ -46,5 +47,15 @@ public class LaundryRequest extends ServiceRequest {
         + get_serviceType()
         + "\nAssignment: "
         + get_assignment();
+  }
+
+  @Override
+  public String[] getValues() {
+    return new String[] {"ID", "Location", "Status", "Service Type", "Assignment"};
+  }
+
+  @Override
+  public String getName() {
+    return this.getClass().getName();
   }
 }

@@ -28,6 +28,7 @@ public class ServiceRequestController extends AbstractController {
   @FXML private JFXButton giftButton;
   @FXML private JFXButton religiousButton;
   @FXML private JFXButton securityButton;
+  @FXML private JFXButton teamCDAPI;
 
   @FXML ImageView LaundryServiceButtonIcon;
   @FXML ImageView langInterpButtonIcon;
@@ -72,7 +73,8 @@ public class ServiceRequestController extends AbstractController {
             transportButton,
             giftButton,
             religiousButton,
-            securityButton));
+            securityButton,
+            teamCDAPI));
 
     showNamesCheckBox
         .selectedProperty()
@@ -169,5 +171,10 @@ public class ServiceRequestController extends AbstractController {
   @FXML
   private void securityButtonPressed() throws IOException {
     controllerMediator.setDefaultPageCenter("SecurityRequest.fxml");
+  }
+
+  @FXML
+  private void teamCDAPIPressed() throws IOException {
+    controllerMediator.setDefaultPageCenter("APIRequest.fxml");
   }
 }

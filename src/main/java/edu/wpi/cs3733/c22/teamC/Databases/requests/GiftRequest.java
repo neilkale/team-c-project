@@ -1,8 +1,9 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.GiftRequestQuery;
 
-public class GiftRequest extends ServiceRequest {
+public class GiftRequest extends ServiceRequest implements DatabaseInterface {
 
   private String _giftType;
 
@@ -60,5 +61,15 @@ public class GiftRequest extends ServiceRequest {
         + get_assignment()
         + "\nGiftType: "
         + _giftType;
+  }
+
+  @Override
+  public String[] getValues() {
+    return new String[] {"ID", "Location", "Status", "Service Type", "Assignment", "GiftType"};
+  }
+
+  @Override
+  public String getName() {
+    return this.getClass().getName();
   }
 }

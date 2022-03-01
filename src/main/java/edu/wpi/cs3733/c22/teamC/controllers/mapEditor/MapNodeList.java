@@ -39,8 +39,9 @@ public class MapNodeList {
     ArrayList<MedicineRequest> mediReq = new ArrayList<>();
     ArrayList<ReligiousRequest> reliReq = new ArrayList<>();
     ArrayList<SanitationRequest> sanReq = new ArrayList<>();
-
+    ArrayList<Location> locs = new ArrayList<>();
     for (MapNode each : nodes) {
+      locs.add(each.getLocation());
       equipment.addAll(each.equipment);
       ArrayList<ServiceRequest> working = each.requests;
       for (ServiceRequest curr : working) {
@@ -89,6 +90,7 @@ public class MapNodeList {
     (new MedicineRequestQuery()).compareAndChange(mediReq, "ticketID");
     (new ReligiousRequestQuery()).compareAndChange(reliReq, "ticketID");
     (new SanitationRequestQuery()).compareAndChange(sanReq, "ticketID");
+    (new LocationQuery()).compareAndChange(locs, "nodeID");
     // (new Query()).compareAndChange();
 
   }

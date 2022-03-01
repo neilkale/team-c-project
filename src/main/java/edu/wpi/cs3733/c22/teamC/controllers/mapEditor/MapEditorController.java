@@ -152,11 +152,11 @@ public class MapEditorController extends AbstractController { // todo implement 
       n.update();
       n.setOnMouseEntered(
           (MouseEvent evt) -> {
-            if (!n.isSelected()) n.setOpacity(.8);
+            if (n.getOpacity() == .6) n.setOpacity(.8);
           });
       n.setOnMouseExited(
           (MouseEvent evt) -> {
-            if (!n.isSelected()) n.setOpacity(.6);
+            if (n.getOpacity() == .8) n.setOpacity(.6);
           });
       iconPane.getChildren().add(n);
     }
@@ -376,6 +376,7 @@ public class MapEditorController extends AbstractController { // todo implement 
       list.nodes
           .get(index)
           .setLocationPos(x / MapState.getZoomFactor(), y / MapState.getZoomFactor());
+      list.nodes.get(index).playEnlargeAnimation();
       movingLocation = false;
     }
     refresh();

@@ -108,6 +108,18 @@
                                     </ImageView>
                                  </graphic>
                               </JFXButton>
+                              <JFXButton fx:id="infoButton" alignment="TOP_LEFT" prefHeight="50.0" prefWidth="500.0" text="Information" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/DashboardIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
                               <JFXButton fx:id="exitButton" alignment="TOP_LEFT" prefHeight="50.0" prefWidth="500.0" text="Exit" textFill="WHITE" VBox.vgrow="NEVER">
                                  <VBox.margin>
                                     <Insets bottom="20.0" />
@@ -132,6 +144,9 @@
                                  <font>
                                     <Font size="15.0" />
                                  </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
                               </Label>
                            </children>
                         </VBox>
@@ -150,6 +165,6 @@
             <Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
-      <JFXDrawersStack fx:id="drawerStack" layoutX="150.0" prefHeight="600.0" prefWidth="235.0" />
+      <JFXDrawersStack fx:id="drawerStack" layoutX="150.0" prefHeight="600.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

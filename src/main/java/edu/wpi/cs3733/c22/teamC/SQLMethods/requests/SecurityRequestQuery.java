@@ -12,12 +12,15 @@ public class SecurityRequestQuery extends Query<SecurityRequest> {
 
   public SecurityRequestQuery() {}
 
-  @Override
   public SecurityRequest queryFactory(String[] inputs) {
+    return staticQueryFactory(inputs);
+  }
+
+  public static SecurityRequest staticQueryFactory(String[] inputs) {
     if (inputs.length != 8) {
       System.out.println(
           "[QueryFactory of QueryType]: "
-              + getQueryInput()
+              + staticGetQueryInput()
               + "has failed | Input arguments does not match the allotted arguments for the creation of the object - NULL has been returned");
       return null;
     }
@@ -138,6 +141,10 @@ public class SecurityRequestQuery extends Query<SecurityRequest> {
 
   @Override
   public String getQueryInput() {
+    return staticGetQueryInput();
+  }
+
+  public static String staticGetQueryInput() {
     return "SECURITYREQUESTC";
   }
 }

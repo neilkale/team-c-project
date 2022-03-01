@@ -16,23 +16,25 @@ public class Node {
   private int h;
   private int row;
   private int col;
+  private int height;
   private boolean isBlock;
   private Node parent;
   private List<Node> adjacents;
   private String nodeID;
 
-  public Node(int row, int col, String nodeID) {
+  public Node(int row, int col, int height, String nodeID) {
     super();
     this.row = row;
     this.col = col;
+    this.height = height;
     this.nodeID = nodeID;
     this.isBlock = false;
     adjacents = new ArrayList<Node>();
   }
 
-  public void calculateHeuristic(Node finalNode) {
-    this.h = Math.abs(finalNode.getRow() - getRow()) + Math.abs(finalNode.getCol() - getCol());
-  }
+  //  public void calculateHeuristic(Node finalNode) {
+  //    this.h = Math.abs(finalNode.getRow() - getRow()) + Math.abs(finalNode.getCol() - getCol());
+  //  }
 
   public void setNodeData(Node currentNode, int cost) {
     int gCost = currentNode.getG() + cost;
@@ -131,7 +133,11 @@ public class Node {
   }
 
   public static int getDistance(Node n1, Node n2) {
-    return (int) Math.sqrt(Math.pow(n1.row - n2.row, 2) + Math.pow(n1.col - n2.col, 2));
+    return (int)
+        Math.sqrt(
+            Math.pow(n1.row - n2.row, 2)
+                + Math.pow(n1.col - n2.col, 2)
+                + Math.pow(n1.height - n2.height, 2));
   }
 
   public String getNodeID() {

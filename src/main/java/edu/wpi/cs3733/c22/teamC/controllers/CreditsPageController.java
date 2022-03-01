@@ -4,6 +4,5 @@ import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 
 public class CreditsPageController extends AbstractController {
-    @FXML private JFXButton backButton;
-
+  @FXML private JFXButton backButton;
 }

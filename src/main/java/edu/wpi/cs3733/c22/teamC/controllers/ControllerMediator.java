@@ -46,6 +46,15 @@ public class ControllerMediator {
     orderTrackerController.getEmployeeComboBox().requestFocus();
   }
 
+  // sets the name of the logged in user on default page left menu, bottom
+  public void setNameLabel(String nameOfUser) {
+    try {
+      getDefaultController().getNameLabel().setText(nameOfUser);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
   // takes in the hashcode key of a Tab and a Default Controller instance
   public void addDefaultController(String tabKey, DefaultController defaultController) {
     this.defaultControllerMap.put(tabKey, defaultController);

@@ -17,11 +17,17 @@ public class MongoDatabase {
   private static Map<String, ArrayList<String>> map;
   private static String uri =
       "mongodb+srv://admin:dDbno11RbFVsXVv3@serverlessinstance0.zitm8.mongodb.net/teamC_DB?retryWrites=true&w=majority";
+  private DatabaseConnection databaseConnection;
 
   public MongoDatabase() {
-    mongoClient = MongoClients.create(uri);
-    teamC_db = mongoClient.getDatabase("teamC_DB");
-    map = new HashMap<>();
+    try{
+      mongoClient = MongoClients.create(uri);
+      teamC_db = mongoClient.getDatabase("teamC_DB");
+      map = new HashMap<>();
+      databaseConnection = DatabaseConnection.getInstance();
+    } catch (Exception e){
+      databaseConnection.disableMongo();
+    }
   }
 
   public void closeMongo() {
@@ -56,7 +62,12 @@ public class MongoDatabase {
       }
       docList.add(doc);
     }
-    teamC_db.getCollection(table).insertMany(docList);
+
+    try{
+      teamC_db.getCollection(table).insertMany(docList);
+    } catch (Exception e){
+      databaseConnection.disableMongo();
+    }
   }
 
   public String getAction(String query) {
@@ -108,7 +119,11 @@ public class MongoDatabase {
     for (int i = 0; i < fields.size(); i++) {
       doc.append(fields.get(i), values.get(i));
     }
-    teamC_db.getCollection(table).insertOne(doc);
+    try{
+      teamC_db.getCollection(table).insertOne(doc);
+    } catch (Exception e){
+      databaseConnection.disableMongo();
+    }
     return "INSERT";
   }
 
@@ -270,7 +285,7 @@ public class MongoDatabase {
     return toReturn;
   }
 
-  public String tableToQueryClass(String tableName) {
+  public static String tableToQueryClass(String tableName) {
     String toCheck = tableName.toUpperCase(Locale.ROOT);
     String toReturn = "";
     switch (toCheck) {

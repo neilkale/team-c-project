@@ -256,6 +256,7 @@ public abstract class ServiceRequest implements DatabaseInterface {
     return new int[] {total.size(), completed};
   }
 
+
   // return all of the current ticketIDs being used for submitted requests
   public static ArrayList<String> getAvailableTicketIDs() {
     ArrayList<ServiceRequest> total = getAllServiceRequests();
@@ -265,10 +266,11 @@ public abstract class ServiceRequest implements DatabaseInterface {
           ids.add(serviceRequest.get_ticketID());
         });
     return ids;
-}
+  }
+
   protected static ArrayList<String> getServiceRequestTables() {
     ArrayList<String> list = new ArrayList<>();
-    for (String each : DatabaseConnection.getTableNames()) {
+    for (String each : Query.getTableNames()) {
       if (each.toUpperCase().contains("REQUEST")) list.add(each);
     }
     return list;

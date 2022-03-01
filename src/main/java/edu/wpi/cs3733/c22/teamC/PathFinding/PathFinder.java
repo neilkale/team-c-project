@@ -42,6 +42,7 @@ public class PathFinder {
           new Node(
               Integer.parseInt(loc.get_xcoord()),
               Integer.parseInt(loc.get_ycoord()),
+              loc.get_zcoord(),
               loc.get_nodeID());
       nodeMap.put(loc.get_nodeID(), node);
     }
@@ -82,13 +83,27 @@ public class PathFinder {
     return nodeMap;
   }
 
-  public void blockMaintenance() {
+  /**
+   * Blocks nodes with live maintenance requests
+   */
+  private void blockMaintenance() {
     MaintenanceRequestQuery maintenanceRequestQuery = new MaintenanceRequestQuery();
     ArrayList<MaintenanceRequest> allMaintenanceRequests = maintenanceRequestQuery.getAllNodeData();
     for (MaintenanceRequest maintenanceRequest : allMaintenanceRequests) {
       String maintenanceLocationID = maintenanceRequest.get_locationID();
       nodeMap.get(maintenanceLocationID).setBlock(true);
     }
+  }
+
+  /**
+   * Blocks stairs for disabled guests
+   */
+  public void setDisabilityFriendly(boolean enabled) {
+    nodeMap.forEach((key,value) -> {
+      if (key.toUpperCase().contains("STAI")) {
+        value.setBlock(enabled);
+      }
+    });
   }
 
   public Node getNodeByID(String nodeID) {

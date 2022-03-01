@@ -41,8 +41,8 @@ public class SideViewDeselectedController {
         break;
     }
     cleanLabel.setText(
-        Integer.toString(EquipmentCountTracker.getCleanEquipCount(MapState.getCurrentFloor())));
+        Integer.toString(SideViewTracker.getCleanEquipCount(MapState.getCurrentFloor())));
     dirtyLabel.setText(
-        Integer.toString(EquipmentCountTracker.getDirtyEquipCount(MapState.getCurrentFloor())));
+        Integer.toString(SideViewTracker.getDirtyEquipCount(MapState.getCurrentFloor())));
   }
 }

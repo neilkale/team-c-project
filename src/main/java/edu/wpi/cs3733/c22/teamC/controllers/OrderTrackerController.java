@@ -277,9 +277,12 @@ public class OrderTrackerController extends AbstractController {
             // else if the field is the location fieldValue, convert it back to NodeID for database
             // storage
             else if (orderFieldsList.indexOf(field)
-                == controllerMediator.getLocationFieldIndex(orderKey))
-              orderFieldsList.set(
-                  orderFieldsList.indexOf(field), LocationQuery.longToNodeID(field));
+                == controllerMediator.getLocationFieldIndex(orderKey)) {
+              String nodeID = LocationQuery.longToNodeID(field);
+              if (!nodeID.equals("")) orderFieldsList.set(orderFieldsList.indexOf(field), nodeID);
+              else
+                ControllerUtil.popUpMessage("Error Saving", "You have entered an invalid location");
+            }
           });
 
       // retrieve the corresponding request instance that matches the request of this order pane
@@ -324,7 +327,7 @@ public class OrderTrackerController extends AbstractController {
                   srCriteria = new SRCriteriaID(comboBox.getEditor().getText());
                   break;
                 case "location":
-                  srCriteria = new SRCriteriaLocation(comboBox.getEditor().getText());
+                  srCriteria = new SRCriteriaLocationLong(comboBox.getEditor().getText());
                   break;
                 case "type":
                   srCriteria = new SRCriteriaType(comboBox.getEditor().getText());

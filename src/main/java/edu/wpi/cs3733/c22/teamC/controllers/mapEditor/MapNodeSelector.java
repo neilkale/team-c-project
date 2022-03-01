@@ -86,14 +86,14 @@ public class MapNodeSelector {
     int index = -1;
     MapNode node = list.nodes.get(0);
 
-    double minDist = node.getDistance(xCoord, yCoord) * 2;
+    double minDist = node.getDistance(xCoord, yCoord);
 
     for (int n = 0; n < list.nodes.size(); n++) {
       node = list.nodes.get(n);
 
       double dist = node.getDistance(xCoord, yCoord);
 
-      double maxDist = node.getRadius() * node.getRadius();
+      double maxDist = node.getRadius() * 1.5;
 
       list.nodes.get(n).setSelected(false);
 
@@ -104,9 +104,11 @@ public class MapNodeSelector {
     }
 
     if (index == -1) { // Nothing clicked
+      list.nodes.get(previousNodeIndex).playWiggleAnimation();
       MapState.setIndexSelected(-1);
     } else { // Location clicked
       list.nodes.get(index).addEquipment(list.nodes.get(previousNodeIndex).getEquipment());
+      list.nodes.get(index).playEnlargeAnimation();
       list.nodes.get(previousNodeIndex).removeEquipment();
       MapState.setIndexSelected(index);
     }
@@ -139,6 +141,7 @@ public class MapNodeSelector {
     } else { // Location clicked
       MapState.setIndexSelected(index);
       list.nodes.get(index).addEquipment(list.nodes.get(previousNodeIndex).getEquipment());
+      list.nodes.get(index).playEnlargeAnimation();
       list.nodes.get(previousNodeIndex).removeEquipment();
       list.nodes.get(index).setSelected(true);
     }

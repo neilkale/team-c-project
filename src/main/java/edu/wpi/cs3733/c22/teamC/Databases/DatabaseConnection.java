@@ -16,15 +16,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-// import org.apache.derby.jdbc.*;
 
 public class DatabaseConnection {
   private Connection connection;
   private MongoDatabase mongoDatabase;
   private boolean justStartup;
   private boolean isMongo;
+  private boolean canMongo;
   private List<String> startupInsert;
   private static ArrayList<String> tableNames;
+
 
 
   public boolean isClientDatabase() {
@@ -32,9 +33,19 @@ public class DatabaseConnection {
   }
 
   public void setStartup(boolean b) {
-
     justStartup = b;
   }
+
+  public void disableMongo(){
+    mongoDatabase = null;
+    isMongo = false;
+    canMongo = false;
+  }
+
+  public boolean canMongo(){
+    return canMongo;
+  }
+
   public static ArrayList<String> getTableNames() {
     return tableNames;
   }
@@ -53,18 +64,11 @@ public class DatabaseConnection {
     }
     tableNames = list;
   }
-  /*
-  public boolean isMongulDB() {
-    return isMongulDB;
-  }
 
-  public void setMongulDB(boolean b) {
-    isMongulDB = b;
-  }*/
+
   /** databaseType is false if embedded, true if client */
   private boolean isClientDatabase = false;
 
-  // private boolean isMongulDB = false;
 
   private static DatabaseConnection dbcInstance = new DatabaseConnection();
 
@@ -78,9 +82,7 @@ public class DatabaseConnection {
   private String db_url = "jdbc:derby:CDB;create=true";
   private String db_s_c_url = "jdbc:derby://localhost:1527/CDB;create=true";
 
-  // private final String mongulConnection =
-  //
-  // "mongodb+srv://admin:dDbno11RbFVsXVv3@serverlessinstance0.zitm8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+
 
   /**
    * This url should be tested because I am unsure of the port type. I know that the current
@@ -88,16 +90,16 @@ public class DatabaseConnection {
    * a way where we declare the embedded db and then switch over tto the new client server db?
    */
   public DatabaseConnection() {
-    mongoDatabase = new MongoDatabase();
-    justStartup = true;
-    isMongo = false;
-    startupInsert = new ArrayList<>();
-    try {
+    try{
       mongoDatabase = new MongoDatabase();
-    } catch (Exception e) {
+      justStartup = true;
+      isMongo = false;
+      canMongo = true;
+      startupInsert = new ArrayList<>();
+    } catch (Exception e){
       System.out.println("oops no mongo!");
+      disableMongo();
     }
-    // this.isMongulDB = false;
     startDbConnection();
   }
 
@@ -106,7 +108,7 @@ public class DatabaseConnection {
       Class.forName(driver);
       connection = DriverManager.getConnection(db_url);
       isClientDatabase = false;
-      isMongo = false;
+      setMongo(false);
       if (connection != null) {
         System.out.println("Connected to the Embedded DB");
       }
@@ -116,10 +118,7 @@ public class DatabaseConnection {
     }
   }
 
-  /*public void startMongo() {
-    mongoEquipment = new MongoEquipment();
-    mongoLocation = new MongoLocation();
-  }*/
+
 
   /**
    * This will connect to the database once signed in and treat the database as a client server db.
@@ -129,25 +128,24 @@ public class DatabaseConnection {
       Class.forName(driverCS);
       connection = DriverManager.getConnection(db_s_c_url, "admin", "admin");
       isClientDatabase = true;
-      isMongo = false;
+      setMongo(false);
       if (connection != null) {
         dbCreation();
         System.out.println("Connected to the Client DB");
       }
 
-      // DatabaseCreation locTest = new DatabaseCreation();
-      // locTest.
+
     } catch (SQLException | ClassNotFoundException e) {
       e.printStackTrace();
     }
   }
 
   public void setMongo(boolean b) {
-    isMongo = b;
+    isMongo = b && canMongo;
   }
 
   public boolean isMongo() {
-    return isMongo;
+    return canMongo && isMongo;
   }
 
   /**
@@ -171,22 +169,35 @@ public class DatabaseConnection {
   }
 
   public void execute(String query) throws SQLException {
-    if (mongoDatabase != null && justStartup) {
-      if (query.substring(0, query.indexOf(' ')).equals("INSERT")) {
-        startupInsert.add(query);
-      } else {
-        if (startupInsert.size() > 0) {
-          mongoDatabase.batchInsert(startupInsert);
+    // If Database can handle Mongo
+    try {
+      if (mongoDatabase != null && justStartup) {
+        //If Mongo is instanced, and is just starting up
+        if (query.substring(0, query.indexOf(' ')).equals("INSERT")) {
+          //This just waits to add everything when doing batch writes to mono
+          startupInsert.add(query);
+        } else {
+          if (startupInsert.size() > 0) {
+            mongoDatabase.batchInsert(startupInsert);
+          }
+          startupInsert = new ArrayList<>();
+          mongoDatabase.getAction(query);
+          Statement statement = connection.createStatement();
+          statement.execute(query);
         }
-        startupInsert = new ArrayList<>();
-        mongoDatabase.getAction(query);
+      } else if (mongoDatabase != null && isMongo) {
+        mongoDatabase.insert(query);
       }
-    } else if (isMongo && mongoDatabase != null) {
-      mongoDatabase.insert(query);
-    } else {
+    } catch (Exception e){
+      disableMongo();
+    }
+
+    if (!canMongo){
       Statement statement = connection.createStatement();
       statement.execute(query);
     }
+
+
   }
 
   
@@ -195,8 +206,14 @@ public class DatabaseConnection {
     statement.executeUpdate(query);
   }
 
+
+  /**
+   * TEMPORARY CLASS WHILE RESULT SET IS STILL IN USE
+   * @param query
+   * @return
+   */
   public List<? extends Object> getFromMongo(String query) {
-    return mongoDatabase.select(query);
+    return canMongo ? mongoDatabase.select(query) : null;
   }
 
   public void close() {
@@ -205,10 +222,12 @@ public class DatabaseConnection {
     } catch (SQLException e) {
       e.printStackTrace();
     }
-    mongoDatabase.closeMongo();
+    if (mongoDatabase != null) {
+      mongoDatabase.closeMongo();
+    }
   }
 
   public List<String> fieldsFromMongo(String table) {
-    return mongoDatabase.tableToFields(table);
+    return canMongo ?  mongoDatabase.tableToFields(table) : null;
   }
 }

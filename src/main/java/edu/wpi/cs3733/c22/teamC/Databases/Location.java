@@ -32,6 +32,35 @@ public class Location implements DatabaseInterface {
     return _floor;
   }
 
+  public Integer get_zcoord() {
+    switch (_floor) {
+      case "L2":
+        {
+          return 100;
+        }
+      case "L1":
+        {
+          return 200;
+        }
+      case "1":
+        {
+          return 300;
+        }
+      case "2":
+        {
+          return 400;
+        }
+      case "3":
+        {
+          return 500;
+        }
+      default:
+        {
+          return 000;
+        }
+    }
+  }
+
   public String get_building() {
     return _building;
   }
@@ -194,6 +223,7 @@ public class Location implements DatabaseInterface {
       "nodeID", "xcoord", "ycoord", "floor", "building", "nodeType", "longName", "shortName"
     };
   }
+
   // For the purpose of the project we will be phasing out the hash map idea for the location of
   // towers.
   //  public int hashCode() {

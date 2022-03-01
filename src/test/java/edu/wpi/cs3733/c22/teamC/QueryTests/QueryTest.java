@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import edu.wpi.cs3733.c22.teamC.Databases.MedicalEquipment;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.*;
+import edu.wpi.cs3733.c22.teamC.SQLMethods.MedicalEquipmentQuery;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.*;
 import java.sql.SQLException;
 import java.util.*;

@@ -3,9 +3,7 @@ package edu.wpi.cs3733.c22.teamC.SQLMethods.requests;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.GiftRequest;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GiftRequestQuery extends Query<GiftRequest> {
@@ -35,31 +33,6 @@ public class GiftRequestQuery extends Query<GiftRequest> {
     GiftRequest toReturn =
         new GiftRequest(inputs[0], inputs[1], inputs[2], inputs[3], inputs[4], inputs[5]);
     return toReturn;
-  }
-
-  @Override
-  public ArrayList<GiftRequest> getAllNodeData() {
-    GiftRequest queryResult = null;
-    ArrayList<GiftRequest> allNodes = new ArrayList<GiftRequest>();
-    try {
-      String query = "SELECT * FROM " + getQueryInput();
-      ResultSet rs = dbConnection.executeQuery(query);
-      while (rs.next()) {
-        String ticketID = rs.getString("ticketID");
-        String locationID = rs.getString("locationID");
-        String status = rs.getString("status");
-        String serviceType = rs.getString("serviceType");
-        String assignment = rs.getString("assignment");
-        String giftType = rs.getString("giftType");
-
-        queryResult =
-            new GiftRequest(ticketID, locationID, status, serviceType, assignment, giftType);
-        allNodes.add(queryResult);
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return allNodes;
   }
 
   @Override
@@ -115,17 +88,6 @@ public class GiftRequestQuery extends Query<GiftRequest> {
             + object.get_ticketID()
             + "'";
     dbConnection.execute(query);
-  }
-
-  @Override
-  public Integer getNumRows() throws SQLException {
-    String sql = "SELECT * FROM " + getQueryInput();
-    ResultSet rs = dbConnection.executeQuery(sql);
-    Integer rowCount = 0;
-    while (rs.next()) {
-      rowCount++;
-    }
-    return rowCount;
   }
 
   @Override

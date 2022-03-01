@@ -180,6 +180,7 @@ public class Employee implements DatabaseInterface {
     List<String> a = new ArrayList<>();
     String[] fields = getFields();
     Method setter;
+
     for (int i = 0; i < getFields().length; i++) {
       try {
         setter = this.getClass().getMethod("set_" + fields[i]);
@@ -192,6 +193,7 @@ public class Employee implements DatabaseInterface {
         e.printStackTrace();
       }
     }
+
 
     String[] toReturn = new String[a.size()];
     for (int i = 0; i < a.size(); i++) {
@@ -209,4 +211,5 @@ public class Employee implements DatabaseInterface {
   public DaoInterface getDao() {
     return DaoSingleton.getEmployeeDao();
   }
+
 }

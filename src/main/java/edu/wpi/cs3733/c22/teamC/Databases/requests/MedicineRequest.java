@@ -1,9 +1,10 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.MedicineRequestQuery;
 
 /** this class is for the medicine service request data */
-public class MedicineRequest extends ServiceRequest {
+public class MedicineRequest extends ServiceRequest implements DatabaseInterface {
 
   private String _medicineType;
   private String _quantity;
@@ -58,20 +59,6 @@ public class MedicineRequest extends ServiceRequest {
     return "Medicine Request";
   }
 
-  @Override
-  public String[] getFieldNames() {
-    String[] in = getGenericFieldNames();
-    return new String[] {in[0], in[1], in[2], in[3], in[4], "Medicine Type", "Quantity", "Urgency"};
-  }
-
-  @Override
-  public String[] getFieldValues() {
-    String[] in = getGenericFieldValues();
-    return new String[] {
-      in[0], in[1], in[2], in[3], in[4], this._medicineType, this._quantity, this._urgency
-    };
-  }
-
   public String toString() {
     return "Medicine Request\nID: "
         + get_ticketID()
@@ -89,5 +76,24 @@ public class MedicineRequest extends ServiceRequest {
         + _quantity
         + "\nUrgency: "
         + _urgency;
+  }
+
+  @Override
+  public String[] getFields() {
+    return new String[] {
+      "ID",
+      "Location",
+      "Status",
+      "Service Type",
+      "Assignment",
+      "Medicine Type",
+      "Quantity",
+      "Urgency"
+    };
+  }
+
+  @Override
+  public String getName() {
+    return this.getClass().getName();
   }
 }

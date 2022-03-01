@@ -2,7 +2,7 @@ package edu.wpi.cs3733.c22.teamC.SQLMethods.requests;
 
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
-import edu.wpi.cs3733.c22.teamC.Databases.requests.MedicalEquipment;
+import edu.wpi.cs3733.c22.teamC.Databases.MedicalEquipment;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,11 +10,9 @@ import java.util.ArrayList;
 
 public class MedicalEquipmentQuery extends Query<MedicalEquipment> {
   private DatabaseConnection dbConnection = super.dbConnection;
-  // private MongoEquipment mongoEquipment;
 
   public MedicalEquipmentQuery() {
     try {
-      // mongoEquipment = new MongoEquipment();
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println(
@@ -27,12 +25,15 @@ public class MedicalEquipmentQuery extends Query<MedicalEquipment> {
     return each.get_equipmentID();
   }
 
-  @Override
   public MedicalEquipment queryFactory(String[] inputs) {
+    return staticQueryFactory(inputs);
+  }
+
+  public static MedicalEquipment staticQueryFactory(String[] inputs) {
     if (inputs.length != 6) {
       System.out.println(
           "[QueryFactory of QueryType]: "
-              + getQueryInput()
+              + staticGetQueryInput()
               + "has failed | Input arguments does not match the allotted arguments for the creation of the object - NULL has been returned");
       return null;
     }
@@ -114,6 +115,10 @@ public class MedicalEquipmentQuery extends Query<MedicalEquipment> {
 
   @Override
   public String getQueryInput() {
+    return staticGetQueryInput();
+  }
+
+  public static String staticGetQueryInput() {
     return "EQUIPMENTC";
   }
 

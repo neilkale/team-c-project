@@ -1,8 +1,9 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.GiftRequestQuery;
 
-public class GiftRequest extends ServiceRequest {
+public class GiftRequest extends ServiceRequest implements DatabaseInterface {
 
   private String _giftType;
 
@@ -35,18 +36,6 @@ public class GiftRequest extends ServiceRequest {
     return "Gift Request";
   }
 
-  @Override
-  public String[] getFieldNames() {
-    String[] in = getGenericFieldNames();
-    return new String[] {in[0], in[1], in[2], in[3], in[4], "Gift Type"};
-  }
-
-  @Override
-  public String[] getFieldValues() {
-    String[] in = getGenericFieldValues();
-    return new String[] {in[0], in[1], in[2], in[3], in[4], this._giftType};
-  }
-
   public String toString() {
     return "Gift Request\nID: "
         + get_ticketID()
@@ -60,5 +49,15 @@ public class GiftRequest extends ServiceRequest {
         + get_assignment()
         + "\nGiftType: "
         + _giftType;
+  }
+
+  @Override
+  public String[] getFields() {
+    return new String[] {"ID", "Location", "Status", "Service Type", "Assignment", "GiftType"};
+  }
+
+  @Override
+  public String getName() {
+    return this.getClass().getName();
   }
 }

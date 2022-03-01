@@ -25,19 +25,21 @@ public class Capp extends Application {
   @Override
   public void start(Stage primaryStage) throws SQLException {
     try {
+      DatabaseConnection.getInstance().setStartup(true);
       dbCreation();
+      DatabaseConnection.getInstance().setStartup(false);
       DatabaseConnection.setTableNames();
       ImageLoader imageLoader = new ImageLoader();
       FXMLLoader loader = new FXMLLoader();
       Parent root =
           loader.load(Main.class.getResource("/edu/wpi/cs3733.c22.teamC/Views/SignInPage.fxml"));
-
       Scene scene = new Scene(root);
       primaryStage.setMinWidth(800);
       primaryStage.setMinHeight(660);
       primaryStage.setTitle("Team Cyan Cyclops App");
       primaryStage.setScene(scene);
       primaryStage.show();
+      DatabaseConnection.getInstance().setMongo(false);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -73,6 +75,7 @@ public class Capp extends Application {
   public void stop() {
     // log.info("Shutting Down");
     dbSave();
+    DatabaseConnection.getInstance().close();
   }
 
   // Implements persistent storage of databases when app is closed

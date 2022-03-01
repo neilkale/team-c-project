@@ -2,7 +2,7 @@ package edu.wpi.cs3733.c22.teamC.controllers.mapEditor;
 
 import com.jfoenix.controls.*;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
-import edu.wpi.cs3733.c22.teamC.Databases.requests.MedicalEquipment;
+import edu.wpi.cs3733.c22.teamC.Databases.MedicalEquipment;
 import edu.wpi.cs3733.c22.teamC.PathFinding.PathFinder;
 import edu.wpi.cs3733.c22.teamC.controllers.AbstractController;
 import edu.wpi.cs3733.c22.teamC.controllers.ImageLoader;

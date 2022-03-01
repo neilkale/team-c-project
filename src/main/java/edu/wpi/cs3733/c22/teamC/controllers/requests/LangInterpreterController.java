@@ -76,7 +76,7 @@ public class LangInterpreterController extends AbstractController {
               ServiceRequest.getNewestID(),
               LocationQuery.longToNodeID(locationComboBox.getValue().toString()),
               statusComboBox.getSelectionModel().selectedItemProperty().getValue().toString(),
-              "Security",
+              "Interpreter",
               employeeNames.get(
                   assignmentComboBox
                       .getSelectionModel()

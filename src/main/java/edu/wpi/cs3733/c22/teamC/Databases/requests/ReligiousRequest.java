@@ -1,8 +1,9 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.ReligiousRequestQuery;
 
-public class ReligiousRequest extends ServiceRequest {
+public class ReligiousRequest extends ServiceRequest implements DatabaseInterface {
 
   private String _religion;
 
@@ -35,18 +36,6 @@ public class ReligiousRequest extends ServiceRequest {
     return "Religious Request";
   }
 
-  @Override
-  public String[] getFieldNames() {
-    String[] in = getGenericFieldNames();
-    return new String[] {in[0], in[1], in[2], in[3], in[4], "Religion"};
-  }
-
-  @Override
-  public String[] getFieldValues() {
-    String[] in = getGenericFieldValues();
-    return new String[] {in[0], in[1], in[2], in[3], in[4], this._religion};
-  }
-
   public String toString() {
     return "Religious Request\nID: "
         + get_ticketID()
@@ -60,5 +49,17 @@ public class ReligiousRequest extends ServiceRequest {
         + get_assignment()
         + "\nReligion: "
         + _religion;
+  }
+
+  @Override
+  public String[] getFields() {
+    return new String[] {
+      "ticketID", "locationID", "status", "serviceType", "assignment", "religion",
+    };
+  }
+
+  @Override
+  public String getName() {
+    return this.getClass().getName();
   }
 }

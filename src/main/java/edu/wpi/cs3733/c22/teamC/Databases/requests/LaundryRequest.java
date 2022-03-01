@@ -1,8 +1,9 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.LaundryRequestQuery;
 
-public class LaundryRequest extends ServiceRequest {
+public class LaundryRequest extends ServiceRequest implements DatabaseInterface {
 
   public LaundryRequest(
       String _ticketID,
@@ -23,18 +24,6 @@ public class LaundryRequest extends ServiceRequest {
     return "Laundry Request";
   }
 
-  @Override
-  public String[] getFieldNames() {
-    String[] in = getGenericFieldNames();
-    return new String[] {in[0], in[1], in[2], in[3], in[4]};
-  }
-
-  @Override
-  public String[] getFieldValues() {
-    String[] in = getGenericFieldValues();
-    return new String[] {in[0], in[1], in[2], in[3], in[4]};
-  }
-
   public String toString() {
     return "Laundry Request\nID: "
         + get_ticketID()
@@ -46,5 +35,23 @@ public class LaundryRequest extends ServiceRequest {
         + get_serviceType()
         + "\nAssignment: "
         + get_assignment();
+  }
+
+  /*
+  _ticketID;
+  private String _locationID;
+  private String _serviceType;
+  private String _status;
+  private String _assignment
+   */
+
+  @Override
+  public String[] getFields() {
+    return new String[] {"ticketID", "locationID", "status", "serviceType", "assignment"};
+  }
+
+  @Override
+  public String getName() {
+    return this.getClass().getName();
   }
 }

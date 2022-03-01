@@ -1,14 +1,20 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.*;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.LaundryRequestQuery;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.sql.Connection;
+
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 /** this class is for the medical equipment service request data */
-public abstract class ServiceRequest {
+public abstract class ServiceRequest implements DatabaseInterface {
   private String _ticketID;
   private String _locationID;
   private String _serviceType;
@@ -144,6 +150,7 @@ public abstract class ServiceRequest {
   public static String getNewestID() {
     int largest = 0;
     try {
+
       ArrayList<String> list = getServiceRequestTables();
       for (String table : list) {
         String query = "SELECT TICKETID FROM " + table;
@@ -194,7 +201,7 @@ public abstract class ServiceRequest {
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println(
-          "[ServiceRequst::setStatus]: Error in setting value "
+          "[ServiceRequest::setStatus]: Error in setting value "
               + statusIn
               + " given [ServiceRequest]:"
               + this.toString());
@@ -249,6 +256,16 @@ public abstract class ServiceRequest {
     return new int[] {total.size(), completed};
   }
 
+  // return all of the current ticketIDs being used for submitted requests
+  public static ArrayList<String> getAvailableTicketIDs() {
+    ArrayList<ServiceRequest> total = getAllServiceRequests();
+    ArrayList<String> ids = new ArrayList<String>();
+    total.forEach(
+        serviceRequest -> {
+          ids.add(serviceRequest.get_ticketID());
+        });
+    return ids;
+}
   protected static ArrayList<String> getServiceRequestTables() {
     ArrayList<String> list = new ArrayList<>();
     for (String each : DatabaseConnection.getTableNames()) {
@@ -263,22 +280,50 @@ public abstract class ServiceRequest {
   // FIELD VALUE
   public abstract String getRequestType();
 
-  public abstract String[] getFieldNames();
-
-  public abstract String[] getFieldValues();
-
-  public String[] getGenericFieldNames() {
-    return new String[] {"Ticket ID", "Location ID", "Status", "Service Type", "Assignment"};
+  @Override
+  public String[] setValues() {
+    List<String> a = new ArrayList<>();
+    Method getter;
+    for (String s : getFields()) {
+      try {
+        getter = this.getClass().getMethod("set_" + s);
+        a.add((String) getter.invoke(this, new Object[] {}));
+      } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+      } catch (InvocationTargetException e) {
+        e.printStackTrace();
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      }
+    }
+    String[] toReturn = new String[a.size()];
+    for (int i = 0; i < a.size(); i++) {
+      toReturn[i] = a.get(i);
+    }
+    return toReturn;
   }
-  //    this._ticketID = ticketID;
-  //    this._locationID = locationID;
-  //    this._status = status;
-  //    this._serviceType = serviceType;
-  //    this._assignment = assignment;
-  public String[] getGenericFieldValues() {
-    return new String[] {
-      this._ticketID, this._locationID, this._status, this._serviceType, this._assignment
-    };
+
+  @Override
+  public String[] getValues() {
+    List<String> a = new ArrayList<>();
+    Method getter;
+    for (String s : getFields()) {
+      try {
+        getter = this.getClass().getMethod("get_" + s);
+        a.add((String) getter.invoke(this, new Object[] {}));
+      } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+      } catch (InvocationTargetException e) {
+        e.printStackTrace();
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      }
+    }
+    String[] toReturn = new String[a.size()];
+    for (int i = 0; i < a.size(); i++) {
+      toReturn[i] = a.get(i);
+    }
+    return toReturn;
   }
 
   @Override

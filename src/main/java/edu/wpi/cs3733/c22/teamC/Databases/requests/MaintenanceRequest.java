@@ -1,9 +1,10 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.MaintenanceRequestQuery;
 
 /** this class is for the maintenance service request data */
-public class MaintenanceRequest extends ServiceRequest {
+public class MaintenanceRequest extends ServiceRequest implements DatabaseInterface {
   private String _issueType;
 
   public MaintenanceRequest(
@@ -35,18 +36,6 @@ public class MaintenanceRequest extends ServiceRequest {
     return "Maintenance Request";
   }
 
-  @Override
-  public String[] getFieldNames() {
-    String[] in = getGenericFieldNames();
-    return new String[] {in[0], in[1], in[2], in[3], in[4], "Issue Type"};
-  }
-
-  @Override
-  public String[] getFieldValues() {
-    String[] in = getGenericFieldValues();
-    return new String[] {in[0], in[1], in[2], in[3], in[4], this._issueType};
-  }
-
   public String toString() {
     return "Maintenance Request\nID: "
         + get_ticketID()
@@ -60,5 +49,15 @@ public class MaintenanceRequest extends ServiceRequest {
         + get_assignment()
         + "\nIssue Type: "
         + _issueType;
+  }
+
+  @Override
+  public String[] getFields() {
+    return new String[] {"ID", "Location", "Status", "Service Type", "Assignment", "Issue Type"};
+  }
+
+  @Override
+  public String getName() {
+    return this.getClass().getName();
   }
 }

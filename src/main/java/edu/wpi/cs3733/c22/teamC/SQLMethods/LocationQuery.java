@@ -3,14 +3,12 @@ package edu.wpi.cs3733.c22.teamC.SQLMethods;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
-import edu.wpi.cs3733.c22.teamC.Databases.MongoDB.MongoLocation;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class LocationQuery extends Query<Location> {
   private DatabaseConnection dbConnection = super.dbConnection;
-  private MongoLocation mongoLocation;
 
   public LocationQuery() {
 
@@ -65,10 +63,14 @@ public class LocationQuery extends Query<Location> {
   }
 
   public Location queryFactory(String[] inputs) {
+    return staticQueryFactory(inputs);
+  }
+
+  public static Location staticQueryFactory(String[] inputs) {
     if (inputs.length != 8) {
       System.out.println(
           "[QueryFactory of QueryType]: "
-              + getQueryInput()
+              + staticGetQueryInput()
               + "has failed | Input arguments does not match the allotted arguments for the creation of the object - NULL has been returned");
       return null;
     }
@@ -104,7 +106,6 @@ public class LocationQuery extends Query<Location> {
     } catch (SQLException e) {
       e.printStackTrace();
     }
-
     return allNodes;
   }
 
@@ -188,6 +189,10 @@ public class LocationQuery extends Query<Location> {
 
   @Override
   public String getQueryInput() {
+    return staticGetQueryInput();
+  }
+
+  public static String staticGetQueryInput() {
     return "TOWERLOCATIONSC";
   }
 

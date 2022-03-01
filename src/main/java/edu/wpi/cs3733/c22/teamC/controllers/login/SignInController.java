@@ -6,7 +6,6 @@ import edu.wpi.cs3733.c22.teamC.Databases.LoggedInUser;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.EmployeeQuery;
 import edu.wpi.cs3733.c22.teamC.controllers.AbstractController;
 import edu.wpi.cs3733.c22.teamC.controllers.ControllerMediator;
-import edu.wpi.cs3733.c22.teamC.controllers.ControllerUtil;
 import java.io.IOException;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
@@ -79,11 +78,19 @@ public class SignInController extends AbstractController {
       scaleTransition.setNode(username);
       scaleTransition.play();
 
+      scaleTransition = new ScaleTransition();
+
+      scaleTransition.setByY(.15);
+      scaleTransition.setByX(.15);
+      scaleTransition.setDuration(Duration.millis(100));
+      scaleTransition.setCycleCount(2);
+      scaleTransition.setAutoReverse(true);
+
       scaleTransition.setNode(psswd);
       scaleTransition.play();
 
-      ControllerUtil.popUpMessage(
-          "Incorrect User/Password", "There was an error with your Username/Password");
+      // ControllerUtil.popUpMessage(
+      //    "Incorrect User/Password", "There was an error with your Username/Password");
     }
   }
 

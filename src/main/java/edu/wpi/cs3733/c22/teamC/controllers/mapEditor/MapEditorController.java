@@ -68,6 +68,8 @@ public class MapEditorController extends AbstractController { // todo implement 
   @FXML JFXCheckBox equipmentCheckBox;
   @FXML JFXCheckBox locationsCheckBox;
 
+  @FXML JFXCheckBox disableStairsCheckBox;
+
   private final int actualMapWidth = 875;
   private final int actualMapHeight = 786;
 
@@ -85,6 +87,10 @@ public class MapEditorController extends AbstractController { // todo implement 
   private MapNavLine mapNavLine = new MapNavLine();
 
   private List<Location> path = null;
+
+  private PathFinder pf = new PathFinder();
+
+  private boolean pathDrawn = false;
 
   @FXML
   private void initialize() {
@@ -743,8 +749,13 @@ public class MapEditorController extends AbstractController { // todo implement 
 
   @FXML
   private void computeButtonPressed() {
-    PathFinder pf = new PathFinder();
     hideOnClickMenu();
+    if (pathDrawn) {
+      path = new ArrayList<Location>();
+      refresh();
+      pathDrawn = false;
+      return;
+    }
     if (MapState.getStartIndex() != -1
         && MapState.getStopIndex() != -1
         && MapState.getStopIndex() != MapState.getStartIndex()) {
@@ -754,9 +765,20 @@ public class MapEditorController extends AbstractController { // todo implement 
               list.nodes.get(MapState.getStopIndex()).getLocation());
       System.out.println(path.size());
       refresh();
+      pathDrawn = true;
     } else {
       path = new ArrayList<Location>();
       refresh();
+      pathDrawn = false;
+    }
+  }
+
+  @FXML
+  void toggleDisableStairs() {
+    pf.setDisabilityFriendly(disableStairsCheckBox.isSelected());
+    if (pathDrawn) {
+      pathDrawn = false;
+      computeButtonPressed();
     }
   }
 }

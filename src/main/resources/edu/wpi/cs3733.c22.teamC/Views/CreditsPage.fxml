@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.CreditsPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: ffffff;" stylesheets="@../Stylesheets/ServiceRequestConstants.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.CreditsPageController">
    <children>
       <BorderPane layoutX="-2.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -56,76 +56,76 @@
                   <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <GridPane.margin>
-                        <Insets bottom="10.0" left="100.0" top="10.0" />
+                        <Insets bottom="10.0" left="-250.0" top="10.0" />
                      </GridPane.margin>
                      <image>
                         <Image url="@Icons/GiftsIcon.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="imageView1" fitHeight="150.0" fitWidth="150.0" layoutX="335.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                  <ImageView fx:id="imageView1" fitHeight="150.0" fitWidth="150.0" layoutX="335.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <GridPane.margin>
-                        <Insets bottom="10.0" left="100.0" top="10.0" />
+                        <Insets bottom="10.0" left="-250.0" top="10.0" />
                      </GridPane.margin>
                      <image>
                         <Image url="@Icons/TechBlueIcon.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="imageView11" fitHeight="150.0" fitWidth="150.0" layoutX="335.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                  <ImageView fx:id="imageView11" fitHeight="150.0" fitWidth="150.0" layoutX="335.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <GridPane.margin>
-                        <Insets bottom="10.0" left="100.0" top="10.0" />
+                        <Insets bottom="10.0" left="-250.0" top="10.0" />
                      </GridPane.margin>
                      <image>
                         <Image url="@Icons/TransportBlueIcon.png" />
                      </image>
                   </ImageView>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cyan Cyclops Team C" underline="true" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                  <Text fill="#1f58af" strokeType="OUTSIDE" strokeWidth="0.0" text="Cyan Cyclops Team C" underline="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <GridPane.margin>
-                        <Insets left="280.0" top="30.0" />
+                        <Insets left="100.0" top="-30.0" />
                      </GridPane.margin>
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Text>
-                  <Text layoutX="310.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cyan Cyclops Team C" underline="true" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <Text fill="#1f58af" layoutX="310.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cyan Cyclops Team C" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="280.0" top="30.0" />
+                        <Insets left="100.0" top="-30.0" />
                      </GridPane.margin>
                   </Text>
-                  <Text layoutX="10.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cyan Cyclops Team C" underline="true" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                  <Text fill="#1f58af" layoutX="10.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cyan Cyclops Team C" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="280.0" top="30.0" />
+                        <Insets left="100.0" top="-30.0" />
                      </GridPane.margin>
                   </Text>
-                  <Text layoutX="310.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Gift Request API" textAlignment="CENTER" GridPane.valignment="TOP">
+                  <Text layoutX="310.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Gift Request API" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <GridPane.margin>
-                        <Insets left="300.0" top="60.0" />
+                        <Insets left="60.0" top="30.0" />
                      </GridPane.margin>
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="310.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- IT Request API" textAlignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <Text layoutX="310.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- IT Request API" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font size="16.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="300.0" top="60.0" />
+                        <Insets left="60.0" top="30.0" />
                      </GridPane.margin>
                   </Text>
-                  <Text layoutX="310.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Internal Transport Request API" textAlignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                  <Text layoutX="310.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Internal Transport Request API" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <font>
                         <Font size="16.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="300.0" top="60.0" />
+                        <Insets left="160.0" top="30.0" />
                      </GridPane.margin>
                   </Text>
                </children>

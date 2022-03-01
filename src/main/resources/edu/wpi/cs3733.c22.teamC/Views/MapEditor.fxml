@@ -252,7 +252,8 @@
                 <ColumnConstraints hgrow="NEVER" />
                   <ColumnConstraints hgrow="NEVER" />
                 <ColumnConstraints hgrow="NEVER" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="NEVER" />
                   <ColumnConstraints hgrow="NEVER" />
                   <ColumnConstraints hgrow="NEVER" />
                   <ColumnConstraints hgrow="NEVER" />
@@ -276,7 +277,7 @@
                         <Font name="System Bold" size="22.0" />
                      </font>
                   </JFXButton>
-                  <GridPane GridPane.columnIndex="6">
+                  <GridPane GridPane.columnIndex="7">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity" />
                     </columnConstraints>
@@ -306,14 +307,25 @@
                         </JFXCheckBox>
                      </children>
                   </GridPane>
-                  <JFXButton fx:id="computeButton" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#computeButtonPressed" prefHeight="30.0" prefWidth="164.0" style="-fx-background-color: #001A3C;" text="COMPUTE PATH" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
+                  <VBox alignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
+                     <children>
+                        <JFXButton fx:id="computeButton" alignment="CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#computeButtonPressed" prefHeight="30.0" prefWidth="164.0" style="-fx-background-color: #001A3C;" text="COMPUTE PATH" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXCheckBox fx:id="disableStairsCheckBox" checkedColor="#001a3c" mnemonicParsing="false" onMouseReleased="#toggleDisableStairs" text="DISABLE STAIRS" textFill="WHITE" unCheckedColor="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin></JFXCheckBox>
+                     </children>
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
-                  </JFXButton>
+                  </VBox>
                </children>
             </GridPane>
          </top>

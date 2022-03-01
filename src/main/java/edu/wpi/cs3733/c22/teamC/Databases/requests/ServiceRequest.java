@@ -299,6 +299,29 @@ public abstract class ServiceRequest implements DatabaseInterface {
   public abstract String getRequestType();
 
   @Override
+  public String[] setValues() {
+    List<String> a = new ArrayList<>();
+    Method getter;
+    for (String s : getFields()) {
+      try {
+        getter = this.getClass().getMethod("set_" + s);
+        a.add((String) getter.invoke(this, new Object[] {}));
+      } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+      } catch (InvocationTargetException e) {
+        e.printStackTrace();
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      }
+    }
+    String[] toReturn = new String[a.size()];
+    for (int i = 0; i < a.size(); i++) {
+      toReturn[i] = a.get(i);
+    }
+    return toReturn;
+  }
+
+  @Override
   public String[] getValues() {
     List<String> a = new ArrayList<>();
     Method getter;

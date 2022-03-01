@@ -168,6 +168,7 @@ public class DatabaseConnection {
     }
   }
 
+  
   public void executeUpdate(String query) throws SQLException {
     Statement statement = connection.createStatement();
     statement.executeUpdate(query);

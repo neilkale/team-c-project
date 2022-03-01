@@ -24,6 +24,7 @@ public class DefaultController extends AbstractController {
   @FXML private JFXButton infoButton;
   @FXML private Circle profileCircle;
   @FXML private Label nameLabel;
+  @FXML private JFXDrawer profileDrawer;
 
   private JFXDrawer navDrawer = new JFXDrawer();
   private JFXDrawer exitDrawer = new JFXDrawer();
@@ -70,12 +71,28 @@ public class DefaultController extends AbstractController {
               if (newValue && !drawerIsOpened) drawerStack.toBack();
             });
 
+    FXMLLoader profileLoader = getLoader("ProfilePage.fxml");
+    Pane profilePane = profileLoader.load();
+    profileDrawer.setSidePane(profilePane);
+
+    profileDrawer.setOnMouseExited(
+        evt -> {
+          profileDrawer.close();
+          profileCircle.setFill(new ImagePattern(LoggedInUser.getProfilePic()));
+        });
+
+    profileDrawer.close();
+
     ControllerUtil.addDrawerButtonHover(
         navButton, navDrawer, slideNavMenu, drawerList, drawerStack);
     ControllerUtil.addDrawerButtonHover(
         exitButton, exitDrawer, slideExitMenu, drawerList, drawerStack);
     ControllerUtil.addDrawerButtonHover(
         infoButton, infoDrawer, slideInfoMenu, drawerList, drawerStack);
+  }
+
+  public Label getNameLabel() {
+    return nameLabel;
   }
 
   public ArrayList<String> getPrevPageList() {
@@ -92,6 +109,7 @@ public class DefaultController extends AbstractController {
     root.prefHeightProperty().bind(borderPane.heightProperty());
 
     borderPane.setCenter(root);
+    borderPane.getLeft().toFront();
 
     AnchorPane.setTopAnchor(root, 0.0);
     AnchorPane.setBottomAnchor(root, 0.0);
@@ -132,7 +150,7 @@ public class DefaultController extends AbstractController {
     prevPageList.remove(prevPageList.size() - 1); // remove the current page from the tracking list
 
     if (prevPageList.isEmpty()) { // base case
-      setCenter(pane, "DefaultPage.fxml");
+      setCenter(new Pane(), "DefaultPage.fxml");
     } else { // we get last page of list and go to that
       String prevPage = prevPageList.get(prevPageList.size() - 1);
       setCenter(prevPage);
@@ -174,5 +192,10 @@ public class DefaultController extends AbstractController {
             "%s|%s|%s",
             "(?<=[A-Z])(?=[A-Z][a-z])", "(?<=[^A-Z])(?=[A-Z])", "(?<=[A-Za-z])(?=[^A-Za-z])"),
         " ");
+  }
+
+  @FXML
+  void profileButtonPressed() throws IOException {
+    profileDrawer.open();
   }
 }

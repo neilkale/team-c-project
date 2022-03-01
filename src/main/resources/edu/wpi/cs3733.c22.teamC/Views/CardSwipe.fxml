@@ -23,7 +23,7 @@
                         <Font name="System Bold Italic" size="39.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="132.0" fitWidth="247.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imageView" fitHeight="132.0" fitWidth="247.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Icons/CardIcon.png" />
                      </image>

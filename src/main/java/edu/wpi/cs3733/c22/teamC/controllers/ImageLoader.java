@@ -104,6 +104,36 @@ public class ImageLoader {
 
     imageFileNames.put("Kevin", "ProfilePics/kevin.png");
     images.put("Kevin", null);
+
+    imageFileNames.put("Bear", "ProfilePics/bear-pfp.png");
+    images.put("Bear", null);
+
+    imageFileNames.put("Bunny", "ProfilePics/bunny-pfp.png");
+    images.put("Bunny", null);
+
+    imageFileNames.put("Cat", "ProfilePics/cat-pfp.png");
+    images.put("Cat", null);
+
+    imageFileNames.put("Deer", "ProfilePics/deer-pfp.png");
+    images.put("Deer", null);
+
+    imageFileNames.put("Dog", "ProfilePics/dog-pfp.png");
+    images.put("Dog", null);
+
+    imageFileNames.put("Duck", "ProfilePics/duck-pfp.png");
+    images.put("Duck", null);
+
+    imageFileNames.put("Fox", "ProfilePics/fox-pfp.png");
+    images.put("Fox", null);
+
+    imageFileNames.put("Pig", "ProfilePics/pig-pfp.png");
+    images.put("Pig", null);
+
+    imageFileNames.put("Sheep", "ProfilePics/sheep-pfp.png");
+    images.put("Sheep", null);
+
+    imageFileNames.put("Skunk", "ProfilePics/skunk-pfp.png");
+    images.put("Skunk", null);
   }
 
   public static Image loadImage(String name) {

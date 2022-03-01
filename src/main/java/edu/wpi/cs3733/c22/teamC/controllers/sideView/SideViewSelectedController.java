@@ -69,7 +69,7 @@ public class SideViewSelectedController {
         floorLabel.setText("Floor 3");
         break;
     }
-    Integer[] equipCount = EquipmentCountTracker.getEquipmentCount(MapState.getCurrentFloor());
+    Integer[] equipCount = SideViewTracker.getEquipmentCount(MapState.getCurrentFloor());
     cleanXrayLabel.setText(Integer.toString(equipCount[0]));
     cleanPumpLabel.setText(Integer.toString(equipCount[1]));
     cleanBedLabel.setText(Integer.toString(equipCount[2]));

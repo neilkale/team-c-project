@@ -7,8 +7,6 @@ import java.util.List;
 
 public class EmployeeDaoImpl extends DaoInterface<Employee> {
   // list is working as a database
-  private List<Employee> nodes;
-  private EmployeeQuery nodeQuery;
 
   public EmployeeDaoImpl() {
     nodeQuery = new EmployeeQuery();

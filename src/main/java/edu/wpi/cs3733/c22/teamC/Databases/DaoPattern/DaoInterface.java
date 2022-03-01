@@ -7,8 +7,8 @@ import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
 import java.util.List;
 
 public abstract class DaoInterface<T> {
-  private List<T> nodes;
-  private Query<T> nodeQuery;
+  protected List<T> nodes;
+  protected Query<T> nodeQuery;
 
   public List<T> getAllNodes(){
       return nodes;

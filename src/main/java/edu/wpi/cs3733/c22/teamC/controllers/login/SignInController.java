@@ -73,6 +73,7 @@ public class SignInController extends AbstractController {
   }
 
   private boolean checkCredentials(String user, String pass) {
+    if (user.length() == 0 || pass.length() == 0) return false;
     EmployeeQuery employeeQuery = new EmployeeQuery();
     Employee e = employeeQuery.findNodeByUsername(user);
     if (e != null) { // username exists

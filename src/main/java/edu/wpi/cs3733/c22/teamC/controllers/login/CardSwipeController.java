@@ -7,17 +7,21 @@ import edu.wpi.cs3733.c22.teamC.Databases.LoggedInUser;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.EmployeeQuery;
 import edu.wpi.cs3733.c22.teamC.controllers.AbstractController;
 import java.io.IOException;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 public class CardSwipeController extends AbstractController {
   @FXML private TextField textField;
   @FXML private JFXButton cancelButton;
   @FXML private Label failMessage;
   @FXML private JFXSpinner spinner;
+  @FXML private ImageView imageView;
 
   @FXML
   void initialize() {
@@ -52,7 +56,13 @@ public class CardSwipeController extends AbstractController {
 
   // automatically done bruh
   void submitButtonPressed() {
-    if (checkCredentials(textField.getText().substring(1, 10))) {
+    if (textField.getText().length() <= 20) {
+      System.out.println("FAIL");
+      failMessage.setVisible(true);
+      textField.setText("");
+      textField.requestFocus();
+      spinner.setVisible(false);
+    } else if (checkCredentials(textField.getText().substring(1, 10))) {
       FXMLLoader loader = null;
       try {
         loader = getLoader("TabPane.fxml");
@@ -92,8 +102,17 @@ public class CardSwipeController extends AbstractController {
   void keyPressed() {
     if (textField.getText().contains("||0000")) {
       submitButtonPressed();
-    } else if (!textField.getText().equals("")) {
+    } else if (textField.getText().length() <= 1) {
       spinner.setVisible(true);
+      TranslateTransition translateTransition = new TranslateTransition();
+      translateTransition.setNode(imageView);
+
+      translateTransition.setByX(30);
+      translateTransition.setDuration(Duration.millis(200));
+      translateTransition.setCycleCount(2);
+      translateTransition.setAutoReverse(true);
+
+      translateTransition.play();
     }
   }
 }

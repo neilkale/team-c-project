@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.Databases.DaoPattern;
 
+import edu.wpi.cs3733.c22.teamC.controllers.requests.GiftReqController;
+
 public class DaoSingleton {
     private static EmployeeDaoImpl employeeDao;
     private static EquipmentRequestDaoImpl equipmentRequestDao;
@@ -13,6 +15,11 @@ public class DaoSingleton {
     private static ReligiousRequestDaoImpl religiousRequestDao;
     private static SanitationRequestDaoImpl sanitationRequestDao;
     private static SecurityRequestDaoImpl securityRequestDao;
+    private static GiftRequestDaoImpl giftRequestDao;
+
+    public static GiftRequestDaoImpl getGiftRequestDao() {
+        return giftRequestDao;
+    }
 
     public static void makeDaoSingleton(){
         employeeDao = new EmployeeDaoImpl();
@@ -27,6 +34,7 @@ public class DaoSingleton {
         religiousRequestDao = new ReligiousRequestDaoImpl();
         sanitationRequestDao = new SanitationRequestDaoImpl();
         securityRequestDao = new SecurityRequestDaoImpl();
+        giftRequestDao = new GiftRequestDaoImpl();
     }
 
     public static EmployeeDaoImpl getEmployeeDao() {

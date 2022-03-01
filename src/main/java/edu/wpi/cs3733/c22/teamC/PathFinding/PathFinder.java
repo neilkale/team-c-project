@@ -2,6 +2,7 @@ package edu.wpi.cs3733.c22.teamC.PathFinding;
 
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.LocationDaoImpl;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.MaintenanceRequestDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.MaintenanceRequest;
 import edu.wpi.cs3733.c22.teamC.PathFinding.AStarImpl.AStar;
@@ -87,8 +88,8 @@ public class PathFinder {
 
   /** Blocks nodes with live maintenance requests */
   private void blockMaintenance() {
-    MaintenanceRequestQuery maintenanceRequestQuery = new MaintenanceRequestQuery();
-    ArrayList<MaintenanceRequest> allMaintenanceRequests = maintenanceRequestQuery.getAllNodeData();
+    MaintenanceRequestDaoImpl e = DaoSingleton.getMaintenanceRequestDao();
+    ArrayList<MaintenanceRequest> allMaintenanceRequests = e.getAllNodes();
     for (MaintenanceRequest maintenanceRequest : allMaintenanceRequests) {
       String maintenanceLocationID = maintenanceRequest.get_locationID();
       nodeMap.get(maintenanceLocationID).setBlock(true);

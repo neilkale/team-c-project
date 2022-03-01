@@ -1,10 +1,10 @@
 package edu.wpi.cs3733.c22.teamC.controllers.windowControllers;
 
 import com.jfoenix.controls.JFXButton;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
 import edu.wpi.cs3733.c22.teamC.Databases.Employee;
 import edu.wpi.cs3733.c22.teamC.Databases.LoggedInUser;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.ServiceRequest;
-import edu.wpi.cs3733.c22.teamC.SQLMethods.EmployeeQuery;
 import edu.wpi.cs3733.c22.teamC.controllers.AbstractController;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -93,7 +93,7 @@ public class DashboardController extends AbstractController {
     if (passwordField.isVisible()) currentUser.set_password(passwordField.getText());
     else currentUser.set_password(passwordTextField.getText());
 
-    (new EmployeeQuery()).editNode(currentUser);
+    DaoSingleton.getEmployeeDao().updateNode(currentUser);
     controllerMediator.setNameLabel(firstTextField.getText() + " " + lastTextField.getText());
   }
 
@@ -115,7 +115,7 @@ public class DashboardController extends AbstractController {
 
   private void setUserInfo() {
     idLabel.setText("ID: " + currentUser.get_id());
-    typeLabel.setText("Service Type: " + currentUser.get_Service_Type());
+    typeLabel.setText("Service Type: " + currentUser.get_serviceType());
     firstTextField.setText(currentUser.get_firstName());
     lastTextField.setText(currentUser.get_lastName());
     usernameTextField.setText(currentUser.get_username());

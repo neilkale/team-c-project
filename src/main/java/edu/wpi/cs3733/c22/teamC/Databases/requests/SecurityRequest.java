@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoInterface;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.SecurityRequestQuery;
 
 public class SecurityRequest extends ServiceRequest {
@@ -56,22 +58,6 @@ public class SecurityRequest extends ServiceRequest {
     return "Security Request";
   }
 
-  @Override
-  public String[] getFieldNames() {
-    String[] in = getGenericFieldNames();
-    return new String[] {
-      in[0], in[1], in[2], in[3], in[4], "Report Breach", "Security Type", "Urgency"
-    };
-  }
-
-  @Override
-  public String[] getFieldValues() {
-    String[] in = getGenericFieldValues();
-    return new String[] {
-      in[0], in[1], in[2], in[3], in[4], this._reportBreach, this._securityType, this._urgency
-    };
-  }
-
   public String toString() {
     return "Security Request\nID: "
         + get_ticketID()
@@ -89,6 +75,33 @@ public class SecurityRequest extends ServiceRequest {
         + get_securityType()
         + "\nUrgency: "
         + get_urgency();
+  }
+
+  /*
+  String ticketID,
+      String locationID,
+      String status,
+      String serviceType,
+      String assignment,
+      String reportBreach,
+      String securityType,
+      String urgency
+   */
+  @Override
+  public String[] getFields() {
+    return new String[] {
+      "ticketID", "status", "serviceType", "assignment", "reportBreach", "securityType", "urgency"
+    };
+  }
+
+  @Override
+  public String getName() {
+    return this.getClass().getName();
+  }
+
+  @Override
+  public DaoInterface getDao() {
+    return DaoSingleton.getSecurityRequestDao();
   }
 }
 

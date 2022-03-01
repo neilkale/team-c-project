@@ -1,11 +1,13 @@
 package edu.wpi.cs3733.c22.teamC.PathFinding;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.LocationDaoImpl;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.MaintenanceRequestDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.MaintenanceRequest;
 import edu.wpi.cs3733.c22.teamC.PathFinding.AStarImpl.AStar;
 import edu.wpi.cs3733.c22.teamC.PathFinding.AStarImpl.Node;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.LocationQuery;
-import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.MaintenanceRequestQuery;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -15,8 +17,8 @@ public class PathFinder {
   private HashMap<String, Node> nodeMap = new HashMap<String, Node>();
 
   public PathFinder() {
-    LocationQuery locationQuery = new LocationQuery();
-    ArrayList<Location> locList = locationQuery.getAllNodeData();
+    LocationDaoImpl e = DaoSingleton.getLocationDao();
+    ArrayList<Location> locList = e.getAllNodes();
     nodeMap = locsToNodes(locList);
     blockMaintenance();
   }
@@ -40,8 +42,8 @@ public class PathFinder {
     for (Location loc : locationList) {
       Node node =
           new Node(
-              Integer.parseInt(loc.get_xcoord()),
-              Integer.parseInt(loc.get_ycoord()),
+              (int) Double.parseDouble(loc.get_xcoord()),
+              (int) Double.parseDouble(loc.get_ycoord()),
               loc.get_zcoord(),
               loc.get_nodeID());
       nodeMap.put(loc.get_nodeID(), node);
@@ -85,8 +87,8 @@ public class PathFinder {
 
   /** Blocks nodes with live maintenance requests */
   private void blockMaintenance() {
-    MaintenanceRequestQuery maintenanceRequestQuery = new MaintenanceRequestQuery();
-    ArrayList<MaintenanceRequest> allMaintenanceRequests = maintenanceRequestQuery.getAllNodeData();
+    MaintenanceRequestDaoImpl e = DaoSingleton.getMaintenanceRequestDao();
+    ArrayList<MaintenanceRequest> allMaintenanceRequests = e.getAllNodes();
     for (MaintenanceRequest maintenanceRequest : allMaintenanceRequests) {
       String maintenanceLocationID = maintenanceRequest.get_locationID();
       nodeMap.get(maintenanceLocationID).setBlock(true);

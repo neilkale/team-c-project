@@ -2,7 +2,7 @@ package edu.wpi.cs3733.c22.teamC.SQLMethods.requests;
 
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
-import edu.wpi.cs3733.c22.teamC.Databases.requests.MedicalEquipment;
+import edu.wpi.cs3733.c22.teamC.Databases.MedicalEquipment;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
 import java.sql.ResultSet;
 import java.sql.SQLException;

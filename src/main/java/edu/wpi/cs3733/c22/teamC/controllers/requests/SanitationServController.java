@@ -3,6 +3,8 @@ package edu.wpi.cs3733.c22.teamC.controllers.requests;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.SanitationRequestDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.Employee;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.SanitationRequest;
@@ -42,8 +44,8 @@ public class SanitationServController extends AbstractController {
 
   @FXML
   private void initialize() {
-    locations = locationQuery.getAllNodeData();
-    employees = employeeQuery.getAllNodeData();
+    locations = DaoSingleton.getLocationDao().getAllNodes();
+    employees = DaoSingleton.getEmployeeDao().getAllNodes();
 
     imageView.setImage(ImageLoader.loadImage("Sanitation"));
 
@@ -97,7 +99,8 @@ public class SanitationServController extends AbstractController {
 
       System.out.println(request.toString());
       SanitationRequestQuery sanReqQuery = new SanitationRequestQuery();
-      sanReqQuery.addNode(request);
+      SanitationRequestDaoImpl sDao = DaoSingleton.getSanitationRequestDao();
+      sDao.addNode(request);
 
       String[] toString = request.toString().split("\n", 2);
       controllerMediator.anchorPushNotification(toString[0], toString[1]);

@@ -17,6 +17,8 @@ public abstract class AbstractController {
   @FXML
   protected Parent loadFxml(String fxmlFileName) throws IOException {
     FXMLLoader loader = new FXMLLoader();
+    System.out.println(fxmlFileName);
+
     Parent root =
         loader.load(Main.class.getResource("/edu/wpi/cs3733.c22.teamC/Views/" + fxmlFileName));
     return root;

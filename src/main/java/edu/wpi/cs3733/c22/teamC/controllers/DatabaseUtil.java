@@ -1,8 +1,9 @@
 package edu.wpi.cs3733.c22.teamC.controllers;
 
 import com.jfoenix.controls.*;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.LocationDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
-import edu.wpi.cs3733.c22.teamC.SQLMethods.LocationQuery;
 import java.util.*;
 import javafx.fxml.FXML;
 
@@ -12,8 +13,9 @@ public final class DatabaseUtil {
   @FXML
   public static void getLongNames(JFXComboBox comboBox, String... nodeTypesGiven) {
     ArrayList<String> nodeList = new ArrayList<>(Arrays.asList(nodeTypesGiven));
-    LocationQuery locationQuery = new LocationQuery();
-    List<Location> locations = locationQuery.getAllNodeData();
+    LocationDaoImpl e = DaoSingleton.getLocationDao();
+
+    List<Location> locations = e.getAllNodes();
     ArrayList<String> nodeTypes = new ArrayList<>();
     nodeTypes.addAll(nodeList);
 

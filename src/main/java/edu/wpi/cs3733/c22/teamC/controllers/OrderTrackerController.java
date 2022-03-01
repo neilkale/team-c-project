@@ -327,9 +327,7 @@ public class OrderTrackerController extends AbstractController {
                   srCriteria = new SRCriteriaID(comboBox.getEditor().getText());
                   break;
                 case "location":
-                  srCriteria =
-                      new SRCriteriaLocation(
-                          LocationQuery.longToNodeID(comboBox.getEditor().getText()));
+                  srCriteria = new SRCriteriaLocationLong(comboBox.getEditor().getText());
                   break;
                 case "type":
                   srCriteria = new SRCriteriaType(comboBox.getEditor().getText());

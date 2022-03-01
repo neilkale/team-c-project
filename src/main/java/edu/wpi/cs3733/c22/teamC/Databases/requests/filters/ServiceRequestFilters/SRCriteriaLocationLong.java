@@ -20,7 +20,8 @@ public class SRCriteriaLocationLong implements SRCriteria {
     ArrayList<ServiceRequest> toReturn = new ArrayList<ServiceRequest>();
     ArrayList<String> locationIDs = new ArrayList<>();
     for (Location eachLoc : (new LocationQuery()).getAllNodeData()) {
-      if (eachLoc.get_longName().contains(locLongName)) locationIDs.add(eachLoc.get_nodeID());
+      if (eachLoc.get_longName().toUpperCase().contains(locLongName.toUpperCase()))
+        locationIDs.add(eachLoc.get_nodeID());
     }
     for (ServiceRequest each : employeeList) {
       boolean found = false;

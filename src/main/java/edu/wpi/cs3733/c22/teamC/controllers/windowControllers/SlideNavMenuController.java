@@ -25,7 +25,6 @@ public class SlideNavMenuController extends ServiceRequestController {
   @FXML private JFXButton giftButton;
   @FXML private JFXButton religiousButton;
   @FXML private JFXButton securityButton;
-  @FXML private JFXButton APIButton;
 
   @FXML ImageView laundryIcon;
   @FXML ImageView interpIcon;
@@ -38,7 +37,6 @@ public class SlideNavMenuController extends ServiceRequestController {
   @FXML ImageView giftIcon;
   @FXML ImageView religiousIcon;
   @FXML ImageView securityIcon;
-  @FXML ImageView APIIcon;
 
   @FXML private BorderPane borderPane;
   @FXML private ScrollPane scrollPane;
@@ -60,8 +58,6 @@ public class SlideNavMenuController extends ServiceRequestController {
     giftIcon.setImage(ImageLoader.loadImage("Gifts"));
     religiousIcon.setImage(ImageLoader.loadImage("Religion"));
     securityIcon.setImage(ImageLoader.loadImage("Security"));
-    APIIcon.setImage(ImageLoader.loadImage("IT"));
-
     // BE CAREFUL, ADDING BUTTONS THAT DON'T EXIST ON SlideNavMenu.fxml WILL BREAK SEARCH
     jfxButtonList.addAll(
         FXCollections.observableArrayList(
@@ -75,8 +71,7 @@ public class SlideNavMenuController extends ServiceRequestController {
             transportButton,
             giftButton,
             religiousButton,
-            securityButton,
-            APIButton));
+            securityButton));
 
     scrollPane
         .heightProperty()

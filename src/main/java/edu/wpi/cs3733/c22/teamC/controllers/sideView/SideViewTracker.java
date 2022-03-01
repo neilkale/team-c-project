@@ -7,7 +7,7 @@ import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.MedicalEquipmentQuery;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class EquipmentCountTracker {
+public class SideViewTracker {
   private static HashMap<String, Integer[]> equipmentCount = new HashMap<String, Integer[]>();
   private static LocationQuery locationQuery = new LocationQuery();
   private static MedicalEquipmentQuery medicalEquipmentQuery = new MedicalEquipmentQuery();

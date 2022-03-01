@@ -26,5 +26,7 @@ hs_err_pid*
 *.DS_Store
 *.log
 
+
+/Ddb/
 /build/
 

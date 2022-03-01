@@ -47,6 +47,7 @@ public class LoggedInUser {
       EmployeeQuery employeeQuery = new EmployeeQuery();
       employeeQuery.editNode(signedInUser);
     } catch (SQLException e) {
+      e.printStackTrace();
       System.out.println("Failed to set profile pic");
     }
   }

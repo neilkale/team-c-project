@@ -20,6 +20,6 @@ public class SlideInfoMenuController extends AbstractController {
 
   @FXML
   private void helpButtonPressed() throws IOException {
-    // controllerMediator.setDefaultPageCenter(".fxml");
+    controllerMediator.setDefaultPageCenter("HelpPage.fxml");
   }
 }

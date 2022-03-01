@@ -4,5 +4,5 @@ import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 
 public class CovidPageController {
-    @FXML private JFXButton backButton;
+  @FXML private JFXButton backButton;
 }

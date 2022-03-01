@@ -3,8 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -14,9 +12,9 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.CovidPageController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.CovidPageController">
    <children>
-      <AnchorPane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: ffffff;" stylesheets="@../Stylesheets/ServiceRequestConstants.css">
+      <AnchorPane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: ffffff;" stylesheets="@../Stylesheets/ServiceRequestConstants.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <BorderPane layoutX="-2.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <top>
@@ -58,30 +56,6 @@
                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                           <GridPane.margin>
-                              <Insets bottom="10.0" left="-250.0" top="10.0" />
-                           </GridPane.margin>
-                           <image>
-                              <Image url="@Icons/GiftsIcon.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="imageView1" fitHeight="150.0" fitWidth="150.0" layoutX="335.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                           <GridPane.margin>
-                              <Insets bottom="10.0" left="-250.0" top="10.0" />
-                           </GridPane.margin>
-                           <image>
-                              <Image url="@Icons/TechBlueIcon.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="imageView11" fitHeight="150.0" fitWidth="150.0" layoutX="335.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                           <GridPane.margin>
-                              <Insets bottom="10.0" left="-250.0" top="10.0" />
-                           </GridPane.margin>
-                           <image>
-                              <Image url="@Icons/TransportBlueIcon.png" />
-                           </image>
-                        </ImageView>
                         <Text fill="#1f58af" strokeType="OUTSIDE" strokeWidth="0.0" text="Cyan Cyclops Team C" underline="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <GridPane.margin>
                               <Insets left="100.0" top="-30.0" />

@@ -111,12 +111,12 @@
                         <Font size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="310.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- TBD" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Text layoutX="310.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Burgundy Team B" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font size="16.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="90.0" top="30.0" />
+                        <Insets left="110.0" top="30.0" />
                      </GridPane.margin>
                   </Text>
                   <Text layoutX="310.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- TBD" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">

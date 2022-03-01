@@ -116,7 +116,7 @@ public class DatabaseConnection {
   public void startServerClientDbConnection() {
     try {
       Class.forName(driverCS);
-      connection = DriverManager.getConnection(db_s_c_url, "admin", "admin");
+      connection = DriverManager.getConnection(db_s_c_url);
       isClientDatabase = true;
       // isMongulDB = false;
       if (connection != null) {
@@ -171,12 +171,4 @@ public class DatabaseConnection {
       mongoDatabase.closeMongo();
     }
   }
-
-  /*public MongoEquipment getMongoEquipment() {
-    return mongoEquipment;
-  }
-
-  public MongoLocation getMongoLocation() {
-    return mongoLocation;
-  }*/
 }

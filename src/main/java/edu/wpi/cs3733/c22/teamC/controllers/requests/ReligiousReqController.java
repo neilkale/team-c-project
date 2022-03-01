@@ -3,6 +3,8 @@ package edu.wpi.cs3733.c22.teamC.controllers.requests;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.InternalTransportRequestDaoImpl;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.ReligiousRequestDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.Employee;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.ReligiousRequest;
@@ -94,7 +96,8 @@ public class ReligiousReqController extends AbstractController {
 
       System.out.println(request.toString());
       ReligiousRequestQuery religReqQuery = new ReligiousRequestQuery();
-      religReqQuery.addNode(request);
+      ReligiousRequestDaoImpl rDao = DaoSingleton.getReligiousRequestDao();
+      rDao.addNode(request);
 
       String[] toString = request.toString().split("\n", 2);
       controllerMediator.anchorPushNotification(toString[0], toString[1]);

@@ -42,8 +42,7 @@ public class DatabaseAllController extends AbstractController {
     queryType = (new LocationQuery()).getQueryInput();
     dbConnection = DatabaseConnection.getInstance();
     try {
-      ObservableList<String> list =
-          FXCollections.observableArrayList(DatabaseConnection.getTableNames());
+      ObservableList<String> list = FXCollections.observableArrayList(Query.getTableNames());
       comboBox.getItems().setAll(list);
 
     } catch (Exception e) {

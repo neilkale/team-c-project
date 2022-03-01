@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.CreditsPageController">
+   <children>
+      <BorderPane layoutX="-2.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <GridPane style="-fx-background-color: #009f9f;" BorderPane.alignment="CENTER">
+               <rowConstraints>
+                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="55.0" />
+               </rowConstraints>
+               <columnConstraints>
+                  <ColumnConstraints maxWidth="1.7976931348623157E308" />
+                  <ColumnConstraints />
+               </columnConstraints>
+               <children>
+                  <Label fx:id="Banner" alignment="CENTER" prefHeight="55.0" prefWidth="6000.0" stylesheets="@../Stylesheets/ServiceRequestConstants.css" text="CREDITS PAGE" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="backButton" onAction="#backButtonPressed" prefHeight="55.0" prefWidth="55.0" ripplerFill="BLACK" text="&lt;" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="LEFT">
+                     <font>
+                        <Font name="Consolas Bold" size="30.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </GridPane>
+         </top>
+         <center>
+            <GridPane stylesheets="@../Stylesheets/SanitationServices.css" BorderPane.alignment="CENTER">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="-Infinity" vgrow="NEVER" />
+                  <RowConstraints maxHeight="-Infinity" vgrow="NEVER" />
+                  <RowConstraints maxHeight="-Infinity" vgrow="NEVER" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="100.0" top="10.0" />
+                     </GridPane.margin>
+                     <image>
+                        <Image url="@Icons/GiftsIcon.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imageView1" fitHeight="150.0" fitWidth="150.0" layoutX="335.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="100.0" top="10.0" />
+                     </GridPane.margin>
+                     <image>
+                        <Image url="@Icons/TechBlueIcon.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imageView11" fitHeight="150.0" fitWidth="150.0" layoutX="335.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="100.0" top="10.0" />
+                     </GridPane.margin>
+                     <image>
+                        <Image url="@Icons/TransportBlueIcon.png" />
+                     </image>
+                  </ImageView>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cyan Cyclops Team C" underline="true" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets left="280.0" top="30.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="310.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cyan Cyclops Team C" underline="true" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="280.0" top="30.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Text layoutX="10.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cyan Cyclops Team C" underline="true" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="280.0" top="30.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Text layoutX="310.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Gift Request API" textAlignment="CENTER" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets left="300.0" top="60.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="310.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- IT Request API" textAlignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="300.0" top="60.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Text layoutX="310.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Internal Transport Request API" textAlignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="300.0" top="60.0" />
+                     </GridPane.margin>
+                  </Text>
+               </children>
+            </GridPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

@@ -4,7 +4,6 @@ import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.*;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.LaundryRequestQuery;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -145,20 +144,7 @@ public abstract class ServiceRequest {
   public static String getNewestID() {
     int largest = 0;
     try {
-      ArrayList<String> list = new ArrayList<>();
-      Connection dbConnection = DatabaseConnection.getConnection();
-      ResultSet rs =
-          DatabaseConnection.getConnection()
-              .getMetaData()
-              .getTables(null, null, null, new String[] {"TABLE"});
-      while (rs.next()) {
-        String nextTable = (rs.getString("TABLE_NAME"));
-        System.out.println(nextTable);
-        if (nextTable.toUpperCase().contains("REQUEST")) {
-          System.out.println("CONFIRMED");
-          list.add(nextTable);
-        }
-      }
+      ArrayList<String> list = getServiceRequestTables();
       for (String table : list) {
         String query = "SELECT TICKETID FROM " + table;
         ResultSet rsTable = DatabaseConnection.getInstance().executeQuery(query);
@@ -184,16 +170,8 @@ public abstract class ServiceRequest {
       String statusIn) { // sets the status of the service request - ASSUMES A UNIQUE TICKET ID!!!!!
     ArrayList<String> tables = new ArrayList<>();
     try {
+      tables = getServiceRequestTables();
 
-      ResultSet rs =
-          DatabaseConnection.getConnection()
-              .getMetaData()
-              .getTables(null, null, null, new String[] {"TABLE"});
-
-      while (rs.next()) {
-        String nextTable = (rs.getString("TABLE_NAME"));
-        if (nextTable.toUpperCase().contains("REQUEST")) tables.add(nextTable);
-      }
       boolean found = false;
       for (int i = 0; (i < tables.size()) || (!found); i++) {
         String query = "SELECT * FROM " + tables.get(i) + " WHERE TICKETID = " + this._ticketID;
@@ -231,15 +209,7 @@ public abstract class ServiceRequest {
     ArrayList<String> tables = new ArrayList<>();
     try {
 
-      ResultSet rs =
-          DatabaseConnection.getConnection()
-              .getMetaData()
-              .getTables(null, null, null, new String[] {"TABLE"});
-
-      while (rs.next()) {
-        String nextTable = (rs.getString("TABLE_NAME"));
-        if (nextTable.toUpperCase().contains("REQUEST")) tables.add(nextTable);
-      }
+      tables = getServiceRequestTables();
 
       for (int i = 0; (i < tables.size()); i++) {
         String query = "SELECT * FROM " + tables.get(i) + " WHERE TICKETID = " + this._ticketID;
@@ -253,7 +223,7 @@ public abstract class ServiceRequest {
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println(
-          "[ServiceRequst::getStatus]: Error in getting value "
+          "[ServiceRequest::getStatus]: Error in getting value "
               + " given [ServiceRequest]:"
               + this.toString());
       return null;
@@ -277,6 +247,14 @@ public abstract class ServiceRequest {
       }
     }
     return new int[] {total.size(), completed};
+  }
+
+  protected static ArrayList<String> getServiceRequestTables() {
+    ArrayList<String> list = new ArrayList<>();
+    for (String each : DatabaseConnection.getTableNames()) {
+      if (each.toUpperCase().contains("REQUEST")) list.add(each);
+    }
+    return list;
   }
 
   public abstract Query getQueryInstance();

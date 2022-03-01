@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 // import org.apache.derby.jdbc.*;
 
@@ -19,11 +20,30 @@ public class DatabaseConnection {
   private Connection connection;
   // private MongoEquipment mongoEquipment;
   // private MongoLocation mongoLocation;
+  private static ArrayList<String> tableNames;
 
   public boolean isClientDatabase() {
     return isClientDatabase;
   }
 
+  public static ArrayList<String> getTableNames() {
+    return tableNames;
+  }
+
+  public static void setTableNames() throws SQLException {
+    ArrayList<String> list = new ArrayList<>();
+    ResultSet rs =
+        (new DatabaseConnection())
+            .connection
+            .getMetaData()
+            .getTables(null, null, null, new String[] {"TABLE"});
+
+    while (rs.next()) {
+      String nextTable = (rs.getString("TABLE_NAME"));
+      list.add(nextTable);
+    }
+    tableNames = list;
+  }
   /*
   public boolean isMongulDB() {
     return isMongulDB;

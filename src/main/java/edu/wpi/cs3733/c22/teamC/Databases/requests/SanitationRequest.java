@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoInterface;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.SanitationRequestQuery;
 
 /** this class is for the sanitation service request data */
@@ -35,18 +37,6 @@ public class SanitationRequest extends ServiceRequest {
     return "Sanitation Request";
   }
 
-  @Override
-  public String[] getFieldNames() {
-    String[] in = getGenericFieldNames();
-    return new String[] {in[0], in[1], in[2], in[3], in[4], "Mess Type"};
-  }
-
-  @Override
-  public String[] getFieldValues() {
-    String[] in = getGenericFieldValues();
-    return new String[] {in[0], in[1], in[2], in[3], in[4], this._messType};
-  }
-
   public String toString() {
     return "Sanitation Request\nID: "
         + get_ticketID()
@@ -60,5 +50,31 @@ public class SanitationRequest extends ServiceRequest {
         + get_assignment()
         + "\nMess Type: "
         + _messType;
+  }
+
+  /*
+     String ticketID,
+     String locationID,
+     String status,
+     String serviceType,
+     String assignment,
+     String messType
+  */
+
+  @Override
+  public String[] getFields() {
+    return new String[] {
+      "ticketID", "locationID", "status", "serviceType", "assignment", "messType"
+    };
+  }
+
+  @Override
+  public String getName() {
+    return null;
+  }
+
+  @Override
+  public DaoInterface getDao() {
+    return DaoSingleton.getSanitationRequestDao();
   }
 }

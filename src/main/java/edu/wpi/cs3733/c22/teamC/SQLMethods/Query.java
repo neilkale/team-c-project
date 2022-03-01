@@ -141,41 +141,6 @@ public abstract class Query<T> {
     }
   }
 
-  //  public boolean compareAndChange(ArrayList<T> list, String UID) throws Exception {
-  //    try {
-  //      ArrayList<T> listDatabaseNow = getAllNodeData();
-  //      for (T each : listDatabaseNow) {
-  //
-  //        boolean found = false;
-  //        for (T eacher : list) {
-  //          if (!listDatabaseNow.contains(eacher)) {
-  //            if (!found) {
-  //              //            System.out.println("Each :" + getUID(each));
-  //              //            System.out.println("Eacher :" + getUID(eacher));
-  //              if (getUID(each).equals(getUID(eacher))) {
-  //                System.out.println("FOUND  " + getUID(each));
-  //                found = true;
-  //                removeNode(each);
-  //                addNode(eacher);
-  //              }
-  //            }
-  //
-  //            if (!found) {
-  //              removeNode(each);
-  //            }
-  //          } else {
-  //          }
-  //        }
-  //      }
-  //
-  //    } catch (Exception e) {
-  //      e.printStackTrace();
-  //      throw e;
-  //    }
-  //
-  //    return false;
-  //  }
-
   public boolean compareAndChange(ArrayList<T> list, String UID) throws Exception {
     try {
       ArrayList<T> listDataBaseNow = getAllNodeData();
@@ -225,39 +190,6 @@ public abstract class Query<T> {
 
     return false;
   }
-  //  public boolean compareAndChange(ArrayList<T> list, String UID) throws Exception {
-  //    try {
-  //      ArrayList<T> listDatabaseNow = getAllNodeData();
-  //      for (T each : list) {
-  //        String nodeUID = getUID(each);
-  //        if (!listDatabaseNow.contains(each)) {
-  //
-  //          ResultSet rs =
-  //              dbConnection.executeQuery(
-  //                  "SELECT * FROM " + getQueryInput() + " WHERE " + UID + " = '" + nodeUID +
-  // "'");
-  //          boolean found = false;
-  //          if (rs.next()) {
-  //            found = true;
-  //            System.out.println("___:" + rs.getString(UID));
-  //            DatabaseConnection.getConnection()
-  //                .createStatement()
-  //                .executeUpdate(
-  //                    "DELETE  FROM " + getQueryInput() + " WHERE " + UID + " = '" + nodeUID +
-  // "'");
-  //          }
-  //
-  //          addNode(each);
-  //        }
-  //      }
-  //
-  //    } catch (Exception e) {
-  //      e.printStackTrace();
-  //      throw e;
-  //    }
-  //
-  //    return false;
-  //  }
 
   public abstract String getUID(T each) throws SQLException;
 
@@ -269,21 +201,25 @@ public abstract class Query<T> {
     T queryResult = null;
     ArrayList<T> allNodes = new ArrayList<>();
 
-    try {
-      String query = "SELECT * FROM " + getQueryInput();
-      ResultSet rs = dbConnection.executeQuery(query);
-      int columns = rs.getMetaData().getColumnCount();
-      while (rs.next()) {
-        String[] arguments = new String[columns];
-        for (int i = 1; i <= columns; i++) {
-          arguments[i] = rs.getString(rs.getMetaData().getColumnName(i));
-        }
+    if (!dbConnection.isMongo()) {
+      try {
+        String query = "SELECT * FROM " + getQueryInput();
+        ResultSet rs = dbConnection.executeQuery(query);
+        int columns = rs.getMetaData().getColumnCount();
+        while (rs.next()) {
+          String[] arguments = new String[columns];
+          for (int i = 1; i <= columns; i++) {
+            arguments[i] = rs.getString(rs.getMetaData().getColumnName(i));
+          }
 
-        queryResult = queryFactory(arguments);
-        allNodes.add(queryResult);
+          queryResult = queryFactory(arguments);
+          allNodes.add(queryResult);
+        }
+      } catch (SQLException e) {
+        e.printStackTrace();
       }
-    } catch (SQLException e) {
-      e.printStackTrace();
+    } else {
+      allNodes = (ArrayList<T>) dbConnection.getFromMongo("SELECT * FROM " + getQueryInput());
     }
     return allNodes;
   }
@@ -386,11 +322,7 @@ public abstract class Query<T> {
     LocalDateTime date = LocalDateTime.now();
     DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy-HH-mm-ss");
     String dateString = date.format(dateFormat);
-    //    URL resource =
-    //        getClass()
-    //            .getClassLoader()
-    //
-    // .getResource("./resources/main/edu/wpi/cs3733.c22.teamC/CSV_Files/CSVAUTOBACKUP/");
+
     String resource = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "/";
     System.out.println(resource.toString());
     String fileIn =
@@ -401,8 +333,6 @@ public abstract class Query<T> {
             + dateString
             + "-"
             + ".csv"; // fileName format is queryInput-Day-Month-Year-Seconds
-    // if (VERBOSE) System.out.println("Write CSV successful: " + getQueryInput());
-
     return writeCSV(fileIn);
   }
 

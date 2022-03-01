@@ -1,19 +1,28 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.*;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.*;
-import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.LaundryRequestQuery;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 /** this class is for the medical equipment service request data */
-public abstract class ServiceRequest {
+public abstract class ServiceRequest implements DatabaseInterface {
   private String _ticketID;
   private String _locationID;
   private String _serviceType;
   private String _status;
   private String _assignment; // this would really be an employee
+
+  @Override
+  public String getUID() {
+    return _ticketID;
+  }
 
   public ServiceRequest(
       String ticketID,
@@ -38,17 +47,49 @@ public abstract class ServiceRequest {
   public static ArrayList<ServiceRequest> getAllServiceRequests() {
     ArrayList<ServiceRequest> output = new ArrayList<>();
 
-    output.addAll((new InternalTransportRequestQuery()).getAllNodeData());
-    output.addAll((new ITRequestQuery()).getAllNodeData());
-    output.addAll((new GiftRequestQuery()).getAllNodeData());
-    output.addAll((new EquipmentRequestQuery()).getAllNodeData());
-    output.addAll((new LanguageRequestQuery()).getAllNodeData());
-    output.addAll((new LaundryRequestQuery()).getAllNodeData());
-    output.addAll((new MaintenanceRequestQuery()).getAllNodeData());
-    output.addAll((new MedicineRequestQuery()).getAllNodeData());
-    output.addAll((new ReligiousRequestQuery()).getAllNodeData());
-    output.addAll((new SanitationRequestQuery()).getAllNodeData());
-    output.addAll((new SecurityRequestQuery()).getAllNodeData());
+    InternalTransportRequestDaoImpl a;
+    a = DaoSingleton.getInternalTransportRequestDao();
+    output.addAll(a.getAllNodes());
+
+    ITRequestDaoImpl b;
+    b = DaoSingleton.getItRequestDao();
+    output.addAll(b.getAllNodes());
+
+    GiftRequestDaoImpl c;
+    c = DaoSingleton.getGiftRequestDao();
+    output.addAll(c.getAllNodes());
+
+    EquipmentRequestDaoImpl d;
+    d = DaoSingleton.getEquipmentRequestDao();
+    output.addAll(d.getAllNodes());
+
+    LanguageRequestDaoImpl e;
+    e = DaoSingleton.getLanguageRequestDao();
+    output.addAll(e.getAllNodes());
+
+    LaundryRequestDaoImpl f;
+    f = DaoSingleton.getLaundryRequestDao();
+    output.addAll(f.getAllNodes());
+
+    MaintenanceRequestDaoImpl g;
+    g = DaoSingleton.getMaintenanceRequestDao();
+    output.addAll(g.getAllNodes());
+
+    MedicineRequestDaoImpl h;
+    h = DaoSingleton.getMedicineRequestDao();
+    output.addAll(h.getAllNodes());
+
+    ReligiousRequestDaoImpl i; // jklm
+    i = DaoSingleton.getReligiousRequestDao();
+    output.addAll(i.getAllNodes());
+
+    SanitationRequestDaoImpl j;
+    j = DaoSingleton.getSanitationRequestDao();
+    output.addAll(i.getAllNodes());
+
+    SecurityRequestDaoImpl k;
+    k = DaoSingleton.getSecurityRequestDao();
+    output.addAll(i.getAllNodes());
 
     return output;
   }
@@ -144,6 +185,7 @@ public abstract class ServiceRequest {
   public static String getNewestID() {
     int largest = 0;
     try {
+
       ArrayList<String> list = getServiceRequestTables();
       for (String table : list) {
         String query = "SELECT TICKETID FROM " + table;
@@ -194,7 +236,7 @@ public abstract class ServiceRequest {
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println(
-          "[ServiceRequst::setStatus]: Error in setting value "
+          "[ServiceRequest::setStatus]: Error in setting value "
               + statusIn
               + " given [ServiceRequest]:"
               + this.toString());
@@ -274,22 +316,52 @@ public abstract class ServiceRequest {
   // FIELD VALUE
   public abstract String getRequestType();
 
-  public abstract String[] getFieldNames();
+  @Override
+  public String[] setValues(String[] values) {
+    List<String> a = new ArrayList<>();
+    Method getter;
+    String[] fields = getFields();
+    for (int i = 0; i < getFields().length; i++) {
+      try {
+        getter = this.getClass().getMethod("set_" + fields[i]);
+        a.add((String) getter.invoke(this, new Object[] {values[i]}));
+      } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+      } catch (InvocationTargetException e) {
+        e.printStackTrace();
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      }
+    }
 
-  public abstract String[] getFieldValues();
-
-  public String[] getGenericFieldNames() {
-    return new String[] {"Ticket ID", "Location ID", "Status", "Service Type", "Assignment"};
+    String[] toReturn = new String[a.size()];
+    for (int i = 0; i < a.size(); i++) {
+      toReturn[i] = a.get(i);
+    }
+    return toReturn;
   }
-  //    this._ticketID = ticketID;
-  //    this._locationID = locationID;
-  //    this._status = status;
-  //    this._serviceType = serviceType;
-  //    this._assignment = assignment;
-  public String[] getGenericFieldValues() {
-    return new String[] {
-      this._ticketID, this._locationID, this._status, this._serviceType, this._assignment
-    };
+
+  @Override
+  public String[] getValues() {
+    List<String> a = new ArrayList<>();
+    Method getter;
+    for (String s : getFields()) {
+      try {
+        getter = this.getClass().getMethod("get_" + s);
+        a.add((String) getter.invoke(this, new Object[] {}));
+      } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+      } catch (InvocationTargetException e) {
+        e.printStackTrace();
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      }
+    }
+    String[] toReturn = new String[a.size()];
+    for (int i = 0; i < a.size(); i++) {
+      toReturn[i] = a.get(i);
+    }
+    return toReturn;
   }
 
   @Override

@@ -9,17 +9,16 @@ import java.util.List;
 
 public class Employee implements DatabaseInterface {
 
-  private String username;
-  private String password;
-  private String firstName;
-  private String lastName;
-  private String serviceType;
-  private String access;
-  private String id;
-  private String profilePicture;
+  private String _username;
+  private String _password;
+  private String _firstName;
+  private String _lastName;
+  private String _serviceType;
+  private String _access;
+  private String _id;
+  private String _profilePicture;
   private String phoneNumber;
   private String email;
-
 
   public String get_username() {
     return _username;
@@ -112,14 +111,14 @@ public class Employee implements DatabaseInterface {
       String picture,
       String phoneNumber,
       String email) {
-    this.username = username;
-    this.password = password;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.serviceType = serviceType;
-    this.access = access;
-    this.id = id;
-    this.profilePicture = picture;
+    this._username = username;
+    this._password = password;
+    this._firstName = firstName;
+    this._lastName = lastName;
+    this._serviceType = serviceType;
+    this._access = access;
+    this._id = id;
+    this._profilePicture = picture;
     this.phoneNumber = phoneNumber;
     this.email = email;
   }

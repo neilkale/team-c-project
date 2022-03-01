@@ -25,7 +25,8 @@ public class EmployeeQuery extends Query<Employee> {
       return null;
     }
     return new Employee(
-        inputs[0], inputs[1], inputs[2], inputs[3], inputs[4], inputs[5], inputs[6], inputs[7], inputs[8],inputs[9]);
+        inputs[0], inputs[1], inputs[2], inputs[3], inputs[4], inputs[5], inputs[6], inputs[7],
+        inputs[8], inputs[9]);
   }
 
   @Override
@@ -54,7 +55,17 @@ public class EmployeeQuery extends Query<Employee> {
         String email = rs.getString("email");
 
         queryResult =
-            new Employee(username, password, firstName, lastName, serviceType, access, id, pic,phoneNumber,email);
+            new Employee(
+                username,
+                password,
+                firstName,
+                lastName,
+                serviceType,
+                access,
+                id,
+                pic,
+                phoneNumber,
+                email);
         allNodes.add(queryResult);
       }
 

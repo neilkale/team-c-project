@@ -25,6 +25,9 @@ public class ProfilePageController {
 
   @FXML
   void initialize() {
+    if (LoggedInUser.getCurrentUser().get_username().equals("cpage"))
+      for (int i = 0; i < picNames.length; i++) picNames[i] = "Kevin";
+
     firstNameLabel.setText(LoggedInUser.getCurrentUser().get_firstName());
     lastNameLabel.setText(LoggedInUser.getCurrentUser().get_lastName());
     jobTypeLabel.setText(LoggedInUser.getCurrentUser().get_Service_Type());

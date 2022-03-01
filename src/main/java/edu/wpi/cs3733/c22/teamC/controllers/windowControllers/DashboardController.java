@@ -44,7 +44,7 @@ public class DashboardController extends AbstractController {
     passwordField.setVisible(true);
     passwordTextField.setVisible(false);
 
-    //listens for checkbox tick; if ticked, we show password
+    // listens for checkbox tick; if ticked, we show password
     showPassCheckBox
         .selectedProperty()
         .addListener(

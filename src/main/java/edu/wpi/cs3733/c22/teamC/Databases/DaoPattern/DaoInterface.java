@@ -2,13 +2,15 @@ package edu.wpi.cs3733.c22.teamC.Databases.DaoPattern;
 
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class DaoInterface<T> {
-  protected List<T> nodes;
+  protected ArrayList<T> nodes;
   protected Query<T> nodeQuery;
 
-  public List<T> getAllNodes() {
+  public ArrayList<T> getAllNodes() {
     return nodes;
   }
 

@@ -13,6 +13,7 @@ public final class DatabaseUtil {
   public static void getLongNames(JFXComboBox comboBox, String... nodeTypesGiven) {
     ArrayList<String> nodeList = new ArrayList<>(Arrays.asList(nodeTypesGiven));
     LocationQuery locationQuery = new LocationQuery();
+
     List<Location> locations = locationQuery.getAllNodeData();
     ArrayList<String> nodeTypes = new ArrayList<>();
     nodeTypes.addAll(nodeList);

@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.PathFinding;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.LocationDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.MaintenanceRequest;
 import edu.wpi.cs3733.c22.teamC.PathFinding.AStarImpl.AStar;
@@ -15,8 +17,8 @@ public class PathFinder {
   private HashMap<String, Node> nodeMap = new HashMap<String, Node>();
 
   public PathFinder() {
-    LocationQuery locationQuery = new LocationQuery();
-    ArrayList<Location> locList = locationQuery.getAllNodeData();
+    LocationDaoImpl e = DaoSingleton.getLocationDao();
+    ArrayList<Location> locList = e.getAllNodes();
     nodeMap = locsToNodes(locList);
     blockMaintenance();
   }

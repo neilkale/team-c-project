@@ -119,17 +119,7 @@ public class MapNodeList {
       }
     }
 
-    ArrayList<ServiceRequest> requests = new ArrayList<>();
-    requests.addAll(equipmentRequestQuery.getAllNodeData());
-    requests.addAll(giftRequestQuery.getAllNodeData());
-    requests.addAll(internalTransportRequestQuery.getAllNodeData());
-    requests.addAll(itRequestQuery.getAllNodeData());
-    requests.addAll(laundryRequestQuery.getAllNodeData());
-    requests.addAll(maintenanceRequestQuery.getAllNodeData());
-    requests.addAll(medicineRequestQuery.getAllNodeData());
-    requests.addAll(religiousRequestQuery.getAllNodeData());
-    requests.addAll(sanitationRequestQuery.getAllNodeData());
-    requests.addAll(new LanguageRequestQuery().getAllNodeData());
+    ArrayList<ServiceRequest> requests = ServiceRequest.getAllServiceRequests();
     for (ServiceRequest s : requests) {
       for (MapNode n : nodes) {
         if (n.checkLocation(s.get_locationID())) {

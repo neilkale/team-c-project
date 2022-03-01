@@ -20,14 +20,11 @@ public class MongoDatabase {
   private DatabaseConnection databaseConnection;
 
   public MongoDatabase() {
-    try{
-      mongoClient = MongoClients.create(uri);
-      teamC_db = mongoClient.getDatabase("teamC_DB");
-      map = new HashMap<>();
-      databaseConnection = DatabaseConnection.getInstance();
-    } catch (Exception e){
-      databaseConnection.disableMongo();
-    }
+    mongoClient = MongoClients.create(uri);
+    teamC_db = mongoClient.getDatabase("teamC_DB");
+    map = new HashMap<>();
+    databaseConnection = DatabaseConnection.getInstance();
+
   }
 
   public void closeMongo() {
@@ -63,11 +60,8 @@ public class MongoDatabase {
       docList.add(doc);
     }
 
-    try{
-      teamC_db.getCollection(table).insertMany(docList);
-    } catch (Exception e){
-      databaseConnection.disableMongo();
-    }
+    teamC_db.getCollection(table).insertMany(docList);
+
   }
 
   public String getAction(String query) {
@@ -119,18 +113,17 @@ public class MongoDatabase {
     for (int i = 0; i < fields.size(); i++) {
       doc.append(fields.get(i), values.get(i));
     }
-    try{
-      teamC_db.getCollection(table).insertOne(doc);
-    } catch (Exception e){
-      databaseConnection.disableMongo();
-    }
+    teamC_db.getCollection(table).insertOne(doc);
+
     return "INSERT";
   }
 
   public List<? extends Object> select(String query) {
     if (query.contains("*")) {
+      //Returns List of databaseInterface
       return selectAllObjectFromQuery(query);
     } else {
+      //Returns List of String
       return selectColumnFromQuery(query);
     }
   }
@@ -186,11 +179,8 @@ public class MongoDatabase {
     }
     fields.add(toIterate.substring(1, toIterate.indexOf('V') - 1));
     map.put(table, fields);
-    try {
-      teamC_db.createCollection(table);
-    } catch (Exception e) {
-      databaseConnection.disableMongo();
-    }
+    teamC_db.createCollection(table);
+
 
     return "CREATE";
   }
@@ -217,12 +207,9 @@ public class MongoDatabase {
     }
     Document filterDoc = new Document(fields.get(0), values.get(0));
 
-    try{
-      teamC_db.getCollection(table).deleteOne(filterDoc);
-      teamC_db.getCollection(table).insertOne(document);
-    } catch (Exception e){
-      databaseConnection.disableMongo();
-    }
+    teamC_db.getCollection(table).deleteOne(filterDoc);
+    teamC_db.getCollection(table).insertOne(document);
+
 
     return "UPDATE";
   }
@@ -237,12 +224,9 @@ public class MongoDatabase {
       table = query.substring(query.lastIndexOf(' ') + 1);
     }
     MongoCollection<Document> collection;
-    try {
-      collection = teamC_db.getCollection(table);
-    } catch (Exception e){
-      databaseConnection.disableMongo();
-      return null;
-    }
+
+    collection = teamC_db.getCollection(table);
+
     ArrayList<DatabaseInterface> toReturn = new ArrayList<>();
     ArrayList<String> fields = map.get(table);
     Class<? extends Query> queryClass;
@@ -260,19 +244,10 @@ public class MongoDatabase {
             new Document(
                 fields.get(0), query.substring(query.indexOf('\'') + 1, query.length() - 1));
 
-        try {
-          toIterate = collection.find(filter);
-        } catch (Exception e){
-          databaseConnection.disableMongo();
-          return null;
-        }
+        toIterate = collection.find(filter);
+
       } else {
-        try {
-          toIterate = collection.find();
-        } catch (Exception e){
-          databaseConnection.disableMongo();
-          return null;
-        }
+        toIterate = collection.find();
       }
 
       for (Document d : toIterate) {
@@ -311,12 +286,8 @@ public class MongoDatabase {
 
     MongoCollection<Document> collection;
 
-    try{
-      collection = teamC_db.getCollection(table);
-    } catch (Exception e){
-      databaseConnection.disableMongo();
-      return null;
-    }
+    collection = teamC_db.getCollection(table);
+
 
     ArrayList<String> toReturn = new ArrayList<>();
 

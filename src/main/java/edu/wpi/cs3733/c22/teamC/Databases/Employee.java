@@ -112,4 +112,8 @@ public class Employee implements DatabaseInterface {
   public String getName() {
     return null;
   }
+
+  public String get_Service_Type() {
+    return serviceType;
+  }
 }

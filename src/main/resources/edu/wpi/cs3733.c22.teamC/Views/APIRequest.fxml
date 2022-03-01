@@ -13,11 +13,12 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.layout.HBox?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.APIController">
    <children>
       <BorderPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <GridPane style="-fx-background-color: #002d59;" BorderPane.alignment="CENTER">
+            <GridPane style="-fx-background-color: #1f58af;" BorderPane.alignment="CENTER">
               <rowConstraints>
                 <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="55.0" />
               </rowConstraints>
@@ -40,22 +41,34 @@
             </GridPane>
          </top>
          <center>
-             <JFXButton fx:id="TeamBAPI" alignment="CENTER_RIGHT" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#startTeamBAPI" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #002d59;" text="Team C API" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT"  GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
-                 <font>
-                     <Font name="System Bold" size="10.0" />
-                 </font>
-                 <GridPane.margin>
-                     <Insets bottom="10.0" top="10.0" />
-                 </GridPane.margin>
-             </JFXButton>
-             <JFXButton fx:id="TeamDAPI" alignment="CENTER_LEFT" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#startTeamDAPI" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #002d59;" text="Team D API" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
-                 <font>
-                     <Font name="System Bold" size="10.0" />
-                 </font>
-                 <GridPane.margin>
-                     <Insets bottom="10.0" top="10.0" />
-                 </GridPane.margin>
-             </JFXButton>
+             <HBox alignment="CENTER" prefHeight="300.0" prefWidth="100.0" spacing="50.0" BorderPane.alignment="CENTER">
+                 <children>
+                     <JFXButton fx:id="TeamBAPI" onAction="#startTeamBAPI" prefHeight="100" prefWidth="100.0" style="-fx-background-color: #1f58af; -fx-text-fill: #FFFCEB;" text="Team B API">
+                         <font>
+                             <Font size="10.0" />
+                         </font>
+                         <HBox.margin>
+                             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                         </HBox.margin>
+                     </JFXButton>
+                     <JFXButton fx:id="TeamCAPI" onAction="#startTeamCAPI" prefHeight="100" prefWidth="100.0" style="-fx-background-color: #1f58af; -fx-text-fill: #FFFCEB;" text="Team C API">
+                         <font>
+                             <Font size="10.0" />
+                         </font>
+                         <HBox.margin>
+                             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                         </HBox.margin>
+                     </JFXButton>
+                     <JFXButton fx:id="TeamDAPI" onAction="#startTeamDAPI" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #1f58af; -fx-text-fill: #FFFCEB;" styleClass="jfx-button" text="Team D API">
+                         <font>
+                             <Font size="10.0" />
+                         </font>
+                         <HBox.margin>
+                             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                         </HBox.margin>
+                     </JFXButton>
+                 </children>
+             </HBox>
          </center>
       </BorderPane>
    </children>

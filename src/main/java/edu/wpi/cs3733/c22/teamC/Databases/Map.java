@@ -1,5 +1,10 @@
 package edu.wpi.cs3733.c22.teamC.Databases;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Map implements DatabaseInterface {
   private String buildingName;
   private String floorName;
@@ -47,6 +52,29 @@ public class Map implements DatabaseInterface {
 
   @Override
   public String[] getValues() {
+    List<String> a = new ArrayList<>();
+    Method getter;
+    for (String s : getFields()) {
+      try {
+        getter = this.getClass().getMethod("get_" + s);
+        a.add((String) getter.invoke(this, new Object[] {}));
+      } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+      } catch (InvocationTargetException e) {
+        e.printStackTrace();
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      }
+    }
+    String[] toReturn = new String[a.size()];
+    for (int i = 0; i < a.size(); i++) {
+      toReturn[i] = a.get(i);
+    }
+    return toReturn;
+  }
+
+  @Override
+  public String[] getFields() {
     return new String[0];
   }
 

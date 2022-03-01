@@ -12,10 +12,10 @@ import java.util.Map;
 import org.bson.Document;
 
 public class MongoDatabase {
-  static MongoClient mongoClient;
-  static com.mongodb.client.MongoDatabase teamC_db;
-  static Map<String, ArrayList<String>> map;
-  static String uri =
+  private static MongoClient mongoClient;
+  private static com.mongodb.client.MongoDatabase teamC_db;
+  private static Map<String, ArrayList<String>> map;
+  private static String uri =
       "mongodb+srv://admin:dDbno11RbFVsXVv3@serverlessinstance0.zitm8.mongodb.net/teamC_DB?retryWrites=true&w=majority";
 
   public MongoDatabase() {
@@ -28,7 +28,38 @@ public class MongoDatabase {
     mongoClient.close();
   }
 
-  private static String getAction(String query) {
+  public void batchInsert(List<String> queries) {
+    List<Document> docList = new ArrayList<>();
+    Document doc;
+    String actQuery = queries.get(0).substring(queries.get(0).indexOf(' ') + 1);
+    actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
+    String table = actQuery.substring(0, actQuery.indexOf(' '));
+    ArrayList<String> values;
+    for (String query : queries) {
+      actQuery = query.substring(query.indexOf(' ') + 1);
+      actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
+      actQuery = actQuery.substring(actQuery.indexOf('(') + 1, actQuery.indexOf(')'));
+      values = new ArrayList<>();
+
+      ArrayList<String> fields = map.get(table);
+      while (actQuery.contains(",")) {
+        values.add(actQuery.substring(actQuery.indexOf('\'') + 1, actQuery.indexOf(',') - 1));
+        actQuery = actQuery.substring(actQuery.indexOf(','));
+        if (actQuery.charAt(0) == ',') {
+          actQuery = actQuery.substring(1);
+        }
+      }
+      values.add(actQuery.substring(1, actQuery.length() - 1));
+      doc = new Document();
+      for (int i = 0; i < fields.size(); i++) {
+        doc.append(fields.get(i), values.get(i));
+      }
+      docList.add(doc);
+    }
+    teamC_db.getCollection(table).insertMany(docList);
+  }
+
+  public String getAction(String query) {
     String toReturn = "";
     String firstWord = query.substring(0, query.indexOf(' '));
 
@@ -40,7 +71,7 @@ public class MongoDatabase {
         toReturn = createTable(query);
         break;
       case "SELECT":
-        toReturn = select(query);
+        select(query);
         break;
       case "DELETE":
         toReturn = delete(query);
@@ -57,7 +88,7 @@ public class MongoDatabase {
     return toReturn;
   }
 
-  private static String insert(String query) {
+  public String insert(String query) {
     String actQuery = query.substring(query.indexOf(' ') + 1);
     actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
     String table = actQuery.substring(0, actQuery.indexOf(' '));
@@ -72,7 +103,7 @@ public class MongoDatabase {
         actQuery = actQuery.substring(1);
       }
     }
-    values.add(actQuery.substring(2, actQuery.length() - 1));
+    values.add(actQuery.substring(1, actQuery.length() - 1));
     Document doc = new Document();
     for (int i = 0; i < fields.size(); i++) {
       doc.append(fields.get(i), values.get(i));
@@ -81,16 +112,15 @@ public class MongoDatabase {
     return "INSERT";
   }
 
-  private static String select(String query) {
-    if (query.contains("*") && !query.contains("WHERE")) {
-      ArrayList<DatabaseInterface> listOfDatabase = selectAllObjectFromQuery(query);
+  public List<? extends Object> select(String query) {
+    if (query.contains("*")) {
+      return selectAllObjectFromQuery(query);
     } else {
-      ArrayList<String> lstOfDatabase = selectColumnFromQuery(query);
+      return selectColumnFromQuery(query);
     }
-    return "SELECT";
   }
 
-  private static String delete(String query) {
+  public String delete(String query) {
     if (query.contains("WHERE")) {
       String actQuery = query.substring(query.indexOf(' ') + 1);
       actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
@@ -98,14 +128,12 @@ public class MongoDatabase {
       String keyVal = actQuery.substring(actQuery.indexOf('\'') + 1, actQuery.length() - 1);
       teamC_db.getCollection(table).deleteOne(new Document(map.get(table).get(0), keyVal));
     } else {
-      System.out.println("DELETE\n\n\n\n\n");
-      System.out.println(query.substring(query.lastIndexOf(' ') + 1));
       teamC_db.getCollection(query.substring(query.lastIndexOf(' ') + 1)).drop();
     }
     return "DELETE";
   }
 
-  private static String truncate(String query) {
+  public String truncate(String query) {
     String actQuery = query;
     actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
     actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
@@ -113,7 +141,7 @@ public class MongoDatabase {
     return "TRUNCATE";
   }
 
-  private static String createTable(String query) {
+  public String createTable(String query) {
     String actQuery = query.substring(query.indexOf(' ') + 1);
     actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
     String table = actQuery.substring(0, actQuery.indexOf('('));
@@ -137,7 +165,7 @@ public class MongoDatabase {
     return "CREATE";
   }
 
-  private static String update(String query) {
+  public String update(String query) {
     String actQuery = query.substring(query.indexOf(' ') + 1);
     String table = actQuery.substring(0, actQuery.indexOf(' '));
     String toIterate = actQuery;
@@ -163,7 +191,7 @@ public class MongoDatabase {
     return "UPDATE";
   }
 
-  private static ArrayList<DatabaseInterface> selectAllObjectFromQuery(String query) {
+  public ArrayList<DatabaseInterface> selectAllObjectFromQuery(String query) {
     String table;
     if (query.contains("WHERE")) {
       String actQuery = query.substring(query.indexOf(' ') + 1);
@@ -172,7 +200,7 @@ public class MongoDatabase {
     } else {
       table = query.substring(query.lastIndexOf(' ') + 1);
     }
-
+    System.out.println(table);
     MongoCollection<Document> collection = teamC_db.getCollection(table);
     ArrayList<DatabaseInterface> toReturn = new ArrayList<>();
     ArrayList<String> fields = map.get(table);
@@ -220,11 +248,11 @@ public class MongoDatabase {
       System.out.println("IllegalAccess");
       e.printStackTrace();
     }
-
+    System.out.println(toReturn);
     return toReturn;
   }
 
-  private static ArrayList<String> selectColumnFromQuery(String query) {
+  public ArrayList<String> selectColumnFromQuery(String query) {
     String specificField = query.substring(query.indexOf(' ') + 1, query.indexOf("FROM") - 1);
     String actQuery = query.substring(query.indexOf(' ') + 1);
     actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
@@ -243,7 +271,7 @@ public class MongoDatabase {
     return toReturn;
   }
 
-  private static String tableToQueryClass(String tableName) {
+  public String tableToQueryClass(String tableName) {
     String toCheck = tableName.toUpperCase(Locale.ROOT);
     String toReturn = "";
     switch (toCheck) {
@@ -291,9 +319,13 @@ public class MongoDatabase {
         toReturn = "requests.EquipmentRequest";
         break;
       case "EQUIPMENTC":
-        toReturn = "requests.MedicalEquipment";
+        toReturn = "MedicalEquipment";
         break;
     }
     return "edu.wpi.cs3733.c22.teamC.SQLMethods." + toReturn + "Query";
+  }
+
+  public List<String> tableToFields(String table) {
+    return map.get(table);
   }
 }

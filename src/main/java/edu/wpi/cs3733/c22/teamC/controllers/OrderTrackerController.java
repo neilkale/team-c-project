@@ -162,9 +162,9 @@ public class OrderTrackerController extends AbstractController {
 
             // get fieldName and fieldValue arrays and convert to ArrayLists
             ArrayList<String> fieldNamesArrayList =
-                new ArrayList<String>(Arrays.asList(serviceRequest.getFieldNames()));
+                new ArrayList<String>(Arrays.asList(serviceRequest.getFields()));
             ArrayList<String> fieldValuesArrayList =
-                new ArrayList<String>(Arrays.asList(serviceRequest.getFieldValues()));
+                new ArrayList<String>(Arrays.asList(serviceRequest.getValues()));
 
             fieldNamesArrayList.forEach(
                 fieldName -> {

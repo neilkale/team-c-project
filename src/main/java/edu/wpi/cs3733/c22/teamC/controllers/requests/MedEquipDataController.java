@@ -1,7 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.controllers.requests;
 
 import com.jfoenix.controls.JFXButton;
-import edu.wpi.cs3733.c22.teamC.Databases.requests.MedicalEquipment;
+import edu.wpi.cs3733.c22.teamC.Databases.MedicalEquipment;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.MedicalEquipmentQuery;
 import edu.wpi.cs3733.c22.teamC.controllers.AbstractController;
 import java.sql.SQLException;

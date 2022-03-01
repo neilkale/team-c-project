@@ -1,7 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.controllers.mapEditor;
 
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
-import edu.wpi.cs3733.c22.teamC.Databases.requests.MedicalEquipment;
+import edu.wpi.cs3733.c22.teamC.Databases.MedicalEquipment;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.ServiceRequest;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.LocationQuery;
 import edu.wpi.cs3733.c22.teamC.controllers.ImageLoader;

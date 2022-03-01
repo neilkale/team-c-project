@@ -1,15 +1,19 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.*;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.LaundryRequestQuery;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 /** this class is for the medical equipment service request data */
-public abstract class ServiceRequest {
+public abstract class ServiceRequest implements DatabaseInterface {
   private String _ticketID;
   private String _locationID;
   private String _serviceType;
@@ -153,9 +157,7 @@ public abstract class ServiceRequest {
               .getTables(null, null, null, new String[] {"TABLE"});
       while (rs.next()) {
         String nextTable = (rs.getString("TABLE_NAME"));
-        System.out.println(nextTable);
         if (nextTable.toUpperCase().contains("REQUEST")) {
-          System.out.println("CONFIRMED");
           list.add(nextTable);
         }
       }
@@ -216,7 +218,7 @@ public abstract class ServiceRequest {
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println(
-          "[ServiceRequst::setStatus]: Error in setting value "
+          "[ServiceRequest::setStatus]: Error in setting value "
               + statusIn
               + " given [ServiceRequest]:"
               + this.toString());
@@ -253,7 +255,7 @@ public abstract class ServiceRequest {
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println(
-          "[ServiceRequst::getStatus]: Error in getting value "
+          "[ServiceRequest::getStatus]: Error in getting value "
               + " given [ServiceRequest]:"
               + this.toString());
       return null;
@@ -296,22 +298,27 @@ public abstract class ServiceRequest {
   // FIELD VALUE
   public abstract String getRequestType();
 
-  public abstract String[] getFieldNames();
-
-  public abstract String[] getFieldValues();
-
-  public String[] getGenericFieldNames() {
-    return new String[] {"Ticket ID", "Location ID", "Status", "Service Type", "Assignment"};
-  }
-  //    this._ticketID = ticketID;
-  //    this._locationID = locationID;
-  //    this._status = status;
-  //    this._serviceType = serviceType;
-  //    this._assignment = assignment;
-  public String[] getGenericFieldValues() {
-    return new String[] {
-      this._ticketID, this._locationID, this._status, this._serviceType, this._assignment
-    };
+  @Override
+  public String[] getValues() {
+    List<String> a = new ArrayList<>();
+    Method getter;
+    for (String s : getFields()) {
+      try {
+        getter = this.getClass().getMethod("get_" + s);
+        a.add((String) getter.invoke(this, new Object[] {}));
+      } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+      } catch (InvocationTargetException e) {
+        e.printStackTrace();
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      }
+    }
+    String[] toReturn = new String[a.size()];
+    for (int i = 0; i < a.size(); i++) {
+      toReturn[i] = a.get(i);
+    }
+    return toReturn;
   }
 
   @Override

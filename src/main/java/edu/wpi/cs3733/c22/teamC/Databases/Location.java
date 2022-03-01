@@ -1,5 +1,10 @@
 package edu.wpi.cs3733.c22.teamC.Databases;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Location implements DatabaseInterface {
 
   private String _nodeID;
@@ -133,27 +138,37 @@ public class Location implements DatabaseInterface {
     this._shortName = null;
   }
 
-  public String[] getarguments() {
-    return new String[] {
-      "nodeID", "xcoord", "ycoord", "floor", "building", "nodeType", "longName", "shortName"
-    };
-  }
-
   public String getName() {
     return "Location";
   }
 
   @Override
   public String[] getValues() {
+    List<String> a = new ArrayList<>();
+    Method getter;
+    for (String s : getFields()) {
+      try {
+        getter = this.getClass().getMethod("get_" + s);
+        a.add((String) getter.invoke(this, new Object[] {}));
+      } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+      } catch (InvocationTargetException e) {
+        e.printStackTrace();
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      }
+    }
+    String[] toReturn = new String[a.size()];
+    for (int i = 0; i < a.size(); i++) {
+      toReturn[i] = a.get(i);
+    }
+    return toReturn;
+  }
+
+  @Override
+  public String[] getFields() {
     return new String[] {
-      get_nodeID(),
-      get_xcoord(),
-      get_ycoord(),
-      get_floor(),
-      get_building(),
-      get_nodeType(),
-      get_longName(),
-      get_shortName()
+      "nodeID", "xcoord", "ycoord", "floor", "building", "nodeType", "longName", "shortName"
     };
   }
   // For the purpose of the project we will be phasing out the hash map idea for the location of

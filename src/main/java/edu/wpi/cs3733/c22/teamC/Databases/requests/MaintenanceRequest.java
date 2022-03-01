@@ -36,18 +36,6 @@ public class MaintenanceRequest extends ServiceRequest implements DatabaseInterf
     return "Maintenance Request";
   }
 
-  @Override
-  public String[] getFieldNames() {
-    String[] in = getGenericFieldNames();
-    return new String[] {in[0], in[1], in[2], in[3], in[4], "Issue Type"};
-  }
-
-  @Override
-  public String[] getFieldValues() {
-    String[] in = getGenericFieldValues();
-    return new String[] {in[0], in[1], in[2], in[3], in[4], this._issueType};
-  }
-
   public String toString() {
     return "Maintenance Request\nID: "
         + get_ticketID()
@@ -64,7 +52,7 @@ public class MaintenanceRequest extends ServiceRequest implements DatabaseInterf
   }
 
   @Override
-  public String[] getValues() {
+  public String[] getFields() {
     return new String[] {"ID", "Location", "Status", "Service Type", "Assignment", "Issue Type"};
   }
 

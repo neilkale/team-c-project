@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.c22.teamC.Capp;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.LocationQuery;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
 import java.awt.*;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -25,7 +27,6 @@ import javax.swing.filechooser.FileSystemView;
 
 public class DatabaseAllController extends AbstractController {
   private ObservableList<ObservableList> data;
-  @FXML private JFXButton backButton;
   @FXML private TableView tableView;
   @FXML private JFXComboBox comboBox;
   @FXML private JFXButton refreshButton;
@@ -136,20 +137,16 @@ public class DatabaseAllController extends AbstractController {
 
   @FXML
   private void toMongo() {
-    //    Capp.dbSave();
-
-    // This creates the switch in db
-    dbConnection.startDbConnection();
-    // This creates the new tables for the db
-    Capp test = new Capp();
-    test.dbCreation();
-
-    btnToMongo.setText("Switch to Embedded Database");
-    /*} else if (!dbConnection.isMongulDB()) {
-      // dbConnection.start();
-      dbConnection.setMongulDB(true);
+    if (dbConnection.isMongo()) {
+      dbConnection.startDbConnection();
+      dbConnection.setMongo(false);
       btnToMongo.setText("Switch to NoSQL");
-    }*/
+      System.out.println("Allegedly switched to embedded");
+    } else if (!dbConnection.isMongo()) {
+      System.out.println("Allegedly switched to mongo");
+      dbConnection.setMongo(true);
+      btnToMongo.setText("Switch to Embedded Database");
+    }
     //  Capp.dbCreation();
   }
 
@@ -160,42 +157,73 @@ public class DatabaseAllController extends AbstractController {
     tableView.getColumns().clear();
 
     data = FXCollections.observableArrayList();
-    try {
-      String query = "SELECT * FROM " + queryType.toUpperCase();
-      ResultSet rs = dbConnection.executeQuery(query);
-      int columnNum = rs.getMetaData().getColumnCount();
 
-      for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
-        // We are using non property style for making dynamic table
-        final int j = i;
-        TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
+    if (!dbConnection.isMongo()) {
+      try {
+        String query = "SELECT * FROM " + queryType.toUpperCase();
+        ResultSet rs = dbConnection.executeQuery(query);
+        int columnNum = rs.getMetaData().getColumnCount();
+
+        for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+          // We are using non property style for making dynamic table
+          final int j = i;
+          TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
+          col.setCellValueFactory(
+              new Callback<
+                  TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
+                public ObservableValue<String> call(
+                    TableColumn.CellDataFeatures<ObservableList, String> param) {
+                  return new SimpleStringProperty(param.getValue().get(j).toString());
+                }
+              });
+
+          tableView.getColumns().addAll(col);
+          // System.out.println("Column [" + i + "] ");
+        }
+        while (rs.next()) {
+          // Iterate Row
+          ObservableList<String> row = FXCollections.observableArrayList();
+          for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+            // Iterate Column
+            row.add(rs.getString(i));
+          }
+          // System.out.println("Row [1] added " + row);
+          data.add(row);
+        }
+
+        // FINALLY ADDED TO TableView
+        tableView.setItems(data);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    } else {
+      String query = "SELECT * FROM " + queryType.toUpperCase();
+      List<DatabaseInterface> fromMongo =
+          (List<DatabaseInterface>) dbConnection.getFromMongo(query);
+      System.out.println(dbConnection.fieldsFromMongo(queryType.toUpperCase()));
+
+      for (String s : dbConnection.fieldsFromMongo(queryType.toUpperCase())) {
+        TableColumn col = new TableColumn(s);
         col.setCellValueFactory(
             new Callback<
                 TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
               public ObservableValue<String> call(
                   TableColumn.CellDataFeatures<ObservableList, String> param) {
-                return new SimpleStringProperty(param.getValue().get(j).toString());
+                return new SimpleStringProperty(s);
               }
             });
-
-        tableView.getColumns().addAll(col);
-        // System.out.println("Column [" + i + "] ");
+        tableView.getColumns().add(col);
       }
-      while (rs.next()) {
-        // Iterate Row
+      for (DatabaseInterface d : fromMongo) {
+        System.out.println(d);
         ObservableList<String> row = FXCollections.observableArrayList();
-        for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-          // Iterate Column
-          row.add(rs.getString(i));
+        for (String s : d.getValues()) {
+          System.out.println(s);
+          row.add(s);
         }
-        // System.out.println("Row [1] added " + row);
         data.add(row);
       }
-
-      // FINALLY ADDED TO TableView
       tableView.setItems(data);
-    } catch (Exception e) {
-      e.printStackTrace();
     }
   }
 }

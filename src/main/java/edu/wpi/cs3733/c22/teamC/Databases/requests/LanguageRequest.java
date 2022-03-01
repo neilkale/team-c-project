@@ -37,18 +37,6 @@ public class LanguageRequest extends ServiceRequest implements DatabaseInterface
     return "Language Request";
   }
 
-  @Override
-  public String[] getFieldNames() {
-    String[] in = getGenericFieldNames();
-    return new String[] {in[0], in[1], in[2], in[3], in[4], "Language"};
-  }
-
-  @Override
-  public String[] getFieldValues() {
-    String[] in = getGenericFieldValues();
-    return new String[] {in[0], in[1], in[2], in[3], in[4], this._language};
-  }
-
   public String toString() {
     return "Language Request\nID: "
         + get_ticketID()
@@ -65,7 +53,7 @@ public class LanguageRequest extends ServiceRequest implements DatabaseInterface
   }
 
   @Override
-  public String[] getValues() {
+  public String[] getFields() {
     return new String[] {"ID", "Location", "Status", "Service Type", "Assignment", "Language"};
   }
 

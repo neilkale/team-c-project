@@ -12,17 +12,26 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 // import org.apache.derby.jdbc.*;
 
 public class DatabaseConnection {
   private Connection connection;
   private MongoDatabase mongoDatabase;
+  private boolean justStartup;
+  private boolean isMongo;
+  private List<String> startupInsert;
 
   public boolean isClientDatabase() {
     return isClientDatabase;
   }
 
+  public void setStartup(boolean b) {
+
+    justStartup = b;
+  }
   /*
   public boolean isMongulDB() {
     return isMongulDB;
@@ -31,7 +40,6 @@ public class DatabaseConnection {
   public void setMongulDB(boolean b) {
     isMongulDB = b;
   }*/
-
   /** databaseType is false if embedded, true if client */
   private boolean isClientDatabase = false;
 
@@ -60,6 +68,14 @@ public class DatabaseConnection {
    */
   public DatabaseConnection() {
     mongoDatabase = new MongoDatabase();
+    justStartup = true;
+    isMongo = false;
+    startupInsert = new ArrayList<>();
+    try {
+      mongoDatabase = new MongoDatabase();
+    } catch (Exception e) {
+      System.out.println("oops no mongo!");
+    }
     // this.isMongulDB = false;
     startDbConnection();
   }
@@ -69,7 +85,7 @@ public class DatabaseConnection {
       Class.forName(driver);
       connection = DriverManager.getConnection(db_url);
       isClientDatabase = false;
-      // isMongulDB = false;
+      isMongo = false;
       if (connection != null) {
         System.out.println("Connected to the Embedded DB");
       }
@@ -92,7 +108,7 @@ public class DatabaseConnection {
       Class.forName(driverCS);
       connection = DriverManager.getConnection(db_s_c_url, "admin", "admin");
       isClientDatabase = true;
-      // isMongulDB = false;
+      isMongo = false;
       if (connection != null) {
         dbCreation();
         System.out.println("Connected to the Client DB");
@@ -103,6 +119,14 @@ public class DatabaseConnection {
     } catch (SQLException | ClassNotFoundException e) {
       e.printStackTrace();
     }
+  }
+
+  public void setMongo(boolean b) {
+    isMongo = b;
+  }
+
+  public boolean isMongo() {
+    return isMongo;
   }
 
   /**
@@ -126,13 +150,31 @@ public class DatabaseConnection {
   }
 
   public void execute(String query) throws SQLException {
-    Statement statement = connection.createStatement();
-    statement.execute(query);
+    if (mongoDatabase != null && justStartup) {
+      if (query.substring(0, query.indexOf(' ')).equals("INSERT")) {
+        startupInsert.add(query);
+      } else {
+        if (startupInsert.size() > 0) {
+          mongoDatabase.batchInsert(startupInsert);
+        }
+        startupInsert = new ArrayList<>();
+        mongoDatabase.getAction(query);
+      }
+    } else if (isMongo && mongoDatabase != null) {
+      mongoDatabase.insert(query);
+    } else {
+      Statement statement = connection.createStatement();
+      statement.execute(query);
+    }
   }
 
   public void executeUpdate(String query) throws SQLException {
     Statement statement = connection.createStatement();
     statement.executeUpdate(query);
+  }
+
+  public List<? extends Object> getFromMongo(String query) {
+    return mongoDatabase.select(query);
   }
 
   public void close() {
@@ -144,11 +186,7 @@ public class DatabaseConnection {
     mongoDatabase.closeMongo();
   }
 
-  /*public MongoEquipment getMongoEquipment() {
-    return mongoEquipment;
+  public List<String> fieldsFromMongo(String table) {
+    return mongoDatabase.tableToFields(table);
   }
-
-  public MongoLocation getMongoLocation() {
-    return mongoLocation;
-  }*/
 }

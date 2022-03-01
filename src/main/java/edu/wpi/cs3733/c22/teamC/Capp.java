@@ -26,12 +26,13 @@ public class Capp extends Application {
   @Override
   public void start(Stage primaryStage) throws SQLException {
     try {
+      DatabaseConnection.getInstance().setStartup(true);
       dbCreation();
+      DatabaseConnection.getInstance().setStartup(false);
       ImageLoader imageLoader = new ImageLoader();
       FXMLLoader loader = new FXMLLoader();
       Parent root =
           loader.load(Main.class.getResource("/edu/wpi/cs3733.c22.teamC/Views/SignInPage.fxml"));
-
       Scene scene = new Scene(root);
       primaryStage.setMinWidth(800);
       primaryStage.setMinHeight(660);

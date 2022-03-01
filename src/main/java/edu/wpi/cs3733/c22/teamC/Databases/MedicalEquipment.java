@@ -1,7 +1,10 @@
-package edu.wpi.cs3733.c22.teamC.Databases.requests;
+package edu.wpi.cs3733.c22.teamC.Databases;
 
-import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.MedicalEquipmentQuery;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /** this class is for the medical equipment data */
@@ -108,6 +111,29 @@ public class MedicalEquipment implements DatabaseInterface {
   }
 
   @Override
+  public String[] getValues() {
+    List<String> a = new ArrayList<>();
+    Method getter;
+    for (String s : getFields()) {
+      try {
+        getter = this.getClass().getMethod("get_" + s);
+        a.add((String) getter.invoke(this, new Object[] {}));
+      } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+      } catch (InvocationTargetException e) {
+        e.printStackTrace();
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      }
+    }
+    String[] toReturn = new String[a.size()];
+    for (int i = 0; i < a.size(); i++) {
+      toReturn[i] = a.get(i);
+    }
+    return toReturn;
+  }
+
+  @Override
   public String getName() {
     return this.getClass().getName();
   }
@@ -117,7 +143,7 @@ public class MedicalEquipment implements DatabaseInterface {
   }
 
   @Override
-  public String[] getValues() {
+  public String[] getFields() {
     return new String[] {
       get_equipmentID(),
       get_locationID(),

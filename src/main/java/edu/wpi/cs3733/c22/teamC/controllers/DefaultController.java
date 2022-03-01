@@ -21,14 +21,17 @@ public class DefaultController extends AbstractController {
   @FXML private JFXDrawersStack drawerStack;
   @FXML private JFXButton navButton;
   @FXML private JFXButton exitButton;
+  @FXML private JFXButton infoButton;
   @FXML private Circle profileCircle;
   @FXML private Label nameLabel;
 
   private JFXDrawer navDrawer = new JFXDrawer();
   private JFXDrawer exitDrawer = new JFXDrawer();
+  private JFXDrawer infoDrawer = new JFXDrawer();
   private ArrayList<JFXDrawer> drawerList = new ArrayList<JFXDrawer>();
   private Pane slideNavMenu;
   private Pane slideExitMenu;
+  private Pane slideInfoMenu;
 
   private SlideNavMenuController slideNavMenuController;
   private ArrayList<String> prevPageList = new ArrayList<String>();
@@ -46,9 +49,11 @@ public class DefaultController extends AbstractController {
     slideNavMenuController = slideNavLoader.getController();
 
     slideExitMenu = (Pane) loadFxml("SlideExitMenu.fxml");
+    slideInfoMenu = (Pane) loadFxml("SlideInfoMenu.fxml");
 
     drawerList.add(navDrawer);
     drawerList.add(exitDrawer);
+    drawerList.add(infoDrawer);
     drawerStack.setContent(pane);
 
     AnchorPane.setTopAnchor(drawerStack, 0.0);
@@ -69,6 +74,8 @@ public class DefaultController extends AbstractController {
         navButton, navDrawer, slideNavMenu, drawerList, drawerStack);
     ControllerUtil.addDrawerButtonHover(
         exitButton, exitDrawer, slideExitMenu, drawerList, drawerStack);
+    ControllerUtil.addDrawerButtonHover(
+        infoButton, infoDrawer, slideInfoMenu, drawerList, drawerStack);
   }
 
   public ArrayList<String> getPrevPageList() {

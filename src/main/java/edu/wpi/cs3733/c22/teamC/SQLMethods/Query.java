@@ -205,10 +205,6 @@ public abstract class Query<T> {
       if (in != null) {
         Scanner s = new Scanner(in);
 
-        if (connection != null) {
-          System.out.println(queryType);
-        }
-
         // Taking a query of the table so that I can find out the amount of columns
         int columns =
             connection

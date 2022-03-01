@@ -28,8 +28,6 @@ public class TableFields {
       toIterate = toIterate.substring(toIterate.indexOf(',') + 1);
     }
     fields.add(toIterate.substring(1, toIterate.indexOf('V') - 1));
-    System.out.println(table);
-    System.out.println(fields);
     map.put(table, fields);
   }
 

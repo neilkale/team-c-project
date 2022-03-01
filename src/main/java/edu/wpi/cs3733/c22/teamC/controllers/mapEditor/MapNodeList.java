@@ -5,8 +5,8 @@ import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import edu.wpi.cs3733.c22.teamC.Databases.MedicalEquipment;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.*;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.LocationQuery;
+import edu.wpi.cs3733.c22.teamC.SQLMethods.MedicalEquipmentQuery;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.*;
-import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.MedicalEquipmentQuery;
 import java.util.ArrayList;
 
 public class MapNodeList {

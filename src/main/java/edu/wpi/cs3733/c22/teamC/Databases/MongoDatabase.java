@@ -136,13 +136,15 @@ public class MongoDatabase {
       try {
         teamC_db.getCollection(table).deleteOne(new Document(map.get(table).get(0), keyVal));
       } catch (Exception e) {
-        databaseConnection.disableMongo();
+
+        databaseConnection.disableMongo("Mongo Failed to Delete " + query);
       }
     } else {
       try {
         teamC_db.getCollection(query.substring(query.lastIndexOf(' ') + 1)).drop();
       } catch (Exception e) {
-        databaseConnection.disableMongo();
+
+        databaseConnection.disableMongo("Mongo Failed to Delete " + query);
       }
     }
     return "DELETE";
@@ -156,7 +158,8 @@ public class MongoDatabase {
     try {
       teamC_db.getCollection(actQuery).drop();
     } catch (Exception e) {
-      databaseConnection.disableMongo();
+
+      databaseConnection.disableMongo("Mongo Failed to truncate " + query);
     }
     return "TRUNCATE";
   }
@@ -177,7 +180,13 @@ public class MongoDatabase {
     }
     fields.add(toIterate.substring(1, toIterate.indexOf('V') - 1));
     map.put(table, fields);
-    teamC_db.createCollection(table);
+
+
+    try {
+      teamC_db.getCollection(table);
+    } catch (Exception e) {
+      teamC_db.createCollection(table);
+    }
 
     return "CREATE";
   }
@@ -216,6 +225,7 @@ public class MongoDatabase {
       String actQuery = query.substring(query.indexOf(' ') + 1);
       actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
       table = actQuery.substring(0, actQuery.indexOf(' '));
+      System.out.println(table);
     } else {
       table = query.substring(query.lastIndexOf(' ') + 1);
     }

@@ -97,6 +97,7 @@ public class Map implements DatabaseInterface {
         e.printStackTrace();
       }
     }
+
     String[] toReturn = new String[a.size()];
     for (int i = 0; i < a.size(); i++) {
       toReturn[i] = a.get(i);

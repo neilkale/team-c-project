@@ -81,37 +81,18 @@ public abstract class Query<T> {
 
   public abstract void addNode(T object) throws SQLException;
 
-  public boolean addNodeGeneric(String[] fields) throws SQLException {
-    try {
-      ResultSetMetaData rs =
-          dbConnection.executeQuery("select * from" + getQueryInput()).getMetaData();
-      int columns = rs.getColumnCount();
-      if (fields.length != columns) {
-        if (VERBOSE)
-          System.out.println(
-              "Improper amount of arguments entered for addNodeGeneric using queryType"
-                  + getQueryInput());
-        return false;
-      }
-      StringBuilder query = new StringBuilder();
-      query.append("INSERT INTO ");
-      query.append(getQueryInput());
-      query.append(" VALUES ('");
-      for (int i = 0; i < columns; i++) {
-        query.append(fields[i]);
-      }
-      query.append("')");
-      dbConnection.execute(query.toString());
-    } catch (SQLException e) {
-      if (VERBOSE) System.out.println(e);
-      return false;
-    }
-    return true;
-  }
-
   public abstract void removeNode(T object) throws SQLException;
 
   public abstract void editNode(T object) throws SQLException;
+
+  public ArrayList<T> getAllNodeData() {
+    try {
+      return (ArrayList<T>) dbConnection.executeQuery("SELECT * FROM " + getQueryInput());
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return new ArrayList<>();
+    }
+  }
 
   public void modifyFromList(ArrayList<String> modificationTypes, ArrayList<T> nodes)
       throws Exception {
@@ -224,6 +205,7 @@ public abstract class Query<T> {
     return allNodes;
   }
 
+
   public abstract String
       getQueryInput(); // Returns the table name so that I can query it (For example in locations
 
@@ -239,8 +221,7 @@ public abstract class Query<T> {
 
   public static boolean readCSV(String fileIn, String queryType) {
     try {
-      Connection connection = DatabaseConnection.getConnection();
-      System.out.println(fileIn);
+      DatabaseConnection connection = DatabaseConnection.getInstance();
 
       String readFile = fileIn;
       URL resource = Query.class.getClassLoader().getResource(fileIn);
@@ -249,16 +230,13 @@ public abstract class Query<T> {
       File in = new File(fileIn); // goetting the file
       if (in != null) {
         Scanner s = new Scanner(in);
-        ResultSet inputLine =
-            DatabaseConnection.getInstance()
-                .executeQuery(
-                    "SELECT * FROM "
-                        + queryType); // Taking a query of the table so that I can find out the
-        // amount of columns
+
+        // Taking a query of the table so that I can find out the amount of columns
         int columns =
-            inputLine
-                .getMetaData()
-                .getColumnCount(); // Taking the amount of columns from the query metadata
+            connection
+                .getFieldsFromTable(queryType)
+                .size(); // Taking the amount of columns from the query metadata
+
         if (VERBOSE) System.out.println("Columns:" + columns);
         // ArrayList<String> columnNames = new ArrayList<>();
         if (VERBOSE)
@@ -272,10 +250,8 @@ public abstract class Query<T> {
         if (VERBOSE) System.out.println("Entering : " + s.hasNext());
         while (s.hasNext()) {
           String innie = s.nextLine();
-          StringTokenizer st =
-              new StringTokenizer(
-                  innie,
-                  "[\"]+,[\"]+"); // using string tokenizer with delimiter of regular expression
+          StringTokenizer st = new StringTokenizer(innie, "[\"]+,[\"]+");
+          // using string tokenizer with delimiter of regular expression
           // meaning any amount of " followed by a comma followed by any amount of " so  | " : {x} |
           // , : {1} | " : {x} |  where x represents a arbitrary number
           // example """"""",""""""" would be considered one delimiter but ,"""", would be
@@ -311,6 +287,7 @@ public abstract class Query<T> {
             "Read CSV unsuccessful: [file was not found or is unwritable to] " + queryType);
 
     } catch (Exception e) {
+      e.printStackTrace();
       if (VERBOSE) System.out.println("Read CSV unsuccessful: " + queryType);
       if (VERBOSE) e.printStackTrace();
       return false;
@@ -342,28 +319,26 @@ public abstract class Query<T> {
 
   public static boolean writeCSV(String fileIn, String queryType) {
     try {
-      Connection connection = DatabaseConnection.getConnection();
-      DatabaseMetaData databaseMetaData = connection.getMetaData();
+      DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
       File in = createFile(fileIn); // creates the file using createfile
       if (in != null && in.canWrite()) {
         FileWriter fw = new FileWriter(in);
-        ResultSet inputLine =
-            DatabaseConnection.getInstance().executeQuery("SELECT * FROM " + queryType);
-        int columns =
-            inputLine
-                .getMetaData()
-                .getColumnCount(); // same as readcsv - getting column amount of querytype using
+
+        List<DatabaseInterface> fromDB =
+            (List<DatabaseInterface>) databaseConnection.executeQuery("SELECT * FROM " + queryType);
+        if (fromDB.size() == 0) {
+          fw.close();
+          return true;
+        }
+        String[] fields = fromDB.get(0).getFields();
         // metadata
-        while (inputLine.next()) { // for every table row
+        for (DatabaseInterface d : fromDB) { // for every table row
           StringBuilder line = new StringBuilder();
-          for (int i = 1; i <= columns; i++) { // for every table entry
-            line.append(inputLine.getString(i)); // append them to a certain line
-            if (i
-                != (columns)) { // add commas to the end of them ONLY IF THEY ARE NOT THE LAST ENTRY
-              line.append(","); // ^
-            }
+          for (String val : d.getValues()) { // for every table entry
+            line.append(val); // append them to a certain line
           }
-          line.append("\n"); // end the line with \n
+          line.substring(0, line.lastIndexOf(","));
+          line.append(",\n"); // end the line with \n
           fw.write(line.toString()); // write the line to the document
         }
         fw.close(); // closes the writer here
@@ -381,12 +356,7 @@ public abstract class Query<T> {
 
   public Integer getNumRows() throws SQLException {
     String sql = "SELECT * FROM " + getQueryInput();
-    ResultSet rs = dbConnection.executeQuery(sql);
-    int rowCount = 0;
-    while (rs.next()) {
-      rowCount++;
-    }
-    return rowCount;
+    return dbConnection.executeQuery(sql).size();
   }
 
   public void clearTable() {

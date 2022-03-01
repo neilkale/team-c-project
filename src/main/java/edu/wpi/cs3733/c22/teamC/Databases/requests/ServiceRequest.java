@@ -8,6 +8,7 @@ import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.ResultSet;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -183,20 +184,17 @@ public abstract class ServiceRequest implements DatabaseInterface {
   }
 
   public static String getNewestID() {
+    DatabaseConnection connection = DatabaseConnection.getInstance();
     int largest = 0;
     try {
 
       ArrayList<String> list = getServiceRequestTables();
       for (String table : list) {
         String query = "SELECT TICKETID FROM " + table;
-        ResultSet rsTable = DatabaseConnection.getInstance().executeQuery(query);
-        while (rsTable.next()) {
-          if ((rsTable.getString("TICKETID")).matches("[0-9]+")) {
-            int got = Integer.parseInt(rsTable.getString("TICKETID"));
-
-            if (got > largest) {
-              largest = got;
-            }
+        List<String> fromMongo = (List<String>) connection.executeQuery(query);
+        for (String s : fromMongo) {
+          if (largest < Integer.parseInt(s)) {
+            largest = Integer.parseInt(s);
           }
         }
       }
@@ -206,72 +204,6 @@ public abstract class ServiceRequest implements DatabaseInterface {
     }
 
     return Integer.toString(largest + 1);
-  }
-
-  public boolean setStatus(
-      String statusIn) { // sets the status of the service request - ASSUMES A UNIQUE TICKET ID!!!!!
-    ArrayList<String> tables = new ArrayList<>();
-    try {
-      tables = getServiceRequestTables();
-
-      boolean found = false;
-      for (int i = 0; (i < tables.size()) || (!found); i++) {
-        String query = "SELECT * FROM " + tables.get(i) + " WHERE TICKETID = " + this._ticketID;
-        ResultSet request = DatabaseConnection.getInstance().executeQuery(query);
-        if (request.next()) {
-          found = true;
-          DatabaseConnection.getInstance()
-              .execute(
-                  "UPDATE "
-                      + tables.get(i)
-                      + " SET STATUS = "
-                      + statusIn
-                      + " WHERE TICKETID = "
-                      + _ticketID);
-        }
-      }
-
-      // for
-      this._status = statusIn;
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.out.println(
-          "[ServiceRequest::setStatus]: Error in setting value "
-              + statusIn
-              + " given [ServiceRequest]:"
-              + this.toString());
-      return false;
-    }
-
-    return true;
-  }
-
-  public String getStatusDB() { // gets the status of the service request - ASSUMES A UNIQUE TICKET
-    // ID!!!!!
-    ArrayList<String> tables = new ArrayList<>();
-    try {
-
-      tables = getServiceRequestTables();
-
-      for (int i = 0; (i < tables.size()); i++) {
-        String query = "SELECT * FROM " + tables.get(i) + " WHERE TICKETID = " + this._ticketID;
-        ResultSet request = DatabaseConnection.getInstance().executeQuery(query);
-        if (request.next()) {
-          return request.getString("TICKETID");
-        }
-      }
-
-      // for
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.out.println(
-          "[ServiceRequest::getStatus]: Error in getting value "
-              + " given [ServiceRequest]:"
-              + this.toString());
-      return null;
-    }
-
-    return null;
   }
 
   /**
@@ -333,6 +265,7 @@ public abstract class ServiceRequest implements DatabaseInterface {
         e.printStackTrace();
       }
     }
+
 
     String[] toReturn = new String[a.size()];
     for (int i = 0; i < a.size(); i++) {

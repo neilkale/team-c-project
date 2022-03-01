@@ -3,9 +3,7 @@ package edu.wpi.cs3733.c22.teamC.SQLMethods.requests;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.ReligiousRequest;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ReligiousRequestQuery extends Query<ReligiousRequest> {
@@ -34,31 +32,6 @@ public class ReligiousRequestQuery extends Query<ReligiousRequest> {
     ReligiousRequest toReturn =
         new ReligiousRequest(inputs[0], inputs[1], inputs[2], inputs[3], inputs[4], inputs[5]);
     return toReturn;
-  }
-
-  @Override
-  public ArrayList<ReligiousRequest> getAllNodeData() {
-    ReligiousRequest queryResult = null;
-    ArrayList<ReligiousRequest> allNodes = new ArrayList<ReligiousRequest>();
-    try {
-      String query = "SELECT * FROM " + getQueryInput();
-      ResultSet rs = dbConnection.executeQuery(query);
-      while (rs.next()) {
-        String ticketID = rs.getString("ticketID");
-        String locationID = rs.getString("locationID");
-        String status = rs.getString("status");
-        String serviceType = rs.getString("serviceType");
-        String assignment = rs.getString("assignment");
-        String religion = rs.getString("religion");
-
-        queryResult =
-            new ReligiousRequest(ticketID, locationID, status, serviceType, assignment, religion);
-        allNodes.add(queryResult);
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return allNodes;
   }
 
   @Override
@@ -124,16 +97,5 @@ public class ReligiousRequestQuery extends Query<ReligiousRequest> {
 
   public static String staticGetQueryInput() {
     return "RELIGIOUSREQUESTC";
-  }
-
-  @Override
-  public Integer getNumRows() throws SQLException {
-    String sql = "SELECT * FROM " + getQueryInput();
-    ResultSet rs = dbConnection.executeQuery(sql);
-    Integer rowCount = 0;
-    while (rs.next()) {
-      rowCount++;
-    }
-    return rowCount;
   }
 }

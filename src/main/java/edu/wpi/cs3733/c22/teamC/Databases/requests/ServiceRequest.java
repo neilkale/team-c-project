@@ -249,7 +249,6 @@ public abstract class ServiceRequest {
     return new int[] {total.size(), completed};
   }
 
-
   // return all of the current ticketIDs being used for submitted requests
   public static ArrayList<String> getAvailableTicketIDs() {
     ArrayList<ServiceRequest> total = getAllServiceRequests();

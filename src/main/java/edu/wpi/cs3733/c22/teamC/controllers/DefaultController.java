@@ -78,6 +78,10 @@ public class DefaultController extends AbstractController {
         infoButton, infoDrawer, slideInfoMenu, drawerList, drawerStack);
   }
 
+  public Label getNameLabel() {
+    return nameLabel;
+  }
+
   public ArrayList<String> getPrevPageList() {
     return prevPageList;
   }

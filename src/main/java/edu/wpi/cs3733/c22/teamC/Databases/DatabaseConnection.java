@@ -15,6 +15,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+
 // import org.apache.derby.jdbc.*;
 
 public class DatabaseConnection {
@@ -23,6 +24,8 @@ public class DatabaseConnection {
   private boolean justStartup;
   private boolean isMongo;
   private List<String> startupInsert;
+  private static ArrayList<String> tableNames;
+
 
   public boolean isClientDatabase() {
     return isClientDatabase;
@@ -31,6 +34,24 @@ public class DatabaseConnection {
   public void setStartup(boolean b) {
 
     justStartup = b;
+  }
+  public static ArrayList<String> getTableNames() {
+    return tableNames;
+  }
+
+  public static void setTableNames() throws SQLException {
+    ArrayList<String> list = new ArrayList<>();
+    ResultSet rs =
+        (new DatabaseConnection())
+            .connection
+            .getMetaData()
+            .getTables(null, null, null, new String[] {"TABLE"});
+
+    while (rs.next()) {
+      String nextTable = (rs.getString("TABLE_NAME"));
+      list.add(nextTable);
+    }
+    tableNames = list;
   }
   /*
   public boolean isMongulDB() {

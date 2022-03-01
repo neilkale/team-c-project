@@ -32,8 +32,13 @@ public class Employee implements DatabaseInterface {
     return _lastName;
   }
 
+ MongoDB_Create
   public String get_Service_Type() {
     return _serviceType;
+
+  public String get_service_type() {
+    return serviceType;
+
   }
 
   public String get_access() {

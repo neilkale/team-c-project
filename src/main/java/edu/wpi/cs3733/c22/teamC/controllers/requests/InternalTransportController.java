@@ -46,7 +46,7 @@ public class InternalTransportController extends AbstractController {
     DatabaseUtil.getLongNames(dropOffLocationComboBox, "PATI", "ELEV", "HALL");
 
     for (Employee e : employees) {
-      if (e.get_Service_Type().toLowerCase().equals("transportation")) {
+      if (e.get_service_type().toLowerCase().equals("transportation")) {
         String name = e.get_firstName() + " " + e.get_lastName().charAt(0);
         String fullName = e.get_firstName() + " " + e.get_lastName();
         employeeNames.put(name, fullName);

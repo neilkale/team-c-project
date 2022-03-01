@@ -103,7 +103,7 @@ public class EmployeeQuery extends Query<Employee> {
               + "', '"
               + employee.get_lastName()
               + "', '"
-              + employee.get_Service_Type()
+              + employee.get_service_type()
               + "', '"
               + employee.get_access()
               + "', '"
@@ -139,7 +139,7 @@ public class EmployeeQuery extends Query<Employee> {
             + "', lastName = '"
             + employee.get_lastName()
             + "', serviceType = '"
-            + employee.get_Service_Type()
+            + employee.get_service_type()
             + "', access = '"
             + employee.get_access()
             + "', id ="

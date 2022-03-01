@@ -12,7 +12,7 @@ public class CriteriaEquipDistributor implements Criteria {
     List<Employee> equipDistributorEmployees = new ArrayList<Employee>();
 
     for (Employee e : employees) {
-      if (e.get_Service_Type().equalsIgnoreCase("equip-distributor")) {
+      if (e.get_service_type().equalsIgnoreCase("equip-distributor")) {
         equipDistributorEmployees.add(e);
       }
     }

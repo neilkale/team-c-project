@@ -47,17 +47,8 @@ public class DatabaseAllController extends AbstractController {
     }
     queryType = (new LocationQuery()).getQueryInput();
     try {
-      ObservableList<String> list = FXCollections.observableArrayList();
-      ResultSet rs =
-          dbConnection
-              .getConnection()
-              .getMetaData()
-              .getTables(null, null, null, new String[] {"TABLE"});
-
-      while (rs.next()) {
-        String nextTable = (rs.getString("TABLE_NAME"));
-        list.add(nextTable);
-      }
+      ObservableList<String> list =
+          FXCollections.observableArrayList(DatabaseConnection.getTableNames());
       comboBox.getItems().setAll(list);
 
     } catch (Exception e) {
@@ -66,6 +57,8 @@ public class DatabaseAllController extends AbstractController {
 
     LocationQuery locationQuery = new LocationQuery();
     setTable(locationQuery.getQueryInput());
+    comboBox.setPromptText("Database Table");
+    comboBox.setAccessibleText(locationQuery.getQueryInput());
 
     ControllerUtil.addAutoCompleteListener(comboBox);
   }

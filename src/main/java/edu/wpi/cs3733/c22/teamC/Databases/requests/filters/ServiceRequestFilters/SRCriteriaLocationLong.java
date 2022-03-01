@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests.filters.ServiceRequestFilters;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.LocationDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.ServiceRequest;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.LocationQuery;
@@ -19,7 +21,8 @@ public class SRCriteriaLocationLong implements SRCriteria {
     if (locLongName.equals("")) return employeeList;
     ArrayList<ServiceRequest> toReturn = new ArrayList<ServiceRequest>();
     ArrayList<String> locationIDs = new ArrayList<>();
-    for (Location eachLoc : (new LocationQuery()).getAllNodeData()) {
+    LocationDaoImpl e = DaoSingleton.getLocationDao();
+    for (Location eachLoc : e.getAllNodes()) {
       if (eachLoc.get_longName().toUpperCase().contains(locLongName.toUpperCase()))
         locationIDs.add(eachLoc.get_nodeID());
     }

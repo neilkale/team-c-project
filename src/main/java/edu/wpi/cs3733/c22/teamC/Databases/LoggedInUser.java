@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.Databases;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.EmployeeDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.filters.CriteriaUserSpecific;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.EmployeeQuery;
 import edu.wpi.cs3733.c22.teamC.controllers.ImageLoader;
@@ -17,9 +19,10 @@ public class LoggedInUser {
 
   public static void signInEmployee(String employeeIn) {
     signOutEmployee();
+    EmployeeDaoImpl e = DaoSingleton.getEmployeeDao();
     signedInUser =
         (new CriteriaUserSpecific(employeeIn))
-            .meetCriteria((new EmployeeQuery().getAllNodeData()))
+            .meetCriteria((e.getAllNodes()))
             .get(0);
   }
 

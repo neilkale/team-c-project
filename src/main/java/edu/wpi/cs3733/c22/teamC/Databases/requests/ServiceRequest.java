@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.*;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
@@ -47,17 +48,50 @@ public abstract class ServiceRequest implements DatabaseInterface {
   public static ArrayList<ServiceRequest> getAllServiceRequests() {
     ArrayList<ServiceRequest> output = new ArrayList<>();
 
-    output.addAll((new InternalTransportRequestQuery()).getAllNodeData());
-    output.addAll((new ITRequestQuery()).getAllNodeData());
-    output.addAll((new GiftRequestQuery()).getAllNodeData());
-    output.addAll((new EquipmentRequestQuery()).getAllNodeData());
-    output.addAll((new LanguageRequestQuery()).getAllNodeData());
-    output.addAll((new LaundryRequestQuery()).getAllNodeData());
-    output.addAll((new MaintenanceRequestQuery()).getAllNodeData());
-    output.addAll((new MedicineRequestQuery()).getAllNodeData());
-    output.addAll((new ReligiousRequestQuery()).getAllNodeData());
-    output.addAll((new SanitationRequestQuery()).getAllNodeData());
-    output.addAll((new SecurityRequestQuery()).getAllNodeData());
+    InternalTransportRequestDaoImpl a;
+    a = DaoSingleton.getInternalTransportRequestDao();
+    output.addAll(a.getAllNodes());
+
+    ITRequestDaoImpl b;
+    b = DaoSingleton.getItRequestDao();
+    output.addAll(b.getAllNodes());
+
+    GiftRequestDaoImpl c;
+    c = DaoSingleton.getGiftRequestDao();
+    output.addAll(c.getAllNodes());
+
+    EquipmentRequestDaoImpl d;
+    d = DaoSingleton.getEquipmentRequestDao();
+    output.addAll(d.getAllNodes());
+
+    LanguageRequestDaoImpl e;
+    e = DaoSingleton.getLanguageRequestDao();
+    output.addAll(e.getAllNodes());
+
+    LaundryRequestDaoImpl f;
+    f = DaoSingleton.getLaundryRequestDao();
+    output.addAll(f.getAllNodes());
+
+    MaintenanceRequestDaoImpl g;
+    g = DaoSingleton.getMaintenanceRequestDao();
+    output.addAll(g.getAllNodes());
+
+
+    MedicineRequestDaoImpl h;
+    h = DaoSingleton.getMedicineRequestDao();
+    output.addAll(h.getAllNodes());
+
+    ReligiousRequestDaoImpl i; //jklm
+    i = DaoSingleton.getReligiousRequestDao();
+    output.addAll(i.getAllNodes());
+
+    SanitationRequestDaoImpl j;
+    j = DaoSingleton.getSanitationRequestDao();
+    output.addAll(i.getAllNodes());
+
+    SecurityRequestDaoImpl k;
+    k = DaoSingleton.getSecurityRequestDao();
+    output.addAll(i.getAllNodes());
 
     return output;
   }

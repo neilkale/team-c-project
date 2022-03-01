@@ -105,9 +105,6 @@ public class MedicineDeliveryController extends AbstractController {
 
       String[] toString = request.toString().split("\n", 2);
       controllerMediator.anchorPushNotification(toString[0], toString[1]);
-
-    } else {
-      ControllerUtil.popUpMessage("Error with fields", "Not enough fields filled out");
     }
   }
 

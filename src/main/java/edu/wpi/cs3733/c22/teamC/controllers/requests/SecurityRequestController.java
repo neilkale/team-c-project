@@ -3,6 +3,8 @@ package edu.wpi.cs3733.c22.teamC.controllers.requests;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.InternalTransportRequestDaoImpl;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.SecurityRequestDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.Employee;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.SecurityRequest;
@@ -107,9 +109,10 @@ public class SecurityRequestController extends AbstractController {
       System.out.println(request.toString());
 
       SecurityRequestQuery securityQuery = new SecurityRequestQuery();
+      SecurityRequestDaoImpl sDao = DaoSingleton.getSecurityRequestDao();
 
       try {
-        securityQuery.addNode(request);
+        sDao.addNode(request);
       } catch (Exception e) {
         e.printStackTrace();
       }

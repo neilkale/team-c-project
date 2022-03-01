@@ -3,6 +3,8 @@ package edu.wpi.cs3733.c22.teamC.controllers.requests;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.ITRequestDaoImpl;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.InternalTransportRequestDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.Employee;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.ITRequest;
@@ -93,8 +95,9 @@ public class ITReqController extends AbstractController {
               issueComboBox.getSelectionModel().selectedItemProperty().getValue().toString());
 
       System.out.println(request.toString());
-      ITRequestQuery reqQuery = new ITRequestQuery();
-      reqQuery.addNode(request);
+      //ITRequestQuery reqQuery = new ITRequestQuery();
+      ITRequestDaoImpl itDao = DaoSingleton.getItRequestDao();
+      itDao.addNode(request);
 
       String[] toString = request.toString().split("\n", 2);
       controllerMediator.anchorPushNotification(toString[0], toString[1]);

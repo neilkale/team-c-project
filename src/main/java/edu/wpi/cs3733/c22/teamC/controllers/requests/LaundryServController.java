@@ -3,6 +3,8 @@ package edu.wpi.cs3733.c22.teamC.controllers.requests;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.c22.teamC.Databases.*;
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.InternalTransportRequestDaoImpl;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.LaundryRequestDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.LaundryRequest;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.ServiceRequest;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.EmployeeQuery;
@@ -86,7 +88,8 @@ public class LaundryServController extends AbstractController {
 
       System.out.println(request.toString());
       LaundryRequestQuery sanReqQuery = new LaundryRequestQuery();
-      sanReqQuery.addNode(request);
+      LaundryRequestDaoImpl lDao = DaoSingleton.getLaundryRequestDao();
+      lDao.addNode(request);
 
       String[] toString = request.toString().split("\n", 2);
       controllerMediator.anchorPushNotification(toString[0], toString[1]);

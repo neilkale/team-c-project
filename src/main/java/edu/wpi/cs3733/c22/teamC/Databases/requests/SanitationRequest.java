@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoInterface;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.SanitationRequestQuery;
 
 /** this class is for the sanitation service request data */
@@ -69,5 +71,10 @@ public class SanitationRequest extends ServiceRequest {
   @Override
   public String getName() {
     return null;
+  }
+
+  @Override
+  public DaoInterface getDao() {
+    return DaoSingleton.getSanitationRequestDao();
   }
 }

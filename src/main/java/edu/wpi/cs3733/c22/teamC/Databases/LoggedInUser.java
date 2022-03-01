@@ -47,9 +47,8 @@ public class LoggedInUser {
     signedInUser.set_profilePicture(newPicName);
     // todo: set the new profile pic in DB
     try {
-      EmployeeQuery employeeQuery = new EmployeeQuery();
-      employeeQuery.editNode(signedInUser);
-    } catch (SQLException e) {
+      DaoSingleton.getEmployeeDao().updateNode(signedInUser);
+    } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Failed to set profile pic");
     }

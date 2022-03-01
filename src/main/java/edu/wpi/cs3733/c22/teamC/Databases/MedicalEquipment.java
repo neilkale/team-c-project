@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.Databases;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoInterface;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.MedicalEquipmentQuery;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -165,6 +167,11 @@ public class MedicalEquipment implements DatabaseInterface {
   @Override
   public String getName() {
     return this.getClass().getName();
+  }
+
+  @Override
+  public DaoInterface getDao() {
+    return DaoSingleton.getEquipmentDao();
   }
 
   public MedicalEquipmentQuery getQueryInstance() {

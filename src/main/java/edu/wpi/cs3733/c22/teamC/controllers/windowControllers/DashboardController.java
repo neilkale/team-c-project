@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.controllers.windowControllers;
 
 import com.jfoenix.controls.JFXButton;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
 import edu.wpi.cs3733.c22.teamC.Databases.Employee;
 import edu.wpi.cs3733.c22.teamC.Databases.LoggedInUser;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.ServiceRequest;
@@ -93,7 +94,7 @@ public class DashboardController extends AbstractController {
     if (passwordField.isVisible()) currentUser.set_password(passwordField.getText());
     else currentUser.set_password(passwordTextField.getText());
 
-    (new EmployeeQuery()).editNode(currentUser);
+    DaoSingleton.getEmployeeDao().updateNode(currentUser);
     controllerMediator.setNameLabel(firstTextField.getText() + " " + lastTextField.getText());
   }
 

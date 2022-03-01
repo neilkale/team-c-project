@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.Databases.requests;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoInterface;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.SecurityRequestQuery;
 
 public class SecurityRequest extends ServiceRequest {
@@ -95,6 +97,11 @@ public class SecurityRequest extends ServiceRequest {
   @Override
   public String getName() {
     return this.getClass().getName();
+  }
+
+  @Override
+  public DaoInterface getDao() {
+    return DaoSingleton.getSecurityRequestDao();
   }
 }
 

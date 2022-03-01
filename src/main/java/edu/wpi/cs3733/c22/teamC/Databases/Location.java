@@ -1,5 +1,8 @@
 package edu.wpi.cs3733.c22.teamC.Databases;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoInterface;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -169,6 +172,11 @@ public class Location implements DatabaseInterface {
 
   public String getName() {
     return "Location";
+  }
+
+  @Override
+  public DaoInterface getDao() {
+    return DaoSingleton.getLocationDao();
   }
 
   @Override

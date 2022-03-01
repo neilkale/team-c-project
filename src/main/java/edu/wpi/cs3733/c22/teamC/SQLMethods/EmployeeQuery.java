@@ -25,7 +25,7 @@ public class EmployeeQuery extends Query<Employee> {
       return null;
     }
     return new Employee(
-        inputs[0], inputs[1], inputs[2], inputs[3], inputs[4], inputs[5], inputs[6], inputs[7]);
+        inputs[0], inputs[1], inputs[2], inputs[3], inputs[4], inputs[5], inputs[6], inputs[7], inputs[8],inputs[9]);
   }
 
   @Override
@@ -50,9 +50,11 @@ public class EmployeeQuery extends Query<Employee> {
         String access = rs.getString("access");
         String id = rs.getString("ID");
         String pic = rs.getString("profilePicture");
+        String phoneNumber = rs.getString("phoneNumber");
+        String email = rs.getString("email");
 
         queryResult =
-            new Employee(username, password, firstName, lastName, serviceType, access, id, pic);
+            new Employee(username, password, firstName, lastName, serviceType, access, id, pic,phoneNumber,email);
         allNodes.add(queryResult);
       }
 
@@ -110,6 +112,10 @@ public class EmployeeQuery extends Query<Employee> {
               + employee.get_id()
               + "', '"
               + employee.get_profilePicture()
+              + "', '"
+              + employee.get_phoneNumber()
+              + "', '"
+              + employee.get_email()
               + "')";
       dbConnection.execute(query);
     } catch (SQLException e) {
@@ -146,6 +152,10 @@ public class EmployeeQuery extends Query<Employee> {
             + employee.get_id()
             + "', profilePicture ='"
             + employee.get_profilePicture()
+            + "', phoneNumber = '"
+            + employee.get_phoneNumber()
+            + "', email = '"
+            + employee.get_email()
             + "' WHERE "
             + "username = '"
             + employee.get_username()

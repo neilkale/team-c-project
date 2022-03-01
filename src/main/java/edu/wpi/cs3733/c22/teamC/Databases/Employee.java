@@ -41,8 +41,6 @@ public class Employee implements DatabaseInterface {
     return id;
   }
 
-  // public String get_profilePicture(){return profilePicture;}
-
   public String get_phoneNumber() {
     return phoneNumber;
   }
@@ -79,8 +77,6 @@ public class Employee implements DatabaseInterface {
     this.id = id;
   }
 
-  // public void set_profilePicture(String profilePicture){this.profilePicture = profilePicture;}
-
   public void set_phoneNumber(String phoneNumber) {
     this.phoneNumber = phoneNumber;
   }
@@ -97,7 +93,9 @@ public class Employee implements DatabaseInterface {
       String serviceType,
       String access,
       String id,
-      String picture) {
+      String picture,
+      String phoneNumber,
+      String email) {
     this.username = username;
     this.password = password;
     this.firstName = firstName;
@@ -106,6 +104,8 @@ public class Employee implements DatabaseInterface {
     this.access = access;
     this.id = id;
     this.profilePicture = picture;
+    this.phoneNumber = phoneNumber;
+    this.email = email;
   }
 
   public String get_profilePicture() {
@@ -126,7 +126,9 @@ public class Employee implements DatabaseInterface {
       "serviceType",
       "access",
       "id",
-      "profilePicture"
+      "profilePicture",
+      "phoneNumber",
+      "email"
     };
   }
 

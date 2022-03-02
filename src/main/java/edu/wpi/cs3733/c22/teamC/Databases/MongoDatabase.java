@@ -232,7 +232,7 @@ public class MongoDatabase {
     collection = teamC_db.getCollection(table);
 
     ArrayList<DatabaseInterface> toReturn = new ArrayList<>();
-    ArrayList<String> fields = map(table);
+    List<String> fields = map(table);
     Class<? extends Query> queryClass;
     Method queryFactory;
 

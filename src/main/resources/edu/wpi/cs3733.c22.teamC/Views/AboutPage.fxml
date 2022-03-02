@@ -63,7 +63,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="ABOUT" GridPane.halignment="CENTER">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="ABOUT PAGE" GridPane.halignment="CENTER">
                      <font>
                         <Font name="System Bold" size="30.0" />
                      </font>
@@ -86,11 +86,17 @@
                      <image>
                         <Image url="@GroupPhotos/Screen%20Shot%202022-03-01%20at%206.11.13%20PM.png" />
                      </image>
+                     <GridPane.margin>
+                        <Insets left="10.0" top="5.0" />
+                     </GridPane.margin>
                   </ImageView>
                   <ImageView fitHeight="132.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
                         <Image url="@GroupPhotos/Screen%20Shot%202022-03-01%20at%206.11.00%20PM.png" />
                      </image>
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="10.0" />
+                     </GridPane.margin>
                   </ImageView>
                </children>
             </GridPane>
@@ -110,11 +116,17 @@
                      <image>
                         <Image url="@GroupPhotos/Screen%20Shot%202022-03-01%20at%206.11.58%20PM.png" />
                      </image>
+                     <GridPane.margin>
+                        <Insets bottom="5.0" />
+                     </GridPane.margin>
                   </ImageView>
                   <ImageView fitHeight="131.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@GroupPhotos/Screen%20Shot%202022-03-01%20at%206.11.31%20PM.png" />
                      </image>
+                     <GridPane.margin>
+                        <Insets right="10.0" top="5.0" />
+                     </GridPane.margin>
                   </ImageView>
                </children>
             </GridPane>

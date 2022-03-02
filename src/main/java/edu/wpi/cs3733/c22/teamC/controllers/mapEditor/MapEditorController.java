@@ -28,7 +28,7 @@ public class MapEditorController extends AbstractController { // todo implement 
   @FXML Label requestTypeLabel;
   @FXML Label requestStatusLabel;
 
-  @FXML TabPane tabPane;
+  @FXML TabPane mapTabPane;
   @FXML Tab locationTab;
   @FXML Tab equipmentTab;
   @FXML Tab servicesTab;
@@ -546,9 +546,9 @@ public class MapEditorController extends AbstractController { // todo implement 
         endButton.setDisable(false);
       }
       MapNode node = list.nodes.get(index);
-      tabPane.setVisible(true);
-      tabPane.setLayoutX(xCoord);
-      tabPane.setLayoutY(yCoord);
+      mapTabPane.setVisible(true);
+      mapTabPane.setLayoutX(xCoord);
+      mapTabPane.setLayoutY(yCoord);
       updateOnClickMenuTabs();
       updateFields();
       if (node.isNewPoint()) {
@@ -556,18 +556,18 @@ public class MapEditorController extends AbstractController { // todo implement 
       } else {
         addButton.setDisable(true);
       }
-      if (list.nodes.get(index).hasEquipment() && tabPane.getTabs().contains(equipmentTab))
-        tabPane.getSelectionModel().select(equipmentTab);
-      else if (list.nodes.get(index).hasServiceReq() && tabPane.getTabs().contains(servicesTab))
-        tabPane.getSelectionModel().select(servicesTab);
-      else if (tabPane.getTabs().contains(locationTab))
-        tabPane.getSelectionModel().select(locationTab);
+      if (list.nodes.get(index).hasEquipment() && mapTabPane.getTabs().contains(equipmentTab))
+        mapTabPane.getSelectionModel().select(equipmentTab);
+      else if (list.nodes.get(index).hasServiceReq() && mapTabPane.getTabs().contains(servicesTab))
+        mapTabPane.getSelectionModel().select(servicesTab);
+      else if (mapTabPane.getTabs().contains(locationTab))
+        mapTabPane.getSelectionModel().select(locationTab);
     }
   }
 
   // hides the mobile button pane
   private void hideOnClickMenu() {
-    tabPane.setVisible(false);
+    mapTabPane.setVisible(false);
   }
 
   // Resizes and adjusts the tabpane according to the current filters
@@ -578,36 +578,36 @@ public class MapEditorController extends AbstractController { // todo implement 
       return;
     }
 
-    Tab previouslyOpenTab = tabPane.getSelectionModel().getSelectedItem();
+    Tab previouslyOpenTab = mapTabPane.getSelectionModel().getSelectedItem();
 
-    int paneWidth = 30;
+    int paneWidth = 20;
 
-    tabPane.getTabs().clear();
+    mapTabPane.getTabs().clear();
     if (MapState.isLocationsShown()) {
-      tabPane.getTabs().add(locationTab);
+      mapTabPane.getTabs().add(locationTab);
       paneWidth += 58;
     }
     if (MapState.isEquipmentShown()) {
-      tabPane.getTabs().add(equipmentTab);
+      mapTabPane.getTabs().add(equipmentTab);
       paneWidth += 70;
     }
     if (MapState.isServicesShown()) {
-      tabPane.getTabs().add(servicesTab);
+      mapTabPane.getTabs().add(servicesTab);
       paneWidth += 55;
     }
     if (paneWidth < 130) paneWidth = 130;
 
-    tabPane.setPrefWidth(paneWidth);
+    mapTabPane.setPrefWidth(paneWidth);
 
-    if (tabPane.getTabs().contains(previouslyOpenTab))
-      tabPane.getSelectionModel().select(previouslyOpenTab);
-    else tabPane.getSelectionModel().select(0);
+    if (mapTabPane.getTabs().contains(previouslyOpenTab))
+      mapTabPane.getSelectionModel().select(previouslyOpenTab);
+    else mapTabPane.getSelectionModel().select(0);
 
-    if (locationTab.isSelected()) tabPane.setPrefHeight(273);
-    if (equipmentTab.isSelected()) tabPane.setPrefHeight(243);
-    if (servicesTab.isSelected()) tabPane.setPrefHeight(213);
-    if (tabPane.getHeight() + tabPane.getLayoutY() > iconPane.getHeight()) {
-      tabPane.setLayoutY(iconPane.getHeight() - tabPane.getHeight());
+    if (locationTab.isSelected()) mapTabPane.setPrefHeight(273);
+    if (equipmentTab.isSelected()) mapTabPane.setPrefHeight(243);
+    if (servicesTab.isSelected()) mapTabPane.setPrefHeight(213);
+    if (mapTabPane.getHeight() + mapTabPane.getLayoutY() > iconPane.getHeight()) {
+      mapTabPane.setLayoutY(iconPane.getHeight() - mapTabPane.getHeight());
     }
   }
 

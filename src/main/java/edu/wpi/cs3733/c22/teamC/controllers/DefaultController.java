@@ -24,7 +24,7 @@ public class DefaultController extends AbstractController {
   @FXML private JFXButton infoButton;
   @FXML private Circle profileCircle;
   @FXML private Label nameLabel;
-  @FXML private JFXDrawer profileDrawer;
+  // @FXML private JFXDrawer profileDrawer;
 
   private JFXDrawer navDrawer = new JFXDrawer();
   private JFXDrawer exitDrawer = new JFXDrawer();
@@ -71,7 +71,7 @@ public class DefaultController extends AbstractController {
               if (newValue && !drawerIsOpened) drawerStack.toBack();
             });
 
-    FXMLLoader profileLoader = getLoader("ProfilePage.fxml");
+    /*FXMLLoader profileLoader = getLoader("ProfilePage.fxml");
     Pane profilePane = profileLoader.load();
     profileDrawer.setSidePane(profilePane);
 
@@ -81,7 +81,7 @@ public class DefaultController extends AbstractController {
           profileCircle.setFill(new ImagePattern(LoggedInUser.getProfilePic()));
         });
 
-    profileDrawer.close();
+    profileDrawer.close();*/
 
     ControllerUtil.addDrawerButtonHover(
         navButton, navDrawer, slideNavMenu, drawerList, drawerStack);
@@ -199,7 +199,12 @@ public class DefaultController extends AbstractController {
 
   @FXML
   void profileButtonPressed() throws IOException {
-    profileDrawer.open();
-    profileDrawer.toFront();
+    // profileDrawer.open();
+    // profileDrawer.toFront();
+    dashboardButtonPressed();
+  }
+
+  public void updateProfilePic() {
+    profileCircle.setFill(new ImagePattern(LoggedInUser.getProfilePic()));
   }
 }

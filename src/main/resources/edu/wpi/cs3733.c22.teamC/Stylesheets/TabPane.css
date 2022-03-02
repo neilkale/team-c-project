@@ -1,8 +1,8 @@
-.tab-pane .tab-header-area .tab-header-background {
+#tabPane .tab-header-area .tab-header-background {
     -fx-opacity: 0;
 }
 
-.tab-pane
+#tabPane
 {
     -fx-tab-min-width:90px;
 }
@@ -10,13 +10,13 @@
 .tab{
     -fx-background-insets: 0 1 0 1,0,0;
 }
-.tab-pane .tab
+#tabPane .tab
 {
     -fx-background-color: #88b7ff;
 
 }
 
-.tab-pane .tab:selected
+#tabPane .tab:selected
 {
     -fx-background-color: #1F58AF;
 }
@@ -37,7 +37,7 @@
     -fx-text-fill: #FFF;
 }
 
-.tab-pane:top *.tab-header-area {
+#tabPane:top *.tab-header-area {
     -fx-background-insets: 0, 0 0 1 0;
     /* -fx-padding: 0.416667em 0.166667em 0.0em 0.833em; /* 5 2 0 10 */
     -fx-padding: 0.416667em 0.166667em 0.0em 0.0em; /* overridden as 5 2 0 0 */

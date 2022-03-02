@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #FFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.windowControllers.ProfilePageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: #FFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.windowControllers.ProfilePageController">
     <children>
         <BorderPane layoutX="142.0" layoutY="142.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <center>
@@ -32,10 +32,11 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                  <ImageView fx:id="imageView" fitHeight="175.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                  <ImageView fx:id="imageView" fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                      <GridPane.margin>
                         <Insets top="10.0" />
-                     </GridPane.margin></ImageView>
+                     </GridPane.margin>
+                  </ImageView>
                   <FlowPane fx:id="flowPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="175.0" prefWidth="300.0" visible="false" GridPane.halignment="CENTER">
                      <GridPane.margin>
                         <Insets top="10.0" />
@@ -110,7 +111,7 @@
             </GridPane>
          </top>
         </BorderPane>
-      <Pane fx:id="passPane" layoutY="246.0" prefHeight="154.0" prefWidth="300.0" style="-fx-background-color: #1F58AF;" visible="false">
+      <Pane fx:id="passPane" layoutY="320.0" prefHeight="154.0" prefWidth="300.0" style="-fx-background-color: #1F58AF;" visible="false">
          <children>
             <PasswordField fx:id="oldPass" alignment="CENTER" layoutX="76.0" layoutY="14.0" prefWidth="150.0" promptText="OLD PASSWORD" />
             <PasswordField fx:id="newPass1" alignment="CENTER" layoutX="76.0" layoutY="46.0" prefWidth="150.0" promptText="NEW PASSWORD" />

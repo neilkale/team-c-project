@@ -2,7 +2,9 @@ package edu.wpi.cs3733.c22.teamC.controllers.windowControllers;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.c22.teamC.Databases.LoggedInUser;
+import edu.wpi.cs3733.c22.teamC.controllers.ControllerMediator;
 import edu.wpi.cs3733.c22.teamC.controllers.ImageLoader;
+import java.io.IOException;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -35,6 +37,8 @@ public class ProfilePageController {
 
   @FXML
   void initialize() {
+    ControllerMediator controllerMediator = ControllerMediator.getInstance();
+
     if (LoggedInUser.getCurrentUser().get_username().equals("cpage"))
       for (int i = 0; i < picNames.length; i++) picNames[i] = "Kevin";
 
@@ -54,6 +58,11 @@ public class ProfilePageController {
             changeButton.setVisible(true);
             imageView.setVisible(true);
             flowPane.setVisible(false);
+            try {
+              controllerMediator.updateProfilePic();
+            } catch (IOException e) {
+              System.out.println("failed to update profile pic");
+            }
           });
       flowPane.getChildren().add(pic);
     }
@@ -92,9 +101,9 @@ public class ProfilePageController {
 
       scaleTransition.setNode(oldPass);
       scaleTransition.play();
-      return;
-    }
-    if (!newPass1.getText().equals(newPass2.getText()) && newPass1.getText().length() >= 5) {
+    } else if (!newPass1.getText().equals(newPass2.getText())
+        && !newPass1.getText().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,}$")) {
+
       ScaleTransition scaleTransition = new ScaleTransition();
 
       scaleTransition.setByY(.15);
@@ -116,8 +125,9 @@ public class ProfilePageController {
 
       scaleTransition.setNode(newPass2);
       scaleTransition.play();
-      return;
+    } else {
+      LoggedInUser.changePassword(newPass1.getText());
+      passPane.setVisible(false);
     }
-    LoggedInUser.changePassword(newPass1.getText());
   }
 }

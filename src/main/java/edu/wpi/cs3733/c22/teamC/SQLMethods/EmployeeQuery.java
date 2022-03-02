@@ -33,7 +33,6 @@ public class EmployeeQuery extends Query<Employee> {
     return each.get_username();
   }
 
-
   public static ArrayList<String> getFullNameAll() {
     ArrayList<String> allNodes = new ArrayList<>();
     ArrayList<Employee> allEmployees = (new EmployeeQuery()).getAllNodeData();

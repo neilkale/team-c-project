@@ -3,8 +3,6 @@ package edu.wpi.cs3733.c22.teamC.controllers.requests;
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
 import edu.wpi.cs3733.c22.teamC.Databases.MedicalEquipment;
-
-import edu.wpi.cs3733.c22.teamC.SQLMethods.MedicalEquipmentQuery;
 import edu.wpi.cs3733.c22.teamC.controllers.AbstractController;
 import java.sql.SQLException;
 import java.util.List;

@@ -185,7 +185,6 @@ public class MongoDatabase {
     }
     fields.add(toIterate.substring(1, toIterate.indexOf('V') - 1));
 
-
     try {
       teamC_db.getCollection(table);
     } catch (Exception e) {

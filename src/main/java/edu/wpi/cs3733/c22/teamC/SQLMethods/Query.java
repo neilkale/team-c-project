@@ -198,7 +198,7 @@ public abstract class Query<T> {
       DatabaseConnection connection = DatabaseConnection.getInstance();
 
       String readFile = fileIn;
-      URL resource = Query.class.getClassLoader().getResource(fileIn);
+      URL resource = Query.class.getResource(fileIn);
       if (resource != null) readFile = resource.toString().replace("%20", " ");
 
       File in = new File(fileIn); // goetting the file

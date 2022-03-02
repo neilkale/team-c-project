@@ -50,13 +50,18 @@ public class LoggedInUser {
   }
 
   public static void changePassword(String newPass) {
-    signedInUser.set_password(newPass);
-    EmployeeDaoImpl eDao = DaoSingleton.getEmployeeDao();
-    try {
-      eDao.updateNode(signedInUser);
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.out.println("Failed to set new password");
+
+    if(newPass.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,}$")) {
+      signedInUser.set_password(newPass);
+      EmployeeDaoImpl eDao = DaoSingleton.getEmployeeDao();
+      try {
+        eDao.updateNode(signedInUser);
+      } catch (Exception e) {
+        e.printStackTrace();
+        System.out.println("Failed to set new password");
+      }
+    } else {
+      System.out.println("Not a valid password");
     }
   }
 }

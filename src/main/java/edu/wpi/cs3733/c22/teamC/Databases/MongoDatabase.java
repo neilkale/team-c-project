@@ -8,7 +8,6 @@ import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
-import java.util.Map;
 import org.bson.Document;
 
 public class MongoDatabase {
@@ -26,7 +25,7 @@ public class MongoDatabase {
     mongoClient.close();
   }
 
-  private List<String> map(String s){
+  private List<String> map(String s) {
     return DatabaseConnection.getInstance().getFieldsFromTable(s);
   }
 
@@ -232,7 +231,7 @@ public class MongoDatabase {
     collection = teamC_db.getCollection(table);
 
     ArrayList<DatabaseInterface> toReturn = new ArrayList<>();
-    ArrayList<String> fields = map(table);
+    List<String> fields = map(table);
     Class<? extends Query> queryClass;
     Method queryFactory;
 
@@ -357,6 +356,4 @@ public class MongoDatabase {
     }
     return "edu.wpi.cs3733.c22.teamC.SQLMethods." + toReturn + "Query";
   }
-
-
 }

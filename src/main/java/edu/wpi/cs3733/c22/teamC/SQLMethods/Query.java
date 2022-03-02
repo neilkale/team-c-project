@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.c22.teamC.SQLMethods;
 
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
-import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.*;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.SecurityRequestQuery;
 import java.io.*;
@@ -10,7 +9,6 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 import javax.swing.filechooser.FileSystemView;
@@ -180,7 +178,10 @@ public abstract class Query<T> {
     return DatabaseConnection.getTableNames();
   }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of dd25650 (misc non-biggie changes)
   public ArrayList<T> getAllNodeData() {
     T queryResult = null;
     ArrayList<T> allNodes = new ArrayList<>();

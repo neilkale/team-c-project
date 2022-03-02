@@ -99,10 +99,9 @@ public class MapNodeList {
   void load() {
     nodes.clear();
 
-    LocationDaoImpl e = DaoSingleton.getLocationDao();
+    LocationQuery locationQuery = new LocationQuery();
     // put locations from the databases on the map
-    ArrayList<Location> locations = e.getAllNodes();
-    locations.remove(0);
+    ArrayList<Location> locations = locationQuery.getAllNodeData();
 
     for (Location l : locations) {
       l.set_xcoord(l.get_xcoord());
@@ -111,8 +110,8 @@ public class MapNodeList {
       nodes.add(node);
     }
     // put medical equipment on the map
-    EquipmentDaoImpl eDao = DaoSingleton.getEquipmentDao();
-    ArrayList<MedicalEquipment> equipment = eDao.getAllNodes();
+    MedicalEquipmentQuery medicalEquipmentQuery = new MedicalEquipmentQuery();
+    ArrayList<MedicalEquipment> equipment = medicalEquipmentQuery.getAllNodeData();
 
     for (MedicalEquipment equip : equipment) {
       for (MapNode n : nodes) {
@@ -122,7 +121,10 @@ public class MapNodeList {
       }
     }
 
-    ArrayList<ServiceRequest> requests = ServiceRequest.getAllServiceRequests();
+    ArrayList<ServiceRequest> requests =
+        new ArrayList<ServiceRequest>(ServiceRequest.getAllServiceRequests());
+    requests = (ArrayList<ServiceRequest>) requests.clone();
+
     for (ServiceRequest s : requests) {
       for (MapNode n : nodes) {
         if (n.checkLocation(s.get_locationID())) {
@@ -130,5 +132,7 @@ public class MapNodeList {
         }
       }
     }
+    
+
   }
 }

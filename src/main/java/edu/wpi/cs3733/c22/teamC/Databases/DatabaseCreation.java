@@ -355,7 +355,7 @@ public class DatabaseCreation {
   }
 
   public static void readDatabasesFromCsv() {
-    String prefix = "src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/";
+    String prefix = "";
     Query e = new LocationQuery();
     e.readCSV(prefix + "TowerLocationsC.csv");
 

@@ -1,7 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.controllers.sideView;
 
 import com.jfoenix.controls.JFXButton;
-import edu.wpi.cs3733.c22.teamC.Main;
+import edu.wpi.cs3733.c22.teamC.MainFinal;
 import edu.wpi.cs3733.c22.teamC.controllers.AbstractController;
 import edu.wpi.cs3733.c22.teamC.controllers.mapEditor.MapState;
 import java.io.IOException;
@@ -39,31 +39,36 @@ public class SideViewController extends AbstractController {
 
     l2Button.setGraphic(
         FXMLLoader.load(
-            Main.class.getResource("/edu/wpi/cs3733.c22.teamC/Views/SideViewDeselected.fxml")));
+            MainFinal.class.getResource(
+                "/edu/wpi/cs3733.c22.teamC/Views/SideViewDeselected.fxml")));
 
     MapState.setCurrentFloor("L1");
 
     l1Button.setGraphic(
         FXMLLoader.load(
-            Main.class.getResource("/edu/wpi/cs3733.c22.teamC/Views/SideViewDeselected.fxml")));
+            MainFinal.class.getResource(
+                "/edu/wpi/cs3733.c22.teamC/Views/SideViewDeselected.fxml")));
 
     MapState.setCurrentFloor("1");
 
     f1Button.setGraphic(
         FXMLLoader.load(
-            Main.class.getResource("/edu/wpi/cs3733.c22.teamC/Views/SideViewDeselected.fxml")));
+            MainFinal.class.getResource(
+                "/edu/wpi/cs3733.c22.teamC/Views/SideViewDeselected.fxml")));
 
     MapState.setCurrentFloor("2");
 
     f2Button.setGraphic(
         FXMLLoader.load(
-            Main.class.getResource("/edu/wpi/cs3733.c22.teamC/Views/SideViewDeselected.fxml")));
+            MainFinal.class.getResource(
+                "/edu/wpi/cs3733.c22.teamC/Views/SideViewDeselected.fxml")));
 
     MapState.setCurrentFloor("3");
 
     f3Button.setGraphic(
         FXMLLoader.load(
-            Main.class.getResource("/edu/wpi/cs3733.c22.teamC/Views/SideViewDeselected.fxml")));
+            MainFinal.class.getResource(
+                "/edu/wpi/cs3733.c22.teamC/Views/SideViewDeselected.fxml")));
     populateGraphsDefault();
   }
 
@@ -97,7 +102,8 @@ public class SideViewController extends AbstractController {
     if (previousButton != null) {
       previousButton.setGraphic(
           FXMLLoader.load(
-              Main.class.getResource("/edu/wpi/cs3733.c22.teamC/Views/SideViewDeselected.fxml")));
+              MainFinal.class.getResource(
+                  "/edu/wpi/cs3733.c22.teamC/Views/SideViewDeselected.fxml")));
 
       if (previousButton.equals(button)) {
         previousButton = null;
@@ -109,7 +115,7 @@ public class SideViewController extends AbstractController {
     populateGraphs(SideViewTracker.getEquipmentCount(floor));
     button.setGraphic(
         FXMLLoader.load(
-            Main.class.getResource("/edu/wpi/cs3733.c22.teamC/Views/SideViewSelected.fxml")));
+            MainFinal.class.getResource("/edu/wpi/cs3733.c22.teamC/Views/SideViewSelected.fxml")));
     previousButton = button;
   }
 

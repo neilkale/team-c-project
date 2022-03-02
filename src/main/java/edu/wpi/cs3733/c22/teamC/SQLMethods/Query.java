@@ -5,6 +5,7 @@ import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.*;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.SecurityRequestQuery;
 import java.io.*;
+import java.net.URL;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -197,10 +198,11 @@ public abstract class Query<T> {
       DatabaseConnection connection = DatabaseConnection.getInstance();
 
       String readFile = fileIn;
-      InputStream resource = Query.class.getResourceAsStream(fileIn);
-      if (resource != null) readFile = resource.toString().replace("%20", " ");
+      URL resource = (new MapQuery()).getClass().getClassLoader().getResource(fileIn);
 
-      File in = new File(fileIn); // goetting the file
+      if (resource != null) readFile = resource.toString();
+
+      File in = new File(readFile); // goetting the file
       if (in != null) {
         Scanner s = new Scanner(in);
 

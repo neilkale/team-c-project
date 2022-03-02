@@ -6,7 +6,7 @@ plugins {
     id "io.freefair.lombok" version "5.0.0-rc6"
     id 'org.openjfx.javafxplugin' version '0.0.10'
 }
-mainClassName = 'edu.wpi.cs3733.c22.teamC.Main'
+mainClassName = 'edu.wpi.cs3733.c22.teamC.MainFinal'
 applicationDefaultJvmArgs = ["--add-opens", "javafx.base/com.sun.javafx.runtime=ALL-UNNAMED"]
 applicationDefaultJvmArgs = ["--add-opens","javafx.controls/com.sun.javafx.scene.control.behavior=ALL-UNNAMED"]
 applicationDefaultJvmArgs = ["--add-opens","javafx.controls/com.sun.javafx.scene.control=ALL-UNNAMED"]
@@ -72,8 +72,8 @@ jar {
 }
 
 def codeCoverageExcludes = [
-        'edu.wpi.cs3733.c22.teamC.Capp',
-        'edu.wpi.cs3733.c22.teamC.Main',
+        'edu.wpi.cs3733.c22.teamC.CappFinal',
+        'edu.wpi.cs3733.c22.teamC.MainFinal',
 ]
 
 jacoco {

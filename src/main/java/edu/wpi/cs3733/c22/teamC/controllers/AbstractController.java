@@ -1,6 +1,6 @@
 package edu.wpi.cs3733.c22.teamC.controllers;
 
-import edu.wpi.cs3733.c22.teamC.Main;
+import edu.wpi.cs3733.c22.teamC.MainFinal;
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.animation.ScaleTransition;
@@ -20,14 +20,15 @@ public abstract class AbstractController {
     System.out.println(fxmlFileName);
 
     Parent root =
-        loader.load(Main.class.getResource("/edu/wpi/cs3733.c22.teamC/Views/" + fxmlFileName));
+        loader.load(MainFinal.class.getResource("/edu/wpi/cs3733.c22.teamC/Views/" + fxmlFileName));
     return root;
   }
 
   @FXML
   protected FXMLLoader getLoader(String fxmlFileName) throws IOException {
     FXMLLoader loader =
-        new FXMLLoader(Main.class.getResource("/edu/wpi/cs3733.c22.teamC/Views/" + fxmlFileName));
+        new FXMLLoader(
+            MainFinal.class.getResource("/edu/wpi/cs3733.c22.teamC/Views/" + fxmlFileName));
     return loader;
   }
   /**

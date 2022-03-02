@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class Capp extends Application {
+public class CappFinal extends Application {
   private static final boolean REFRESHFROMCSV = true;
 
   @Override
@@ -33,7 +33,8 @@ public class Capp extends Application {
       ImageLoader imageLoader = new ImageLoader();
       FXMLLoader loader = new FXMLLoader();
       Parent root =
-          loader.load(Main.class.getResource("/edu/wpi/cs3733.c22.teamC/Views/SignInPage.fxml"));
+          loader.load(
+              MainFinal.class.getResource("/edu/wpi/cs3733.c22.teamC/Views/SignInPage.fxml"));
       Scene scene = new Scene(root);
       primaryStage.setMinWidth(800);
       primaryStage.setMinHeight(660);

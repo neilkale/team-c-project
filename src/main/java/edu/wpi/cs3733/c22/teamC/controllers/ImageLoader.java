@@ -1,6 +1,6 @@
 package edu.wpi.cs3733.c22.teamC.controllers;
 
-import edu.wpi.cs3733.c22.teamC.Main;
+import edu.wpi.cs3733.c22.teamC.MainFinal;
 import java.util.HashMap;
 import javafx.scene.image.Image;
 
@@ -149,7 +149,7 @@ public class ImageLoader {
         images.put(
             name,
             new Image(
-                Main.class
+                MainFinal.class
                     .getResource("/edu/wpi/cs3733.c22.teamC/Views/" + imageFileNames.get(name))
                     .toExternalForm()));
         return images.get(name);

@@ -3,7 +3,7 @@ package edu.wpi.cs3733.c22.teamC.controllers.login;
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.EmployeeDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.Employee;
-import edu.wpi.cs3733.c22.teamC.Main;
+import edu.wpi.cs3733.c22.teamC.MainFinal;
 import edu.wpi.cs3733.c22.teamC.controllers.AbstractController;
 import java.io.File;
 import java.io.IOException;
@@ -89,7 +89,9 @@ public class SignUpController extends AbstractController {
   public void initialize() {
     Image gif =
         new Image(
-            Main.class.getResource("/edu/wpi/cs3733.c22.teamC/Views/NUGGIES.gif").toExternalForm());
+            MainFinal.class
+                .getResource("/edu/wpi/cs3733.c22.teamC/Views/NUGGIES.gif")
+                .toExternalForm());
     AnchorPane.setTopAnchor(imageViewLeft, 0.0);
     AnchorPane.setLeftAnchor(imageViewLeft, 0.0);
     AnchorPane.setBottomAnchor(imageViewLeft, 0.0);

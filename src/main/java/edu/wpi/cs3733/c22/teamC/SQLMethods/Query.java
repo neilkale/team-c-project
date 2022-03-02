@@ -152,6 +152,7 @@ public abstract class Query<T> {
         String nowUID = getUID(now);
         for (T mod : list) {
           if (nowUID.equals(getUID(mod))) {
+            //            System.out.println("REMOVING UID:" + nowUID);
             found = true;
           }
         }
@@ -310,7 +311,6 @@ public abstract class Query<T> {
           for (String val : d.getValues()) { // for every table entry
             line.append(val); // append them to a certain line
           }
-          System.out.println("Line: " + line);
           line.substring(0, line.lastIndexOf(","));
           line.append(",\n"); // end the line with \n
           fw.write(line.toString()); // write the line to the document

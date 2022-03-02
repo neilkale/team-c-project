@@ -20,7 +20,6 @@ public class TableFields {
     actQuery = actQuery.substring(actQuery.indexOf('('), actQuery.lastIndexOf(')'));
     String toIterate = actQuery;
     ArrayList<String> fields = new ArrayList<>();
-    System.out.println(query);
     while (toIterate.contains(",")) {
       while (toIterate.charAt(0) != ' ') {
         toIterate = toIterate.substring(1);

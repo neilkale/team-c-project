@@ -217,6 +217,8 @@ public class DatabaseConnection {
         }
       } catch (SQLException e) {
 
+      } catch (Exception f) {
+        disableMongo("Mongo Failed on initilize");
       }
 
     } else if (canMongo()) {
@@ -228,7 +230,6 @@ public class DatabaseConnection {
       if (query.contains("UPDATE")) {
         statement.executeUpdate(query);
       } else {
-        System.out.println("It breaks here sometimes: ");
         statement.execute(query);
       }
     }

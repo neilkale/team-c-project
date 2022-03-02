@@ -224,6 +224,7 @@ public class MongoDatabase {
       String actQuery = query.substring(query.indexOf(' ') + 1);
       actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
       table = actQuery.substring(0, actQuery.indexOf(' '));
+      System.out.println(table);
     } else {
       table = query.substring(query.lastIndexOf(' ') + 1);
     }

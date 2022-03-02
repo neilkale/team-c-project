@@ -156,7 +156,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label lineSpacing="5.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="900.0" text="You can choose which icons are shown on the map by checking the specific icons you would like to see displayed in the top right corner. &#10;You are able to change floors by clicking the number of floor you would like to go to with the buttons in the top left of the map editor, or by selecting the floor on the side using the feature tree on the left.&#10;You can zoom using a track pad by pinching in or out." textFill="#477ccc" wrapText="true" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="8">
+                        <Label lineSpacing="5.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="900.0" text="You can choose which icons are shown on the map by checking the specific icons you would like to see displayed in the top right corner. &#10;You are able to change floors by clicking the number of floor you would like to go to with the buttons in the top left of the map editor.&#10;You can zoom using a track pad by pinching in or out." textFill="#477ccc" wrapText="true" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="8">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

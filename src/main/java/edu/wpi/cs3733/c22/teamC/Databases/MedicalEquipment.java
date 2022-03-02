@@ -116,7 +116,7 @@ public class MedicalEquipment implements DatabaseInterface {
   public String[] getValues() {
     List<String> a = new ArrayList<>();
     Method getter;
-    for (String s : getFields()) {
+    for (String s : getarguments()) {
       try {
         getter = this.getClass().getMethod("get_" + s);
         a.add((String) getter.invoke(this, new Object[] {}));

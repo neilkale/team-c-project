@@ -115,7 +115,7 @@
                                  <graphic>
                                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@Icons/DashboardIcon.png" />
+                                          <Image url="@Icons/HelpIcon.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>

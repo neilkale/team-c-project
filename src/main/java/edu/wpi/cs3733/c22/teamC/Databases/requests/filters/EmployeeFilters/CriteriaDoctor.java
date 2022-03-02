@@ -1,4 +1,4 @@
-package edu.wpi.cs3733.c22.teamC.Databases.requests.filters;
+package edu.wpi.cs3733.c22.teamC.Databases.requests.filters.EmployeeFilters;
 
 import edu.wpi.cs3733.c22.teamC.Databases.Employee;
 import java.util.ArrayList;

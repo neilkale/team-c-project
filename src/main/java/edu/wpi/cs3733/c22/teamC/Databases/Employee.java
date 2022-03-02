@@ -194,6 +194,7 @@ public class Employee implements DatabaseInterface {
       }
     }
 
+
     String[] toReturn = new String[a.size()];
     for (int i = 0; i < a.size(); i++) {
       toReturn[i] = a.get(i);
@@ -210,4 +211,5 @@ public class Employee implements DatabaseInterface {
   public DaoInterface getDao() {
     return DaoSingleton.getEmployeeDao();
   }
+
 }

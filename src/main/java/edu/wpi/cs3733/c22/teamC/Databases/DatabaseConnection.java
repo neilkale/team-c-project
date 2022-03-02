@@ -30,6 +30,7 @@ public class DatabaseConnection {
     justStartup = b;
   }
 
+
   public boolean isJustStartup() {
     return justStartup;
   }
@@ -86,6 +87,7 @@ public class DatabaseConnection {
    * embedded db has to create the initial CDB instance so could this implementation be used in such
    * a way where we declare the embedded db and then switch over tto the new client server db?
    */
+
   private DatabaseConnection() {
     setStartup(true);
     tableFields = new TableFields();
@@ -213,6 +215,7 @@ public class DatabaseConnection {
         }
       } else if (startupInsert.size() > 0) {
         mongoDatabase.batchInsert(startupInsert);
+
       }
 
     } else if (canMongo()) {
@@ -234,6 +237,7 @@ public class DatabaseConnection {
     statement.executeUpdate(query);
   }
 
+
   public void close() {
     try {
       connection.close();
@@ -244,6 +248,7 @@ public class DatabaseConnection {
       mongoDatabase.closeMongo();
     }
   }
+
 
   public List<String> getFieldsFromTable(String table) {
     return tableFields.tableToFields(table);

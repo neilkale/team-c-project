@@ -185,6 +185,7 @@ public class MongoDatabase {
     }
     fields.add(toIterate.substring(1, toIterate.indexOf('V') - 1));
 
+
     try {
       teamC_db.getCollection(table);
     } catch (Exception e) {
@@ -228,6 +229,7 @@ public class MongoDatabase {
       String actQuery = query.substring(query.indexOf(' ') + 1);
       actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
       table = actQuery.substring(0, actQuery.indexOf(' '));
+      System.out.println(table);
     } else {
       table = query.substring(query.lastIndexOf(' ') + 1);
     }

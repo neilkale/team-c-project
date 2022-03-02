@@ -2,7 +2,7 @@ package edu.wpi.cs3733.c22.teamC.Databases;
 
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.EmployeeDaoImpl;
-import edu.wpi.cs3733.c22.teamC.Databases.requests.filters.CriteriaUserSpecific;
+import edu.wpi.cs3733.c22.teamC.Databases.requests.filters.EmployeeFilters.CriteriaUserSpecific;
 import edu.wpi.cs3733.c22.teamC.controllers.ImageLoader;
 import javafx.scene.image.Image;
 

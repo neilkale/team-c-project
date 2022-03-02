@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.CovidPageController">
    <children>
@@ -25,14 +28,10 @@
                         <ColumnConstraints />
                      </columnConstraints>
                      <children>
-                        <Label fx:id="Banner" alignment="CENTER" prefHeight="55.0" prefWidth="6000.0" text="COVID PAGE" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <Label fx:id="Banner" alignment="CENTER" prefHeight="55.0" prefWidth="6000.0" stylesheets="@../Stylesheets/ServiceRequestConstants.css" text="COVID PAGE" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <font>
                               <Font name="System Bold" size="30.0" />
                            </font>
-                           <stylesheets>
-                              <URL value="@../Stylesheets/ServiceRequestConstants.css" />
-                              <URL value="@../Stylesheets/ServiceRequestConstants.css" />
-                           </stylesheets>
                         </Label>
                         <JFXButton fx:id="backButton" onAction="#backButtonPressed" prefHeight="55.0" prefWidth="55.0" ripplerFill="BLACK" text="&lt;" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="LEFT">
                            <font>
@@ -43,7 +42,7 @@
                   </GridPane>
                </top>
                <center>
-                  <GridPane style="-fx-background-color: ffffff;" stylesheets="@../Stylesheets/SanitationServices.css" BorderPane.alignment="CENTER">
+                  <GridPane stylesheets="@../Stylesheets/SanitationServices.css" BorderPane.alignment="CENTER">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
@@ -62,5 +61,70 @@
             </BorderPane>
          </children>
       </AnchorPane>
+      <GridPane layoutX="9.0" layoutY="54.0" prefHeight="575.0" prefWidth="787.0" stylesheets="@../Stylesheets/SanitationServices.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints vgrow="NEVER" />
+            <RowConstraints vgrow="NEVER" />
+            <RowConstraints vgrow="NEVER" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets top="30.0" />
+               </GridPane.margin>
+               <image>
+                  <Image url="@Icons/SafeCareQR.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imageView1" fitHeight="150.0" fitWidth="150.0" layoutX="335.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets top="30.0" />
+               </GridPane.margin>
+               <image>
+                  <Image url="@Icons/PreScreenQR.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imageView11" fitHeight="150.0" fitWidth="150.0" layoutX="335.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets top="30.0" />
+               </GridPane.margin>
+               <image>
+                  <Image url="@Icons/VaccineQR.png" />
+               </image>
+            </ImageView>
+            <Text fill="#1f58af" strokeType="OUTSIDE" strokeWidth="0.0" text="Our Safe Care Commitment" underline="true" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets top="5.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#1f58af" layoutX="310.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COVID-19 Prescreen" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="5.0" />
+               </GridPane.margin>
+            </Text>
+            <Text fill="#1f58af" layoutX="10.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COVID-19 Vaccine Information" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="5.0" />
+               </GridPane.margin>
+            </Text>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>

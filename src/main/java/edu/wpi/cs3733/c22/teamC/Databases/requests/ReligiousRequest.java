@@ -56,7 +56,7 @@ public class ReligiousRequest extends ServiceRequest implements DatabaseInterfac
   @Override
   public String[] getFields() {
     return new String[] {
-      "ticketID", "locationID", "status", "serviceType", "assignment", "religion",
+      "ticketID", "locationID", "status", "serviceType", "assignment", "religion"
     };
   }
 

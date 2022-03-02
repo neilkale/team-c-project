@@ -83,14 +83,7 @@ public class MedicineRequest extends ServiceRequest implements DatabaseInterface
   @Override
   public String[] getFields() {
     return new String[] {
-      "ID",
-      "Location",
-      "Status",
-      "Service Type",
-      "Assignment",
-      "Medicine Type",
-      "Quantity",
-      "Urgency"
+      "ticketID", "status", "serviceType", "assignment", "medicineType", "quantity", "urgency"
     };
   }
 

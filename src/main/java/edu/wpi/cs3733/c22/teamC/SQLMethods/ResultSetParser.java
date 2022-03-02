@@ -53,7 +53,7 @@ public class ResultSetParser {
       while (rs.next()) {
         String[] args = new String[fields.size()];
         for (int i = 0; i < args.length; i++) {
-          args[i] = rs.getString(fields.get(i));
+          args[i] = rs.getString(fields.get(i).trim());
         }
 
         toReturn.add((DatabaseInterface) queryFactory.invoke(null, new Object[] {args}));

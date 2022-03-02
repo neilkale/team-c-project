@@ -55,7 +55,7 @@ public class MaintenanceRequest extends ServiceRequest implements DatabaseInterf
 
   @Override
   public String[] getFields() {
-    return new String[] {"ID", "Location", "Status", "Service Type", "Assignment", "Issue Type"};
+    return new String[] {"ticketID", "status", "serviceType", "assignment", "issueType"};
   }
 
   @Override

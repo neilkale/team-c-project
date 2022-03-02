@@ -68,9 +68,7 @@ public class InternalTransportRequest extends ServiceRequest implements Database
 
   @Override
   public String[] getFields() {
-    return new String[] {
-      "ID", "Pick-up Location", "Status", "Service Type", "Assignment", "Drop off", "Urgency"
-    };
+    return new String[] {"ticketID", "status", "serviceType", "assignment", "dropOff", "urgency"};
   }
 
   @Override

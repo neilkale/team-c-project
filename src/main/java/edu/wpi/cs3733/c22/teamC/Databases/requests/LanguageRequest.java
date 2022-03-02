@@ -56,7 +56,7 @@ public class LanguageRequest extends ServiceRequest implements DatabaseInterface
 
   @Override
   public String[] getFields() {
-    return new String[] {"ID", "Location", "Status", "Service Type", "Assignment", "Language"};
+    return new String[] {"ticketID", "status", "serviceType", "assignment", "language"};
   }
 
   @Override

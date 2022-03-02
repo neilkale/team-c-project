@@ -191,7 +191,7 @@ public class DatabaseConnection {
     System.out.println(query);
     // If Database can handle Mongo
 
-    if (justStartup) {
+    if (justStartup || !isMongo) {
       if (query.contains("CREATE TABLE")) {
         tableFields.addToMap(query);
       }

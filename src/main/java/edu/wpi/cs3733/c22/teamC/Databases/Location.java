@@ -185,7 +185,7 @@ public class Location implements DatabaseInterface {
     for (String s : getFields()) {
       try {
         getter = this.getClass().getMethod("get_" + s);
-        a.add((String) getter.invoke(this, new Object[] {}));
+        a.add((String) getter.invoke(this));
       } catch (NoSuchMethodException e) {
         e.printStackTrace();
       } catch (InvocationTargetException e) {
@@ -212,8 +212,8 @@ public class Location implements DatabaseInterface {
     String[] fields = getFields();
     for (int i = 0; i < getFields().length; i++) {
       try {
-        setter = this.getClass().getMethod("set_" + fields[i]);
-        a.add((String) setter.invoke(this, new Object[] {values[i]}));
+        setter = this.getClass().getMethod("set_" + fields[i], String.class);
+        a.add((String) setter.invoke(this, values[i]));
       } catch (NoSuchMethodException e) {
         e.printStackTrace();
       } catch (InvocationTargetException e) {

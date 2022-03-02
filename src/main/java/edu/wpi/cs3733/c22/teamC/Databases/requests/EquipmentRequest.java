@@ -90,14 +90,14 @@ public class EquipmentRequest extends ServiceRequest implements DatabaseInterfac
   @Override
   public String[] getFields() {
     return new String[] {
-      "ID",
-      "Location",
-      "Status",
-      "Service Type",
-      "Assignment",
-      "Urgency",
-      "Equipment ID",
-      "Pickup Location ID"
+      "ticketID",
+      "locationID",
+      "status",
+      "serviceType",
+      "assignment",
+      "urgency",
+      "equipmentID",
+      "pickupLocationID"
     };
   }
 

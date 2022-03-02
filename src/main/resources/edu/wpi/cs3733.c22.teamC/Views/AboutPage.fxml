@@ -2,7 +2,6 @@
 
 <!--<?import com.gluonhq.charm.glisten.control.BottomNavigationButton?>-->
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -14,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.CreditsPageController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="334.4" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <bottom>
@@ -61,14 +60,9 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="55.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXButton fx:id="backButton" onAction="#backButtonPressed" prefHeight="55.0" prefWidth="55.0" ripplerFill="BLACK" text="&lt;" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="LEFT">
-                     <font>
-                        <Font name="Consolas Bold" size="30.0" />
-                     </font>
-                  </JFXButton>
                   <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="ABOUT PAGE" GridPane.halignment="CENTER">
                      <font>
                         <Font name="System Bold" size="30.0" />
@@ -88,7 +82,7 @@
                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView fitHeight="130.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="132.0" fitWidth="184.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@GroupPhotos/Screen%20Shot%202022-03-01%20at%206.11.13%20PM.png" />
                      </image>
@@ -96,7 +90,7 @@
                         <Insets left="10.0" top="5.0" />
                      </GridPane.margin>
                   </ImageView>
-                  <ImageView fitHeight="130.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                  <ImageView fitHeight="132.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
                         <Image url="@GroupPhotos/Screen%20Shot%202022-03-01%20at%206.11.00%20PM.png" />
                      </image>
@@ -118,7 +112,7 @@
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ImageView fitHeight="130.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                  <ImageView fitHeight="129.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
                         <Image url="@GroupPhotos/Screen%20Shot%202022-03-01%20at%206.11.58%20PM.png" />
                      </image>
@@ -126,7 +120,7 @@
                         <Insets bottom="5.0" />
                      </GridPane.margin>
                   </ImageView>
-                  <ImageView fitHeight="130.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="131.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@GroupPhotos/Screen%20Shot%202022-03-01%20at%206.11.31%20PM.png" />
                      </image>
@@ -138,14 +132,5 @@
             </GridPane>
          </right>
       </BorderPane>
-      <GridPane layoutX="10.0" layoutY="10.0" style="-fx-background-color: #009f9f;">
-         <rowConstraints>
-            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="55.0" />
-         </rowConstraints>
-         <columnConstraints>
-            <ColumnConstraints maxWidth="1.7976931348623157E308" />
-            <ColumnConstraints />
-         </columnConstraints>
-      </GridPane>
    </children>
 </AnchorPane>

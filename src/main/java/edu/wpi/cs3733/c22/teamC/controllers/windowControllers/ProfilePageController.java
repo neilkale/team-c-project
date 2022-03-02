@@ -119,5 +119,6 @@ public class ProfilePageController {
       return;
     }
     LoggedInUser.changePassword(newPass1.getText());
+    passPane.setVisible(false);
   }
 }

@@ -195,40 +195,35 @@ public class DatabaseConnection {
       if (query.contains("CREATE TABLE")) {
         tableFields.addToMap(query);
       }
-      try {
-        if (canMongo()) {
-          // If Mongo is instanced, and is just starting up
-          if (query.substring(0, query.indexOf(' ')).equals("INSERT")) {
-            // This just waits to add everything when doing batch writes to mono
-            startupInsert.add(query);
-          } else {
-            if (startupInsert.size() > 0) {
-              mongoDatabase.batchInsert(startupInsert);
-            }
-            startupInsert = new ArrayList<>();
-            mongoDatabase.getAction(query);
+
+      if (canMongo()) {
+        // If Mongo is instanced, and is just starting up
+        if (query.substring(0, query.indexOf(' ')).equals("INSERT")) {
+          // This just waits to add everything when doing batch writes to mono
+          startupInsert.add(query);
+        } else {
+          if (startupInsert.size() > 0) {
+            mongoDatabase.batchInsert(startupInsert);
             Statement statement = connection.createStatement();
-            if (query.contains("UPDATE")) {
-              statement.executeUpdate(query);
-            } else {
-              statement.execute(query);
+            for (String s : startupInsert) {
+              statement.execute(s);
             }
           }
+          startupInsert = new ArrayList<>();
         }
-      } catch (SQLException e) {
-
+      } else if (startupInsert.size() > 0) {
+        mongoDatabase.batchInsert(startupInsert);
       }
 
     } else if (canMongo()) {
       mongoDatabase.insert(query);
-    }
+    } else {
+      mongoDatabase.getAction(query);
 
-    if (!canMongo()) {
       Statement statement = connection.createStatement();
       if (query.contains("UPDATE")) {
         statement.executeUpdate(query);
       } else {
-        System.out.println("It breaks here sometimes: ");
         statement.execute(query);
       }
     }

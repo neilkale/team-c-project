@@ -38,10 +38,9 @@ public class ResultSetParser {
       actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
       actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
       table = actQuery.substring(0, actQuery.indexOf(' '));
-      System.out.println("Table: "+table);
+      System.out.println("Table: " + table);
     } else {
       table = query.substring(query.lastIndexOf(' ') + 1);
-
     }
 
     Class<? extends Query> queryClass;

@@ -16,9 +16,9 @@
    <children>
       <VBox fx:id="vBoxRight" alignment="TOP_CENTER" prefHeight="577.0" prefWidth="300.0">
          <children>
-            <Label alignment="CENTER" prefHeight="30.0" prefWidth="6000.0" stylesheets="@../Stylesheets/ServiceRequestConstants.css" text="Notifications" textFill="#1f58af">
+            <Label alignment="CENTER" prefHeight="55.0" prefWidth="6000.0" stylesheets="@../Stylesheets/ServiceRequestConstants.css" text="YOUR ORDERS" textFill="#1f58af">
                <font>
-                  <Font name="System Bold" size="25.0" />
+                  <Font name="System Bold" size="33.0" />
                </font>
             </Label>
             <StackPane alignment="BOTTOM_CENTER" maxHeight="-Infinity" prefHeight="250.0" prefWidth="300.0" VBox.vgrow="ALWAYS">

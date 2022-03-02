@@ -11,17 +11,15 @@ public class DashboardController extends AbstractController {
   @FXML FlowPane flowPane;
   private Pane profilePage;
   private Pane requestPage;
-  private Pane sideViewPage;
   private Pane serviceRequestPage;
+  private Pane sideViewPage;
 
   @FXML
   void initialize() throws IOException {
     profilePage = (Pane) loadFxml("ProfilePage.fxml");
     requestPage = (Pane) loadFxml("RequestDashboard.fxml");
+    serviceRequestPage = (Pane) loadFxml("ServiceRequestDashboard.fxml");
     sideViewPage = (Pane) loadFxml("SideViewDashboard.fxml");
-    serviceRequestPage = (Pane) loadFxml("ServiceRequest.fxml");
-    serviceRequestPage.setMaxHeight(400);
-    serviceRequestPage.setMaxWidth(300);
 
     flowPane.getChildren().add(profilePage);
     flowPane.getChildren().add(requestPage);

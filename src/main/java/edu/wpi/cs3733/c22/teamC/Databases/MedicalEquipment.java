@@ -116,7 +116,7 @@ public class MedicalEquipment implements DatabaseInterface {
   public String[] getValues() {
     List<String> a = new ArrayList<>();
     Method getter;
-    for (String s : getarguments()) {
+    for (String s : getFields()) {
       try {
         getter = this.getClass().getMethod("get_" + s);
         a.add((String) getter.invoke(this, new Object[] {}));
@@ -182,12 +182,7 @@ public class MedicalEquipment implements DatabaseInterface {
   @Override
   public String[] getFields() {
     return new String[] {
-      get_equipmentID(),
-      get_locationID(),
-      get_lastKnownTime(),
-      get_status(),
-      get_equipmentType(),
-      get_name()
+      "equipmentID", "locationID", "lastKnownTime", "status", "equipmentType", "name"
     };
   }
 }

@@ -107,7 +107,7 @@ public class Map implements DatabaseInterface {
 
   @Override
   public String[] getFields() {
-    return new String[0];
+    return new String[] {"buildingName", "floorName", "imagePath", "floorNumber"};
   }
 
   @Override

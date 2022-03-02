@@ -38,7 +38,6 @@ public class ResultSetParser {
       actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
       actQuery = actQuery.substring(actQuery.indexOf(' ') + 1);
       table = actQuery.substring(0, actQuery.indexOf(' '));
-      System.out.println("Table: " + table);
     } else {
       table = query.substring(query.lastIndexOf(' ') + 1);
     }
@@ -70,6 +69,8 @@ public class ResultSetParser {
     } catch (IllegalAccessException e) {
       e.printStackTrace();
     }
+
+    System.out.println(toReturn);
     return toReturn;
   }
 }

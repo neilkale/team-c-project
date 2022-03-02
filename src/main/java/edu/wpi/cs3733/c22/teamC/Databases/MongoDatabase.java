@@ -1,6 +1,5 @@
 package edu.wpi.cs3733.c22.teamC.Databases;
 /** @author Aidan Burns 2/28/2022 This project does MongoDatabase on the IntelliJ IDEA */
-import com.mongodb.MongoSocketWriteException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -9,17 +8,22 @@ import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.Map;
 import org.bson.Document;
 
 public class MongoDatabase {
   private static MongoClient mongoClient;
   private static com.mongodb.client.MongoDatabase teamC_db;
+  private static Map<String, ArrayList<String>> map;
   private static String uri =
       "mongodb+srv://admin:dDbno11RbFVsXVv3@serverlessinstance0.zitm8.mongodb.net/teamC_DB?retryWrites=true&w=majority";
+  private DatabaseConnection databaseConnection;
 
   public MongoDatabase() {
     mongoClient = MongoClients.create(uri);
     teamC_db = mongoClient.getDatabase("teamC_DB");
+    map = new HashMap<>();
+    databaseConnection = DatabaseConnection.getInstance();
   }
 
   public void closeMongo() {
@@ -39,7 +43,7 @@ public class MongoDatabase {
       actQuery = actQuery.substring(actQuery.indexOf('(') + 1, actQuery.indexOf(')'));
       values = new ArrayList<>();
 
-      List<String> fields = DatabaseConnection.getInstance().getFieldsFromTable(table);
+      ArrayList<String> fields = map.get(table);
       while (actQuery.contains(",")) {
         values.add(actQuery.substring(actQuery.indexOf('\'') + 1, actQuery.indexOf(',') - 1));
         actQuery = actQuery.substring(actQuery.indexOf(','));
@@ -54,12 +58,8 @@ public class MongoDatabase {
       }
       docList.add(doc);
     }
-    try {
-      teamC_db.getCollection(table).insertMany(docList);
-    } catch (MongoSocketWriteException e) {
-      closeMongo();
-      DatabaseConnection.getInstance().disableMongo("Disabled in batch");
-    }
+
+    teamC_db.getCollection(table).insertMany(docList);
   }
 
   public String getAction(String query) {
@@ -98,7 +98,7 @@ public class MongoDatabase {
     actQuery = actQuery.substring(actQuery.indexOf('(') + 1, actQuery.indexOf(')'));
     ArrayList<String> values = new ArrayList<>();
 
-    List<String> fields = DatabaseConnection.getInstance().getFieldsFromTable(table);
+    ArrayList<String> fields = map.get(table);
     while (actQuery.contains(",")) {
       values.add(actQuery.substring(actQuery.indexOf('\'') + 1, actQuery.indexOf(',') - 1));
       actQuery = actQuery.substring(actQuery.indexOf(','));
@@ -134,22 +134,17 @@ public class MongoDatabase {
       String keyVal = actQuery.substring(actQuery.indexOf('\'') + 1, actQuery.length() - 1);
 
       try {
-        teamC_db
-            .getCollection(table)
-            .deleteOne(
-                new Document(
-                    DatabaseConnection.getInstance().getFieldsFromTable(table).get(0), keyVal));
+        teamC_db.getCollection(table).deleteOne(new Document(map.get(table).get(0), keyVal));
       } catch (Exception e) {
 
-        DatabaseConnection.getInstance().disableMongo("Mongo Failed to Delete " + query);
+        databaseConnection.disableMongo("Mongo Failed to Delete " + query);
       }
     } else {
       try {
-        System.out.println(query.substring(query.lastIndexOf(' ') + 1) + " was dropped");
         teamC_db.getCollection(query.substring(query.lastIndexOf(' ') + 1)).drop();
       } catch (Exception e) {
 
-        DatabaseConnection.getInstance().disableMongo("Mongo Failed to Delete " + query);
+        databaseConnection.disableMongo("Mongo Failed to Delete " + query);
       }
     }
     return "DELETE";
@@ -164,7 +159,7 @@ public class MongoDatabase {
       teamC_db.getCollection(actQuery).drop();
     } catch (Exception e) {
 
-      DatabaseConnection.getInstance().disableMongo("Mongo Failed to truncate " + query);
+      databaseConnection.disableMongo("Mongo Failed to truncate " + query);
     }
     return "TRUNCATE";
   }
@@ -184,6 +179,7 @@ public class MongoDatabase {
       toIterate = toIterate.substring(toIterate.indexOf(',') + 1);
     }
     fields.add(toIterate.substring(1, toIterate.indexOf('V') - 1));
+    map.put(table, fields);
 
 
     try {
@@ -210,7 +206,7 @@ public class MongoDatabase {
     }
     String lastValue = toIterate.substring(toIterate.indexOf('\''), toIterate.indexOf(" WHERE"));
     values.add(lastValue);
-    List<String> fields = DatabaseConnection.getInstance().getFieldsFromTable(table);
+    ArrayList<String> fields = map.get(table);
     Document document = new Document();
     for (int i = 0; i < fields.size(); i++) {
       document.append(fields.get(i), values.get(i));
@@ -238,7 +234,7 @@ public class MongoDatabase {
     collection = teamC_db.getCollection(table);
 
     ArrayList<DatabaseInterface> toReturn = new ArrayList<>();
-    List<String> fields = DatabaseConnection.getInstance().getFieldsFromTable(table);
+    ArrayList<String> fields = map.get(table);
     Class<? extends Query> queryClass;
     Method queryFactory;
 
@@ -362,5 +358,9 @@ public class MongoDatabase {
         break;
     }
     return "edu.wpi.cs3733.c22.teamC.SQLMethods." + toReturn + "Query";
+  }
+
+  public List<String> tableToFields(String table) {
+    return map.get(table);
   }
 }

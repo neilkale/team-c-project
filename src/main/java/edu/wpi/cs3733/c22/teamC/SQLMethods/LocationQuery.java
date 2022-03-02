@@ -44,16 +44,13 @@ public class LocationQuery extends Query<Location> {
   }
 
   public static String longToNodeID(String longName) {
-    LocationQuery queryLoc = new LocationQuery();
 
+    LocationQuery queryLoc = new LocationQuery();
+    String query =
+        "SELECT NODEID FROM " + queryLoc.getQueryInput() + " WHERE longName = '" + longName + "'";
     String toReturn = "";
     try {
-      System.out.println(longName);
-      for (Location l : queryLoc.getAllNodeData()) {
-        if (l.get_longName().equals(longName)) {
-          toReturn = l.get_nodeID();
-        }
-      }
+      toReturn = DatabaseConnection.getInstance().executeQuery(query).get(0).toString();
     } catch (Exception e) {
       e.printStackTrace();
     }

@@ -197,32 +197,37 @@ public class DatabaseConnection {
       if (query.contains("CREATE TABLE")) {
         tableFields.addToMap(query);
       }
-
-      if (canMongo()) {
-        // If Mongo is instanced, and is just starting up
-        if (query.substring(0, query.indexOf(' ')).equals("INSERT")) {
-          // This just waits to add everything when doing batch writes to mono
-          startupInsert.add(query);
-        } else {
-          if (startupInsert.size() > 0) {
-            mongoDatabase.batchInsert(startupInsert);
+      try {
+        if (canMongo()) {
+          // If Mongo is instanced, and is just starting up
+          if (query.substring(0, query.indexOf(' ')).equals("INSERT")) {
+            // This just waits to add everything when doing batch writes to mono
+            startupInsert.add(query);
+          } else {
+            if (startupInsert.size() > 0) {
+              mongoDatabase.batchInsert(startupInsert);
+            }
+            startupInsert = new ArrayList<>();
+            mongoDatabase.getAction(query);
             Statement statement = connection.createStatement();
-            for (String s : startupInsert) {
-              statement.execute(s);
+            if (query.contains("UPDATE")) {
+              statement.executeUpdate(query);
+            } else {
+              statement.execute(query);
             }
           }
-          startupInsert = new ArrayList<>();
         }
-      } else if (startupInsert.size() > 0) {
-        mongoDatabase.batchInsert(startupInsert);
+      } catch (SQLException e) {
 
+      } catch (Exception f) {
+        disableMongo("Mongo Failed on initilize");
       }
 
     } else if (canMongo()) {
       mongoDatabase.insert(query);
-    } else {
-      mongoDatabase.getAction(query);
+    }
 
+    if (!canMongo()) {
       Statement statement = connection.createStatement();
       if (query.contains("UPDATE")) {
         statement.executeUpdate(query);

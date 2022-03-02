@@ -25,7 +25,7 @@ public class PathFinder {
 
   public List<Location> findPath(Location loc1, Location loc2) {
     // TODO: Account for missing nodes / disconnected locations
-    AStar aStar = new AStar(nodeMap.get(loc1.get_nodeID()), nodeMap.get(loc2.get_nodeID()));
+    AStar aStar = new AStar(nodeMap.get(loc1.get_nodeID()), nodeMap.get(loc2.get_nodeID()), this);
     List<Node> nodePath = aStar.findPath();
     List<Location> locationsPath = new ArrayList<>();
 
@@ -74,8 +74,8 @@ public class PathFinder {
         //        System.out.println(nodeMap.get(startLocationID).toString());
         //        System.out.println(nodeMap.get(endLocationID).toString());
         try {
-          nodeMap.get(startLocationID).addAdjacent(nodeMap.get(endLocationID));
-          nodeMap.get(endLocationID).addAdjacent(nodeMap.get(startLocationID));
+          nodeMap.get(startLocationID).addAdjacent(endLocationID);
+          nodeMap.get(endLocationID).addAdjacent(startLocationID);
         } catch (NullPointerException e) {
           System.out.println("Bad row in edge CSV.");
         }

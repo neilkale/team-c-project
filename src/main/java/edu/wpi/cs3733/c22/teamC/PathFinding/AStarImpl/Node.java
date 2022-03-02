@@ -19,7 +19,7 @@ public class Node {
   private int height;
   private boolean isBlock;
   private Node parent;
-  private List<Node> adjacents;
+  private List<String> adjacents;
   private String nodeID;
 
   public Node(int row, int col, int height, String nodeID) {
@@ -29,7 +29,7 @@ public class Node {
     this.height = height;
     this.nodeID = nodeID;
     this.isBlock = false;
-    adjacents = new ArrayList<Node>();
+    adjacents = new ArrayList<String>();
   }
 
   //  public void calculateHeuristic(Node finalNode) {
@@ -124,12 +124,12 @@ public class Node {
     this.col = col;
   }
 
-  public List<Node> getAdjacents() {
+  public List<String> getAdjacents() {
     return adjacents;
   }
 
-  public void addAdjacent(Node node) {
-    adjacents.add(node);
+  public void addAdjacent(String nodeLocationID) {
+    adjacents.add(nodeLocationID);
   }
 
   public static int getDistance(Node n1, Node n2) {

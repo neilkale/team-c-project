@@ -310,9 +310,10 @@ public abstract class Query<T> {
           StringBuilder line = new StringBuilder();
           for (String val : d.getValues()) { // for every table entry
             line.append(val); // append them to a certain line
+            line.append(",");
           }
-          line.substring(0, line.lastIndexOf(","));
-          line.append(",\n"); // end the line with \n
+          line = new StringBuilder(line.substring(0, line.lastIndexOf(",")));
+          line.append("\n"); // end the line with \n
           fw.write(line.toString()); // write the line to the document
         }
         fw.close(); // closes the writer here

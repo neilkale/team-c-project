@@ -143,19 +143,13 @@ public class EmployeeQuery extends Query<Employee> {
    */
   public Employee findNodeByUsername(String target_user) {
     try {
-      System.out.println(
-          dbConnection.executeQuery(
-              "SELECT * FROM " + getQueryInput() + " WHERE username = '" + target_user + "'"));
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    try {
-      return (Employee)
-          dbConnection
-              .executeQuery(
-                  "SELECT * FROM " + getQueryInput() + " WHERE username = '" + target_user + "'")
-              .get(0);
-    } catch (SQLException e) {
+      Employee e= (Employee)
+              dbConnection
+                      .executeQuery(
+                              "SELECT * FROM " + getQueryInput() + " WHERE username = '" + target_user + "'")
+                      .get(0);
+      return e;
+    } catch (Exception e) {
       e.printStackTrace();
     }
     return null;

@@ -7,6 +7,8 @@ import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.ResultSet;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -263,6 +265,7 @@ public abstract class ServiceRequest implements DatabaseInterface {
         e.printStackTrace();
       }
     }
+
 
     String[] toReturn = new String[a.size()];
     for (int i = 0; i < a.size(); i++) {

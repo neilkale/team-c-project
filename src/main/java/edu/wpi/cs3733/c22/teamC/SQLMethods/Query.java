@@ -152,6 +152,7 @@ public abstract class Query<T> {
         String nowUID = getUID(now);
         for (T mod : list) {
           if (nowUID.equals(getUID(mod))) {
+            //            System.out.println("REMOVING UID:" + nowUID);
             found = true;
           }
         }
@@ -178,6 +179,35 @@ public abstract class Query<T> {
   public static ArrayList<String> getTableNames() {
     return DatabaseConnection.getTableNames();
   }
+
+
+  public ArrayList<T> getAllNodeData() {
+    T queryResult = null;
+    ArrayList<T> allNodes = new ArrayList<>();
+
+    if (!dbConnection.isMongo()) {
+      try {
+        String query = "SELECT * FROM " + getQueryInput();
+        ResultSet rs = dbConnection.executeQuery(query);
+        int columns = rs.getMetaData().getColumnCount();
+        while (rs.next()) {
+          String[] arguments = new String[columns];
+          for (int i = 1; i <= columns; i++) {
+            arguments[i] = rs.getString(rs.getMetaData().getColumnName(i));
+          }
+
+          queryResult = queryFactory(arguments);
+          allNodes.add(queryResult);
+        }
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    } else {
+      allNodes = (ArrayList<T>) dbConnection.getFromMongo("SELECT * FROM " + getQueryInput());
+    }
+    return allNodes;
+  }
+
 
   public abstract String
       getQueryInput(); // Returns the table name so that I can query it (For example in locations
@@ -310,7 +340,6 @@ public abstract class Query<T> {
           for (String val : d.getValues()) { // for every table entry
             line.append(val); // append them to a certain line
           }
-          System.out.println("Line: " + line);
           line.substring(0, line.lastIndexOf(","));
           line.append(",\n"); // end the line with \n
           fw.write(line.toString()); // write the line to the document

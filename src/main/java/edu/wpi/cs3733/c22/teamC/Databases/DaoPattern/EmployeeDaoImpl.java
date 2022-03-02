@@ -9,5 +9,6 @@ public class EmployeeDaoImpl extends DaoInterface<Employee> {
   public EmployeeDaoImpl() {
     nodeQuery = new EmployeeQuery();
     nodes = nodeQuery.getAllNodeData();
+
   }
 }

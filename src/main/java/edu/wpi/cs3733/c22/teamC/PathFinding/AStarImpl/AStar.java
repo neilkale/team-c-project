@@ -19,9 +19,9 @@ public class AStar {
   private Set<String> closedSet;
   private Node initialNode;
   private Node finalNode;
-  private PathFinder pf = new PathFinder();
+  private PathFinder pf;
 
-  public AStar(Node initialNode, Node finalNode, int hvCost, int diagonalCost) {
+  public AStar(Node initialNode, Node finalNode, PathFinder pf, int hvCost, int diagonalCost) {
     this.hvCost = hvCost;
     this.diagonalCost = diagonalCost;
     setInitialNode(initialNode);
@@ -37,10 +37,11 @@ public class AStar {
             });
     //    setNodes();
     this.closedSet = new HashSet<>();
+    this.pf = pf;
   }
 
-  public AStar(Node initialNode, Node finalNode) {
-    this(initialNode, finalNode, DEFAULT_HV_COST, DEFAULT_DIAGONAL_COST);
+  public AStar(Node initialNode, Node finalNode, PathFinder pf) {
+    this(initialNode, finalNode, pf, DEFAULT_HV_COST, DEFAULT_DIAGONAL_COST);
   }
 
   //  private void setNodes() {
@@ -98,7 +99,8 @@ public class AStar {
     //    addAdjacentUpperRow(currentNode);
     //    addAdjacentMiddleRow(currentNode);
     //    addAdjacentLowerRow(currentNode);
-    for (Node adjacentNode : currentNode.getAdjacents()) {
+    for (String adjacentNodeLocationID : currentNode.getAdjacents()) {
+      Node adjacentNode = pf.getNodeByID(adjacentNodeLocationID);
       checkNode(currentNode, adjacentNode, Node.getDistance(currentNode, adjacentNode));
     }
   }

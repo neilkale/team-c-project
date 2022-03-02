@@ -355,7 +355,7 @@ public class DatabaseCreation {
   }
 
   public static void readDatabasesFromCsv() {
-    String prefix = "";
+    String prefix = "build/resources/main/edu/wpi/cs3733.c22.teamC/CSV_Files/";
     Query e = new LocationQuery();
     e.readCSV(prefix + "TowerLocationsC.csv");
 
@@ -381,10 +381,10 @@ public class DatabaseCreation {
     e.readCSV(prefix + "SanitationRequestC.csv");
 
     e = new ITRequestQuery();
-    e.readCSV(prefix + "CSV_Files/ITRequestC.csv");
+    e.readCSV(prefix + "ITRequestC.csv");
 
     e = new GiftRequestQuery();
-    e.readCSV(prefix + "CSV_Files/GiftRequestC.csv");
+    e.readCSV(prefix + "GiftRequestC.csv");
 
     e = new InternalTransportRequestQuery();
     e.readCSV(prefix + "InternalTransportRequestC.csv");

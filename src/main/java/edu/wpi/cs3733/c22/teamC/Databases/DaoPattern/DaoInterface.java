@@ -28,23 +28,26 @@ public abstract class DaoInterface<T> {
     int index = -1;
     boolean found = false;
     for (int i = 0; i < nodes.size() && found == false; i++) {
+      System.out.println("Username1: " + ((DatabaseInterface) nodes.get(i)).getUID());
+      System.out.println("Username2: " + ((DatabaseInterface) node).getUID());
       if (((DatabaseInterface) (nodes.get(i)))
           .getUID()
           .equals(((DatabaseInterface) node).getUID())) {
         index = i;
         found = true;
+        System.out.println("Boolean found: " + found);
       }
     }
 
-    try {
-      if (index == -1) {
+    if (found) {
+      try {
         nodeQuery.editNode(node); // updating Employee fields in EMBEDDED
         // updating Employee fields in OBJECT LIST
         T node_update = nodes.get(index);
         ((DatabaseInterface) node_update).setValues(((DatabaseInterface) node).getValues());
+      } catch (Exception e) {
+        e.printStackTrace();
       }
-    } catch (Exception e) {
-      e.printStackTrace();
     }
 
     System.out.println("Employee: Index " + nodes.indexOf(node) + ", updated in the database");

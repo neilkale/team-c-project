@@ -1,9 +1,9 @@
 package edu.wpi.cs3733.c22.teamC.controllers.sideView;
 
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
-import edu.wpi.cs3733.c22.teamC.Databases.requests.MedicalEquipment;
+import edu.wpi.cs3733.c22.teamC.Databases.MedicalEquipment;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.LocationQuery;
-import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.MedicalEquipmentQuery;
+import edu.wpi.cs3733.c22.teamC.SQLMethods.MedicalEquipmentQuery;
 import edu.wpi.cs3733.c22.teamC.controllers.mapEditor.MapState;
 import java.util.ArrayList;
 import javafx.fxml.FXML;

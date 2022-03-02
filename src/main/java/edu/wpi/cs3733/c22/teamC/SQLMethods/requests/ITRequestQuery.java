@@ -3,9 +3,7 @@ package edu.wpi.cs3733.c22.teamC.SQLMethods.requests;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.ITRequest;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class ITRequestQuery extends Query<ITRequest> {
   private DatabaseConnection dbConnection = super.dbConnection;
@@ -32,33 +30,6 @@ public class ITRequestQuery extends Query<ITRequest> {
     ITRequest toReturn =
         new ITRequest(inputs[0], inputs[1], inputs[2], inputs[3], inputs[4], inputs[5]);
     return toReturn;
-  }
-
-  @Override
-  public ArrayList<ITRequest> getAllNodeData() {
-    ITRequest queryResult = null;
-    ArrayList<ITRequest> allNodes = new ArrayList<>();
-
-    try {
-      String query = "SELECT * FROM " + getQueryInput();
-      ResultSet rs = dbConnection.executeQuery(query);
-
-      while (rs.next()) {
-        String ticketID = rs.getString("ticketID");
-        String locationID = rs.getString("locationID");
-        String status = rs.getString("status");
-        String serviceType = rs.getString("serviceType");
-        String assignment = rs.getString("assignment");
-        String issueType = rs.getString("issueType");
-
-        queryResult =
-            new ITRequest(ticketID, locationID, status, serviceType, assignment, issueType);
-        allNodes.add(queryResult);
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return allNodes;
   }
 
   @Override
@@ -123,16 +94,5 @@ public class ITRequestQuery extends Query<ITRequest> {
 
   public static String staticGetQueryInput() {
     return "ITREQUESTC";
-  }
-
-  @Override
-  public Integer getNumRows() throws SQLException {
-    String sql = "SELECT * FROM " + getQueryInput();
-    ResultSet rs = dbConnection.executeQuery(sql);
-    Integer rowCount = 0;
-    while (rs.next()) {
-      rowCount++;
-    }
-    return rowCount;
   }
 }

@@ -3,9 +3,7 @@ package edu.wpi.cs3733.c22.teamC.SQLMethods.requests;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.MedicineRequest;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class MedicineRequestQuery extends Query<MedicineRequest> {
   private DatabaseConnection dbConnection = super.dbConnection;
@@ -33,43 +31,6 @@ public class MedicineRequestQuery extends Query<MedicineRequest> {
   @Override
   public String getUID(MedicineRequest each) throws SQLException {
     return each.get_ticketID();
-  }
-
-  @Override
-  public ArrayList<MedicineRequest> getAllNodeData() {
-    MedicineRequest queryResult = null;
-    ArrayList<MedicineRequest> allNodes = new ArrayList<>();
-
-    try {
-      String query = "SELECT * FROM " + getQueryInput();
-      ResultSet rs = dbConnection.executeQuery(query);
-
-      while (rs.next()) {
-        String ticketID = rs.getString("ticketID");
-        String locationID = rs.getString("locationID");
-        String status = rs.getString("status");
-        String serviceType = rs.getString("serviceType");
-        String assignment = rs.getString("assignment");
-        String medicineType = rs.getString("medicineType");
-        String quantity = rs.getString("quantity");
-        String urgency = rs.getString("urgency");
-
-        queryResult =
-            new MedicineRequest(
-                ticketID,
-                locationID,
-                status,
-                serviceType,
-                assignment,
-                medicineType,
-                quantity,
-                urgency);
-        allNodes.add(queryResult);
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return allNodes;
   }
 
   @Override
@@ -142,16 +103,5 @@ public class MedicineRequestQuery extends Query<MedicineRequest> {
 
   public static String staticGetQueryInput() {
     return "MEDICINEREQUESTC";
-  }
-
-  @Override
-  public Integer getNumRows() throws SQLException {
-    String sql = "SELECT * FROM " + getQueryInput();
-    ResultSet rs = dbConnection.executeQuery(sql);
-    Integer rowCount = 0;
-    while (rs.next()) {
-      rowCount++;
-    }
-    return rowCount;
   }
 }

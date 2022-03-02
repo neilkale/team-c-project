@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.SQLMethods;
 
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.*;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.SecurityRequestQuery;
 import java.io.*;
@@ -9,6 +10,7 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 import javax.swing.filechooser.FileSystemView;
@@ -81,37 +83,18 @@ public abstract class Query<T> {
 
   public abstract void addNode(T object) throws SQLException;
 
-  public boolean addNodeGeneric(String[] fields) throws SQLException {
-    try {
-      ResultSetMetaData rs =
-          dbConnection.executeQuery("select * from" + getQueryInput()).getMetaData();
-      int columns = rs.getColumnCount();
-      if (fields.length != columns) {
-        if (VERBOSE)
-          System.out.println(
-              "Improper amount of arguments entered for addNodeGeneric using queryType"
-                  + getQueryInput());
-        return false;
-      }
-      StringBuilder query = new StringBuilder();
-      query.append("INSERT INTO ");
-      query.append(getQueryInput());
-      query.append(" VALUES ('");
-      for (int i = 0; i < columns; i++) {
-        query.append(fields[i]);
-      }
-      query.append("')");
-      dbConnection.execute(query.toString());
-    } catch (SQLException e) {
-      if (VERBOSE) System.out.println(e);
-      return false;
-    }
-    return true;
-  }
-
   public abstract void removeNode(T object) throws SQLException;
 
   public abstract void editNode(T object) throws SQLException;
+
+  public ArrayList<T> getAllNodeData() {
+    try {
+      return (ArrayList<T>) dbConnection.executeQuery("SELECT * FROM " + getQueryInput());
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return new ArrayList<>();
+    }
+  }
 
   public void modifyFromList(ArrayList<String> modificationTypes, ArrayList<T> nodes)
       throws Exception {
@@ -140,41 +123,6 @@ public abstract class Query<T> {
       e.printStackTrace();
     }
   }
-
-  //  public boolean compareAndChange(ArrayList<T> list, String UID) throws Exception {
-  //    try {
-  //      ArrayList<T> listDatabaseNow = getAllNodeData();
-  //      for (T each : listDatabaseNow) {
-  //
-  //        boolean found = false;
-  //        for (T eacher : list) {
-  //          if (!listDatabaseNow.contains(eacher)) {
-  //            if (!found) {
-  //              //            System.out.println("Each :" + getUID(each));
-  //              //            System.out.println("Eacher :" + getUID(eacher));
-  //              if (getUID(each).equals(getUID(eacher))) {
-  //                System.out.println("FOUND  " + getUID(each));
-  //                found = true;
-  //                removeNode(each);
-  //                addNode(eacher);
-  //              }
-  //            }
-  //
-  //            if (!found) {
-  //              removeNode(each);
-  //            }
-  //          } else {
-  //          }
-  //        }
-  //      }
-  //
-  //    } catch (Exception e) {
-  //      e.printStackTrace();
-  //      throw e;
-  //    }
-  //
-  //    return false;
-  //  }
 
   public boolean compareAndChange(ArrayList<T> list, String UID) throws Exception {
     try {
@@ -225,67 +173,11 @@ public abstract class Query<T> {
 
     return false;
   }
-  //  public boolean compareAndChange(ArrayList<T> list, String UID) throws Exception {
-  //    try {
-  //      ArrayList<T> listDatabaseNow = getAllNodeData();
-  //      for (T each : list) {
-  //        String nodeUID = getUID(each);
-  //        if (!listDatabaseNow.contains(each)) {
-  //
-  //          ResultSet rs =
-  //              dbConnection.executeQuery(
-  //                  "SELECT * FROM " + getQueryInput() + " WHERE " + UID + " = '" + nodeUID +
-  // "'");
-  //          boolean found = false;
-  //          if (rs.next()) {
-  //            found = true;
-  //            System.out.println("___:" + rs.getString(UID));
-  //            DatabaseConnection.getConnection()
-  //                .createStatement()
-  //                .executeUpdate(
-  //                    "DELETE  FROM " + getQueryInput() + " WHERE " + UID + " = '" + nodeUID +
-  // "'");
-  //          }
-  //
-  //          addNode(each);
-  //        }
-  //      }
-  //
-  //    } catch (Exception e) {
-  //      e.printStackTrace();
-  //      throw e;
-  //    }
-  //
-  //    return false;
-  //  }
 
   public abstract String getUID(T each) throws SQLException;
 
   public static ArrayList<String> getTableNames() {
     return DatabaseConnection.getTableNames();
-  }
-
-  public ArrayList<T> getAllNodeData() {
-    T queryResult = null;
-    ArrayList<T> allNodes = new ArrayList<>();
-
-    try {
-      String query = "SELECT * FROM " + getQueryInput();
-      ResultSet rs = dbConnection.executeQuery(query);
-      int columns = rs.getMetaData().getColumnCount();
-      while (rs.next()) {
-        String[] arguments = new String[columns];
-        for (int i = 1; i <= columns; i++) {
-          arguments[i] = rs.getString(rs.getMetaData().getColumnName(i));
-        }
-
-        queryResult = queryFactory(arguments);
-        allNodes.add(queryResult);
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return allNodes;
   }
 
   public abstract String
@@ -303,8 +195,7 @@ public abstract class Query<T> {
 
   public static boolean readCSV(String fileIn, String queryType) {
     try {
-      Connection connection = DatabaseConnection.getConnection();
-      System.out.println(fileIn);
+      DatabaseConnection connection = DatabaseConnection.getInstance();
 
       String readFile = fileIn;
       URL resource = Query.class.getClassLoader().getResource(fileIn);
@@ -313,16 +204,13 @@ public abstract class Query<T> {
       File in = new File(fileIn); // goetting the file
       if (in != null) {
         Scanner s = new Scanner(in);
-        ResultSet inputLine =
-            DatabaseConnection.getInstance()
-                .executeQuery(
-                    "SELECT * FROM "
-                        + queryType); // Taking a query of the table so that I can find out the
-        // amount of columns
+
+        // Taking a query of the table so that I can find out the amount of columns
         int columns =
-            inputLine
-                .getMetaData()
-                .getColumnCount(); // Taking the amount of columns from the query metadata
+            connection
+                .getFieldsFromTable(queryType)
+                .size(); // Taking the amount of columns from the query metadata
+
         if (VERBOSE) System.out.println("Columns:" + columns);
         // ArrayList<String> columnNames = new ArrayList<>();
         if (VERBOSE)
@@ -336,10 +224,8 @@ public abstract class Query<T> {
         if (VERBOSE) System.out.println("Entering : " + s.hasNext());
         while (s.hasNext()) {
           String innie = s.nextLine();
-          StringTokenizer st =
-              new StringTokenizer(
-                  innie,
-                  "[\"]+,[\"]+"); // using string tokenizer with delimiter of regular expression
+          StringTokenizer st = new StringTokenizer(innie, "[\"]+,[\"]+");
+          // using string tokenizer with delimiter of regular expression
           // meaning any amount of " followed by a comma followed by any amount of " so  | " : {x} |
           // , : {1} | " : {x} |  where x represents a arbitrary number
           // example """"""",""""""" would be considered one delimiter but ,"""", would be
@@ -375,6 +261,7 @@ public abstract class Query<T> {
             "Read CSV unsuccessful: [file was not found or is unwritable to] " + queryType);
 
     } catch (Exception e) {
+      e.printStackTrace();
       if (VERBOSE) System.out.println("Read CSV unsuccessful: " + queryType);
       if (VERBOSE) e.printStackTrace();
       return false;
@@ -386,11 +273,7 @@ public abstract class Query<T> {
     LocalDateTime date = LocalDateTime.now();
     DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy-HH-mm-ss");
     String dateString = date.format(dateFormat);
-    //    URL resource =
-    //        getClass()
-    //            .getClassLoader()
-    //
-    // .getResource("./resources/main/edu/wpi/cs3733.c22.teamC/CSV_Files/CSVAUTOBACKUP/");
+
     String resource = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "/";
     System.out.println(resource.toString());
     String fileIn =
@@ -401,8 +284,6 @@ public abstract class Query<T> {
             + dateString
             + "-"
             + ".csv"; // fileName format is queryInput-Day-Month-Year-Seconds
-    // if (VERBOSE) System.out.println("Write CSV successful: " + getQueryInput());
-
     return writeCSV(fileIn);
   }
 
@@ -412,28 +293,26 @@ public abstract class Query<T> {
 
   public static boolean writeCSV(String fileIn, String queryType) {
     try {
-      Connection connection = DatabaseConnection.getConnection();
-      DatabaseMetaData databaseMetaData = connection.getMetaData();
+      DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
       File in = createFile(fileIn); // creates the file using createfile
       if (in != null && in.canWrite()) {
         FileWriter fw = new FileWriter(in);
-        ResultSet inputLine =
-            DatabaseConnection.getInstance().executeQuery("SELECT * FROM " + queryType);
-        int columns =
-            inputLine
-                .getMetaData()
-                .getColumnCount(); // same as readcsv - getting column amount of querytype using
+
+        List<DatabaseInterface> fromDB =
+            (List<DatabaseInterface>) databaseConnection.executeQuery("SELECT * FROM " + queryType);
+        if (fromDB.size() == 0) {
+          fw.close();
+          return true;
+        }
+        String[] fields = fromDB.get(0).getFields();
         // metadata
-        while (inputLine.next()) { // for every table row
+        for (DatabaseInterface d : fromDB) { // for every table row
           StringBuilder line = new StringBuilder();
-          for (int i = 1; i <= columns; i++) { // for every table entry
-            line.append(inputLine.getString(i)); // append them to a certain line
-            if (i
-                != (columns)) { // add commas to the end of them ONLY IF THEY ARE NOT THE LAST ENTRY
-              line.append(","); // ^
-            }
+          for (String val : d.getValues()) { // for every table entry
+            line.append(val); // append them to a certain line
           }
-          line.append("\n"); // end the line with \n
+          line.substring(0, line.lastIndexOf(","));
+          line.append(",\n"); // end the line with \n
           fw.write(line.toString()); // write the line to the document
         }
         fw.close(); // closes the writer here
@@ -451,12 +330,7 @@ public abstract class Query<T> {
 
   public Integer getNumRows() throws SQLException {
     String sql = "SELECT * FROM " + getQueryInput();
-    ResultSet rs = dbConnection.executeQuery(sql);
-    int rowCount = 0;
-    while (rs.next()) {
-      rowCount++;
-    }
-    return rowCount;
+    return dbConnection.executeQuery(sql).size();
   }
 
   public void clearTable() {

@@ -1,9 +1,10 @@
 package edu.wpi.cs3733.c22.teamC.controllers.sideView;
 
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
-import edu.wpi.cs3733.c22.teamC.Databases.requests.MedicalEquipment;
+import edu.wpi.cs3733.c22.teamC.Databases.MedicalEquipment;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.LocationQuery;
-import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.MedicalEquipmentQuery;
+import edu.wpi.cs3733.c22.teamC.SQLMethods.MedicalEquipmentQuery;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,8 +14,8 @@ public class SideViewTracker {
   private static MedicalEquipmentQuery medicalEquipmentQuery = new MedicalEquipmentQuery();
 
   static void loadDataFromDB() {
-    ArrayList<Location> locations = locationQuery.getAllNodeData();
-    ArrayList<MedicalEquipment> equipment = medicalEquipmentQuery.getAllNodeData();
+    ArrayList<Location> locations = DaoSingleton.getLocationDao().getAllNodes();
+    ArrayList<MedicalEquipment> equipment = medicalEquipmentQuery.getAllNodeData(); // LAUREN DO
 
     Integer[] blankArray = {0, 0, 0, 0, 0, 0, 0, 0};
     equipmentCount.put("L2", blankArray.clone());

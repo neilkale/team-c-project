@@ -1,27 +1,27 @@
-Jack0,TeamMember0,Jack,Bergin,maintenance,user,320724504,null
-Lauren1,TeamMember1,Lauren,Flanagan,it-agent,user,2,null
-Coco2,TeamMember2,Cortina,Barbieri,equip-distributor,user,289106754,null
-Dee3,TeamMember3,Dilce,Oliveria,med-distributor,user,628582860,null
-Jared4,TeamMember4,Jared,Chan,sanitation,user,4,null
-Aidan5,TeamMember5,Aidon,Burns,transportation,user,473515010,null
-Ian6,TeamMember6,Ian,MacInerney,religion,user,727007363,null
-Matt7,TeamMember7,Matthew,Adragna,nurse,user,161397039,null
-Abby8,TeamMember8,Abby,Hoschouer,laundry,user,621120845,null
-Neil9,"TeamMember9""",Neil,Kale,doctor,user,752768326,null
-Wong10,Professor1,Wilson,Wong,gift-distributor,admin,10,null
-user,user,user,user,user,user,11,null
-admin,admin,admin,admin,admin,admin,12,null
-cpage,caliSux,Kevin,Page,interpreter,user,148189946,Kevin
-staff,staff,employee,employee,user,user,14,null
-nurse,staff,Wilson,W,nurse,user,100,null
-nurse,staff,Demi,Lovato,nurse,user,101,null
-nurse,staff,Miley,Cyrus,nurse,user,102,null
-nurse,staff,Harrison,Ford,security,user,103,null
-nurse,staff,Chris,Evans,transportation,user,104,null
-nurse,staff,Keanu,Reeves,nurse,user,105,null
-nurse,staff,Jennifer,Lawrence,interpreter,user,106,null
-nurse,staff,Tom,Holland,religion,user,107,null
-nurse,staff,Zendaya,,laundry,user,108,null
-nurse,staff,Dylan,Obrien,gift-distributor,user,109,null
-nurse,staff,Ed,Sheeran,sanitation,user,110,null
-nurse,staff,Taylor,Swift,equip-distributor,user,111,null
+Jack0,TeamMember0,Jack,Bergin,maintenance,user,320724504,Deer, 555-555-5555,jackbergin@cyan.com
+Lauren1,TeamMember1,Lauren,Flanagan,it-agent,user,2,Fox, 555-555-5555,laurenflannagan@cyan.com
+Coco2,TeamMember2,Cortina,Barbieri,equip-distributor,user,289106754,Pig,555-555-5555,cocoberberi@cyan.com
+Dee3,TeamMember3,Dilce,Oliveria,med-distributor,user,628582860,Pig,508-436-3161,dilce@cyan.com
+Jared4,TeamMember4,Jared,Chan,sanitation,user,4,Skunk, 555-555-5555,jared@cyan.com
+Aidan5,TeamMember5,Aidon,Burns,transportation,user,473515010,Bunny,555-555-5555,aidan@cyan.com
+Ian6,TeamMember6,Ian,MacInerney,religion,user,727007363,Cat,555-555-5555,ian@cyan.com
+Matt7,TeamMember7,Matthew,Adragna,nurse,user,161397039,Cat,555-555-5555,matt@cyan.com
+Abby8,TeamMember8,Abby,Hoschouer,laundry,user,621120845,Dog,555-555-5555,abby@cyan.com
+Neil9,"TeamMember9""",Neil,Kale,doctor,user,752768326,Bear,555-555-5555,neil@cyan.com
+Wong10,Professor1,Wilson,Wong,gift-distributor,admin,10,Cat,555-555-5555, professorwong@cyan.com
+user,user,user,user,user,user,11,null,555-555-5555,user@cyan.com
+admin,admin,admin,admin,admin,admin,12,Pig,555-555-5555,admin@cyan.com
+cpage,caliSux,Kevin,Page,interpreter,user,148189946,Kevin,555-555-5555,kevinpage@cyan.com
+staff,staff,employee,employee,user,user,14,null,555-555-5555,staff@cyan.com
+nurse,staff,Wilson,W,nurse,user,100,Dog,555-555-5555,wwong@cyan.com
+nurse,staff,Demi,Lovato,nurse,user,101,Dog,555-555-5555,demi@cyan.com
+nurse,staff,Miley,Cyrus,nurse,user,102,Bunny,555-555-5555,miley@cyan.com
+nurse,staff,Harrison,Ford,security,user,103,Deer,555-555-5555,harrison@cyan.com
+nurse,staff,Chris,Evans,transportation,user,104,Pig,555-555-5555,chris@cyan.com
+nurse,staff,Keanu,Reeves,nurse,user,105,Skunk,555-555-5555,keanu@cyan.com
+nurse,staff,Jennifer,Lawrence,interpreter,user,106,Fox,555-555-5555,jennifer@cyan.com
+nurse,staff,Tom,Holland,religion,user,107,Dog,555-555-5555,tom@cyan.com
+nurse,staff,Zendaya,Coleman,laundry,user,108,Sheep,555-555-5555,zendaya@cyan.com
+nurse,staff,Dylan,Obrien,gift-distributor,user,109,Duck,555-555-5555,dylan@cyan.com
+nurse,staff,Ed,Sheeran,sanitation,user,110,Duck,555-555-5555,ed@cyan.com
+nurse,staff,Taylor,Swift,equip-distributor,user,111,Dog,555-555,5555,taylor@cyan.com

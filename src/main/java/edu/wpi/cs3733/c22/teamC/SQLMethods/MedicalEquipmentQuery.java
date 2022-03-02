@@ -1,10 +1,8 @@
-package edu.wpi.cs3733.c22.teamC.SQLMethods.requests;
+package edu.wpi.cs3733.c22.teamC.SQLMethods;
 
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
-import edu.wpi.cs3733.c22.teamC.Databases.requests.MedicalEquipment;
-import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
-import java.sql.ResultSet;
+import edu.wpi.cs3733.c22.teamC.Databases.MedicalEquipment;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -40,36 +38,6 @@ public class MedicalEquipmentQuery extends Query<MedicalEquipment> {
     MedicalEquipment toReturn =
         new MedicalEquipment(inputs[0], inputs[1], inputs[2], inputs[3], inputs[4], inputs[5]);
     return toReturn;
-  }
-
-  @Override
-  public ArrayList<MedicalEquipment> getAllNodeData() {
-
-    MedicalEquipment queryResult = null;
-    ArrayList<MedicalEquipment> allNodes = new ArrayList<MedicalEquipment>();
-
-    try {
-      String query = "SELECT * FROM " + getQueryInput();
-      ResultSet rs = dbConnection.executeQuery(query);
-
-      while (rs.next()) {
-        String equipmentID = rs.getString("equipmentID");
-        String locationID = rs.getString("locationID");
-        String status = rs.getString("status");
-        String equipmentType = rs.getString("equipmentType");
-        String name = rs.getString("name");
-        String lastKnownTime = rs.getString("lastKnownTime");
-
-        queryResult =
-            new MedicalEquipment(
-                equipmentID, locationID, lastKnownTime, status, equipmentType, name);
-        allNodes.add(queryResult);
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-
-    return allNodes;
   }
 
   private ArrayList<MedicalEquipment> dbInterfaceToEquipment(ArrayList<DatabaseInterface> input) {
@@ -120,16 +88,5 @@ public class MedicalEquipmentQuery extends Query<MedicalEquipment> {
 
   public static String staticGetQueryInput() {
     return "EQUIPMENTC";
-  }
-
-  @Override
-  public Integer getNumRows() throws SQLException {
-    String sql = "SELECT * FROM " + getQueryInput();
-    ResultSet rs = dbConnection.executeQuery(sql);
-    Integer rowCount = 0;
-    while (rs.next()) {
-      rowCount++;
-    }
-    return rowCount;
   }
 }

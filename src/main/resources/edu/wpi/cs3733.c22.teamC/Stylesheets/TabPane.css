@@ -12,13 +12,13 @@
 }
 .tab-pane .tab
 {
-    -fx-background-color: #1F58AF;
+    -fx-background-color: #88b7ff;
 
 }
 
 .tab-pane .tab:selected
 {
-    -fx-background-color: #88b7ff;
+    -fx-background-color: #1F58AF;
 }
 
 .tab .label {

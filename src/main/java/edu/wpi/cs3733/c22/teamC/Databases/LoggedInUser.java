@@ -1,9 +1,9 @@
 package edu.wpi.cs3733.c22.teamC.Databases;
 
-import edu.wpi.cs3733.c22.teamC.Databases.requests.filters.CriteriaUserSpecific;
-import edu.wpi.cs3733.c22.teamC.SQLMethods.EmployeeQuery;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.EmployeeDaoImpl;
+import edu.wpi.cs3733.c22.teamC.Databases.requests.filters.EmployeeFilters.CriteriaUserSpecific;
 import edu.wpi.cs3733.c22.teamC.controllers.ImageLoader;
-import java.sql.SQLException;
 import javafx.scene.image.Image;
 
 public class LoggedInUser {
@@ -17,10 +17,8 @@ public class LoggedInUser {
 
   public static void signInEmployee(String employeeIn) {
     signOutEmployee();
-    signedInUser =
-        (new CriteriaUserSpecific(employeeIn))
-            .meetCriteria((new EmployeeQuery().getAllNodeData()))
-            .get(0);
+    EmployeeDaoImpl e = DaoSingleton.getEmployeeDao();
+    signedInUser = (new CriteriaUserSpecific(employeeIn)).meetCriteria((e.getAllNodes())).get(0);
   }
 
   public static void signOutEmployee() {
@@ -44,9 +42,8 @@ public class LoggedInUser {
     signedInUser.set_profilePicture(newPicName);
     // todo: set the new profile pic in DB
     try {
-      EmployeeQuery employeeQuery = new EmployeeQuery();
-      employeeQuery.editNode(signedInUser);
-    } catch (SQLException e) {
+      DaoSingleton.getEmployeeDao().updateNode(signedInUser);
+    } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Failed to set profile pic");
     }

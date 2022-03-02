@@ -73,12 +73,16 @@ public class PathFinder {
         //        Location endLoc = locationQuery.findNodeByID(endLocationID);
         //        System.out.println(nodeMap.get(startLocationID).toString());
         //        System.out.println(nodeMap.get(endLocationID).toString());
-        nodeMap.get(startLocationID).addAdjacent(nodeMap.get(endLocationID));
-        nodeMap.get(endLocationID).addAdjacent(nodeMap.get(startLocationID));
+        try {
+          nodeMap.get(startLocationID).addAdjacent(nodeMap.get(endLocationID));
+          nodeMap.get(endLocationID).addAdjacent(nodeMap.get(startLocationID));
+        } catch (NullPointerException e) {
+          System.out.println("Bad row in edge CSV.");
+        }
       }
     } catch (FileNotFoundException e) {
       e.printStackTrace();
-    } catch (NoSuchElementException | NullPointerException e) {
+    } catch (NoSuchElementException e) {
       // end of csv reached, continue
     }
 

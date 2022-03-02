@@ -76,24 +76,6 @@ public class ServiceRequestDashboardController extends AbstractController {
   }
 
   @FXML
-  private void searchBoxEntered() {
-    jfxButtonList.forEach(
-        jfxButton -> {
-          if (!jfxButton.getText().toUpperCase().contains(searchBox.getText().toUpperCase())) {
-            jfxButton.getParent().setVisible(false);
-            jfxButton.getParent().setManaged(false);
-            jfxButton.setVisible(false);
-            jfxButton.setManaged(false);
-          } else {
-            jfxButton.getParent().setVisible(true);
-            jfxButton.getParent().setManaged(true);
-            jfxButton.setVisible(true);
-            jfxButton.setManaged(true);
-          }
-        });
-  }
-
-  @FXML
   private void equipDelivReqButtonPressed() throws IOException {
     controllerMediator.setDefaultPageCenter("EquipDeliveryRequest.fxml");
   }

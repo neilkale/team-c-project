@@ -4,6 +4,7 @@ import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
 import edu.wpi.cs3733.c22.teamC.Databases.Employee;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class EmployeeQuery extends Query<Employee> {
   private DatabaseConnection dbConnection = super.dbConnection;
@@ -115,7 +116,7 @@ public class EmployeeQuery extends Query<Employee> {
             + employee.get_access()
             + "', id ='"
             + employee.get_id()
-            + "', profilePicture ='"
+            + "', profilePicture = '"
             + employee.get_profilePicture()
             + "', phoneNumber = '"
             + employee.get_phoneNumber()
@@ -143,21 +144,14 @@ public class EmployeeQuery extends Query<Employee> {
    * @return employee if exists, else null
    */
   public Employee findNodeByUsername(String target_user) {
-    try {
-      System.out.println(
-          dbConnection.executeQuery(
-              "SELECT * FROM " + getQueryInput() + " WHERE username = '" + target_user + "'"));
-    } catch (SQLException e) {
-      e.printStackTrace();
+    List<Employee> employees = getAllNodeData();
+    for (Employee e : employees) {
+      System.out.println(e);
     }
-    try {
-      return (Employee)
-          dbConnection
-              .executeQuery(
-                  "SELECT * FROM " + getQueryInput() + " WHERE username = '" + target_user + "'")
-              .get(0);
-    } catch (SQLException e) {
-      e.printStackTrace();
+    for (Employee e : employees) {
+      if (e.get_username().equals(target_user)) {
+        return e;
+      }
     }
     return null;
   }

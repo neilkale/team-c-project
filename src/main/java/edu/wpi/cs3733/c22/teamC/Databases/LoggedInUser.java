@@ -51,11 +51,12 @@ public class LoggedInUser {
 
   public static void changePassword(String newPass) {
     signedInUser.set_password(newPass);
+    EmployeeDaoImpl eDao = DaoSingleton.getEmployeeDao();
     try {
-      DaoSingleton.getEmployeeDao().updateNode(signedInUser);
+      eDao.updateNode(signedInUser);
     } catch (Exception e) {
       e.printStackTrace();
-      System.out.println("Failed to set profile pic");
+      System.out.println("Failed to set new password");
     }
   }
 }

@@ -426,7 +426,7 @@ public class MapEditorController extends AbstractController { // todo implement 
 
   @FXML
   void handleClick(MouseEvent evt) {
-    if (evt.getButton() == MouseButton.MIDDLE) scrollPane.setPannable(false);
+    if (evt.getButton() == MouseButton.SECONDARY) scrollPane.setPannable(false);
     if (evt.getButton() != MouseButton.PRIMARY && evt.getButton() != MouseButton.SECONDARY) return;
 
     // Grab mouse coords
@@ -439,6 +439,7 @@ public class MapEditorController extends AbstractController { // todo implement 
       if (index != -1) {
         list.nodes.get(index).update();
       }
+      if (evt.getButton() == MouseButton.SECONDARY) return;
     }
 
     if (movingPoint) {
@@ -458,7 +459,10 @@ public class MapEditorController extends AbstractController { // todo implement 
   @FXML
   void handleDrag(MouseEvent evt) {
     // middle mouse drag pans screen
-    if (evt.getButton() == MouseButton.MIDDLE) scrollPane.setPannable(true);
+    if (evt.getButton() == MouseButton.SECONDARY) {
+      scrollPane.setPannable(true);
+      dragStarted = true;
+    }
 
     // Filters out non-left clicks
     if (evt.getButton() != MouseButton.PRIMARY) return;

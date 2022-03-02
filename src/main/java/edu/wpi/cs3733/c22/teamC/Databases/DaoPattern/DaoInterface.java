@@ -41,12 +41,10 @@ public abstract class DaoInterface<T> {
 
     if (found) {
       try {
-        System.out.println("ENTERED FOUND");
         nodeQuery.editNode(node); // updating Employee fields in EMBEDDED
         // updating Employee fields in OBJECT LIST
         T node_update = nodes.get(index);
         ((DatabaseInterface) node_update).setValues(((DatabaseInterface) node).getValues());
-        System.out.println("Node Updated : " + node_update);
       } catch (Exception e) {
         e.printStackTrace();
       }

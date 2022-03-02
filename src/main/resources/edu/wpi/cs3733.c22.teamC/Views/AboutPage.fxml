@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--<?import com.gluonhq.charm.glisten.control.BottomNavigationButton?>-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.AboutPageController">
+   <children>
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="334.4" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <bottom>
+<!--                  <BottomNavigationButton style="-fx-background-color: 1f58af;" stylesheets="@../Stylesheets/ServiceRequestConstants.css" text="&lt;" textFill="WHITE">-->
+<!--                     <font>-->
+<!--                        <Font name="System Bold" size="79.0" />-->
+<!--                     </font>-->
+<!--                  </BottomNavigationButton>-->
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="“The Brigham &amp; Women’s Hospital maps and data used in this application are copyrighted and provided for the sole use of educational purposes.”" textAlignment="CENTER" wrappingWidth="598.9831027984619" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="8.0" />
+               </font>
+            </Text>
+         </bottom>
+         <center>
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" vgrow="NEVER" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A Message From Team C" textAlignment="CENTER" wrappingWidth="165.55905151367188" GridPane.halignment="CENTER">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets top="75.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Team Cyan Cyclops is grounded in a strong form of team bonding. Over the course of this term we have had a lot of really wonderful moments, as we learned new prgramming skills, made new friends, and developed an application that we are all incredibly proud of. Though we all came into our class with different levels of experience, we have all been able to push ourselves and improve our understanding of modern code practices. We are all incredibly proud of the work that we've done and hope that you enjoy our application." textAlignment="CENTER" wrappingWidth="169.5987720489502" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Text>
+               </children>
+            </GridPane>
+         </center>
+         <top>
+            <GridPane style="-fx-background-color: #1f58af;" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="ABOUT PAGE" GridPane.halignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                  </Text>
+               </children>
+            </GridPane>
+         </top>
+         <left>
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ImageView fitHeight="132.0" fitWidth="184.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@GroupPhotos/Screen%20Shot%202022-03-01%20at%206.11.13%20PM.png" />
+                     </image>
+                     <GridPane.margin>
+                        <Insets left="10.0" top="5.0" />
+                     </GridPane.margin>
+                  </ImageView>
+                  <ImageView fitHeight="132.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@GroupPhotos/Screen%20Shot%202022-03-01%20at%206.11.00%20PM.png" />
+                     </image>
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="10.0" />
+                     </GridPane.margin>
+                  </ImageView>
+               </children>
+            </GridPane>
+         </left>
+         <right>
+            <GridPane BorderPane.alignment="CENTER">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <ImageView fitHeight="129.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@GroupPhotos/Screen%20Shot%202022-03-01%20at%206.11.58%20PM.png" />
+                     </image>
+                     <GridPane.margin>
+                        <Insets bottom="5.0" />
+                     </GridPane.margin>
+                  </ImageView>
+                  <ImageView fitHeight="131.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@GroupPhotos/Screen%20Shot%202022-03-01%20at%206.11.31%20PM.png" />
+                     </image>
+                     <GridPane.margin>
+                        <Insets right="10.0" top="5.0" />
+                     </GridPane.margin>
+                  </ImageView>
+               </children>
+            </GridPane>
+         </right>
+      </BorderPane>
+   </children>
+</AnchorPane>

@@ -124,7 +124,7 @@ public class EmployeeQuery extends Query<Employee> {
             + "username = '"
             + employee.get_username()
             + "'";
-    DatabaseConnection.getConnection().createStatement().execute(query);
+    dbConnection.execute(query);
   }
 
   @Override

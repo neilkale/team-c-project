@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.SQLMethods;
 
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
+import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.*;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.SecurityRequestQuery;
 import java.io.*;
@@ -9,6 +10,7 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 import javax.swing.filechooser.FileSystemView;
@@ -178,32 +180,7 @@ public abstract class Query<T> {
     return DatabaseConnection.getTableNames();
   }
 
-  public ArrayList<T> getAllNodeData() {
-    T queryResult = null;
-    ArrayList<T> allNodes = new ArrayList<>();
 
-    if (!dbConnection.isMongo()) {
-      try {
-        String query = "SELECT * FROM " + getQueryInput();
-        ResultSet rs = dbConnection.executeQuery(query);
-        int columns = rs.getMetaData().getColumnCount();
-        while (rs.next()) {
-          String[] arguments = new String[columns];
-          for (int i = 1; i <= columns; i++) {
-            arguments[i] = rs.getString(rs.getMetaData().getColumnName(i));
-          }
-
-          queryResult = queryFactory(arguments);
-          allNodes.add(queryResult);
-        }
-      } catch (SQLException e) {
-        e.printStackTrace();
-      }
-    } else {
-      allNodes = (ArrayList<T>) dbConnection.getFromMongo("SELECT * FROM " + getQueryInput());
-    }
-    return allNodes;
-  }
 
 
   public abstract String

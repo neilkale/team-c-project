@@ -20,6 +20,7 @@ public class MongoDatabase {
   private DatabaseConnection databaseConnection;
 
   public MongoDatabase() {
+    DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
     mongoClient = MongoClients.create(uri);
     teamC_db = mongoClient.getDatabase("teamC_DB");
     map = new HashMap<>();

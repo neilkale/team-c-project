@@ -114,7 +114,7 @@ public class EmployeeQuery extends Query<Employee> {
             + employee.get_access()
             + "', id ='"
             + employee.get_id()
-            + "', profilePicture ='"
+            + "', profilePicture = '"
             + employee.get_profilePicture()
             + "', phoneNumber = '"
             + employee.get_phoneNumber()

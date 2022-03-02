@@ -98,7 +98,7 @@
                   </Text>
                   <ImageView fitHeight="88.0" fitWidth="165.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@Iteration-4/src/main/resources/edu/wpi/cs3733.c22.teamC/Views/Group%20Photos/Screen%20Shot%202022-03-01%20at%206.11.00%20PM.png" />
+                        <Image url="/Users/dilce/Desktop/Iteration-4/src/main/resources/edu/wpi/cs3733.c22.teamC/Views/Group Photos/GP1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="88.0" fitWidth="165.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="12" GridPane.rowIndex="2">

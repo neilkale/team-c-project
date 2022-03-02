@@ -160,4 +160,8 @@ public class ControllerMediator {
   public void backButtonPressed() throws IOException {
     this.getDefaultController().backButtonPressed();
   }
+
+  public void updateProfilePic() throws IOException {
+    this.getDefaultController().updateProfilePic();
+  }
 }

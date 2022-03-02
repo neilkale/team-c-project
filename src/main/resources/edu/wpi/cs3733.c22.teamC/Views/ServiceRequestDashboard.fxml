@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #1f58af;" stylesheets="@../Stylesheets/ServiceRequest.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.ServiceRequestDashboardController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: #1f58af;" stylesheets="@../Stylesheets/ServiceRequest.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamC.controllers.ServiceRequestDashboardController">
    <top>
       <GridPane BorderPane.alignment="CENTER">
          <rowConstraints>
@@ -23,7 +23,7 @@
             <ColumnConstraints />
          </columnConstraints>
          <children>
-            <Label alignment="CENTER" prefHeight="55.0" prefWidth="6000.0" stylesheets="@../Stylesheets/ServiceRequestConstants.css" text="Service Requests" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Label alignment="CENTER" prefHeight="55.0" prefWidth="6000.0" stylesheets="@../Stylesheets/ServiceRequestConstants.css" text="SERVICE REQUEST" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
@@ -34,100 +34,100 @@
    <bottom>
       <FlowPane fx:id="flowPane" alignment="CENTER" columnHalignment="CENTER" hgap="1.0" prefWrapLength="220.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton fx:id="giftButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#giftButtonPressed" prefHeight="78.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="Gift" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <JFXButton fx:id="giftButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#giftButtonPressed" prefHeight="100.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="Gift" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
                <graphic>
-                  <ImageView fx:id="giftButtonIcon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="giftButtonIcon" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="transportButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#transportButtonPressed" prefHeight="78.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="Transport" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <JFXButton fx:id="transportButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#transportButtonPressed" prefHeight="100.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="Transport" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
                <graphic>
-                  <ImageView fx:id="internalTransportButtonIcon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="internalTransportButtonIcon" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="equipDelivButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#equipDelivReqButtonPressed" prefHeight="78.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="Equipment" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <JFXButton fx:id="equipDelivButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#equipDelivReqButtonPressed" prefHeight="100.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="Equipment" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
                <graphic>
-                  <ImageView fx:id="equipDelivButtonIcon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="equipDelivButtonIcon" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="launServButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#laundryServButtonPressed" prefHeight="78.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="Laundry" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <JFXButton fx:id="launServButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#laundryServButtonPressed" prefHeight="100.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="Laundry" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
                <graphic>
-                  <ImageView fx:id="LaundryServiceButtonIcon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="LaundryServiceButtonIcon" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="langInterpButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#langInterpButtonPressed" prefHeight="78.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="Interpreter" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <JFXButton fx:id="langInterpButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#langInterpButtonPressed" prefHeight="100.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="Interpreter" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
                <graphic>
-                  <ImageView fx:id="langInterpButtonIcon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="langInterpButtonIcon" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="itButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#itButtonPressed" prefHeight="78.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="IT Help" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <JFXButton fx:id="itButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#itButtonPressed" prefHeight="100.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="IT Help" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
                <graphic>
-                  <ImageView fx:id="ITHelpButtonIcon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="ITHelpButtonIcon" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="saniServButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#saniServButtonPressed" prefHeight="78.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="Sanitation" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <JFXButton fx:id="saniServButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#saniServButtonPressed" prefHeight="100.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="Sanitation" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
                <graphic>
-                  <ImageView fx:id="sanitationButtonIcon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="sanitationButtonIcon" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="maintReqButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#maintenanceButtonPressed" prefHeight="78.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="Maintenance" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <JFXButton fx:id="maintReqButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#maintenanceButtonPressed" prefHeight="100.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="Maintenance" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
                <graphic>
-                  <ImageView fx:id="maintenanceButtonIcon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="maintenanceButtonIcon" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="medDelivButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#medDelivButtonPressed" prefHeight="78.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="Medicine" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <JFXButton fx:id="medDelivButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#medDelivButtonPressed" prefHeight="100.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="Medicine" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
                <graphic>
-                  <ImageView fx:id="medDeliveryButtonIcon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="medDeliveryButtonIcon" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="religiousButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#religiousButtonPressed" prefHeight="78.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="Religious" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <JFXButton fx:id="religiousButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#religiousButtonPressed" prefHeight="100.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="Religious" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
                <graphic>
-                  <ImageView fx:id="religiousButtonIcon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="religiousButtonIcon" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="securityButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#securityButtonPressed" prefHeight="78.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="Security" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <JFXButton fx:id="securityButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#securityButtonPressed" prefHeight="100.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="Security" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
                <graphic>
-                  <ImageView fx:id="securityButtonIcon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="securityButtonIcon" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="APIButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#APIButtonPressed" prefHeight="78.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="Team APIs" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <JFXButton fx:id="APIButton" alignment="TOP_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#APIButtonPressed" prefHeight="100.0" prefWidth="95.0" ripplerFill="WHITE" styleClass="JFXButton" text="Team APIs" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
                <graphic>
-                  <ImageView fx:id="APIButtonIcon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="APIButtonIcon" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </JFXButton>
          </children>

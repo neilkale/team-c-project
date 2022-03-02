@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXDrawersStack?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -156,11 +155,6 @@
                         <Insets />
                      </opaqueInsets>
                   </VBox>
-                  <JFXDrawer fx:id="profileDrawer" defaultDrawerSize="400.0" direction="BOTTOM" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" GridPane.valignment="BOTTOM">
-                     <GridPane.margin>
-                        <Insets left="150.0" />
-                     </GridPane.margin>
-                  </JFXDrawer>
                </children>
                <effect>
                   <DropShadow />

@@ -45,7 +45,7 @@ public class GiftReqController extends AbstractController {
     imageView.setImage(ImageLoader.loadImage("Gifts"));
 
     LocationDaoImpl lDao = DaoSingleton.getLocationDao();
-    EquipmentDaoImpl eDao = DaoSingleton.getEquipmentDao();
+    EmployeeDaoImpl eDao = DaoSingleton.getEmployeeDao();
     locations = lDao.getAllNodes();
     employees = eDao.getAllNodes();
 

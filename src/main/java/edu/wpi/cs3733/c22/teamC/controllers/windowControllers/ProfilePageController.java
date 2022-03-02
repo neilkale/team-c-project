@@ -3,13 +3,19 @@ package edu.wpi.cs3733.c22.teamC.controllers.windowControllers;
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.c22.teamC.Databases.LoggedInUser;
 import edu.wpi.cs3733.c22.teamC.controllers.ImageLoader;
+import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
 public class ProfilePageController {
   @FXML ImageView imageView;
+
+  @FXML Pane passPane;
 
   @FXML FlowPane flowPane;
 
@@ -18,6 +24,10 @@ public class ProfilePageController {
   @FXML Label jobTypeLabel;
 
   @FXML JFXButton changeButton;
+
+  @FXML PasswordField oldPass;
+  @FXML PasswordField newPass1;
+  @FXML PasswordField newPass2;
 
   String[] picNames = {
     "Bear", "Bunny", "Cat", "Deer", "Dog", "Duck", "Fox", "Pig", "Sheep", "Skunk"
@@ -54,5 +64,60 @@ public class ProfilePageController {
     changeButton.setVisible(false);
     imageView.setVisible(false);
     flowPane.setVisible(true);
+  }
+
+  @FXML
+  void changePassButtonPressed() {
+    passPane.setVisible(true);
+  }
+
+  @FXML
+  void cancelButtonPressed() {
+    passPane.setVisible(false);
+    oldPass.setText("");
+    newPass1.setText("");
+    newPass2.setText("");
+  }
+
+  @FXML
+  void confirmButtonPressed() {
+    if (!oldPass.getText().equals(LoggedInUser.getCurrentUser().get_password())) {
+      ScaleTransition scaleTransition = new ScaleTransition();
+
+      scaleTransition.setByY(.15);
+      scaleTransition.setByX(.15);
+      scaleTransition.setDuration(Duration.millis(100));
+      scaleTransition.setCycleCount(2);
+      scaleTransition.setAutoReverse(true);
+
+      scaleTransition.setNode(oldPass);
+      scaleTransition.play();
+      return;
+    }
+    if (!newPass1.getText().equals(newPass2.getText()) && newPass1.getText().length() >= 5) {
+      ScaleTransition scaleTransition = new ScaleTransition();
+
+      scaleTransition.setByY(.15);
+      scaleTransition.setByX(.15);
+      scaleTransition.setDuration(Duration.millis(100));
+      scaleTransition.setCycleCount(2);
+      scaleTransition.setAutoReverse(true);
+
+      scaleTransition.setNode(newPass1);
+      scaleTransition.play();
+
+      scaleTransition = new ScaleTransition();
+
+      scaleTransition.setByY(.15);
+      scaleTransition.setByX(.15);
+      scaleTransition.setDuration(Duration.millis(100));
+      scaleTransition.setCycleCount(2);
+      scaleTransition.setAutoReverse(true);
+
+      scaleTransition.setNode(newPass2);
+      scaleTransition.play();
+      return;
+    }
+    LoggedInUser.changePassword(newPass1.getText());
   }
 }

@@ -3,9 +3,7 @@ package edu.wpi.cs3733.c22.teamC.SQLMethods.requests;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.MaintenanceRequest;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MaintenanceRequestQuery extends Query<MaintenanceRequest> {
@@ -30,32 +28,6 @@ public class MaintenanceRequestQuery extends Query<MaintenanceRequest> {
     MaintenanceRequest toReturn =
         new MaintenanceRequest(inputs[0], inputs[1], inputs[2], inputs[3], inputs[4], inputs[5]);
     return toReturn;
-  }
-
-  @Override
-  public ArrayList<MaintenanceRequest> getAllNodeData() {
-    MaintenanceRequest queryResult = null;
-    ArrayList<MaintenanceRequest> allNodes = new ArrayList<MaintenanceRequest>();
-    try {
-      String query = "SELECT * FROM " + getQueryInput();
-      ResultSet rs = dbConnection.executeQuery(query);
-      while (rs.next()) {
-        String ticketID = rs.getString("ticketID");
-        String locationID = rs.getString("locationID");
-        String status = rs.getString("status");
-        String serviceType = rs.getString("serviceType");
-        String assignment = rs.getString("assignment");
-        String issueType = rs.getString("issueType");
-
-        queryResult =
-            new MaintenanceRequest(
-                ticketID, locationID, status, serviceType, assignment, issueType);
-        allNodes.add(queryResult);
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return allNodes;
   }
 
   @Override
@@ -116,17 +88,6 @@ public class MaintenanceRequestQuery extends Query<MaintenanceRequest> {
             + object.get_ticketID()
             + "'";
     dbConnection.execute(query);
-  }
-
-  @Override
-  public Integer getNumRows() throws SQLException {
-    String sql = "SELECT * FROM " + getQueryInput();
-    ResultSet rs = dbConnection.executeQuery(sql);
-    Integer rowCount = 0;
-    while (rs.next()) {
-      rowCount++;
-    }
-    return rowCount;
   }
 
   @Override

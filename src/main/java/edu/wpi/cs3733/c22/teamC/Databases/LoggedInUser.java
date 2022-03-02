@@ -2,7 +2,7 @@ package edu.wpi.cs3733.c22.teamC.Databases;
 
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.EmployeeDaoImpl;
-import edu.wpi.cs3733.c22.teamC.Databases.requests.filters.CriteriaUserSpecific;
+import edu.wpi.cs3733.c22.teamC.Databases.requests.filters.EmployeeFilters.CriteriaUserSpecific;
 import edu.wpi.cs3733.c22.teamC.controllers.ImageLoader;
 import javafx.scene.image.Image;
 
@@ -41,6 +41,16 @@ public class LoggedInUser {
     profilePic = ImageLoader.loadImage(newPicName);
     signedInUser.set_profilePicture(newPicName);
     // todo: set the new profile pic in DB
+    try {
+      DaoSingleton.getEmployeeDao().updateNode(signedInUser);
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.out.println("Failed to set profile pic");
+    }
+  }
+
+  public static void changePassword(String newPass) {
+    signedInUser.set_password(newPass);
     try {
       DaoSingleton.getEmployeeDao().updateNode(signedInUser);
     } catch (Exception e) {

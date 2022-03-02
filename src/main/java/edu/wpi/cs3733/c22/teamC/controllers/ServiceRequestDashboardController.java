@@ -5,16 +5,12 @@ import com.jfoenix.controls.JFXCheckBox;
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
 
-public class ServiceRequestController extends AbstractController {
+public class ServiceRequestDashboardController extends AbstractController {
   @FXML private JFXButton equipDelivButton;
   @FXML private JFXButton saniServButton;
   @FXML private JFXButton launServButton;
@@ -77,24 +73,6 @@ public class ServiceRequestController extends AbstractController {
             religiousButton,
             securityButton,
             APIButton));
-
-    showNamesCheckBox
-        .selectedProperty()
-        .addListener(
-            (observable, oldValue, newValue) -> {
-              if (newValue) showNameLabels(true);
-              else showNameLabels(false);
-            });
-  }
-
-  private void showNameLabels(Boolean isShown) {
-    ObservableList<Node> flowPaneChildren = flowPane.getChildren();
-    for (Node vBox : flowPaneChildren) {
-      ObservableList<Node> vBoxChildren = ((VBox) vBox).getChildren();
-      for (Node label : vBoxChildren) {
-        if (label instanceof Label) label.setVisible(isShown);
-      }
-    }
   }
 
   @FXML
@@ -148,11 +126,6 @@ public class ServiceRequestController extends AbstractController {
   @FXML
   private void itButtonPressed() throws IOException {
     controllerMediator.setDefaultPageCenter("ITReq.fxml");
-  }
-
-  @FXML
-  private void expandButtonPressed() throws IOException {
-    controllerMediator.setDefaultPageCenter("ServiceRequest.fxml");
   }
 
   @FXML

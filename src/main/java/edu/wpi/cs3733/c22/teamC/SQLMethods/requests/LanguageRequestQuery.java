@@ -3,9 +3,7 @@ package edu.wpi.cs3733.c22.teamC.SQLMethods.requests;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
 import edu.wpi.cs3733.c22.teamC.Databases.requests.LanguageRequest;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LanguageRequestQuery extends Query<LanguageRequest> {
@@ -29,31 +27,6 @@ public class LanguageRequestQuery extends Query<LanguageRequest> {
     LanguageRequest toReturn =
         new LanguageRequest(inputs[0], inputs[1], inputs[2], inputs[3], inputs[4], inputs[5]);
     return toReturn;
-  }
-
-  @Override
-  public ArrayList<LanguageRequest> getAllNodeData() {
-    LanguageRequest queryResult = null;
-    ArrayList<LanguageRequest> allNodes = new ArrayList<LanguageRequest>();
-    try {
-      String query = "SELECT * FROM " + getQueryInput();
-      ResultSet rs = dbConnection.executeQuery(query);
-      while (rs.next()) {
-        String ticketID = rs.getString("ticketID");
-        String locationID = rs.getString("locationID");
-        String status = rs.getString("status");
-        String serviceType = rs.getString("serviceType");
-        String assignment = rs.getString("assignment");
-        String language = rs.getString("language");
-
-        queryResult =
-            new LanguageRequest(ticketID, locationID, status, serviceType, assignment, language);
-        allNodes.add(queryResult);
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return allNodes;
   }
 
   @Override
@@ -124,16 +97,5 @@ public class LanguageRequestQuery extends Query<LanguageRequest> {
 
   public static String staticGetQueryInput() {
     return "LANGUAGEREQUESTC";
-  }
-
-  @Override
-  public Integer getNumRows() throws SQLException {
-    String sql = "SELECT * FROM " + getQueryInput();
-    ResultSet rs = dbConnection.executeQuery(sql);
-    Integer rowCount = 0;
-    while (rs.next()) {
-      rowCount++;
-    }
-    return rowCount;
   }
 }

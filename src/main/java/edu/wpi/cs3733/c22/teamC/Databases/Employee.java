@@ -180,6 +180,7 @@ public class Employee implements DatabaseInterface {
     List<String> a = new ArrayList<>();
     String[] fields = getFields();
     Method setter;
+
     for (int i = 0; i < getFields().length; i++) {
       try {
         setter = this.getClass().getMethod("set_" + fields[i]);

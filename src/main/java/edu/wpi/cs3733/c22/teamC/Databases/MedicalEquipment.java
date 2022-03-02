@@ -2,7 +2,7 @@ package edu.wpi.cs3733.c22.teamC.Databases;
 
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoInterface;
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
-import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.MedicalEquipmentQuery;
+import edu.wpi.cs3733.c22.teamC.SQLMethods.MedicalEquipmentQuery;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -157,6 +157,7 @@ public class MedicalEquipment implements DatabaseInterface {
         e.printStackTrace();
       }
     }
+
     String[] toReturn = new String[a.size()];
     for (int i = 0; i < a.size(); i++) {
       toReturn[i] = a.get(i);

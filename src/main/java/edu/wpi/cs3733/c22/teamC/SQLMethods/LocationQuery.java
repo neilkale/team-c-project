@@ -1,9 +1,7 @@
 package edu.wpi.cs3733.c22.teamC.SQLMethods;
 
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
-import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.Databases.Location;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -52,10 +50,7 @@ public class LocationQuery extends Query<Location> {
         "SELECT NODEID FROM " + queryLoc.getQueryInput() + " WHERE longName = '" + longName + "'";
     String toReturn = "";
     try {
-      ResultSet rs = queryLoc.dbConnection.executeQuery(query);
-      if (rs.next()) {
-        toReturn = rs.getString("NODEID");
-      }
+      toReturn = DatabaseConnection.getInstance().executeQuery(query).get(0).toString();
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -77,43 +72,6 @@ public class LocationQuery extends Query<Location> {
     Location toReturn =
         new Location(
             inputs[0], inputs[1], inputs[2], inputs[3], inputs[4], inputs[5], inputs[6], inputs[7]);
-    return toReturn;
-  }
-
-  public ArrayList<Location> getAllNodeData() {
-    Location queryResult = null;
-    ArrayList<Location> allNodes = new ArrayList<Location>();
-
-    try {
-      String query = "SELECT * FROM " + getQueryInput();
-      ResultSet rs = dbConnection.executeQuery(query);
-
-      while (rs.next()) {
-        String nodeID = rs.getString("nodeID");
-        String xcoord = rs.getString("xcoord");
-        String ycoord = rs.getString("ycoord");
-        String floor = rs.getString("floor");
-        String building = rs.getString("building");
-        String nodeType = rs.getString("nodeType");
-        String longName = rs.getString("longName");
-        String shortName = rs.getString("shortName");
-
-        queryResult =
-            new Location(nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName);
-        allNodes.add(queryResult);
-      }
-
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return allNodes;
-  }
-
-  private ArrayList<Location> dbInterfaceToLocation(ArrayList<DatabaseInterface> input) {
-    ArrayList<Location> toReturn = new ArrayList<>();
-    for (DatabaseInterface d : input) {
-      toReturn.add((Location) d);
-    }
     return toReturn;
   }
 
@@ -196,34 +154,10 @@ public class LocationQuery extends Query<Location> {
     return "TOWERLOCATIONSC";
   }
 
-  @Override
-  public Integer getNumRows() throws SQLException {
-    String sql = "SELECT * FROM " + getQueryInput();
-    ResultSet rs = dbConnection.executeQuery(sql);
-    Integer rowCount = 0;
-    while (rs.next()) {
-      rowCount++;
-    }
-    return rowCount;
-  }
-
   public Location findNodeByID(String target_ID) {
     try {
       String sql = "SELECT * FROM " + getQueryInput() + " WHERE nodeID = '" + target_ID + "'";
-      ResultSet rs = dbConnection.executeQuery(sql);
-      while (rs.next()) {
-        String nodeID = rs.getString("nodeID");
-        String xcoord = rs.getString("xcoord");
-        String ycoord = rs.getString("ycoord");
-        String floor = rs.getString("floor");
-        String building = rs.getString("building");
-        String nodeType = rs.getString("nodeType");
-        String longName = rs.getString("longName");
-        String shortName = rs.getString("shortName");
-        Location queryResult =
-            new Location(nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName);
-        return queryResult;
-      }
+      return (Location) dbConnection.executeQuery(sql).get(0);
     } catch (SQLException e) {
       e.printStackTrace();
     }

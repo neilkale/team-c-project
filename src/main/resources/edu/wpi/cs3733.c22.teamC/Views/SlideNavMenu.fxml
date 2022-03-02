@@ -138,6 +138,17 @@
                         <ImageView fx:id="religiousIcon" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </JFXButton>
+                  <JFXButton fx:id="APIButton" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#APIButtonPressed" prefHeight="50.0" prefWidth="175.0" ripplerFill="WHITE" style="-fx-background-color: #1f58af;" styleClass="JFXButton" text="API" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets left="6.0" top="5.0" />
+                     </FlowPane.margin>
+                     <graphic>
+                        <ImageView fx:id="APIIcon" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </JFXButton>
                </children>
             </FlowPane>
          </content>

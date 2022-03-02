@@ -20,7 +20,7 @@
                      <children>
                         <ImageView fx:id="mapView" fitHeight="425.0" fitWidth="638.0" pickOnBounds="true" preserveRatio="true" />
                         <Pane fx:id="iconPane" maxWidth="-Infinity" prefHeight="425.0" prefWidth="638.0" />
-                        <TabPane fx:id="tabPane" onMouseClicked="#updateOnClickMenuTabs" prefHeight="273.0" prefWidth="150.0" tabClosingPolicy="UNAVAILABLE" visible="false">
+                        <TabPane fx:id="mapTabPane" onMouseClicked="#updateOnClickMenuTabs" prefHeight="273.0" prefWidth="150.0" styleClass="aaaaaaaaa" tabClosingPolicy="UNAVAILABLE">
                           <tabs>
                             <Tab fx:id="locationTab" text="Location">
                               <content>
@@ -73,8 +73,8 @@
                                                       <Insets top="2.0" />
                                                    </GridPane.margin>
                                                 </JFXComboBox>
-                                                <JFXTextField fx:id="longNameField" focusColor="#1f58af" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="120.0" promptText="Long Name" unFocusColor="#c04878" GridPane.rowIndex="3" />
-                                                <JFXTextField fx:id="shortNameField" focusColor="#1f58af" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="120.0" promptText="Short Name" unFocusColor="#c04878" GridPane.rowIndex="4" />
+                                                <JFXTextField fx:id="longNameField" focusColor="#1f58af" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="120.0" promptText="Long Name" unFocusColor="#c04878" GridPane.rowIndex="3" />
+                                                <JFXTextField fx:id="shortNameField" focusColor="#1f58af" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="120.0" promptText="Short Name" unFocusColor="#c04878" GridPane.rowIndex="4" />
                                                 <JFXButton fx:id="locationUpdateButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#updateButtonPressed" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #1F58AF;" text="UPDATE" textFill="WHITE" GridPane.rowIndex="5">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />

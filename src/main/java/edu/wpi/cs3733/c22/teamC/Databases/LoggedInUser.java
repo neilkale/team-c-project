@@ -48,4 +48,14 @@ public class LoggedInUser {
       System.out.println("Failed to set profile pic");
     }
   }
+
+  public static void changePassword(String newPass) {
+    signedInUser.set_password(newPass);
+    try {
+      DaoSingleton.getEmployeeDao().updateNode(signedInUser);
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.out.println("Failed to set profile pic");
+    }
+  }
 }

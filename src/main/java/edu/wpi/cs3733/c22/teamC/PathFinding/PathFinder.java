@@ -10,6 +10,7 @@ import edu.wpi.cs3733.c22.teamC.PathFinding.AStarImpl.Node;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.LocationQuery;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URL;
 import java.util.*;
 
 public class PathFinder {
@@ -53,8 +54,10 @@ public class PathFinder {
     // TODO: class... restructure.
 
     // Reads the CSV to add edges to the nodes
-    File fileIn =
-        new File("./src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/TowerEdges.csv");
+    URL resource = PathFinder.class.getClassLoader().getResource("TowerEdges.csv");
+    File fileIn;
+    if (resource != null) fileIn = new File(resource.toString());
+    else fileIn = new File("TowerEdges.csv");
     try {
       Scanner sc = new Scanner(fileIn);
       sc.useDelimiter(",|\\r"); // set to comma-delimited

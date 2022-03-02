@@ -207,12 +207,12 @@ public class DatabaseConnection {
             }
             startupInsert = new ArrayList<>();
             mongoDatabase.getAction(query);
-            Statement statement = connection.createStatement();
-            if (query.contains("UPDATE")) {
-              statement.executeUpdate(query);
-            } else {
-              statement.execute(query);
-            }
+          }
+          Statement statement = connection.createStatement();
+          if (query.contains("UPDATE")) {
+            statement.executeUpdate(query);
+          } else {
+            statement.execute(query);
           }
         }
       } catch (SQLException e) {

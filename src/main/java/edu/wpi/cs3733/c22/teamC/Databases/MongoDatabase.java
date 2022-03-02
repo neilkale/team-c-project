@@ -145,6 +145,7 @@ public class MongoDatabase {
       }
     } else {
       try {
+        System.out.println(query.substring(query.lastIndexOf(' ') + 1) + " was dropped");
         teamC_db.getCollection(query.substring(query.lastIndexOf(' ') + 1)).drop();
       } catch (Exception e) {
 

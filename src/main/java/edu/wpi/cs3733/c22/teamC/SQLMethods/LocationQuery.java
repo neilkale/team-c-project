@@ -49,8 +49,8 @@ public class LocationQuery extends Query<Location> {
     String toReturn = "";
     try {
       System.out.println(longName);
-      for (Location l : queryLoc.getAllNodeData()){
-        if (l.get_longName().equals(longName)){
+      for (Location l : queryLoc.getAllNodeData()) {
+        if (l.get_longName().equals(longName)) {
           toReturn = l.get_nodeID();
         }
       }

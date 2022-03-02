@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.c22.teamC.SQLMethods;
 
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
-import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.*;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.SecurityRequestQuery;
 import java.io.*;
@@ -10,7 +9,6 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 import javax.swing.filechooser.FileSystemView;
@@ -291,28 +289,69 @@ public abstract class Query<T> {
     return (writeCSV(fileIn, getQueryInput()));
   }
 
+  //  public static boolean writeCSV(String fileIn, String queryType) {
+  //    try {
+  //      DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
+  //      File in = createFile(fileIn); // creates the file using createfile
+  //      if (in != null && in.canWrite()) {
+  //        FileWriter fw = new FileWriter(in);
+  //
+  //        List<DatabaseInterface> fromDB =
+  //            (List<DatabaseInterface>) databaseConnection.executeQuery("SELECT * FROM " +
+  // queryType);
+  //        if (fromDB.size() == 0) {
+  //          fw.close();
+  //          return true;
+  //        }
+  //        String[] fields = fromDB.get(0).getFields();
+  //        // metadata
+  //        for (DatabaseInterface d : fromDB) { // for every table row
+  //          StringBuilder line = new StringBuilder();
+  //          for (String val : d.getValues()) { // for every table entry
+  //            line.append(val); // append them to a certain line
+  //          }
+  //          line.substring(0, line.lastIndexOf(","));
+  //          line.append(",\n"); // end the line with \n
+  //          fw.write(line.toString()); // write the line to the document
+  //        }
+  //        fw.close(); // closes the writer here
+  //      } else {
+  //        return false;
+  //      }
+  //    } catch (Exception e) {
+  //      if (VERBOSE) System.out.println("Write CSV unsuccessful: " + queryType);
+  //      e.printStackTrace();
+  //      return false;
+  //    }
+  //    if (VERBOSE) System.out.println("Write CSV successful: " + queryType);
+  //    return true;
+  //  }
   public static boolean writeCSV(String fileIn, String queryType) {
     try {
-      DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
+      Connection connection = DatabaseConnection.getConnection();
+      DatabaseMetaData databaseMetaData = connection.getMetaData();
       File in = createFile(fileIn); // creates the file using createfile
       if (in != null && in.canWrite()) {
         FileWriter fw = new FileWriter(in);
-
-        List<DatabaseInterface> fromDB =
-            (List<DatabaseInterface>) databaseConnection.executeQuery("SELECT * FROM " + queryType);
-        if (fromDB.size() == 0) {
-          fw.close();
-          return true;
-        }
-        String[] fields = fromDB.get(0).getFields();
+        ResultSet inputLine =
+            DatabaseConnection.getConnection()
+                .createStatement()
+                .executeQuery("SELECT * FROM " + queryType);
+        int columns =
+            inputLine
+                .getMetaData()
+                .getColumnCount(); // same as readcsv - getting column amount of querytype using
         // metadata
-        for (DatabaseInterface d : fromDB) { // for every table row
+        while (inputLine.next()) { // for every table row
           StringBuilder line = new StringBuilder();
-          for (String val : d.getValues()) { // for every table entry
-            line.append(val); // append them to a certain line
+          for (int i = 1; i <= columns; i++) { // for every table entry
+            line.append(inputLine.getString(i)); // append them to a certain line
+            if (i
+                != (columns)) { // add commas to the end of them ONLY IF THEY ARE NOT THE LAST ENTRY
+              line.append(","); // ^
+            }
           }
-          line.substring(0, line.lastIndexOf(","));
-          line.append(",\n"); // end the line with \n
+          line.append("\n"); // end the line with \n
           fw.write(line.toString()); // write the line to the document
         }
         fw.close(); // closes the writer here

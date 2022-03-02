@@ -101,9 +101,9 @@ public class ProfilePageController {
 
       scaleTransition.setNode(oldPass);
       scaleTransition.play();
-      return;
-    }
-    if (!newPass1.getText().equals(newPass2.getText()) && newPass1.getText().length() >= 5) {
+    } else if (!newPass1.getText().equals(newPass2.getText())
+        && !newPass1.getText().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,}$")) {
+
       ScaleTransition scaleTransition = new ScaleTransition();
 
       scaleTransition.setByY(.15);
@@ -125,9 +125,9 @@ public class ProfilePageController {
 
       scaleTransition.setNode(newPass2);
       scaleTransition.play();
-      return;
+    } else {
+      LoggedInUser.changePassword(newPass1.getText());
+      passPane.setVisible(false);
     }
-    LoggedInUser.changePassword(newPass1.getText());
-    passPane.setVisible(false);
   }
 }

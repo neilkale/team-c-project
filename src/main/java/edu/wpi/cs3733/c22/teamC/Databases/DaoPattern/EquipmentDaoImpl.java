@@ -1,6 +1,6 @@
 package edu.wpi.cs3733.c22.teamC.Databases.DaoPattern;
 
-import edu.wpi.cs3733.c22.teamC.SQLMethods.MedicalEquipmentQuery;
+import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.MedicalEquipmentQuery;
 
 public class EquipmentDaoImpl extends DaoInterface {
 

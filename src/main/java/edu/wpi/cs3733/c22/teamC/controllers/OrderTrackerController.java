@@ -185,7 +185,7 @@ public class OrderTrackerController extends AbstractController {
                     TextField valueTextField;
                     // if field name is location id, lets take its fieldValue and convert the NODEID
                     // -> longName
-                    if (fieldName.equalsIgnoreCase("location id")) {
+                    if (fieldName.contains("location")) {
                       LocationQuery locationQuery = new LocationQuery();
                       Location location =
                           locationQuery.findNodeByID(

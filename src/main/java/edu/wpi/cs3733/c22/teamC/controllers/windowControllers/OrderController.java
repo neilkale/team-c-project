@@ -99,7 +99,7 @@ public class OrderController {
           Node vBoxChild = vBox.getChildren().get(j);
           if (vBoxChild instanceof Label) {
             Label label = (Label) vBoxChild;
-            if (label.getText().equalsIgnoreCase("location id")) return i;
+            if (label.getText().contains("location")) return i;
           }
         }
       }

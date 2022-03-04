@@ -2,11 +2,9 @@ package edu.wpi.cs3733.c22.teamC.SQLMethods;
 
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
-import edu.wpi.cs3733.c22.teamC.MainFinal;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.*;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.SecurityRequestQuery;
 import java.io.*;
-import java.net.URL;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -198,14 +196,13 @@ public abstract class Query<T> {
     try {
       DatabaseConnection connection = DatabaseConnection.getInstance();
 
-      String readFile = fileIn;
-      URL resource = MainFinal.class.getResource(fileIn);
-
-      if (resource != null) readFile = resource.toString();
-
-      File in = new File(readFile); // goetting the file
+      InputStream resource = Query.class.getResourceAsStream(fileIn);
+      System.out.println("Resource : " + resource.toString());
+      File in = new File(fileIn); // goetting the file
       if (in != null) {
-        Scanner s = new Scanner(in);
+        Scanner s;
+        if (resource == null) s = new Scanner(in);
+        else s = new Scanner(resource);
 
         // Taking a query of the table so that I can find out the amount of columns
         int columns =

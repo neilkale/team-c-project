@@ -57,7 +57,8 @@ public class PathFinder {
     URL resource = PathFinder.class.getClassLoader().getResource("TowerEdges.csv");
     File fileIn;
     if (resource != null) fileIn = new File(resource.toString());
-    else fileIn = new File("TowerEdges.csv");
+    else
+      fileIn = new File("./src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/TowerEdges.csv");
     try {
       Scanner sc = new Scanner(fileIn);
       sc.useDelimiter(",|\\r"); // set to comma-delimited
@@ -84,6 +85,7 @@ public class PathFinder {
         }
       }
     } catch (FileNotFoundException e) {
+      System.out.println("File not here!");
       e.printStackTrace();
     } catch (NoSuchElementException e) {
       // end of csv reached, continue
@@ -114,5 +116,12 @@ public class PathFinder {
 
   public Node getNodeByID(String nodeID) {
     return nodeMap.get(nodeID);
+  }
+
+  public void refreshNodeMap() {
+    LocationDaoImpl e = DaoSingleton.getLocationDao();
+    ArrayList<Location> locList = e.getAllNodes();
+    nodeMap = locsToNodes(locList);
+    blockMaintenance();
   }
 }

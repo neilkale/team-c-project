@@ -748,12 +748,16 @@ public class MapEditorController extends AbstractController { // todo implement 
     refresh();
   }
 
+  boolean stairsDisabled = false;
+
   @FXML
   private void computeButtonPressed() {
     hideOnClickMenu();
     if (MapState.getStartIndex() != -1
         && MapState.getStopIndex() != -1
         && MapState.getStopIndex() != MapState.getStartIndex()) {
+      pf.refreshNodeMap();
+      pf.setDisabilityFriendly(stairsDisabled);
       path =
           pf.findPath(
               list.nodes.get(MapState.getStartIndex()).getLocation(),
@@ -767,7 +771,7 @@ public class MapEditorController extends AbstractController { // todo implement 
 
   @FXML
   void toggleDisableStairs() {
-    pf.setDisabilityFriendly(disableStairsCheckBox.isSelected());
+    stairsDisabled = disableStairsCheckBox.isSelected();
     if (path != null) {
       path = null;
       computeButtonPressed();

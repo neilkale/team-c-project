@@ -16,7 +16,7 @@ public class ITRequest extends ServiceRequest implements DatabaseInterface {
       String serviceType,
       String assignment,
       String _issueType) {
-    super(ticketID, locationID, status, "interpreter", assignment);
+    super(ticketID, locationID, status, "IT request", assignment);
     this._issueType = _issueType;
   }
 

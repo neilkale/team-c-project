@@ -32,7 +32,7 @@ public abstract class ServiceRequest implements DatabaseInterface {
     this._ticketID = ticketID;
     this._locationID = locationID;
     this._status = status;
-    this._serviceType = serviceType;
+    this._serviceType = getRequestType();
     this._assignment = assignment;
   }
 

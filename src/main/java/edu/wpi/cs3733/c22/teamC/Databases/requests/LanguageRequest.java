@@ -17,7 +17,7 @@ public class LanguageRequest extends ServiceRequest implements DatabaseInterface
       String serviceType,
       String assignment,
       String language) {
-    super(ticketID, locationID, status, "interpreter", assignment);
+    super(ticketID, locationID, status, "Language Request", assignment);
     this._language = language;
   }
 

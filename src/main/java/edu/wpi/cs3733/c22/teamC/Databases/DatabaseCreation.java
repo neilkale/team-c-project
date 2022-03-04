@@ -355,7 +355,7 @@ public class DatabaseCreation {
   }
 
   public static void readDatabasesFromCsv() {
-    String prefix = "";
+    String prefix = "/";
     Query e = new LocationQuery();
     e.readCSV(prefix + "TowerLocationsC.csv");
 

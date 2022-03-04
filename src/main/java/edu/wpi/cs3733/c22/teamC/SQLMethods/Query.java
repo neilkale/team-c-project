@@ -2,6 +2,7 @@ package edu.wpi.cs3733.c22.teamC.SQLMethods;
 
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseConnection;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
+import edu.wpi.cs3733.c22.teamC.MainFinal;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.*;
 import edu.wpi.cs3733.c22.teamC.SQLMethods.requests.SecurityRequestQuery;
 import java.io.*;
@@ -198,7 +199,7 @@ public abstract class Query<T> {
       DatabaseConnection connection = DatabaseConnection.getInstance();
 
       String readFile = fileIn;
-      URL resource = (new MapQuery()).getClass().getClassLoader().getResource(fileIn);
+      URL resource = MainFinal.class.getResource(fileIn);
 
       if (resource != null) readFile = resource.toString();
 

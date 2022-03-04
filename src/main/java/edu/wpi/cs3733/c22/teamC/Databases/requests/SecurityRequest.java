@@ -90,7 +90,14 @@ public class SecurityRequest extends ServiceRequest {
   @Override
   public String[] getFields() {
     return new String[] {
-      "ticketID", "status", "serviceType", "assignment", "reportBreach", "securityType", "urgency"
+      "ticketID",
+      "locationID",
+      "status",
+      "serviceType",
+      "assignment",
+      "reportBreach",
+      "securityType",
+      "urgency"
     };
   }
 

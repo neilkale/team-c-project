@@ -157,9 +157,9 @@ public abstract class ServiceRequest implements DatabaseInterface {
   //    return _serviceType;
   //  }
   //
-  //  public void set_serviceType(String _serviceType) {
-  //    this._serviceType = _serviceType;
-  //  }
+  public void set_serviceType(String _serviceType) {
+    this._serviceType = _serviceType;
+  }
 
   public String get_status() {
     return _status;

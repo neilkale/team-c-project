@@ -2,6 +2,7 @@ package edu.wpi.cs3733.c22.teamC.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoInterface;
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.DaoSingleton;
 import edu.wpi.cs3733.c22.teamC.Databases.DaoPattern.LocationDaoImpl;
 import edu.wpi.cs3733.c22.teamC.Databases.DatabaseInterface;
@@ -14,7 +15,6 @@ import edu.wpi.cs3733.c22.teamC.SQLMethods.Query;
 import edu.wpi.cs3733.c22.teamC.controllers.windowControllers.OrderController;
 import java.awt.*;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -293,14 +293,13 @@ public class OrderTrackerController extends AbstractController {
       // retrieve the corresponding request instance that matches the request of this order pane
       ServiceRequest request = requestHashMap.get(orderKey);
       Query requestQuery = request.getQueryInstance(); // get query instance of the request
-
+      DaoInterface dao = request.getDao();
       // create new request holding edited fields using queryFactory method
       Object editedRequest = requestQuery.queryFactory(orderFieldsList.toArray(new String[0]));
       System.out.println(editedRequest.toString());
       try {
-        requestQuery.editNode(
-            editedRequest); // call editNode of query and pass in new edited request
-      } catch (SQLException e) {
+        dao.updateNode(editedRequest); // call editNode of query and pass in new edited request
+      } catch (Exception e) {
         e.printStackTrace();
       }
 

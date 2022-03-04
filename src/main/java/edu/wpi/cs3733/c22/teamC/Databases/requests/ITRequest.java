@@ -55,7 +55,9 @@ public class ITRequest extends ServiceRequest implements DatabaseInterface {
 
   @Override
   public String[] getFields() {
-    return new String[] {"ticketID", "status", "serviceType", "assignment", "issueType"};
+    return new String[] {
+      "ticketID", "locationID", "status", "serviceType", "assignment", "issueType"
+    };
   }
 
   @Override

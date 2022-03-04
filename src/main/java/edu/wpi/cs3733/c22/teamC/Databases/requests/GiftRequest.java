@@ -55,7 +55,9 @@ public class GiftRequest extends ServiceRequest implements DatabaseInterface {
 
   @Override
   public String[] getFields() {
-    return new String[] {"ticketID", "status", "serviceType", "assignment", "giftType"};
+    return new String[] {
+      "ticketID", "locationID", "status", "serviceType", "assignment", "giftType"
+    };
   }
 
   @Override

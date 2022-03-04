@@ -57,8 +57,7 @@ public class PathFinder {
     URL resource = PathFinder.class.getClassLoader().getResource("TowerEdges.csv");
     File fileIn;
     if (resource != null) fileIn = new File(resource.toString());
-    else
-      fileIn = new File("./src/main/resources/edu/wpi/cs3733.c22.teamC/CSV_Files/TowerEdges.csv");
+    else fileIn = new File("TowerEdges.csv");
     try {
       Scanner sc = new Scanner(fileIn);
       sc.useDelimiter(",|\\r"); // set to comma-delimited
